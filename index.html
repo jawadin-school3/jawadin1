@@ -320,6 +320,61 @@
             margin-bottom: 8px;
         }
 
+        /* تنسيق بطاقات الأهداف والرؤية المنسق الجديد */
+        .vision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .vision-card {
+            background: var(--bg-primary);
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .vision-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .vision-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .vision-card-number {
+            background-color: var(--color-blue);
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+        }
+
+        .vision-card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-dark);
+        }
+
+        .vision-card-text {
+            font-size: 14.5px;
+            color: #4b5563;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
         .info-card {
             background-color: var(--bg-primary);
             border: 1px solid #e5e7eb;
@@ -539,7 +594,7 @@
                     <li><a href="#" class="active" id="linkHome">الرئيسية</a></li>
                     <li><a href="#system" id="linkSystem">النظام الدراسي</a></li>
                     <li><a href="#digital" id="linkDigital">التواصل الرقمي</a></li>
-                    <li><a href="#notifications" id="linkNotifications">التبليغات</a></li>
+                    <li><a href="notifications.html" id="linkNotifications">التبليغات</a></li>
                     <li><a href="#vision" id="linkVision">رؤية المدرسة</a></li>
                 </ul>
             </nav>
@@ -596,7 +651,7 @@
 
                 <h2 id="digital">الأنشطة والتواصل الرقمي والالكتروني</h2>
                 <p>
-                    تركز الإدارة على تفعيل دور التكنولوجيا والأنشطة الرقمية التفاعلية لتعزيز أواصر العلاقة بين الطالب والمدرسة، حيث تحرص بشكل كبير على تفعيل قنوات التواصل المباشر بين الطلاب والإدارة عبر الوسائل التالية:
+                    التركيز الأساسي للإدارة يعتمد على دمج التكنولوجيا والأنشطة الرقمية التفاعلية لتعزيز أواصر العلاقة بين الطالب والمدرسة، حيث تحرص بشكل كبير على تفعيل قنوات التواصل المباشر بين الطلاب والإدارة عبر الوسائل التالية:
                 </p>
                 <ul>
                     <li><strong>روابط الاستبيان الإلكترونية:</strong> وهي أدوات رقمية تتيح للطلاب إمكانية تسجيل الشكاوى التي تواجههم، أو مشاركة آرائهم الشخصية ومقترحاتهم البناءة مع الإدارة مباشرة، مما أسهم بشكل واضح في تعزيز مستويات الثقة المتبادلة بين الطلاب ومدرستهم وعمل على تطوير البيئة التعليمية داخل المدرسة بشكل مستمر.</li>
@@ -609,17 +664,58 @@
                     لا توجد تبليغات جديدة حالياً. سيتم نشر الإعلانات الهامة والقرارات الإدارية هنا فور صدورها.
                 </div>
 
+                <!-- قسم رؤية مدرسة الجوادين والاهداف الاستراتيجية بتصميم البطاقات المدمج -->
                 <h2 id="vision">رؤية مدرسة الجوادين والأهداف الاستراتيجية</h2>
-                <p>
+                <p id="visionDesc">
                     ترتكز الرؤية التعليمية والتربوية لمتوسطة الجوادين للبنين على تحقيق عدة أهداف متكاملة مستخلصة من مسيرتها التعليمية، وتتلخص في:
                 </p>
-                <ol>
-                    <li>السعي الدائم والمستمر لرفع وتطوير المستوى العلمي والتربوي للطلاب في منطقة الشعب والمناطق المجاورة لها.</li>
-                    <li>تعزيز وبناء ثقة متبادلة وقوية بين الطلاب وإدارة المدرسة عبر قنوات التواصل الرقمية والاستبيانات الإلكترونية الفورية والمستمرة.</li>
-                    <li>التطوير الشامل والمستمر للبيئة التعليمية والصفوف الدراسية والمرافق اللوجستية لتكون دائماً محفزة على التفوق والإبداع.</li>
-                    <li>الاهتمام الفائق بطلبة الصف الثالث المتوسط وتقديم كافة أشكال الدعم العلمي، المحاضرات الإضافية والمراجعات المكثفة لضمان حصولهم على أعلى المعدلات والتميز في امتحانات البكالوريا الوزارية.</li>
-                    <li>الاستمرار في مواكبة أحدث الأساليب والوسائل الإلكترونية المتاحة في التعليم الإلكتروني, ونشر كافة الجداول والتبليغات ونتائج الامتحانات عبر منصات التواصل الرسمية لضمان أقصى درجات الشفافية والتواصل السريع والفعال.</li>
-                </ol>
+                
+                <div class="vision-grid" id="visionGrid">
+                    <!-- الهدف الأول -->
+                    <div class="vision-card">
+                        <div class="vision-card-header">
+                            <span class="vision-card-number">١</span>
+                            <span class="vision-card-title">التميز العلمي</span>
+                        </div>
+                        <p class="vision-card-text">السعي الدائم والمستمر لرفع وتطوير المستوى العلمي والتربوي للطلاب في منطقة الشعب والمناطق المجاورة لها.</p>
+                    </div>
+
+                    <!-- الهدف الثاني -->
+                    <div class="vision-card">
+                        <div class="vision-card-header">
+                            <span class="vision-card-number">٢</span>
+                            <span class="vision-card-title">التواصل الرقمي</span>
+                        </div>
+                        <p class="vision-card-text">تعزيز وبناء ثقة متبادلة وقوية بين الطلاب وإدارة المدرسة عبر قنوات التواصل الرقمية والاستبيانات الإلكترونية الفورية والمستمرة.</p>
+                    </div>
+
+                    <!-- الهدف الثالث -->
+                    <div class="vision-card">
+                        <div class="vision-card-header">
+                            <span class="vision-card-number">٣</span>
+                            <span class="vision-card-title">البيئة التعليمية</span>
+                        </div>
+                        <p class="vision-card-text">التطوير الشامل والمستمر للبيئة التعليمية والصفوف الدراسية والمرافق اللوجستية لتكون دائماً محفزة على التفوق والإبداع.</p>
+                    </div>
+
+                    <!-- الهدف الرابع -->
+                    <div class="vision-card">
+                        <div class="vision-card-header">
+                            <span class="vision-card-number">٤</span>
+                            <span class="vision-card-title">دعم الثالث المتوسط</span>
+                        </div>
+                        <p class="vision-card-text">الاهتمام الفائق بطلبة الصف الثالث المتوسط وتقديم كافة أشكال الدعم العلمي، المحاضرات الإضافية والمراجعات المكثفة لضمان حصولهم على أعلى المعدلات والتميز في امتحانات البكالوريا الوزارية.</p>
+                    </div>
+
+                    <!-- الهدف الخامس -->
+                    <div class="vision-card">
+                        <div class="vision-card-header">
+                            <span class="vision-card-number">٥</span>
+                            <span class="vision-card-title">مواكبة التطور</span>
+                        </div>
+                        <p class="vision-card-text">الاستمرار في مواكبة أحدث الأساليب والوسائل الإلكترونية المتاحة في التعليم الإلكتروني، ونشر كافة الجداول والتبليغات ونتائج الامتحانات عبر منصات التواصل الرسمية لضمان أقصى درجات الشفافية والتواصل السريع والفعال.</p>
+                    </div>
+                </div>
             </article>
         </main>
 
@@ -751,7 +847,7 @@
                     </div>
                 `;
 
-                // تحويل لغة المقال إلى الإنكليزية
+                // تحويل لغة المقال إلى الإنكليزية بما في ذلك قسم الرؤية الجديد
                 document.getElementById('mainArticle').innerHTML = `
                     <p>
                         <strong>Al-Jawadin Intermediate School for Boys</strong> is a government intermediate school for boys located in the Iraqi capital, <strong>Baghdad</strong>, specifically in the <strong>Al-Shaab</strong> area under the Directorate of Education of Al-Rusafa First. The school is classified as one of the most famous and prominent intermediate schools in the region, serving a large student population of over 1,000 students, and housing all three intermediate academic levels.
@@ -779,6 +875,53 @@
                     <h2 id="notifications">Administrative Notifications</h2>
                     <div class="notifications-box" id="notificationsBox">
                         No new notifications currently. Important announcements and administrative decisions will be published here as soon as they are issued.
+                    </div>
+
+                    <h2 id="vision">School Vision & Strategic Goals</h2>
+                    <p>
+                        The educational and pedagogical vision of Al-Jawadin Intermediate School for Boys is based on achieving several integrated goals, summarized as follows:
+                    </p>
+                    
+                    <div class="vision-grid">
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">1</span>
+                                <span class="vision-card-title">Scientific Excellence</span>
+                            </div>
+                            <p class="vision-card-text">Continuous efforts to upgrade and develop the academic and educational level of students in Al-Shaab and its vicinity.</p>
+                        </div>
+
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">2</span>
+                                <span class="vision-card-title">Digital Communication</span>
+                            </div>
+                            <p class="vision-card-text">Fostering and building mutual trust between students and the school administration through digital channels and feedback surveys.</p>
+                        </div>
+
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">3</span>
+                                <span class="vision-card-title">Learning Environment</span>
+                            </div>
+                            <p class="vision-card-text">Comprehensive development of the classrooms and facilities to constantly motivate students towards innovation and excellence.</p>
+                        </div>
+
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">4</span>
+                                <span class="vision-card-title">Supporting 3rd Grade</span>
+                            </div>
+                            <p class="vision-card-text">Providing exceptional care, additional lectures, and extensive reviews for third-grade intermediate students to secure top scores in ministerial exams.</p>
+                        </div>
+
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">5</span>
+                                <span class="vision-card-title">Embracing Innovation</span>
+                            </div>
+                            <p class="vision-card-text">Continuously adopting the latest e-learning methodologies and publishing schedules, notices, and exam results via official channels for maximum transparency.</p>
+                        </div>
                     </div>
                 `;
             } else {
@@ -815,19 +958,117 @@
                 document.getElementById('thCoord').innerText = 'الإحداثيات';
                 document.getElementById('thWeb').innerText = 'المواقع الإلكترونية';
                 
-                // إعادة روابط التلغرام للعربية
                 document.getElementById('linkTg1').innerText = 'قناة الأول متوسط';
                 document.getElementById('linkTg2').innerText = 'قناة الثاني متوسط';
                 document.getElementById('linkTg3').innerText = 'قناة الثالث متوسط';
 
-                // إعادة محتوى التبليغات للعربية
                 document.getElementById('notificationsBox').innerText = 'لا توجد تبليغات جديدة حالياً. سيتم نشر الإعلانات الهامة والقرارات الإدارية هنا فور صدورها.';
 
-                // إعادة الفوتر العربي
                 document.getElementById('mainFooter').innerHTML = `
                     <div>جميع الحقوق محفوظة © 2026 متوسطة الجوادين للبنين</div>
                     <div class="footer-credits">
                         تصميم وبرمجة: <span style="color: var(--color-blue);">محمود أحمد</span> | للدعم الفني: <a href="tel:07734894407">07734894407</a>
+                    </div>
+                `;
+
+                // استرجاع المحتوى العربي الأصلي للمقال متضمناً البطاقات الجديدة للرؤية
+                document.getElementById('mainArticle').innerHTML = `
+                    <p>
+                        <strong>متوسطة الجوادين للبنين</strong> هي مدرسة متوسطة حكومية مخصصة للبنين تقع في العاصمة العراقية <strong>بغداد</strong>، وتحديداً في منطقة <strong>الشعب</strong> التابعة لمديرية تربية الرصافة الأولى. تُصنف المدرسة كواحدة من أشهر المدارس المتوسطة وأبرزها في المنطقة؛ حيث تقدم خدماتها التعليمية والتربوية لجمهور واسع من الطلبة يتجاوز عددهم الألف طالب، وتضم تحت سقفها المراحل الدراسية الثلاث المعتمدة في النظام التعليمي العراقي للمرحلة المتوسطة وهي: الصف الأول المتوسط، والصف الثاني المتوسط، والصف الثالث المتوسط، ويشرف على تدريسهم كادر تعليمي وتدريسي متميز ومؤهل علمياً.
+                    </p>
+
+                    <h2>التأسيس والتاريخ والنمو الأكاديمي</h2>
+                    <p>
+                        يرجع تاريخ تأسيس متوسطة الجوادين للبنين إلى عام 2008م. ومنذ انطلاقتها في هذا العام، سعت المدرسة بشكل دؤوب إلى تحقيق رسالتها في رفع وتطوير المستوى العلمي والتربوي لجميع الطلاب الساكنين في منطقة الشعب والمناطق المجاورة والمحيطة بها. وبفضل هذه الجهود المستمرة، نجحت المدرسة في بناء واكتساب سمعة طيبة جداً وشهرة واسعة بين أهالي المنطقة والطلبة على حد سواء، ويعود الفضل في هذه السمعة إلى ما تمتلكه المدرسة من كادر تدريسي متميز يمتلك الرصانة العلمية والخبرة التربوية الكافية لإدارة وتوجيه الطلاب.
+                    </p>
+                    <p>
+                        خلال مسيرتها التي تمتد لأكثر من عقد ونصف، قامت المدرسة بتخريج آلاف الطلبة الذين واصلوا مسيرتهم بنجاح في الإعداديات والجامعات العراقية المرموقة. وتتميز الإدارة بحرصها على الانضباط العالي والالتزام بالزي المدرسي الموحد، وتوطيد العلاقات الاجتماعية الهادفة بين الملاك التدريسي وأولياء الأمور من خلال مجالس الآباء والمعلمين الدورية لتذليل العقبات الدراسية التي قد تواجه الطلبة في مسيرتهم الأكاديمية.
+                    </p>
+                    <p>
+                        تواصل المدرسة تحديث مخرجاتها التعليمية باستمرار من خلال التدريب والتطوير المستمر لكادرها التدريسي ودمج الأساليب الحديثة مع التعليم التقليدي، مما أثمر عن تحقيق نسب نجاح متميزة في الامتحانات الوزارية للصف الثالث المتوسط على مستوى قاطع الشعب والمديرية العامة لتربية الرصافة الأولى لسنوات متعددة.
+                    </p>
+
+                    <h2 id="system">النظام الدراسي والمرافق البناية</h2>
+                    <p>
+                        تلتزم المدرسة التزاماً كاملاً بتطبيق المناهج والقرارات الدراسية الرسمية الصادرة عن وزارة التربية العراقية. وتولي إدارة المدرسة والكادر التدريسي اهتماماً خاصاً واستثنائياً بطلبة الصف الثالث المتوسط؛ نظراً للأهمية المصيرية لهذه المرحلة الدراسية، حيث تعمل على تهيئتهم وإعدادهم بشكل كامل لخوض غمار الامتحانات الوزارية النهائية (الباكالوريا)، ويتم ذلك عبر خطة تعليمية تشمل تقديم الدعم العلمي المتواصل والمراجعات المنهجية المستمرة للمواد الدراسية.
+                    </p>
+                    <p>
+                        وتتكون البناية المدرسية لمتوسطة الجوادين للبنين من عدة مرافق أساسية تم تصميمها لخدمة العملية التعليمية وتوفير سبل الراحة للطلبة والكادر، وتشتمل هذه المرافق على:
+                    </p>
+                    <ul>
+                        <li><strong>الصفوف الدراسية:</strong> القاعات المخصصة لإعطاء الدروس والمحاضرات للطلبة في المراحل المختلفة ومجهزة بالوسائل الضرورية لتلقي العلم.</li>
+                        <li><strong>غرفة الإدارة:</strong> المقر المخصص لإدارة المدرسة ومتابعة شؤونها التنظيمية والتربوية واللوجستية بقيادة المدير المتميز السيد فيصل برغش تايه ومساعديه.</li>
+                        <li><strong>غرفة المدرسين:</strong> المكان المخصص لأعضاء الكادر التدريسي المتميز للاستراحة والتحضير العلمي والمناقشات المنهجية.</li>
+                        <li><strong>الساحات المدرسية:</strong> الفضاءات المفتوحة المخصصة لممارسة الأنشطة الرياضية المتنوعة مثل كرة القدم والكرة الطائرة، واستراحة الطلاب وتجديد نشاطهم البدني والذهني بين الحصص الدراسية.</li>
+                        <li><strong>المرشد التربوي:</strong> توفر المدرسة مكتباً خاصاً بالإرشاد التربوي والنفسي لمساعدة الطلاب على حل مشاكلهم الشخصية والأكاديمية، وتهيئة بيئة صحية تحفزهم على التفوق الدراسي وصقل شخصياتهم القيادية والاجتماعية.</li>
+                    </ul>
+
+                    <h2 id="digital">الأنشطة والتواصل الرقمي والالكتروني</h2>
+                    <p>
+                        التركيز الأساسي للإدارة يعتمد على دمج التكنولوجيا والأنشطة الرقمية التفاعلية لتعزيز أواصر العلاقة بين الطالب والمدرسة، حيث تحرص بشكل كبير على تفعيل قنوات التواصل المباشر بين الطلاب والإدارة عبر الوسائل التالية:
+                    </p>
+                    <ul>
+                        <li><strong>روابط الاستبيان الإلكترونية:</strong> وهي أدوات رقمية تتيح للطلاب إمكانية تسجيل الشكاوى التي تواجههم، أو مشاركة آرائهم الشخصية ومقترحاتهم البناءة مع الإدارة مباشرة، مما أسهم بشكل واضح في تعزيز مستويات الثقة المتبادلة بين الطلاب ومدرستهم وعمل على تطوير البيئة التعليمية داخل المدرسة بشكل مستمر.</li>
+                        <li><strong>المنصات الرسمية على مواقع التواصل الاجتماعي:</strong> تمتلك المدرسة منصات إلكترونية رسمية نشطة، وتبرز من بينها القناة الرسمية للمدرسة على تطبيق تلغرام، والتي تُستخدم كأداة إعلامية أساسية للتواصل مع الطلاب وأولياء الأمور أولاً بأول ونشر كل ما يتعلق بـالتبليغات والتعليمات الرسمية، الجداول الدراسية الأسبوعية وجداول الامتحانات، والنتائج بمجرد صدورها لضمان وصولها السريع للجميع.</li>
+                    </ul>
+
+                    <!-- قسم التبليغات الفارغ -->
+                    <h2 id="notifications">التبليغات والتعميمات الإدارية</h2>
+                    <div class="notifications-box" id="notificationsBox">
+                        لا توجد تبليغات جديدة حالياً. سيتم نشر الإعلانات الهامة والقرارات الإدارية هنا فور صدورها.
+                    </div>
+
+                    <!-- قسم رؤية مدرسة الجوادين والاهداف الاستراتيجية بتصميم البطاقات المدمج -->
+                    <h2 id="vision">رؤية مدرسة الجوادين والأهداف الاستراتيجية</h2>
+                    <p id="visionDesc">
+                        ترتكز الرؤية التعليمية والتربوية لمتوسطة الجوادين للبنين على تحقيق عدة أهداف متكاملة مستخلصة من مسيرتها التعليمية، وتتلخص في:
+                    </p>
+                    
+                    <div class="vision-grid" id="visionGrid">
+                        <!-- الهدف الأول -->
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">١</span>
+                                <span class="vision-card-title">التميز العلمي</span>
+                            </div>
+                            <p class="vision-card-text">السعي الدائم والمستمر لرفع وتطوير المستوى العلمي والتربوي للطلاب في منطقة الشعب والمناطق المجاورة لها.</p>
+                        </div>
+
+                        <!-- الهدف الثاني -->
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">٢</span>
+                                <span class="vision-card-title">التواصل الرقمي</span>
+                            </div>
+                            <p class="vision-card-text">تعزيز وبناء ثقة متبادلة وقوية بين الطلاب وإدارة المدرسة عبر قنوات التواصل الرقمية والاستبيانات الإلكترونية الفورية والمستمرة.</p>
+                        </div>
+
+                        <!-- الهدف الثالث -->
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">٣</span>
+                                <span class="vision-card-title">البيئة التعليمية</span>
+                            </div>
+                            <p class="vision-card-text">التطوير الشامل والمستمر للبيئة التعليمية والصفوف الدراسية والمرافق اللوجستية لتكون دائماً محفزة على التفوق والإبداع.</p>
+                        </div>
+
+                        <!-- الهدف الرابع -->
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">٤</span>
+                                <span class="vision-card-title">دعم الثالث المتوسط</span>
+                            </div>
+                            <p class="vision-card-text">الاهتمام الفائق بطلبة الصف الثالث المتوسط وتقديم كافة أشكال الدعم العلمي، المحاضرات الإضافية والمراجعات المكثفة لضمان حصولهم على أعلى المعدلات والتميز في امتحانات البكالوريا الوزارية.</p>
+                        </div>
+
+                        <!-- الهدف الخامس -->
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">٥</span>
+                                <span class="vision-card-title">مواكبة التطور</span>
+                            </div>
+                            <p class="vision-card-text">الاستمرار في مواكبة أحدث الأساليب والوسائل الإلكترونية المتاحة في التعليم الإلكتروني، ونشر كافة الجداول والتبليغات ونتائج الامتحانات عبر منصات التواصل الرسمية لضمان أقصى درجات الشفافية والتواصل السريع والفعال.</p>
+                        </div>
                     </div>
                 `;
             }
