@@ -6,213 +6,181 @@
     <title>لوحة تحكم الأستاذ - متوسطة الجوادين</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f3f4f6;
-            --color-text-dark: #0f172a;
-            --color-blue: #2563eb;
-            --color-blue-hover: #1d4ed8;
-            --font-main: 'Tajawal', sans-serif;
-        }
-
         body {
-            font-family: var(--font-main);
-            background-color: var(--bg-secondary);
-            color: var(--color-text-dark);
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f3f4f6;
+            color: #0f172a;
+            padding: 40px 20px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
         }
-
-        .admin-card {
-            background-color: var(--bg-primary);
+        .control-card {
+            background-color: #ffffff;
+            border-radius: 16px;
             padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            max-width: 500px;
             width: 100%;
-            text-align: center;
+            max-width: 600px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
-
-        h2 {
-            margin-bottom: 20px;
-            color: #1e3a8a;
+        h1 {
             font-size: 22px;
             font-weight: 800;
+            color: #2563eb;
+            margin-bottom: 20px;
+            text-align: center;
         }
-
-        .input-group {
-            margin-bottom: 15px;
-            text-align: right;
+        .form-group {
+            margin-bottom: 20px;
         }
-
         label {
             display: block;
-            margin-bottom: 5px;
             font-weight: 700;
+            margin-bottom: 8px;
             font-size: 14px;
         }
-
-        input[type="password"], textarea, input[type="text"] {
+        input, textarea {
             width: 100%;
             padding: 12px;
-            border: 1px solid #cbd5e1;
+            border: 1px solid #d1d5db;
             border-radius: 8px;
-            font-family: var(--font-main);
+            font-family: 'Tajawal', sans-serif;
             font-size: 15px;
             box-sizing: border-box;
         }
-
-        textarea {
-            height: 120px;
-            resize: none;
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
-
-        .btn {
-            background-color: var(--color-blue);
-            color: white;
+        .btn-submit {
+            background-color: #2563eb;
+            color: #ffffff;
             border: none;
-            padding: 12px 25px;
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
             font-size: 16px;
             font-weight: 700;
-            border-radius: 8px;
             cursor: pointer;
-            width: 100%;
             transition: background 0.3s;
-            font-family: var(--font-main);
         }
-
-        .btn:hover {
-            background-color: var(--color-blue-hover);
+        .btn-submit:hover {
+            background-color: #1d4ed8;
         }
-
-        .hidden {
-            display: none;
+        .notice {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 5px;
         }
-
-        .error-msg {
-            color: #ef4444;
-            font-size: 14px;
-            margin-top: 10px;
-            font-weight: bold;
+        .notification-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            position: relative;
         }
-
-        .success-msg {
-            color: #22c55e;
-            font-size: 14px;
-            margin-top: 10px;
-            font-weight: bold;
+        .btn-delete {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
         }
     </style>
 </head>
 <body>
 
-    <div class="admin-card">
-        <img src="2.jpg" onerror="this.onerror=null; this.src='https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';" alt="شعار مدرسة الجوادين" style="max-width: 100px; border-radius: 50%; margin-bottom: 15px;" />
+    <div class="control-card">
+        <h1>لوحة نشر التبليغات الرسمية 📣</h1>
         
-        <!-- قسم تسجيل الدخول بالأرقام السرية -->
-        <div id="loginSection">
-            <h2>بوابة الإدارة والأستاذ المعني</h2>
-            <p style="font-size: 13px; color: #64748b; margin-bottom: 20px;">يرجى إدخال الرقم السري للأستاذ للتمكن من نشر التبليغات للطلاب</p>
-            <div class="input-group">
-                <label for="password">رمز الدخول السري:</label>
-                <input type="password" id="password" placeholder="أدخل رمز المرور السري هنا">
-            </div>
-            <button class="btn" onclick="checkPassword()">دخول</button>
-            <p id="errorArea" class="error-msg hidden">رمز الدخول غير صحيح!</p>
+        <div class="form-group">
+            <label for="adminPassword">رمز الدخول السري للأستاذ:</label>
+            <input type="password" id="adminPassword" placeholder="أدخل الرمز السري لتتمكن من النشر">
         </div>
 
-        <!-- قسم إضافة التبليغات (يظهر فقط عند إدخال كلمة المرور الصحيحة) -->
-        <div id="publishSection" class="hidden">
-            <h2>لوحة نشر التبليغات والتعميمات</h2>
-            <p style="font-size: 13px; color: #64748b; margin-bottom: 20px;">اكتب التبليغ بالأسفل وسيظهر فوراً على شاشات الطلاب في الموقع الرسمي</p>
-            
-            <div class="input-group">
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #e5e7eb;">
+
+        <form id="announcementForm">
+            <div class="form-group">
                 <label for="announcementText">نص التبليغ:</label>
-                <textarea id="announcementText" placeholder="اكتب التبليغ هنا (مثلاً: نود إعلام طلاب الصف الثالث بنشر درجات الشهر الثاني...)"></textarea>
+                <textarea id="announcementText" rows="5" placeholder="اكتب تفاصيل الإعلان هنا..." required></textarea>
             </div>
 
-            <div class="input-group">
-                <label for="announcementDate">تاريخ النشر (اختياري):</label>
-                <input type="text" id="announcementDate" placeholder="مثال: 2026/07/14 أو اتركها فارغة للتاريخ الحالي">
+            <div class="form-group">
+                <label for="announcementImage">رابط الصورة (اختياري):</label>
+                <input type="url" id="announcementImage" placeholder="مثال: https://i.ibb.co/image.png">
+                <p class="notice">يرجى رفع الصورة على أي موقع رفع خارجي (مثل imgbb) ولصق الرابط المباشر هنا.</p>
             </div>
 
-            <button class="btn" onclick="publishNow()">نشر التبليغ للطلاب الآن 🚀</button>
-            <p id="successArea" class="success-msg hidden">تم نشر التبليغ بنجاح وسيظهر للطلبة فوراً!</p>
-        </div>
+            <button type="submit" class="btn-submit">نشر التبليغ فوراً للطلاب 🚀</button>
+        </form>
+
+        <h2 style="font-size: 18px; margin-top: 40px; border-top: 1px solid #e5e7eb; padding-top: 20px;">التبليغات الحالية (يمكنك حذفها من هنا):</h2>
+        <div id="currentAnnouncements"></div>
     </div>
 
-    <!-- استدعاء مكاتب فايربيس الرسمية للربط بقاعدة البيانات -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <script>
-        // إعدادات اتصال الفايربيس بمشروعك (نفس الإعدادات في ملف index.html)
+        // تم ربط الرابط الخاص بقاعدتك هنا بنجاح
         const firebaseConfig = {
-            authDomain: "jawadin-school.firebaseapp.com",
-            projectId: "jawadin-school",
-            storageBucket: "jawadin-school.appspot.com",
+            databaseURL: "https://jawadin-school1-default-rtdb.firebaseio.com/"
         };
-
-        // تهيئة فايربيس
+        
         firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        const database = firebase.database();
 
-        // 🚨 حدد كلمة المرور السرية للأستاذ هنا (يمكنك تغييرها لأي شيء تريده)
-        const ADMIN_PASSWORD = "jawadin_teacher_2026"; 
+        // كلمة المرور التي يختارها الأستاذ (تستطيع تغييرها لأي شيء تريده)
+        const CORRECT_PASSWORD = "jawadin_secret_2026"; 
 
-        function checkPassword() {
-            const enteredPass = document.getElementById('password').value;
-            const errorArea = document.getElementById('errorArea');
+        const form = document.getElementById('announcementForm');
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const passwordInput = document.getElementById('adminPassword').value;
+            const textInput = document.getElementById('announcementText').value;
+            const imageInput = document.getElementById('announcementImage').value;
 
-            if (enteredPass === ADMIN_PASSWORD) {
-                document.getElementById('loginSection').classList.add('hidden');
-                document.getElementById('publishSection').classList.remove('hidden');
-            } else {
-                errorArea.classList.remove('hidden');
-            }
-        }
-
-        function publishNow() {
-            const text = document.getElementById('announcementText').value;
-            let date = document.getElementById('announcementDate').value;
-            const successArea = document.getElementById('successArea');
-
-            if (!text.trim()) {
-                alert("الرجاء كتابة نص التبليغ أولاً!");
+            // التحقق من كلمة المرور لحماية الموقع
+            if (passwordInput !== CORRECT_PASSWORD) {
+                alert('عذراً! رمز الدخول السري غير صحيح. لا يمكن النشر.');
                 return;
             }
 
-            // إذا لم يحدد الأستاذ تاريخاً، نستخدم تاريخ اليوم تلقائياً
-            if (!date.trim()) {
-                const today = new Date();
-                date = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
-            }
-
-            // إرسال البيانات لـ Firestore في مجموعة "announcements"
-            db.collection("announcements").add({
-                text: text,
-                date: date,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp() // للترتيب التلقائي من الأحدث للأقدم
-            })
-            .then(() => {
-                successArea.classList.remove('hidden');
-                document.getElementById('announcementText').value = ""; // تفريغ الخانة بعد النشر
-                document.getElementById('announcementDate').value = "";
-                
-                // إخفاء رسالة النجاح بعد 4 ثوانٍ
-                setTimeout(() => {
-                    successArea.classList.add('hidden');
-                }, 4000);
-            })
-            .catch((error) => {
-                console.error("حدث خطأ أثناء النشر: ", error);
-                alert("فشل النشر، يرجى التحقق من اتصال الإنترنت أو إعدادات قاعدة البيانات.");
+            // الحصول على تاريخ اليوم وتنسيقه
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString('ar-IQ', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
             });
-        }
-    </script>
-</body>
-</html>
+
+            // دفع التبليغ الجديد إلى قاعدة البيانات
+            database.ref('announcements').push({
+                text: textInput,
+                image: imageInput,
+                date: formattedDate
+            }).then(() => {
+                alert('تم نشر التبليغ بنجاح وسيظهر للطلبة الآن!');
+                form.reset();
+            }).catch((err) => {
+                alert('حدث خطأ أثناء النشر: ' + err.message);
+            });
+        });
+
+        // عرض التبليغات الحالية في صفحة التحكم مع إمكانية حذفها
+        const currentAnnouncements = document.getElementById('currentAnnouncements');
+        database.ref('announcements').on('value', (snapshot) => {
+            const data = snapshot.val();
+            if (data
