@@ -408,6 +408,18 @@
             margin: 0;
         }
 
+        /* صندوق التبليغات الفارغ */
+        .notifications-box {
+            background-color: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 30px 20px;
+            text-align: center;
+            color: #64748b;
+            font-style: italic;
+            margin-top: 15px;
+        }
+
         footer {
             background-color: var(--bg-secondary);
             border-top: 1px solid #e5e7eb;
@@ -495,6 +507,7 @@
 </head>
 <body>
 
+    <!-- شاشة اختيار اللغة الترحيبية (تظهر دائماً عند الدخول للموقع) -->
     <div class="language-overlay" id="langOverlay">
         <div class="lang-card">
             <img src="2.jpg" onerror="this.onerror=null; this.src='https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';" alt="شعار مدرسة الجوادين" class="lang-card-img" />
@@ -508,6 +521,7 @@
         </div>
     </div>
 
+    <!-- الهيدر الثابت الذي يلتصق عند النزول -->
     <header>
         <div class="nav-container">
             <a href="#" class="logo">
@@ -525,6 +539,7 @@
                     <li><a href="#" class="active" id="linkHome">الرئيسية</a></li>
                     <li><a href="#system" id="linkSystem">النظام الدراسي</a></li>
                     <li><a href="#digital" id="linkDigital">التواصل الرقمي</a></li>
+                    <li><a href="#notifications" id="linkNotifications">التبليغات</a></li>
                     <li><a href="#vision" id="linkVision">رؤية المدرسة</a></li>
                 </ul>
             </nav>
@@ -588,6 +603,12 @@
                     <li><strong>المنصات الرسمية على مواقع التواصل الاجتماعي:</strong> تمتلك المدرسة منصات إلكترونية رسمية نشطة، وتبرز من بينها القناة الرسمية للمدرسة على تطبيق تلغرام، والتي تُستخدم كأداة إعلامية أساسية للتواصل مع الطلاب وأولياء الأمور أولاً بأول ونشر كل ما يتعلق بـالتبليغات والتعليمات الرسمية، الجداول الدراسية الأسبوعية وجداول الامتحانات، والنتائج بمجرد صدورها لضمان وصولها السريع للجميع.</li>
                 </ul>
 
+                <!-- قسم التبليغات الفارغ -->
+                <h2 id="notifications">التبليغات والتعميمات الإدارية</h2>
+                <div class="notifications-box" id="notificationsBox">
+                    لا توجد تبليغات جديدة حالياً. سيتم نشر الإعلانات الهامة والقرارات الإدارية هنا فور صدورها.
+                </div>
+
                 <h2 id="vision">رؤية مدرسة الجوادين والأهداف الاستراتيجية</h2>
                 <p>
                     ترتكز الرؤية التعليمية والتربوية لمتوسطة الجوادين للبنين على تحقيق عدة أهداف متكاملة مستخلصة من مسيرتها التعليمية، وتتلخص في:
@@ -650,6 +671,7 @@
         </div>
     </footer>
 
+    <!-- الأكواد البرمجية للوظائف واختيار اللغة -->
     <script>
         // التحكم بالقائمة الجانبية (الثلاث نقاط)
         const menuBtn = document.getElementById('menuBtn');
@@ -685,6 +707,7 @@
                 document.getElementById('linkHome').innerText = 'Home';
                 document.getElementById('linkSystem').innerText = 'Educational System';
                 document.getElementById('linkDigital').innerText = 'Digital Communication';
+                document.getElementById('linkNotifications').innerText = 'Notifications';
                 document.getElementById('linkVision').innerText = 'School Vision';
                 document.getElementById('btnTelegram').innerText = 'Telegram Channel';
 
@@ -716,6 +739,9 @@
                 document.getElementById('linkTg1').innerText = '1st Intermediate Channel';
                 document.getElementById('linkTg2').innerText = '2nd Intermediate Channel';
                 document.getElementById('linkTg3').innerText = '3rd Intermediate Channel';
+
+                // تحديث صندوق التبليغات الفارغ بالإنكليزية
+                document.getElementById('notificationsBox').innerText = 'No new notifications currently. Important announcements and administrative decisions will be published here as soon as they are issued.';
 
                 // تحديث الفوتر
                 document.getElementById('mainFooter').innerHTML = `
@@ -749,6 +775,11 @@
                     <p>
                         The administration actively utilizes digital tools to engage with students, including online feedback surveys and its official Telegram channel to instantly publish study schedules, official notifications, and final results.
                     </p>
+                    
+                    <h2 id="notifications">Administrative Notifications</h2>
+                    <div class="notifications-box" id="notificationsBox">
+                        No new notifications currently. Important announcements and administrative decisions will be published here as soon as they are issued.
+                    </div>
                 `;
             } else {
                 // إعادة ضبط كل شيء للعربي الأصلي
@@ -758,6 +789,7 @@
                 document.getElementById('linkHome').innerText = 'الرئيسية';
                 document.getElementById('linkSystem').innerText = 'النظام الدراسي';
                 document.getElementById('linkDigital').innerText = 'التواصل الرقمي';
+                document.getElementById('linkNotifications').innerText = 'التبليغات';
                 document.getElementById('linkVision').innerText = 'رؤية المدرسة';
                 document.getElementById('btnTelegram').innerText = 'قناة التلغرام';
 
@@ -787,6 +819,9 @@
                 document.getElementById('linkTg1').innerText = 'قناة الأول متوسط';
                 document.getElementById('linkTg2').innerText = 'قناة الثاني متوسط';
                 document.getElementById('linkTg3').innerText = 'قناة الثالث متوسط';
+
+                // إعادة محتوى التبليغات للعربية
+                document.getElementById('notificationsBox').innerText = 'لا توجد تبليغات جديدة حالياً. سيتم نشر الإعلانات الهامة والقرارات الإدارية هنا فور صدورها.';
 
                 // إعادة الفوتر العربي
                 document.getElementById('mainFooter').innerHTML = `
