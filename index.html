@@ -136,3 +136,702 @@
             color: var(--color-text-dark);
             text-decoration: none;
             display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .logo span {
+            color: var(--color-blue);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--color-text-dark);
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--color-blue);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: 1px solid #d1d5db;
+            padding: 6px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--color-text-dark);
+        }
+
+        .lang-btn:hover {
+            border-color: var(--color-blue);
+            color: var(--color-blue);
+        }
+
+        /* زر القائمة الجانبية (الثلاث نقاط) */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px 5px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 6px;
+            height: 6px;
+            background-color: var(--color-text-dark);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        /* الهيرو وباقي الصفحة */
+        .hero {
+            background-color: var(--bg-secondary);
+            background-image: radial-gradient(circle, rgba(255,255,255,0.8) 10%, transparent 11%);
+            background-size: 20px 20px;
+            padding: 90px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--color-text-dark);
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: #64748b;
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--color-blue);
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-blue-hover);
+        }
+
+        .btn-secondary {
+            background-color: #ffffff;
+            color: var(--color-blue);
+            border: 1px solid var(--color-blue);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+
+        .wiki-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .wiki-content {
+            background-color: var(--bg-primary);
+        }
+
+        .wiki-content h2 {
+            font-size: 24px;
+            color: var(--color-text-dark);
+            margin: 35px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--bg-secondary);
+            position: relative;
+        }
+
+        .wiki-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 60px;
+            height: 2px;
+            background-color: var(--color-blue);
+        }
+
+        .wiki-content p {
+            color: #334155;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .wiki-content ul, .wiki-content ol {
+            margin-right: 25px;
+            margin-bottom: 20px;
+            color: #334155;
+        }
+
+        .wiki-content li {
+            margin-bottom: 8px;
+        }
+
+        .info-card {
+            background-color: var(--bg-primary);
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            align-self: start;
+        }
+
+        .info-card-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .info-card-img {
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .info-card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #475569;
+            margin-top: 8px;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .info-table tr {
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .info-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .info-table th {
+            text-align: right;
+            padding: 10px 5px;
+            font-size: 14px;
+            color: #64748b;
+            width: 35%;
+        }
+
+        .info-table td {
+            padding: 10px 5px;
+            font-size: 14px;
+            color: var(--color-text-dark);
+            font-weight: 500;
+        }
+
+        .info-table td a {
+            color: var(--color-blue);
+            text-decoration: none;
+        }
+
+        .info-table td a:hover {
+            text-decoration: underline;
+        }
+
+        .map-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: bold;
+            color: var(--color-blue) !important;
+        }
+
+        /* تنسيقات قنوات التلغرام لتبدو بشكل منسق وجذاب */
+        .telegram-links-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .telegram-links-list li {
+            margin: 0;
+        }
+
+        /* صندوق التبليغات الفارغ */
+        .notifications-box {
+            background-color: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 30px 20px;
+            text-align: center;
+            color: #64748b;
+            font-style: italic;
+            margin-top: 15px;
+        }
+
+        footer {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid #e5e7eb;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 15px;
+            color: #64748b;
+        }
+
+        .footer-credits {
+            margin-top: 15px;
+            font-weight: 700;
+            color: var(--color-text-dark);
+        }
+
+        .footer-credits a {
+            color: var(--color-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-credits a:hover {
+            text-decoration: underline;
+        }
+
+        /* تجاوب التصميم مع الهواتف والشاشات الصغيرة */
+        @media (max-width: 992px) {
+            .wiki-container {
+                grid-template-columns: 1fr;
+            }
+            .info-card {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 20px;
+                background-color: var(--bg-primary);
+                border: 1px solid #e5e7eb;
+                border-radius: 8px;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+                padding: 15px;
+                width: 200px;
+                z-index: 999;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .nav-container {
+                padding: 10px 20px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شاشة اختيار اللغة الترحيبية (تظهر دائماً عند الدخول للموقع) -->
+    <div class="language-overlay" id="langOverlay">
+        <div class="lang-card">
+            <img src="2.jpg" onerror="this.onerror=null; this.src='https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';" alt="شعار مدرسة الجوادين" class="lang-card-img" />
+            <h2>أهلاً بكم في متوسطة الجوادين للبنين</h2>
+            <p>يرجى اختيار لغة تصفح الموقع للبدء</p>
+            <p style="margin-top: -20px; margin-bottom: 25px; font-size: 13px; opacity: 0.8;">Please choose a language to enter the site</p>
+            <div class="lang-buttons-container">
+                <button class="lang-select-btn" onclick="selectLanguage('ar')">العربية</button>
+                <button class="lang-select-btn" onclick="selectLanguage('en')">English</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- الهيدر الثابت الذي يلتصق عند النزول -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                الجوادين<span>.</span>
+            </a>
+            
+            <button class="menu-toggle" id="menuBtn" aria-label="القائمة">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="#" class="active" id="linkHome">الرئيسية</a></li>
+                    <li><a href="#system" id="linkSystem">النظام الدراسي</a></li>
+                    <li><a href="#digital" id="linkDigital">التواصل الرقمي</a></li>
+                    <li><a href="#notifications" id="linkNotifications">التبليغات</a></li>
+                    <li><a href="#vision" id="linkVision">رؤية المدرسة</a></li>
+                </ul>
+            </nav>
+            <div class="header-left">
+                <a href="https://telegram.me/jawadin3" target="_blank" class="lang-btn" id="btnTelegram">قناة التلغرام</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 id="heroTitle">متوسطة الجوادين للبنين</h1>
+            <p id="heroDesc">صرح علمي متميز يسعى لبناء أجيال واعدة قادرة على التفوق والنجاح المستمر.</p>
+            <div class="hero-buttons">
+                <a href="#system" class="btn btn-primary" id="btnHeroSystem">النظام الدراسي والمرافق</a>
+                <a href="https://telegram.me/jawadin3" target="_blank" class="btn btn-secondary" id="btnHeroResults">نتائج الامتحانات على تلغرام</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="wiki-container">
+        
+        <main class="wiki-content">
+            <article id="mainArticle">
+                <p>
+                    <strong>متوسطة الجوادين للبنين</strong> هي مدرسة متوسطة حكومية مخصصة للبنين تقع في العاصمة العراقية <strong>بغداد</strong>، وتحديداً في منطقة <strong>الشعب</strong> التابعة لمديرية تربية الرصافة الأولى. تُصنف المدرسة كواحدة من أشهر المدارس المتوسطة وأبرزها في المنطقة؛ حيث تقدم خدماتها التعليمية والتربوية لجمهور واسع من الطلبة يتجاوز عددهم الألف طالب، وتضم تحت سقفها المراحل الدراسية الثلاث المعتمدة في النظام التعليمي العراقي للمرحلة المتوسطة وهي: الصف الأول المتوسط، والصف الثاني المتوسط، والصف الثالث المتوسط، ويشرف على تدريسهم كادر تعليمي وتدريسي متميز ومؤهل علمياً.
+                </p>
+
+                <h2>التأسيس والتاريخ والنمو الأكاديمي</h2>
+                <p>
+                    يرجع تاريخ تأسيس متوسطة الجوادين للبنين إلى عام 2008م. ومنذ انطلاقتها في هذا العام، سعت المدرسة بشكل دؤوب إلى تحقيق رسالتها في رفع وتطوير المستوى العلمي والتربوي لجميع الطلاب الساكنين في منطقة الشعب والمناطق المجاورة والمحيطة بها. وبفضل هذه الجهود المستمرة، نجحت المدرسة في بناء واكتساب سمعة طيبة جداً وشهرة واسعة بين أهالي المنطقة والطلبة على حد سواء، ويعود الفضل في هذه السمعة إلى ما تمتلكه المدرسة من كادر تدريسي متميز يمتلك الرصانة العلمية والخبرة التربوية الكافية لإدارة وتوجيه الطلاب.
+                </p>
+                <p>
+                    خلال مسيرتها التي تمتد لأكثر من عقد ونصف، قامت المدرسة بتخريج آلاف الطلبة الذين واصلوا مسيرتهم بنجاح في الإعداديات والجامعات العراقية المرموقة. وتتميز الإدارة بحرصها على الانضباط العالي والالتزام بالزي المدرسي الموحد، وتوطيد العلاقات الاجتماعية الهادفة بين الملاك التدريسي وأولياء الأمور من خلال مجالس الآباء والمعلمين الدورية لتذليل العقبات الدراسية التي قد تواجه الطلبة في مسيرتهم الأكاديمية.
+                </p>
+                <p>
+                    تواصل المدرسة تحديث مخرجاتها التعليمية باستمرار من خلال التدريب والتطوير المستمر لكادرها التدريسي ودمج الأساليب الحديثة مع التعليم التقليدي، مما أثمر عن تحقيق نسب نجاح متميزة في الامتحانات الوزارية للصف الثالث المتوسط على مستوى قاطع الشعب والمديرية العامة لتربية الرصافة الأولى لسنوات متعددة.
+                </p>
+
+                <h2 id="system">النظام الدراسي والمرافق البناية</h2>
+                <p>
+                    تلتزم المدرسة التزاماً كاملاً بتطبيق المناهج والقرارات الدراسية الرسمية الصادرة عن وزارة التربية العراقية. وتولي إدارة المدرسة والكادر التدريسي اهتماماً خاصاً واستثنائياً بطلبة الصف الثالث المتوسط؛ نظراً للأهمية المصيرية لهذه المرحلة الدراسية، حيث تعمل على تهيئتهم وإعدادهم بشكل كامل لخوض غمار الامتحانات الوزارية النهائية (الباكالوريا)، ويتم ذلك عبر خطة تعليمية تشمل تقديم الدعم العلمي المتواصل والمراجعات المنهجية المستمرة للمواد الدراسية.
+                </p>
+                <p>
+                    وتتكون البناية المدرسية لمتوسطة الجوادين للبنين من عدة مرافق أساسية تم تصميمها لخدمة العملية التعليمية وتوفير سبل الراحة للطلبة والكادر، وتشتمل هذه المرافق على:
+                </p>
+                <ul>
+                    <li><strong>الصفوف الدراسية:</strong> القاعات المخصصة لإعطاء الدروس والمحاضرات للطلبة في المراحل المختلفة ومجهزة بالوسائل الضرورية لتلقي العلم.</li>
+                    <li><strong>غرفة الإدارة:</strong> المقر المخصص لإدارة المدرسة ومتابعة شؤونها التنظيمية والتربوية واللوجستية بقيادة المدير المتميز السيد فيصل برغش تايه ومساعديه.</li>
+                    <li><strong>غرفة المدرسين:</strong> المكان المخصص لأعضاء الكادر التدريسي المتميز للاستراحة والتحضير العلمي والمناقشات المنهجية.</li>
+                    <li><strong>الساحات المدرسية:</strong> الفضاءات المفتوحة المخصصة لممارسة الأنشطة الرياضية المتنوعة مثل كرة القدم والكرة الطائرة، واستراحة الطلاب وتجديد نشاطهم البدني والذهني بين الحصص الدراسية.</li>
+                    <li><strong>المرشد التربوي:</strong> توفر المدرسة مكتباً خاصاً بالإرشاد التربوي والنفسي لمساعدة الطلاب على حل مشاكلهم الشخصية والأكاديمية، وتهيئة بيئة صحية تحفزهم على التفوق الدراسي وصقل شخصياتهم القيادية والاجتماعية.</li>
+                </ul>
+
+                <h2 id="digital">الأنشطة والتواصل الرقمي والالكتروني</h2>
+                <p>
+                    تركز الإدارة على تفعيل دور التكنولوجيا والأنشطة الرقمية التفاعلية لتعزيز أواصر العلاقة بين الطالب والمدرسة، حيث تحرص بشكل كبير على تفعيل قنوات التواصل المباشر بين الطلاب والإدارة عبر الوسائل التالية:
+                </p>
+                <ul>
+                    <li><strong>روابط الاستبيان الإلكترونية:</strong> وهي أدوات رقمية تتيح للطلاب إمكانية تسجيل الشكاوى التي تواجههم، أو مشاركة آرائهم الشخصية ومقترحاتهم البناءة مع الإدارة مباشرة، مما أسهم بشكل واضح في تعزيز مستويات الثقة المتبادلة بين الطلاب ومدرستهم وعمل على تطوير البيئة التعليمية داخل المدرسة بشكل مستمر.</li>
+                    <li><strong>المنصات الرسمية على مواقع التواصل الاجتماعي:</strong> تمتلك المدرسة منصات إلكترونية رسمية نشطة، وتبرز من بينها القناة الرسمية للمدرسة على تطبيق تلغرام، والتي تُستخدم كأداة إعلامية أساسية للتواصل مع الطلاب وأولياء الأمور أولاً بأول ونشر كل ما يتعلق بـالتبليغات والتعليمات الرسمية، الجداول الدراسية الأسبوعية وجداول الامتحانات، والنتائج بمجرد صدورها لضمان وصولها السريع للجميع.</li>
+                </ul>
+
+                <!-- قسم التبليغات الفارغ -->
+                <h2 id="notifications">التبليغات والتعميمات الإدارية</h2>
+                <div class="notifications-box" id="notificationsBox">
+                    لا توجد تبليغات جديدة حالياً. سيتم نشر الإعلانات الهامة والقرارات الإدارية هنا فور صدورها.
+                </div>
+
+                <h2 id="vision">رؤية مدرسة الجوادين والأهداف الاستراتيجية</h2>
+                <p>
+                    ترتكز الرؤية التعليمية والتربوية لمتوسطة الجوادين للبنين على تحقيق عدة أهداف متكاملة مستخلصة من مسيرتها التعليمية، وتتلخص في:
+                </p>
+                <ol>
+                    <li>السعي الدائم والمستمر لرفع وتطوير المستوى العلمي والتربوي للطلاب في منطقة الشعب والمناطق المجاورة لها.</li>
+                    <li>تعزيز وبناء ثقة متبادلة وقوية بين الطلاب وإدارة المدرسة عبر قنوات التواصل الرقمية والاستبيانات الإلكترونية الفورية والمستمرة.</li>
+                    <li>التطوير الشامل والمستمر للبيئة التعليمية والصفوف الدراسية والمرافق اللوجستية لتكون دائماً محفزة على التفوق والإبداع.</li>
+                    <li>الاهتمام الفائق بطلبة الصف الثالث المتوسط وتقديم كافة أشكال الدعم العلمي، المحاضرات الإضافية والمراجعات المكثفة لضمان حصولهم على أعلى المعدلات والتميز في امتحانات البكالوريا الوزارية.</li>
+                    <li>الاستمرار في مواكبة أحدث الأساليب والوسائل الإلكترونية المتاحة في التعليم الإلكتروني, ونشر كافة الجداول والتبليغات ونتائج الامتحانات عبر منصات التواصل الرسمية لضمان أقصى درجات الشفافية والتواصل السريع والفعال.</li>
+                </ol>
+            </article>
+        </main>
+
+        <aside class="info-card">
+            <div class="info-card-header">
+                <img src="2.jpg" onerror="this.onerror=null; this.src='https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';" alt="شعار مدرسة الجوادين" class="info-card-img" />
+                <div class="info-card-title" id="sideCardTitle">شعار متوسطة الجوادين للبنين</div>
+            </div>
+            <table class="info-table" id="infoTable">
+                <tr>
+                    <th id="thEst">التأسيس</th>
+                    <td id="tdEst">2008م</td>
+                </tr>
+                <tr>
+                    <th id="thDir">المدير</th>
+                    <td id="tdDir">السيد فيصل برغش تايه</td>
+                </tr>
+                <tr>
+                    <th id="thLoc">المكان</th>
+                    <td id="tdLoc">بغداد، الشعب، الرصافة الأولى</td>
+                </tr>
+                <tr>
+                    <th id="thCountry">البلد</th>
+                    <td id="tdCountry">العراق 🇮🇶</td>
+                </tr>
+                <tr>
+                    <th id="thCoord">الإحداثيات</th>
+                    <td><a href="https://maps.google.com/?q=33.428444,44.401944" target="_blank" class="map-link">📍 33° 25' 42.4" N, 44° 24' 07.0" E</a></td>
+                </tr>
+                <tr>
+                    <th id="thWeb">المواقع الإلكترونية</th>
+                    <td id="tdWeb">
+                        <ul class="telegram-links-list" id="telegramLinksList">
+                            <li><a href="https://telegram.me/Jawadin1" target="_blank" id="linkTg1">قناة الأول متوسط</a></li>
+                            <li><a href="https://telegram.me/Jawadin2" target="_blank" id="linkTg2">قناة الثاني متوسط</a></li>
+                            <li><a href="https://telegram.me/jawadin3" target="_blank" id="linkTg3">قناة الثالث متوسط</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </aside>
+
+    </div>
+
+    <footer id="mainFooter">
+        <div>جميع الحقوق محفوظة © 2026 متوسطة الجوادين للبنين</div>
+        <div class="footer-credits">
+            تصميم وبرمجة: <span style="color: var(--color-blue);">محمود أحمد</span> | للدعم الفني: <a href="tel:07734894407">07734894407</a>
+        </div>
+    </footer>
+
+    <!-- الأكواد البرمجية للوظائف واختيار اللغة -->
+    <script>
+        // التحكم بالقائمة الجانبية (الثلاث نقاط)
+        const menuBtn = document.getElementById('menuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // تشغيل نظام اللغات من جديد مع كل عملية دخول للموقع
+        function selectLanguage(lang) {
+            // إخفاء الشاشة الترحيبية بحركة تلاشي
+            document.getElementById('langOverlay').classList.add('hidden');
+            
+            // تطبيق اللغة المحددة
+            applyLanguage(lang);
+        }
+
+        function applyLanguage(lang) {
+            if (lang === 'en') {
+                // تعديل اتجاه الصفحة للإنكليزية
+                document.documentElement.dir = 'ltr';
+                document.documentElement.lang = 'en';
+
+                // تحديث روابط النافبار
+                document.getElementById('linkHome').innerText = 'Home';
+                document.getElementById('linkSystem').innerText = 'Educational System';
+                document.getElementById('linkDigital').innerText = 'Digital Communication';
+                document.getElementById('linkNotifications').innerText = 'Notifications';
+                document.getElementById('linkVision').innerText = 'School Vision';
+                document.getElementById('btnTelegram').innerText = 'Telegram Channel';
+
+                // تحديث منطقة الهيرو
+                document.getElementById('heroTitle').innerText = 'Al-Jawadin Intermediate School for Boys';
+                document.getElementById('heroDesc').innerText = 'An outstanding scientific edifice that seeks to build promising generations capable of continuous excellence and success.';
+                document.getElementById('btnHeroSystem').innerText = 'Educational System & Facilities';
+                document.getElementById('btnHeroResults').innerText = 'Exam Results on Telegram';
+
+                // تحديث معلومات الكارت الجانبي بالكامل (العناوين والقيم)
+                document.getElementById('sideCardTitle').innerText = 'Al-Jawadin Intermediate School Logo';
+                
+                document.getElementById('thEst').innerText = 'Established';
+                document.getElementById('tdEst').innerText = '2008';
+
+                document.getElementById('thDir').innerText = 'Principal';
+                document.getElementById('tdDir').innerText = 'Mr. Faisal Barghash Tayeh';
+
+                document.getElementById('thLoc').innerText = 'Location';
+                document.getElementById('tdLoc').innerText = 'Baghdad, Al-Shaab, Al-Rusafa 1';
+
+                document.getElementById('thCountry').innerText = 'Country';
+                document.getElementById('tdCountry').innerText = 'Iraq 🇮🇶';
+
+                document.getElementById('thCoord').innerText = 'Coordinates';
+                document.getElementById('thWeb').innerText = 'Websites';
+                
+                // تحديث روابط التلغرام إلى الإنكليزية
+                document.getElementById('linkTg1').innerText = '1st Intermediate Channel';
+                document.getElementById('linkTg2').innerText = '2nd Intermediate Channel';
+                document.getElementById('linkTg3').innerText = '3rd Intermediate Channel';
+
+                // تحديث صندوق التبليغات الفارغ بالإنكليزية
+                document.getElementById('notificationsBox').innerText = 'No new notifications currently. Important announcements and administrative decisions will be published here as soon as they are issued.';
+
+                // تحديث الفوتر
+                document.getElementById('mainFooter').innerHTML = `
+                    <div>All rights reserved © 2026 Al-Jawadin Intermediate School for Boys</div>
+                    <div class="footer-credits">
+                        Designed & Programmed by: <span style="color: var(--color-blue);">Mahmoud Ahmed</span> | Tech Support: <a href="tel:07734894407">07734894407</a>
+                    </div>
+                `;
+
+                // تحويل لغة المقال إلى الإنكليزية
+                document.getElementById('mainArticle').innerHTML = `
+                    <p>
+                        <strong>Al-Jawadin Intermediate School for Boys</strong> is a government intermediate school for boys located in the Iraqi capital, <strong>Baghdad</strong>, specifically in the <strong>Al-Shaab</strong> area under the Directorate of Education of Al-Rusafa First. The school is classified as one of the most famous and prominent intermediate schools in the region, serving a large student population of over 1,000 students, and housing all three intermediate academic levels.
+                    </p>
+                    <h2>Establishment & Academic Growth</h2>
+                    <p>
+                        The school was established in 2008. Since its inception, it has diligently worked to raise the scientific and educational level of all students in Al-Shaab and surrounding areas. It has earned an excellent reputation thanks to its highly qualified educational staff.
+                    </p>
+                    <h2 id="system">Educational System & Facilities</h2>
+                    <p>
+                        The school fully implements the official curricula of the Iraqi Ministry of Education, with exceptional focus on third-grade intermediate students to prepare them for the final ministerial exams.
+                    </p>
+                    <ul>
+                        <li><strong>Classrooms:</strong> Fully equipped rooms designed for efficient learning.</li>
+                        <li><strong>Administration Office:</strong> Managed by Principal Faisal Barghash Tayeh.</li>
+                        <li><strong>Teachers Room:</strong> A dedicated area for teacher preparations and meetings.</li>
+                        <li><strong>Sports Yards:</strong> Open spaces for football, volleyball, and student recreation.</li>
+                        <li><strong>Educational Counselor:</strong> A dedicated counseling office supporting student growth.</li>
+                    </ul>
+                    <h2 id="digital">Activities & Digital Communication</h2>
+                    <p>
+                        The administration actively utilizes digital tools to engage with students, including online feedback surveys and its official Telegram channel to instantly publish study schedules, official notifications, and final results.
+                    </p>
+                    
+                    <h2 id="notifications">Administrative Notifications</h2>
+                    <div class="notifications-box" id="notificationsBox">
+                        No new notifications currently. Important announcements and administrative decisions will be published here as soon as they are issued.
+                    </div>
+                `;
+            } else {
+                // إعادة ضبط كل شيء للعربي الأصلي
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+                
+                document.getElementById('linkHome').innerText = 'الرئيسية';
+                document.getElementById('linkSystem').innerText = 'النظام الدراسي';
+                document.getElementById('linkDigital').innerText = 'التواصل الرقمي';
+                document.getElementById('linkNotifications').innerText = 'التبليغات';
+                document.getElementById('linkVision').innerText = 'رؤية المدرسة';
+                document.getElementById('btnTelegram').innerText = 'قناة التلغرام';
+
+                document.getElementById('heroTitle').innerText = 'متوسطة الجوادين للبنين';
+                document.getElementById('heroDesc').innerText = 'صرح علمي متميز يسعى لبناء أجيال واعدة قادرة على التفوق والنجاح المستمر.';
+                document.getElementById('btnHeroSystem').innerText = 'النظام الدراسي والمرافق';
+                document.getElementById('btnHeroResults').innerText = 'نتائج الامتحانات على تلغرام';
+
+                document.getElementById('sideCardTitle').innerText = 'شعار متوسطة الجوادين للبنين';
+                
+                document.getElementById('thEst').innerText = 'التأسيس';
+                document.getElementById('tdEst').innerText = '2008م';
+
+                document.getElementById('thDir').innerText = 'المدير';
+                document.getElementById('tdDir').innerText = 'السيد فيصل برغش تايه';
+
+                document.getElementById('thLoc').innerText = 'المكان';
+                document.getElementById('tdLoc').innerText = 'بغداد، الشعب، الرصافة الأولى';
+
+                document.getElementById('thCountry').innerText = 'البلد';
+                document.getElementById('tdCountry').innerText = 'العراق 🇮🇶';
+
+                document.getElementById('thCoord').innerText = 'الإحداثيات';
+                document.getElementById('thWeb').innerText = 'المواقع الإلكترونية';
+                
+                // إعادة روابط التلغرام للعربية
+                document.getElementById('linkTg1').innerText = 'قناة الأول متوسط';
+                document.getElementById('linkTg2').innerText = 'قناة الثاني متوسط';
+                document.getElementById('linkTg3').innerText = 'قناة الثالث متوسط';
+
+                // إعادة محتوى التبليغات للعربية
+                document.getElementById('notificationsBox').innerText = 'لا توجد تبليغات جديدة حالياً. سيتم نشر الإعلانات الهامة والقرارات الإدارية هنا فور صدورها.';
+
+                // إعادة الفوتر العربي
+                document.getElementById('mainFooter').innerHTML = `
+                    <div>جميع الحقوق محفوظة © 2026 متوسطة الجوادين للبنين</div>
+                    <div class="footer-credits">
+                        تصميم وبرمجة: <span style="color: var(--color-blue);">محمود أحمد</span> | للدعم الفني: <a href="tel:07734894407">07734894407</a>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
