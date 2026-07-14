@@ -6,308 +6,339 @@
     <title>لوحة تحكم الأستاذ - متوسطة الجوادين</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --color-text-dark: #0f172a;
+            --color-blue: #2563eb;
+            --color-blue-hover: #1d4ed8;
+            --font-main: 'Tajawal', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: #f3f4f6;
-            color: #0f172a;
-            padding: 40px 20px;
+            font-family: var(--font-main);
+            background-color: var(--bg-secondary);
+            color: var(--color-text-dark);
+            line-height: 1.6;
+            padding: 20px;
             display: flex;
             justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-        .control-card {
-            background-color: #ffffff;
+
+        .admin-card {
+            background-color: var(--bg-primary);
             border-radius: 16px;
-            padding: 30px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 600px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            padding: 35px;
+            border: 1px solid #e2e8f0;
         }
-        h1 {
+
+        .header-logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header-logo img {
+            max-width: 100px;
+            height: auto;
+            border-radius: 50%;
+            border: 3px solid var(--color-blue);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h2 {
             font-size: 22px;
             font-weight: 800;
-            color: #2563eb;
-            margin-bottom: 20px;
             text-align: center;
+            color: var(--color-text-dark);
+            margin-bottom: 10px;
         }
+
+        .sub-title {
+            font-size: 14px;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
+
         label {
             display: block;
             font-weight: 700;
             margin-bottom: 8px;
             font-size: 14px;
+            color: #334155;
         }
-        input, textarea {
+
+        input[type="text"],
+        input[type="password"],
+        textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #d1d5db;
+            padding: 12px 16px;
+            border: 1px solid #cbd5e1;
             border-radius: 8px;
-            font-family: 'Tajawal', sans-serif;
+            font-family: var(--font-main);
             font-size: 15px;
-            box-sizing: border-box;
-        }
-        input:focus, textarea:focus {
+            color: var(--color-text-dark);
             outline: none;
-            border-color: #2563eb;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        textarea:focus {
+            border-color: var(--color-blue);
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
-        /* تنسيق مخصص لزر اختيار ملف صورة من الهاتف */
-        .file-input-wrapper {
-            position: relative;
-            display: inline-block;
-            width: 100%;
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
         }
-        .file-input-button {
+
+        /* تنسيق مخصص لزر اختيار ملف الصورة */
+        .file-upload-wrapper {
+            position: relative;
+            margin-top: 5px;
+        }
+
+        .file-upload-btn {
             display: block;
-            width: 100%;
-            background-color: #f3f4f6;
-            color: #4b5563;
+            text-align: center;
+            background-color: #f1f5f9;
             border: 2px dashed #cbd5e1;
             padding: 15px;
-            text-align: center;
             border-radius: 8px;
-            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
+            font-weight: 700;
+            color: #475569;
+            transition: all 0.3s ease;
         }
-        .file-input-button:hover {
-            background-color: #e5e7eb;
-            border-color: #2563eb;
+
+        .file-upload-btn:hover {
+            background-color: #e2e8f0;
+            border-color: var(--color-blue);
         }
-        #announcementImage {
+
+        input[type="file"] {
             display: none;
         }
-        .preview-container {
-            margin-top: 10px;
-            text-align: center;
-            display: none;
-        }
-        .preview-img {
+
+        .image-preview {
+            margin-top: 15px;
             max-width: 100%;
             max-height: 200px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: none;
+            border: 1px solid #e2e8f0;
         }
+
         .btn-submit {
-            background-color: #2563eb;
+            width: 100%;
+            background-color: var(--color-blue);
             color: #ffffff;
             border: none;
-            width: 100%;
             padding: 14px;
-            border-radius: 8px;
+            font-family: var(--font-main);
+            font-weight: 800;
             font-size: 16px;
-            font-weight: 700;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
         }
+
         .btn-submit:hover {
-            background-color: #1d4ed8;
+            background-color: var(--color-blue-hover);
         }
-        .notification-item {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            padding: 15px;
+
+        /* رسائل الحالة التنبيهية */
+        .status-msg {
+            padding: 12px;
             border-radius: 8px;
             margin-top: 15px;
-            position: relative;
+            font-weight: 700;
+            text-align: center;
+            font-size: 14px;
+            display: none;
         }
-        .btn-delete {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #ef4444;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            cursor: pointer;
-            font-family: 'Tajawal', sans-serif;
+
+        .status-success {
+            background-color: #dcfce7;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
         }
-        .uploaded-img {
-            max-width: 100%;
-            max-height: 150px;
-            display: block;
-            margin-top: 10px;
-            border-radius: 6px;
+
+        .status-error {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #fca5a5;
         }
     </style>
 </head>
 <body>
 
-    <div class="control-card">
-        <h1>لوحة نشر التبليغات الرسمية 📣</h1>
-        
-        <!-- حقل كلمة المرور لحماية النشر -->
-        <div class="form-group">
-            <label for="adminPassword">رمز الدخول السري للأستاذ:</label>
-            <input type="password" id="adminPassword" placeholder="أدخل الرمز السري لتتمكن من النشر">
+    <div class="admin-card">
+        <div class="header-logo">
+            <img src="2.jpg" onerror="this.onerror=null; this.src='https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';" alt="شعار مدرسة الجوادين">
         </div>
+        
+        <h2>لوحة تحكم الأستاذ والإدارة</h2>
+        <div class="sub-title">يمكنك كتابة التبليغ للطلاب ورفع صورة من هاتفك مباشرة لتظهر في الصفحة الرئيسية.</div>
 
-        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #e5e7eb;">
-
-        <form id="announcementForm">
+        <form id="notificationForm" onsubmit="publishNotification(event)">
+            
             <div class="form-group">
-                <label for="announcementText">نص التبليغ:</label>
-                <textarea id="announcementText" rows="5" placeholder="اكتب تفاصيل الإعلان هنا..." required></textarea>
+                <label for="notifText">نص التبليغ أو الإعلان *</label>
+                <textarea id="notifText" placeholder="اكتب هنا التبليغ أو التعليمات الإدارية للطلاب أولياء الأمور..." required></textarea>
             </div>
 
-            <!-- ميزة اختيار ملف صورة مباشرة من الهاتف -->
             <div class="form-group">
-                <label>إرفاق صورة من جهازك (اختياري):</label>
-                <div class="file-input-wrapper">
-                    <label for="announcementImage" class="file-input-button" id="fileLabel">📸 اضغط هنا لاختيار صورة من الاستوديو</label>
-                    <input type="file" id="announcementImage" accept="image/*">
+                <label>إرفاق صورة مع التبليغ (اختياري)</label>
+                <div class="file-upload-wrapper">
+                    <label for="notifImage" class="file-upload-btn" id="uploadLabel">اضغط هنا لاختيار صورة من هاتفك</label>
+                    <input type="file" id="notifImage" accept="image/*" onchange="previewImage(event)">
                 </div>
-                <div class="preview-container" id="previewContainer">
-                    <p style="font-size: 12px; color: #64748b; margin-bottom: 5px;">معاينة الصورة المختارة:</p>
-                    <img id="imagePreview" class="preview-img" src="" alt="Preview">
-                </div>
+                <img id="imgPreview" class="image-preview" alt="معاينة الصورة">
             </div>
 
-            <button type="submit" class="btn-submit">نشر التبليغ فوراً للطلاب 🚀</button>
+            <div class="form-group">
+                <label for="secretKey">الرمز السري الأمني للنشر *</label>
+                <input type="password" id="secretKey" placeholder="أدخل رمز المرور الخاص بالنشر..." required>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">نشر التبليغ للطلاب الآن</button>
         </form>
 
-        <h2 style="font-size: 18px; margin-top: 40px; border-top: 1px solid #e5e7eb; padding-top: 20px;">التبليغات الحالية (يمكنك حذفها من هنا):</h2>
-        <div id="currentAnnouncements"></div>
+        <div id="statusBox" class="status-msg"></div>
     </div>
 
-    <!-- استدعاء إصدارات Firebase الحديثة والمستقرة لتجنب أي مشاكل بالمتصفح -->
+    <!-- استدعاء المكاتب الرسمية لـ Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <script>
-        // إعدادات الاتصال بقاعدة البيانات الخاصة بك
+        // إعداد وتأسيس الاتصال بالـ Firebase الخاص بك
         const firebaseConfig = {
-            databaseURL: "https://jawadin-school1-default-rtdb.firebaseio.com/"
+            databaseURL: "https://jawadin-school1-default-rtdb.firebaseio.com"
         };
-        
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
-        // الرمز السري الموحد للأستاذ
-        const CORRECT_PASSWORD = "jawadin_secret_2026"; 
+        let base64Image = ""; // متغير لتخزين ترميز الصورة بعد تحويلها
 
-        const form = document.getElementById('announcementForm');
-        const fileInput = document.getElementById('announcementImage');
-        const fileLabel = document.getElementById('fileLabel');
-        const previewContainer = document.getElementById('previewContainer');
-        const imagePreview = document.getElementById('imagePreview');
-        
-        let base64Image = ""; // متغير لحفظ الصورة بصيغة نصية
+        // دالة لمعاينة الصورة المرفوعة من الهاتف وتحويلها لـ Base64
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('imgPreview');
+            const label = document.getElementById('uploadLabel');
 
-        // عند اختيار صورة من الهاتف، نقوم بتحويلها لقراءة فورية ومعاينتها
-        fileInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
             if (file) {
-                fileLabel.innerText = "✅ تم اختيار: " + file.name;
-                
+                // التأكد من أن الملف المختار هو صورة بالفعل
+                if (!file.type.startsWith('image/')) {
+                    showStatus("يرجى اختيار ملف صورة صالح فقط!", false);
+                    event.target.value = "";
+                    return;
+                }
+
+                // قراءة وتحويل الصورة
                 const reader = new FileReader();
-                reader.onload = function(event) {
-                    base64Image = event.target.result; // تخزين الصورة بنجاح
-                    imagePreview.src = base64Image;
-                    previewContainer.style.display = "block";
+                reader.onload = function(e) {
+                    base64Image = e.target.result; // خزن الصورة المرمزة بـ base64
+                    preview.src = base64Image;
+                    preview.style.display = "block";
+                    label.innerText = `تم اختيار: ${file.name}`;
+                    label.style.borderColor = "#2563eb";
                 };
                 reader.readAsDataURL(file);
             } else {
-                fileLabel.innerText = "📸 اضغط هنا لاختيار صورة من الاستوديو";
-                previewContainer.style.display = "none";
                 base64Image = "";
+                preview.style.display = "none";
+                label.innerText = "اضغط هنا لاختيار صورة من هاتفك";
+                label.style.borderColor = "#cbd5e1";
             }
-        });
+        }
 
-        // عند إرسال النموذج لنشر التبليغ
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const passwordInput = document.getElementById('adminPassword').value.trim();
-            const textInput = document.getElementById('announcementText').value;
+        // دالة إرسال ونشر البيانات إلى Firebase
+        function publishNotification(event) {
+            event.preventDefault();
 
-            // 1. التحقق من كلمة المرور فوراً مع إعطاء تنبيه واضح
-            if (passwordInput !== CORRECT_PASSWORD) {
-                alert('عذراً! رمز الدخول السري غير صحيح. لا يمكن النشر.');
+            const text = document.getElementById('notifText').value.trim();
+            const password = document.getElementById('secretKey').value;
+            const submitBtn = document.getElementById('submitBtn');
+
+            // 1. التحقق من الرمز السري
+            if (password !== "jawadin_secret_2026") {
+                showStatus("الرمز السري الأمني غير صحيح! يرجى التأكد وإعادة المحاولة.", false);
                 return;
             }
 
-            // 2. تنسيق التاريخ
+            // تعطيل الزر لتجنب التكرار أثناء الرفع
+            submitBtn.disabled = true;
+            submitBtn.innerText = "جاري النشر والرفع...";
+
+            // 2. صياغة تاريخ اليوم تلقائياً بصيغة جميلة (مثل: 2026-07-14)
             const today = new Date();
-            const formattedDate = today.toLocaleDateString('ar-IQ', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
+            const yyyy = today.getFullYear();
+            let mm = today.getMonth() + 1; // الأشهر تبدأ من 0
+            let dd = today.getDate();
 
-            // 3. نشر البيانات في عقدة 'notifications' لتطابق الصفحة الرئيسية للموقع
-            database.ref('notifications').push({
-                text: textInput,
-                image: base64Image, // الصورة المرفوعة من الموبايل مباشرة
-                date: formattedDate
-            }).then(() => {
-                alert('تم نشر التبليغ بنجاح وسيظهر للطلبة الآن على الموقع الرئيسي!');
-                form.reset();
-                fileLabel.innerText = "📸 اضغط هنا لاختيار صورة من الاستوديو";
-                previewContainer.style.display = "none";
-                base64Image = "";
-            }).catch((err) => {
-                alert('حدث خطأ أثناء النشر: ' + err.message);
-            });
-        });
+            if (dd < 10) dd = '0' + dd;
+            if (mm < 10) mm = '0' + mm;
+            const formattedDate = yyyy + '-' + mm + '-' + dd;
 
-        // عرض التبليغات الحالية تحت لوحة التحكم مع إمكانية حذفها بشكل فوري
-        const currentAnnouncements = document.getElementById('currentAnnouncements');
-        database.ref('notifications').on('value', (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                let html = '';
-                Object.keys(data).reverse().forEach(key => {
-                    const item = data[key];
-                    // التأكد من استخراج النص بشكل صحيح سواء كان كائناً أو نصاً بسيطاً
-                    let textContent = "";
-                    let imgTag = "";
+            // 3. بناء كائن البيانات الجديد للتبليغ
+            const newPost = {
+                text: text,
+                date: formattedDate,
+                image: base64Image // ستكون فارغة إذا لم يختر المدرس صورة
+            };
 
-                    if (typeof item === 'object') {
-                        textContent = item.text || item.content || "";
-                        if (item.image) {
-                            imgTag = `<img src="${item.image}" class="uploaded-img" alt="Attached Image">`;
-                        }
-                    } else {
-                        textContent = item;
-                    }
-
-                    const itemDate = item.date ? `📅 ${item.date}` : "تبليغ غير مؤرخ";
-
-                    html += `
-                        <div class="notification-item">
-                            <button class="btn-delete" onclick="deleteAnnouncement('${key}')">حذف</button>
-                            <strong>${itemDate}</strong>
-                            <p style="margin-top: 10px; font-size: 14px; white-space: pre-wrap;">${textContent}</p>
-                            ${imgTag}
-                        </div>
-                    `;
+            // 4. الرفع إلى مسار notifications في قاعدة البيانات
+            database.ref('notifications').push(newPost)
+                .then(() => {
+                    showStatus("تم نشر التبليغ ورفعه بنجاح! سيظهر الآن للطلاب فوراً في الواجهة.", true);
+                    
+                    // إعادة تهيئة النموذج بالكامل بعد النجاح
+                    document.getElementById('notificationForm').reset();
+                    document.getElementById('imgPreview').style.display = "none";
+                    document.getElementById('uploadLabel').innerText = "اضغط هنا لاختيار صورة من هاتفك";
+                    base64Image = ""; 
+                })
+                .catch((error) => {
+                    console.error("Firebase Error: ", error);
+                    showStatus("حدث خطأ أثناء الاتصال بقاعدة البيانات. حاول مجدداً.", false);
+                })
+                .finally(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "نشر التبليغ للطلاب الآن";
                 });
-                currentAnnouncements.innerHTML = html;
-            } else {
-                currentAnnouncements.innerHTML = '<p style="color: #64748b; font-size: 14px;">لا توجد تبليغات حالياً.</p>';
-            }
-        });
+        }
 
-        // وظيفة الحذف للأستاذ مع حماية بالرمز السري
-        window.deleteAnnouncement = function(key) {
-            const passwordInput = document.getElementById('adminPassword').value.trim();
-            if (passwordInput !== CORRECT_PASSWORD) {
-                alert('يرجى إدخال رمز الدخول السري الصحيح في الحقل المخصص بالأعلى أولاً لتتمكن من الحذف!');
-                return;
-            }
-            if (confirm('هل أنت متأكد من رغبتك في حذف هذا التبليغ نهائياً؟')) {
-                database.ref('notifications').child(key).remove().then(() => {
-                    alert('تم حذف التبليغ بنجاح.');
-                }).catch((err) => {
-                    alert('فشل الحذف: ' + err.message);
-                });
-            }
+        // دالة مساعدة لإظهار رسائل الحالة بنجاح أو فشل
+        function showStatus(message, isSuccess) {
+            const statusBox = document.getElementById('statusBox');
+            statusBox.innerText = message;
+            statusBox.className = isSuccess ? "status-msg status-success" : "status-msg status-error";
+            statusBox.style.display = "block";
+
+            // إخفاء الرسالة تلقائياً بعد 6 ثوانٍ
+            setTimeout(() => {
+                statusBox.style.display = "none";
+            }, 6000);
         }
     </script>
 </body>
