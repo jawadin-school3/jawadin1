@@ -481,12 +481,12 @@
             background-color: #ffffff;
             border: 1px solid #e2e8f0;
             border-right: 4px solid var(--color-blue); /* شريط أزرق مائل لليمين للتبليغ */
-            border-radius: 6px;
-            padding: 15px;
-            margin-bottom: 12px;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
             text-align: right;
             font-style: normal;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             color: var(--color-text-dark);
         }
 
@@ -495,6 +495,30 @@
             border-right: none;
             border-left: 4px solid var(--color-blue);
             text-align: left;
+        }
+
+        .notification-date {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .notification-text {
+            font-size: 16px;
+            color: #1e293b;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        .notification-img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #e5e7eb;
+            display: block;
         }
 
         footer {
@@ -584,7 +608,6 @@
 </head>
 <body>
 
-    <!-- شاشة اختيار اللغة الترحيبية -->
     <div class="language-overlay" id="langOverlay">
         <div class="lang-card">
             <img src="2.jpg" onerror="this.onerror=null; this.src='https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';" alt="شعار مدرسة الجوادين" class="lang-card-img" />
@@ -598,7 +621,6 @@
         </div>
     </div>
 
-    <!-- الهيدر الثابت الذي يلتصق عند النزول -->
     <header>
         <div class="nav-container">
             <a href="#" class="logo">
@@ -647,7 +669,7 @@
 
                 <h2>التأسيس والتاريخ والنمو الأكاديمي</h2>
                 <p>
-                    يرجع تاريخ تأسيس متوسطة الجوادين للبنين إلى عام 2008م. ومنذ انطلاقتها في هذا العام، سعت المدرسة بشكل دؤوب إلى تحقيق رسالتها في رفع وتطوير المستوى العلمي والتربوي لجميع الطلاب الساكنين في منطقة الشعب والمناطق المجاورة والمحيطة بها. وبفضل هذه الجهود المستمرة، نجحت المدرسة في بناء واكتساب سمعة طيبة جداً وشهرة واسعة بين أهالي المنطقة والطلبة على حد سواء، ويعود الفضل في هذه السمعة إلى ما تمتلكه المدرسة من كادر تدريسي متميز يمتلك الرصانة العلمية والخبرة التربوية الكافية لإدارة وتوجيه الطلاب.
+                    يرجع تاريخ تأسيس متوسطة الجوادين للبنين إلى عام 2008م. ومنذ انطلاقتها في هذا عام، سعت المدرسة بشكل دؤوب إلى تحقيق رسالتها في رفع وتطوير المستوى العلمي والتربوي لجميع الطلاب الساكنين في منطقة الشعب والمناطق المجاورة والمحيطة بها. وبفضل هذه الجهود المستمرة، نجحت المدرسة في بناء واكتساب سمعة طيبة جداً وشهرة واسعة بين أهالي المنطقة والطلبة على حد سواء، ويعود الفضل في هذه السمعة إلى ما تمتلكه المدرسة من كادر تدريسي متميز يمتلك الرصانة العلمية والخبرة التربوية الكافية لإدارة وتوجيه الطلاب.
                 </p>
                 <p>
                     خلال مسيرتها التي تمتد لأكثر من عقد ونصف، قامت المدرسة بتخريج آلاف الطلبة الذين واصلوا مسيرتهم بنجاح في الإعداديات والجامعات العراقية المرموقة. وتتميز الإدارة بحرصها على الانضباط العالي والالتزام بالزي المدرسي الموحد، وتوطيد العلاقات الاجتماعية الهادفة بين الملاك التدريسي وأولياء الأمور من خلال مجالس الآباء والمعلمين الدورية لتذليل العقبات الدراسية التي قد تواجه الطلبة في مسيرتهم الأكاديمية.
@@ -668,312 +690,4 @@
                     <li><strong>غرفة الإدارة:</strong> المقر المخصص لإدارة المدرسة ومتابعة شؤونها التنظيمية والتربوية واللوجستية بقيادة المدير المتميز السيد فيصل برغش تايه ومساعديه.</li>
                     <li><strong>غرفة المدرسين:</strong> المكان المخصص لأعضاء الكادر التدريسي المتميز للاستراحة والتحضير العلمي والمناقشات المنهجية.</li>
                     <li><strong>الساحات المدرسية:</strong> الفضاءات المفتوحة المخصصة لممارسة الأنشطة الرياضية المتنوعة مثل كرة القدم والكرة الطائرة، واستراحة الطلاب وتجديد نشاطهم البدني والذهني بين الحصص الدراسية.</li>
-                    <li><strong>المرشد التربوي:</strong> توفر المدرسة مكتباً خاصاً بالإرشاد التربوي والنفسي لمساعدة الطلاب على حل مشاكلهم الشخصية والأكاديمية، وتهيئة بيئة صحية تحفزهم على التفوق الدراسي وصقل شخصياتهم القيادية والاجتماعية.</li>
-                </ul>
-
-                <h2 id="digital">الأنشطة والتواصل الرقمي والالكتروني</h2>
-                <p>
-                    التركيز الأساسي للإدارة يعتمد على دمج التكنولوجيا والأنشطة الرقمية التفاعلية لتعزيز أواصر العلاقة بين الطالب والمدرسة، حيث تحرص بشكل كبير على تفعيل قنوات التواصل المباشر بين الطلاب والإدارة عبر الوسائل التالية:
-                </p>
-                <ul>
-                    <li><strong>روابط الاستبيان الإلكترونية:</strong> وهي أدوات رقمية تتيح للطلاب إمكانية تسجيل الشكاوى التي تواجههم، أو مشاركة آرائهم الشخصية ومقترحاتهم البناءة مع الإدارة مباشرة، مما أسهم بشكل واضح في تعزيز مستويات الثقة المتبادلة بين الطلاب ومدرستهم وعمل على تطوير البيئة التعليمية داخل المدرسة بشكل مستمر.</li>
-                    <li><strong>المنصات الرسمية على مواقع التواصل الاجتماعي:</strong> تمتلك المدرسة منصات إلكترونية رسمية نشطة، وتبرز من بينها القناة الرسمية للمدرسة على تطبيق تلغرام، والتي تُستخدم كأداة إعلامية أساسية للتواصل مع الطلاب وأولياء الأمور أولاً بأول ونشر كل ما يتعلق بـالتبليغات والتعليمات الرسمية، الجداول الدراسية الأسبوعية وجداول الامتحانات، والنتائج بمجرد صدورها لضمان وصولها السريع للجميع.</li>
-                </ul>
-
-                <!-- قسم التبليغات المعدل والمربوط بـ Firebase -->
-                <h2 id="notifications">التبليغات والتعميمات الإدارية</h2>
-                <div class="notifications-box" id="notificationsBox">
-                    جاري تحميل التبليغات من قاعدة البيانات...
-                </div>
-
-                <!-- قسم رؤية مدرسة الجوادين والاهداف الاستراتيجية بتصميم البطاقات المدمج -->
-                <h2 id="vision">رؤية مدرسة الجوادين والأهداف الاستراتيجية</h2>
-                <p id="visionDesc">
-                    ترتكز الرؤية التعليمية والتربوية لمتوسطة الجوادين للبنين على تحقيق عدة أهداف متكاملة مستخلصة من مسيرتها التعليمية، وتتلخص في:
-                </p>
-                
-                <div class="vision-grid" id="visionGrid">
-                    <!-- الهدف الأول -->
-                    <div class="vision-card">
-                        <div class="vision-card-header">
-                            <span class="vision-card-number">١</span>
-                            <span class="vision-card-title">التميز العلمي</span>
-                        </div>
-                        <p class="vision-card-text">السعي الدائم والمستمر لرفع وتطوير المستوى العلمي والتربوي للطلاب في منطقة الشعب والمناطق المجاورة لها.</p>
-                    </div>
-
-                    <!-- الهدف الثاني -->
-                    <div class="vision-card">
-                        <div class="vision-card-header">
-                            <span class="vision-card-number">٢</span>
-                            <span class="vision-card-title">التواصل الرقمي</span>
-                        </div>
-                        <p class="vision-card-text">تعزيز وبناء ثقة متبادلة وقوية بين الطلاب وإدارة المدرسة عبر قنوات التواصل الرقمية والاستبيانات الإلكترونية الفورية والمستمرة.</p>
-                    </div>
-
-                    <!-- الهدف الثالث -->
-                    <div class="vision-card">
-                        <div class="vision-card-header">
-                            <span class="vision-card-number">٣</span>
-                            <span class="vision-card-title">البيئة التعليمية</span>
-                        </div>
-                        <p class="vision-card-text">التطوير الشامل والمستمر للبيئة التعليمية والصفوف الدراسية والمرافق اللوجستية لتكون دائماً محفزة على التفوق والإبداع.</p>
-                    </div>
-
-                    <!-- الهدف الرابع -->
-                    <div class="vision-card">
-                        <div class="vision-card-header">
-                            <span class="vision-card-number">٤</span>
-                            <span class="vision-card-title">دعم الثالث المتوسط</span>
-                        </div>
-                        <p class="vision-card-text">الاهتمام الفائق بطلبة الصف الثالث المتوسط وتقديم كافة أشكال الدعم العلمي، المحاضرات الإضافية والمراجعات المكثفة لضمان حصولهم على أعلى المعدلات والتميز في امتحانات البكالوريا الوزارية.</p>
-                    </div>
-
-                    <!-- الهدف الخامس -->
-                    <div class="vision-card">
-                        <div class="vision-card-header">
-                            <span class="vision-card-number">٥</span>
-                            <span class="vision-card-title">مواكبة التطور</span>
-                        </div>
-                        <p class="vision-card-text">الاستمرار في مواكبة أحدث الأساليب والوسائل الإلكترونية المتاحة في التعليم الإلكتروني، ونشر كافة الجداول والتبليغات ونتائج الامتحانات عبر منصات التواصل الرسمية لضمان أقصى درجات الشفافية والتواصل السريع والفعال.</p>
-                    </div>
-                </div>
-            </article>
-        </main>
-
-        <aside class="info-card">
-            <div class="info-card-header">
-                <img src="2.jpg" onerror="this.onerror=null; this.src='https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';" alt="شعار مدرسة الجوادين" class="info-card-img" />
-                <div class="info-card-title" id="sideCardTitle">شعار متوسطة الجوادين للبنين</div>
-            </div>
-            <table class="info-table" id="infoTable">
-                <tr>
-                    <th id="thEst">التأسيس</th>
-                    <td id="tdEst">2008م</td>
-                </tr>
-                <tr>
-                    <th id="thDir">المدير</th>
-                    <td id="tdDir">السيد فيصل برغش تايه</td>
-                </tr>
-                <tr>
-                    <th id="thLoc">المكان</th>
-                    <td id="tdLoc">بغداد، الشعب، الرصافة الأولى</td>
-                </tr>
-                <tr>
-                    <th id="thCountry">البلد</th>
-                    <td id="tdCountry">العراق 🇮🇶</td>
-                </tr>
-                <tr>
-                    <th id="thCoord">الإحداثيات</th>
-                    <td><a href="https://maps.google.com/?q=33.428444,44.401944" target="_blank" class="map-link">📍 33° 25' 42.4" N, 44° 24' 07.0" E</a></td>
-                </tr>
-                <tr>
-                    <th id="thWeb">المواقع الإلكترونية</th>
-                    <td id="tdWeb">
-                        <ul class="telegram-links-list" id="telegramLinksList">
-                            <li><a href="https://telegram.me/Jawadin1" target="_blank" id="linkTg1">قناة الأول متوسط</a></li>
-                            <li><a href="https://telegram.me/Jawadin2" target="_blank" id="linkTg2">قناة الثاني متوسط</a></li>
-                            <li><a href="https://telegram.me/jawadin3" target="_blank" id="linkTg3">قناة الثالث متوسط</a></li>
-                        </ul>
-                    </td>
-                </tr>
-            </table>
-        </aside>
-
-    </div>
-
-    <footer id="mainFooter">
-        <div>جميع الحقوق محفوظة © 2026 متوسطة الجوادين للبنين</div>
-        <div class="footer-credits">
-            تصميم وبرمجة: <span style="color: var(--color-blue);">محمود أحمد</span> | للدعم الفني: <a href="tel:07734894407">07734894407</a>
-        </div>
-    </footer>
-
-    <!-- استدعاء مكتبة Firebase الرسمية للإصدار المتوافق -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
-    <script>
-        // إعداد وتدشين الاتصال بقاعدة بيانات Firebase الخاصة بمشروعك
-        const firebaseConfig = {
-            databaseURL: "https://jawadin-school1-default-rtdb.firebaseio.com"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
-
-        // متغير لتخزين اللغة النشطة حالياً (عربي افتراضياً)
-        let currentLang = 'ar';
-
-        // دالة لجلب التبليغات وعرضها فوراً من الفايربيس
-        function fetchNotifications() {
-            const notificationsBox = document.getElementById('notificationsBox');
-            
-            // قراءة البيانات في مسار التبليغات مباشرة (Realtime)
-            database.ref('notifications').on('value', (snapshot) => {
-                const data = snapshot.val();
-                
-                // تنظيف الصندوق تماماً لبناء القائمة الجديدة
-                notificationsBox.innerHTML = '';
-                notificationsBox.style.border = 'none';
-                notificationsBox.style.background = 'transparent';
-                notificationsBox.style.padding = '0';
-
-                if (data) {
-                    // إذا كانت التبليغات مخرونة كـ Object (الأسلوب المعتاد في Firebase)
-                    let listHTML = '';
-                    
-                    // تحويل الكائنات إلى مصفوفة لعرضها مرتبة
-                    const items = Object.values(data);
-
-                    items.forEach(item => {
-                        let content = '';
-                        if (typeof item === 'object') {
-                            // إذا كان الكائن يحتوي على حقول للغتين أو نص مباشر
-                            content = (currentLang === 'en' && item.text_en) ? item.text_en : (item.text || item.content || JSON.stringify(item));
-                        } else {
-                            content = item;
-                        }
-                        
-                        listHTML += `<div class="notification-item">${content}</div>`;
-                    });
-
-                    notificationsBox.innerHTML = listHTML;
-                } else {
-                    // في حال كانت قاعدة البيانات فارغة تماماً
-                    resetEmptyBox();
-                }
-            }, (error) => {
-                console.error("Error fetching data: ", error);
-                notificationsBox.innerText = currentLang === 'en' ? 'Error loading notifications.' : 'حدث خطأ أثناء تحميل التبليغات.';
-            });
-        }
-
-        // دالة لإرجاع شكل الصندوق الافتراضي المخطط في حال عدم وجود تبليغات
-        function resetEmptyBox() {
-            const notificationsBox = document.getElementById('notificationsBox');
-            notificationsBox.style.border = '2px dashed #cbd5e1';
-            notificationsBox.style.backgroundColor = '#f8fafc';
-            notificationsBox.style.padding = '30px 20px';
-            notificationsBox.style.fontStyle = 'italic';
-            
-            if (currentLang === 'en') {
-                notificationsBox.innerText = 'No new notifications currently. Important announcements will be published here.';
-            } else {
-                notificationsBox.innerText = 'لا توجد تبليغات جديدة حالياً. سيتم نشر الإعلانات الهامة والقرارات الإدارية هنا فور صدورها.';
-            }
-        }
-
-        // التحكم بالقائمة الجانبية (الثلاث نقاط)
-        const menuBtn = document.getElementById('menuBtn');
-        const navMenu = document.getElementById('navMenu');
-
-        menuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-
-        const navLinks = document.querySelectorAll('nav ul li a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
-        });
-
-        // تشغيل نظام اللغات مع تعديل استدعاء جلب البيانات
-        function selectLanguage(lang) {
-            document.getElementById('langOverlay').classList.add('hidden');
-            applyLanguage(lang);
-        }
-
-        function applyLanguage(lang) {
-            currentLang = lang; // تعيين اللغة النشطة
-
-            if (lang === 'en') {
-                // تعديل اتجاه الصفحة للإنكليزية
-                document.documentElement.dir = 'ltr';
-                document.documentElement.lang = 'en';
-
-                // تحديث روابط النافبار
-                document.getElementById('linkHome').innerText = 'Home';
-                document.getElementById('linkSystem').innerText = 'Educational System';
-                document.getElementById('linkDigital').innerText = 'Digital Communication';
-                document.getElementById('linkNotifications').innerText = 'Notifications';
-                document.getElementById('linkVision').innerText = 'School Vision';
-                document.getElementById('btnTelegram').innerText = 'Telegram Channel';
-
-                // تحديث منطقة الهيرو
-                document.getElementById('heroTitle').innerText = 'Al-Jawadin Intermediate School for Boys';
-                document.getElementById('heroDesc').innerText = 'An outstanding scientific edifice that seeks to build promising generations capable of continuous excellence and success.';
-                document.getElementById('btnHeroSystem').innerText = 'Educational System & Facilities';
-                document.getElementById('btnHeroResults').innerText = 'Exam Results on Telegram';
-
-                // تحديث معلومات الكارت الجانبي بالكامل (العناوين والقيم)
-                document.getElementById('sideCardTitle').innerText = 'Al-Jawadin Intermediate School Logo';
-                
-                document.getElementById('thEst').innerText = 'Established';
-                document.getElementById('tdEst').innerText = '2008';
-
-                document.getElementById('thDir').innerText = 'Principal';
-                document.getElementById('tdDir').innerText = 'Mr. Faisal Barghash Tayeh';
-
-                document.getElementById('thLoc').innerText = 'Location';
-                document.getElementById('tdLoc').innerText = 'Baghdad, Al-Shaab, Al-Rusafa 1';
-
-                document.getElementById('thCountry').innerText = 'Country';
-                document.getElementById('tdCountry').innerText = 'Iraq 🇮🇶';
-
-                document.getElementById('thCoord').innerText = 'Coordinates';
-                document.getElementById('thWeb').innerText = 'Websites';
-                
-                // تحديث روابط التلغرام إلى الإنكليزية
-                document.getElementById('linkTg1').innerText = '1st Intermediate Channel';
-                document.getElementById('linkTg2').innerText = '2nd Intermediate Channel';
-                document.getElementById('linkTg3').innerText = '3rd Intermediate Channel';
-
-            } else {
-                // إرجاع اتجاه الصفحة للعربية
-                document.documentElement.dir = 'rtl';
-                document.documentElement.lang = 'ar';
-
-                // إرجاع روابط النافبار للعربية
-                document.getElementById('linkHome').innerText = 'الرئيسية';
-                document.getElementById('linkSystem').innerText = 'النظام الدراسي';
-                document.getElementById('linkDigital').innerText = 'التواصل الرقمي';
-                document.getElementById('linkNotifications').innerText = 'التبليغات';
-                document.getElementById('linkVision').innerText = 'رؤية المدرسة';
-                document.getElementById('btnTelegram').innerText = 'قناة التلغرام';
-
-                // إرجاع منطقة الهيرو للعربية
-                document.getElementById('heroTitle').innerText = 'متوسطة الجوادين للبنين';
-                document.getElementById('heroDesc').innerText = 'صرح علمي متميز يسعى لبناء أجيال واعدة قادرة على التفوق والنجاح المستمر.';
-                document.getElementById('btnHeroSystem').innerText = 'النظام الدراسي والمرافق';
-                document.getElementById('btnHeroResults').innerText = 'نتائج الامتحانات على تلغرام';
-
-                // إرجاع معلومات الكارت الجانبي للعربية
-                document.getElementById('sideCardTitle').innerText = 'شعار متوسطة الجوادين للبنين';
-                
-                document.getElementById('thEst').innerText = 'التأسيس';
-                document.getElementById('tdEst').innerText = '2008م';
-
-                document.getElementById('thDir').innerText = 'المدير';
-                document.getElementById('tdDir').innerText = 'السيد فيصل برغش تايه';
-
-                document.getElementById('thLoc').innerText = 'المكان';
-                document.getElementById('tdLoc').innerText = 'بغداد، الشعب، الرصافة الأولى';
-
-                document.getElementById('thCountry').innerText = 'البلد';
-                document.getElementById('tdCountry').innerText = 'العراق 🇮🇶';
-
-                document.getElementById('thCoord').innerText = 'الإحداثيات';
-                document.getElementById('thWeb').innerText = 'المواقع الإلكترونية';
-                
-                document.getElementById('linkTg1').innerText = 'قناة الأول متوسط';
-                document.getElementById('linkTg2').innerText = 'قناة الثاني متوسط';
-                document.getElementById('linkTg3').innerText = 'قناة الثالث متوسط';
-            }
-
-            // إعادة استدعاء التبليغات لتظهر باللغة المناسبة فور تغييرها
-            fetchNotifications();
-        }
-    </script>
-</body>
-</html>
+                    <li><strong>المرشد التربوي:</strong> توفر المدرسة مكتباً خاصاً بالإرشاد التربوي والنفسي لمساعدة الطلاب على حل مشاكلهم الشخصية والأكاديمية، وتهيئة بيئة صحية تحفزهم على التفوق الدراسي وصقل شخصياتهم القيادية
