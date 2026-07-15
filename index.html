@@ -12,10 +12,8 @@
             --color-text-dark: #0f172a;
             --color-blue: #2563eb;
             --color-blue-hover: #1d4ed8;
-            --color-emerald: #10b981;
-            --color-emerald-hover: #059669;
-            --color-rose: #f43f5e;
             --font-main: 'Tajawal', sans-serif;
+            --color-green: #10b981;
         }
 
         * {
@@ -146,10 +144,6 @@
             color: var(--color-blue);
         }
 
-        nav {
-            display: block;
-        }
-
         nav ul {
             list-style: none;
             display: flex;
@@ -174,37 +168,22 @@
             gap: 15px;
         }
 
-        /* زر الدخول / الحساب الجديد */
-        .auth-btn {
-            background-color: var(--color-blue);
-            border: 1px solid var(--color-blue);
-            padding: 8px 18px;
+        .lang-btn {
+            background: none;
+            border: 1px solid #d1d5db;
+            padding: 6px 16px;
             border-radius: 20px;
             cursor: pointer;
             font-family: var(--font-main);
             font-size: 14px;
-            font-weight: bold;
             transition: all 0.3s ease;
             text-decoration: none;
-            color: #ffffff;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+            color: var(--color-text-dark);
         }
 
-        .auth-btn:hover {
-            background-color: var(--color-blue-hover);
-            border-color: var(--color-blue-hover);
-        }
-
-        .auth-btn.logged-in {
-            background-color: #f0fdf4;
-            border-color: var(--color-emerald);
-            color: var(--color-emerald);
-        }
-
-        .auth-btn.logged-in:hover {
-            background-color: #dcfce7;
+        .lang-btn:hover {
+            border-color: var(--color-blue);
+            color: var(--color-blue);
         }
 
         .menu-toggle {
@@ -283,12 +262,12 @@
 
         .btn-secondary {
             background-color: #ffffff;
-            color: var(--color-emerald);
-            border: 1px solid var(--color-emerald);
+            color: var(--color-blue);
+            border: 1px solid var(--color-blue);
         }
 
         .btn-secondary:hover {
-            background-color: rgba(16, 185, 129, 0.05);
+            background-color: rgba(37, 99, 235, 0.05);
         }
 
         .wiki-container {
@@ -539,6 +518,192 @@
             display: block;
         }
 
+        /* --- النوافذ المنبثقة لنظام الطلاب التفاعلي الجديد --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 5000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: #ffffff;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 30px;
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #f1f5f9;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+        }
+        html[dir="ltr"] .close-modal { left: auto; right: 20px; }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--color-text-dark);
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: right;
+        }
+        html[dir="ltr"] .form-group { text-align: left; }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #334155;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: var(--font-main);
+            font-size: 14.5px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--color-blue);
+        }
+
+        .student-dashboard-grid {
+            display: grid;
+            grid-template-columns: 130px 1fr;
+            gap: 20px;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-avatar {
+            width: 130px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #ffffff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .dashboard-info-text p {
+            font-size: 14px;
+            margin-bottom: 4px;
+            color: #475569;
+        }
+
+        .dashboard-info-text strong {
+            color: var(--color-text-dark);
+        }
+
+        .grade-section-title {
+            font-size: 16px;
+            font-weight: 800;
+            background: #3b82f6;
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin: 20px 0 10px;
+        }
+
+        .grades-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            margin-bottom: 15px;
+        }
+
+        .grades-table th, .grades-table td {
+            border: 1px solid #e2e8f0;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .grades-table th {
+            background: #f1f5f9;
+            font-weight: 700;
+        }
+
+        .badge-alert-pvt {
+            background: #fff1f2;
+            border: 1px dashed #f43f5e;
+            color: #be123c;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14.5px;
+            margin-bottom: 15px;
+        }
+
+        /* تنسيق قسم التبليغات الخاصة داخل لوحة التحكم */
+        .dashboard-private-notifications {
+            margin-top: 25px;
+            background: #fffbeb;
+            border: 1px solid #fef3c7;
+            padding: 20px;
+            border-radius: 12px;
+            border-right: 4px solid #f59e0b;
+        }
+        
+        .dashboard-private-notifications h4 {
+            color: #b45309;
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         footer {
             background-color: var(--bg-secondary);
             border-top: 1px solid #e5e7eb;
@@ -562,261 +727,6 @@
 
         .footer-credits a:hover {
             text-decoration: underline;
-        }
-
-        /* نافذة منبثقة تفاعلية (Modal Popups) */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(4px);
-            z-index: 2000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            padding: 15px;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-container {
-            background-color: #ffffff;
-            border-radius: 16px;
-            width: 100%;
-            max-width: 550px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            transition: transform 0.3s ease;
-            transform: scale(0.95);
-            position: relative;
-        }
-
-        .modal-overlay.active .modal-container {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            padding: 20px;
-            border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-title {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--color-text-dark);
-        }
-
-        .modal-close-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: #94a3b8;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .modal-close-btn:hover {
-            color: var(--color-rose);
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
-
-        /* نماذج الإدخال والتصميم */
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 14px;
-            font-weight: 700;
-            color: #475569;
-            margin-bottom: 6px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px 14px;
-            font-family: var(--font-main);
-            font-size: 14px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        .form-control:focus {
-            border-color: var(--color-blue);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .form-select {
-            appearance: none;
-            background-image: url("data:image/svg+xml;utf8,<svg fill='%2364748b' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24Hz' fill='none'/></svg>");
-            background-repeat: no-repeat;
-            background-position: left 10px center;
-        }
-
-        html[dir="ltr"] .form-select {
-            background-position: right 10px center;
-        }
-
-        .error-message {
-            color: var(--color-rose);
-            font-size: 13px;
-            font-weight: bold;
-            margin-top: 5px;
-            display: none;
-        }
-
-        /* أزرار النافذة التفاعلية */
-        .modal-footer-btns {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
-            justify-content: flex-end;
-        }
-
-        .modal-btn {
-            padding: 10px 20px;
-            font-family: var(--font-main);
-            font-size: 14px;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .modal-btn-confirm {
-            background-color: var(--color-blue);
-            color: #ffffff;
-        }
-
-        .modal-btn-confirm:hover {
-            background-color: var(--color-blue-hover);
-        }
-
-        .modal-btn-cancel {
-            background-color: #f1f5f9;
-            color: #475569;
-        }
-
-        .modal-btn-cancel:hover {
-            background-color: #e2e8f0;
-        }
-
-        .modal-btn-danger {
-            background-color: var(--color-rose);
-            color: #ffffff;
-        }
-
-        .modal-btn-danger:hover {
-            background-color: #e11d48;
-        }
-
-        /* واجهة لوحة الطالب المنبثقة */
-        .student-profile {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        .student-avatar {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: 2px solid var(--color-blue);
-            object-fit: cover;
-        }
-
-        .student-info h3 {
-            font-size: 17px;
-            font-weight: 800;
-            color: var(--color-text-dark);
-        }
-
-        .student-info p {
-            font-size: 13px;
-            color: #64748b;
-        }
-
-        /* جدول الدرجات للطالب */
-        .grades-section-title {
-            font-size: 15px;
-            font-weight: 800;
-            background-color: #f1f5f9;
-            padding: 6px 12px;
-            border-radius: 6px;
-            margin: 15px 0 8px;
-            color: #334155;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .grades-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 15px;
-            font-size: 13.5px;
-        }
-
-        .grades-table th, .grades-table td {
-            border: 1px solid #e2e8f0;
-            padding: 8px;
-            text-align: center;
-        }
-
-        .grades-table th {
-            background-color: #f8fafc;
-            color: #475569;
-            font-weight: bold;
-        }
-
-        .grade-not-announced {
-            color: #94a3b8;
-            font-style: italic;
-        }
-
-        /* قسم التبليغات الخاصة للطالب */
-        .private-notif-card {
-            background-color: #fef2f2;
-            border-right: 4px solid var(--color-rose);
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 10px;
-            font-size: 13.5px;
-        }
-
-        html[dir="ltr"] .private-notif-card {
-            border-right: none;
-            border-left: 4px solid var(--color-rose);
-        }
-
-        .private-notif-date {
-            font-size: 11px;
-            font-weight: bold;
-            color: #94a3b8;
-            display: block;
-            margin-bottom: 4px;
         }
 
         @media (max-width: 992px) {
@@ -875,12 +785,18 @@
             .btn {
                 width: 100%;
             }
+            .student-dashboard-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .dashboard-avatar {
+                margin: 0 auto;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- واجهة اختيار اللغة -->
     <div class="language-overlay" id="langOverlay">
         <div class="lang-card">
             <img src="2.jpg" onerror="this.onerror=null; this.src='https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';" alt="شعار مدرسة الجوادين" class="lang-card-img" />
@@ -894,7 +810,6 @@
         </div>
     </div>
 
-    <!-- رأس الصفحة (الهيدر) -->
     <header>
         <div class="nav-container">
             <a href="#" class="logo">
@@ -917,31 +832,112 @@
                 </ul>
             </nav>
             <div class="header-left">
-                <!-- دكمة تسجيل الدخول / حساب جديد المعدلة بدلاً من قناة التلغرام -->
-                <button class="auth-btn" id="btnAuth" onclick="handleAuthClick()">تسجيل دخول / إنشاء حساب</button>
+                <!-- تم استبدال دكمة التلغرام بدكمة الدخول الفورية التفاعلية -->
+                <button onclick="handleStudentGate()" class="lang-btn" id="btnAuthHeader" style="background-color: var(--color-blue); color: white; border: none; font-weight: bold; padding: 8px 18px;">تسجيل دخول / انشاء حساب</button>
             </div>
         </div>
     </header>
 
-    <!-- القسم التعريفي (هيرو) -->
     <section class="hero">
         <div class="hero-content">
             <h1 id="heroTitle">متوسطة الجوادين للبنين</h1>
             <p id="heroDesc">صرح علمي متميز يسعى لبناء أجيال واعدة قادرة على التفوق والنجاح المستمر.</p>
             <div class="hero-buttons">
                 <a href="#system" class="btn btn-primary" id="btnHeroSystem">النظام الدراسي والمرافق</a>
-                <!-- دكمة لوحة الطالب التفاعلية المخصصة -->
-                <button onclick="handleStudentPortalClick()" class="btn btn-secondary" id="btnStudentPortal">نتائج امتحاناتي والتبليغات المخصصة</button>
+                <button onclick="handleStudentGate()" class="btn btn-secondary" id="btnHeroResults" style="background-color: var(--color-green); color: #fff; border: none;">نتائج امتحاناتي والتبليغات المخصصة</button>
             </div>
         </div>
     </section>
 
-    <!-- محتوى الويكي وجدول المعلومات -->
+    <div class="modal-overlay" id="studentGateModal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeModal('studentGateModal')">X</button>
+            <div class="modal-title" id="gateTitle">بوابة الطالب الإلكترونية</div>
+            
+            <div id="askRegisterView" style="text-align: center; padding: 20px 0;">
+                <p style="font-size: 16px; margin-bottom: 25px; font-weight: 500;">لم تسجل في المنصة بعد، هل تريد التسجيل لإنشاء حساب جديد؟</p>
+                <div style="display: flex; gap: 15px; justify-content: center;">
+                    <button class="btn btn-primary" onclick="showFormView('register')">نعم، إنشاء حساب</button>
+                    <button class="btn btn-secondary" onclick="showFormView('login')">لدي حساب بالفعل</button>
+                </div>
+            </div>
+
+            <div id="loginFormView" style="display: none;">
+                <div class="form-group">
+                    <label>الاسم الرباعي للطالب:</label>
+                    <input type="text" id="loginFullName" placeholder="أدخل اسمك الرباعي كما في الهوية">
+                </div>
+                <div class="form-group">
+                    <label>الرمز السري الخاص بك:</label>
+                    <input type="password" id="loginPassword" placeholder="أدخل رمزك السري">
+                </div>
+                <button class="btn btn-primary" style="width:100%; margin-top:10px;" onclick="processLogin()">تسجيل الدخول</button>
+                <p style="text-align:center; font-size:13px; margin-top:15px; color:#64748b;">ليس لديك حساب؟ <a href="#" onclick="showFormView('register')">سجل الآن</a></p>
+            </div>
+
+            <div id="registerFormView" style="display: none;">
+                <div class="form-group">
+                    <label>الاسم الرباعي للطالب حصراً *</label>
+                    <input type="text" id="regFullName" placeholder="اكتب الاسم الرباعي الصحيح">
+                </div>
+                <div class="form-group">
+                    <label>الصف الدراسي *</label>
+                    <select id="regGrade" onchange="updateClassOptions()">
+                        <option value="">اختر الصف...</option>
+                        <option value="1">الأول متوسط</option>
+                        <option value="2">الثاني متوسط</option>
+                        <option value="3">الثالث متوسط</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>الشعبة *</label>
+                    <select id="regClassOption">
+                        <option value="">يرجى اختيار الصف أولاً</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>اسم الأم الثلاثي *</label>
+                    <input type="text" id="regMotherName" placeholder="اكتب اسم الأم">
+                </div>
+                <div class="form-group">
+                    <label>اسم أب الأم (الجد) *</label>
+                    <input type="text" id="regMotherFatherName" placeholder="اكتب اسم والد الأم">
+                </div>
+                <div class="form-group">
+                    <label>رقم هاتف ولي الأمر *</label>
+                    <input type="tel" id="regPhone" placeholder="077xxxxxxx">
+                </div>
+                <div class="form-group">
+                    <label>رقم البطاقة الوطنية الموحدة *</label>
+                    <input type="text" id="regNationalId" placeholder="أدخل رقم البطاقة الموحدة">
+                </div>
+                <div class="form-group">
+                    <label>الصورة الرسمية للطالب (بخلفية بيضاء حصراً) *</label>
+                    <input type="file" id="regPhotoFile" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label>إنشاء رمز سري خاص بك للدخول مستقبلاً *</label>
+                    <input type="password" id="regPassword" placeholder="اكتب رمزاً سرياً تحفظه جيداً">
+                </div>
+                <button class="btn btn-primary" style="width:100%; background-color:var(--color-green);" onclick="processRegister()">إرسال البيانات وإنشاء الحساب</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="studentDashboardModal">
+        <div class="modal-box" style="max-width: 750px;">
+            <button class="close-modal" onclick="closeModal('studentDashboardModal')">X</button>
+            <div class="modal-title">لوحة بيانات الطالب المخصصة</div>
+            
+            <div id="dashboardContent">
+            </div>
+        </div>
+    </div>
+
     <div class="wiki-container">
         
         <main class="wiki-content">
             <article id="mainArticle">
-                <!-- سيتم ملء هذا المحتوى ديناميكياً حسب اختيار اللغة -->
             </article>
         </main>
 
@@ -987,7 +983,6 @@
 
     </div>
 
-    <!-- تذييل الصفحة -->
     <footer id="mainFooter">
         <div id="footerText">جميع الحقوق محفوظة © 2026 متوسطة الجوادين للبنين</div>
         <div class="footer-credits" id="footerCredits">
@@ -995,167 +990,6 @@
         </div>
     </footer>
 
-    <!-- ======================================================== -->
-    <!--            النوافذ المنبثقة التفاعلية (Modals)            -->
-    <!-- ======================================================== -->
-
-    <!-- 1. نافذة التأكيد قبل التسجيل (هل أنت مسجل؟) -->
-    <div class="modal-overlay" id="modalConfirmReg">
-        <div class="modal-container">
-            <div class="modal-header">
-                <span class="modal-title" id="confirmTitle">منصة الجوادين الإلكترونية للطلاب</span>
-                <button class="modal-close-btn" onclick="closeModal('modalConfirmReg')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p id="confirmBodyText" style="font-size: 15px; text-align: center; margin-bottom: 20px;">لم تقم بتسجيل الدخول أو التسجيل في المنصة بعد. هل تريد إنشاء حساب طالب جديد وتنزيل درجاتك؟</p>
-                <div style="display: flex; gap: 10px; justify-content: center;">
-                    <button class="btn btn-primary" onclick="openRegisterModal()" id="btnGoRegister">نعم، إنشاء حساب جديد</button>
-                    <button class="btn btn-secondary" onclick="openLoginModal()" id="btnGoLogin" style="color: var(--color-blue); border-color: var(--color-blue);">لدي حساب، تسجيل دخول</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 2. نافذة إنشاء حساب جديد -->
-    <div class="modal-overlay" id="modalRegister">
-        <div class="modal-container">
-            <div class="modal-header">
-                <span class="modal-title" id="regTitle">إنشاء حساب طالب جديد</span>
-                <button class="modal-close-btn" onclick="closeModal('modalRegister')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="formRegister" onsubmit="submitRegistration(event)">
-                    <div class="form-group">
-                        <label class="form-label" id="lblRegFullName">الاسم الرباعي للطالب *</label>
-                        <input type="text" class="form-control" id="regFullName" required placeholder="مثال: محمود أحمد محمد علي">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" id="lblRegGrade">الصف الدراسي *</label>
-                        <select class="form-control form-select" id="regGrade" onchange="handleRegGradeChange()" required>
-                            <option value="">-- اختر الصف الدراسي --</option>
-                            <option value="1">الصف الأول المتوسط</option>
-                            <option value="2">الصف الثاني المتوسط</option>
-                            <option value="3">الصف الثالث المتوسط</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" id="lblRegSection">الشعبة الدراسية *</label>
-                        <select class="form-control form-select" id="regSection" required>
-                            <option value="">-- اختر الصف أولاً --</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" id="lblRegMotherName">اسم الأم الكامل *</label>
-                        <input type="text" class="form-control" id="regMotherName" required placeholder="مثال: ليلى كامل حميد">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" id="lblRegMotherFatherName">اسم أب الأم (جد الطالب من الأم) *</label>
-                        <input type="text" class="form-control" id="regMotherFatherName" required placeholder="مثال: كامل حميد حسن">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" id="lblRegPhone">رقم هاتف ولي الأمر *</label>
-                        <input type="tel" class="form-control" id="regPhone" required placeholder="مثال: 077xxxxxxx">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" id="lblRegNationalId">رقم البطاقة الوطنية الموحدة *</label>
-                        <input type="text" class="form-control" id="regNationalId" required placeholder="الرقم التعريفي المكون من 12 رقماً">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" id="lblRegPhoto">تحميل صورة شخصية خلفية بيضاء *</label>
-                        <input type="file" class="form-control" id="regPhoto" accept="image/*" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" id="lblRegPassword">إنشاء رمز سري خاص بك *</label>
-                        <input type="password" class="form-control" id="regPassword" required placeholder="احفظ هذا الرمز لتدخل به دائماً">
-                    </div>
-
-                    <div class="error-message" id="regError">حدث خطأ ما أثناء التسجيل.</div>
-
-                    <div class="modal-footer-btns">
-                        <button type="submit" class="modal-btn modal-btn-confirm" id="btnRegSubmit">تأكيد التسجيل</button>
-                        <button type="button" class="modal-btn modal-btn-cancel" onclick="closeModal('modalRegister')" id="btnRegCancel">إلغاء</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- 3. نافذة تسجيل الدخول -->
-    <div class="modal-overlay" id="modalLogin">
-        <div class="modal-container">
-            <div class="modal-header">
-                <span class="modal-title" id="loginTitle">تسجيل دخول الطالب</span>
-                <button class="modal-close-btn" onclick="closeModal('modalLogin')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="formLogin" onsubmit="submitLogin(event)">
-                    <div class="form-group">
-                        <label class="form-label" id="lblLoginName">الاسم الرباعي للطالب *</label>
-                        <input type="text" class="form-control" id="loginFullName" required placeholder="اكتب اسمك الرباعي كما سجلته">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" id="lblLoginPassword">الرمز السري الخاص بك *</label>
-                        <input type="password" class="form-control" id="loginPassword" required placeholder="اكتب رمزك السري">
-                    </div>
-
-                    <div class="error-message" id="loginError">الاسم أو الرمز السري غير صحيح.</div>
-
-                    <div class="modal-footer-btns">
-                        <button type="submit" class="modal-btn modal-btn-confirm" id="btnLoginSubmit">دخول</button>
-                        <button type="button" class="modal-btn modal-btn-cancel" onclick="closeModal('modalLogin')" id="btnLoginCancel">إلغاء</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- 4. نافذة لوحة الطالب الخاصة وعرض الدرجات والتبليغات -->
-    <div class="modal-overlay" id="modalStudentPortal">
-        <div class="modal-container" style="max-width: 650px;">
-            <div class="modal-header">
-                <span class="modal-title" id="portalTitle">لوحة معلومات درجاتي</span>
-                <button class="modal-close-btn" onclick="closeModal('modalStudentPortal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="student-profile">
-                    <img id="portalStudentPhoto" src="2.jpg" class="student-avatar" alt="صورة الطالب">
-                    <div class="student-info">
-                        <h3 id="portalStudentName">محمود أحمد محمد علي</h3>
-                        <p id="portalStudentMeta">الصف الثالث المتوسط - شعبة د</p>
-                    </div>
-                </div>
-
-                <!-- حاوية جداول الدرجات الديناميكية -->
-                <div id="gradesTablesContainer">
-                    <!-- يتم بناؤه عبر الجافا سكربت حسب الصف -->
-                </div>
-
-                <!-- قسم التبليغات المخصصة للطالب -->
-                <div class="grades-section-title" style="background-color: #fee2e2; color: #991b1b;">
-                    <span id="lblPrivateNotifTitle">التبليغات المخصصة لي من الأساتذة</span>
-                </div>
-                <div id="privateNotificationsContainer" style="margin-bottom: 20px;">
-                    <!-- التبليغات المخصصة للطالب ستنزل هنا -->
-                    <p style="font-size: 13.5px; color: #64748b; text-align: center; font-style: italic;" id="lblNoPrivateNotif">لا توجد تبليغات مخصصة لك حالياً.</p>
-                </div>
-
-                <div class="modal-footer-btns">
-                    <button type="button" class="modal-btn modal-btn-danger" onclick="logoutStudent()" id="btnLogOut">تسجيل الخروج</button>
-                    <button type="button" class="modal-btn modal-btn-cancel" onclick="closeModal('modalStudentPortal')" id="btnPortalClose">إغلاق</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- سكربتات Firebase والموقع التفاعلي -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -1167,9 +1001,7 @@
         const database = firebase.database();
 
         let currentLang = 'ar';
-        let loggedInStudent = null; // يحفظ بيانات الطالب المسجل حالياً
 
-        // كائن الترجمات الكامل
         const translations = {
             ar: {
                 article: `
@@ -1214,7 +1046,7 @@
                     </p>
                     <ul>
                         <li><strong>روابط الاستبيان الإلكترونية:</strong> وهي أدوات رقمية تتيح للطلاب إمكانية تسجيل الشكاوى التي تواجههم، أو مشاركة آرائهم الشخصية ومقترحاتهم البناءة مع الإدارة مباشرة، مما أسهم بشكل واضح في تعزيز مستويات الثقة المتبادلة بين الطلاب ومدرستهم وعمل على تطوير البيئة التعليمية داخل المدرسة بشكل مستمر.</li>
-                        <li><strong>المنصات الرسمية على مواقع التواصل الاجتماعي:</strong> تمتلك المدرسة منصات إلكترونية رسمية نشطة، وتبرز من بينها القناة الرسمية للمدرسة على تطبيق تلغرام، والتي تُستخدم كأداة إعلامية أساسية للتواصل مع الطلاب وأولياء الأمور أولاً بأول ونشر كل ما يتعلق بـالتبليغات والتعليمات الرسمية، الجداول الدراسية الأسبوعية وجداول الامتحانات، والنتائج بمجرد صدورها لضمان وصولها السريع للجميع.</li>
+                        <li><strong>المنصات الرسمية على مواقع التواصل الاجتماعي:</strong> تمتلك المدرسة منصات إلكترونية رسمية نشطة، وتبرز من بينها القناء الرسمية للمدرسة على تطبيق تلغرام، والتي تُستخدم كأداة إعلامية أساسية للتواصل مع الطلاب وأولياء الأمور أولاً بأول ونشر كل ما يتعلق بـالتبليغات والتعليمات الرسمية، الجداول الدراسية الأسبوعية وجداول الامتحانات، والنتائج بمجرد صدورها لضمان وصولها السريع للجميع.</li>
                     </ul>
 
                     <h2 id="vision">رؤية مدرسة الجوادين والأهداف الاستراتيجية</h2>
@@ -1271,180 +1103,34 @@
                     <div id="notificationsBox">
                         <div class="notifications-box">Loading announcements from the database...</div>
                     </div>
-
-                    <p style="margin-top: 25px;">
-                        <strong>Al-Jawadin Intermediate School for Boys</strong> is a public intermediate school for boys located in the Iraqi capital, <strong>Baghdad</strong>, specifically in the <strong>Al-Shaab</strong> district under the Directorate of Education of Rusafa First. The school is classified as one of the most famous and prominent intermediate schools in the region, providing educational services to a large student body exceeding 1,000 students, encompassing the three intermediate grade levels: First, Second, and Third Intermediate, supervised by a distinguished and academically qualified teaching staff.
-                    </p>
-
-                    <h2>Establishment, History, and Academic Growth</h2>
-                    <p>
-                        The establishment of Al-Jawadin Intermediate School for Boys dates back to 2008. Since its inception, the school has worked diligently to achieve its mission of elevating the academic and educational standards for all students residing in Al-Shaab and surrounding areas. Thanks to these continuous efforts, the school has built an outstanding reputation among the community and students alike, largely due to its dedicated teaching staff which possesses both academic rigor and extensive educational experience.
-                    </p>
-                    <p>
-                        Over its fifteen-year journey, the school has graduated thousands of students who successfully continued their paths in prestigious Iraqi high schools and universities. The administration is well-regarded for its high discipline, commitment to the school uniform, and strengthening social ties between the staff and parents through regular Parent-Teacher Association (PTA) meetings to resolve any academic challenges students might face.
-                    </p>
-                    <p>
-                        The school continuously updates its educational methods by developing its teaching staff and integrating modern technology with traditional learning, which has resulted in outstanding success rates in the national ministerial examinations (Baccalaureate) for the Third Intermediate grade across the Al-Shaab district for several consecutive years.
-                    </p>
-
-                    <h2 id="system">Educational System and Campus Facilities</h2>
-                    <p>
-                        The school is fully committed to implementing the official curricula and academic regulations issued by the Iraqi Ministry of Education. The administration and teaching staff pay exceptional attention to Third Intermediate students due to the critical nature of this academic stage, working to prepare them fully for the final national exams (Baccalaureate) through structured reviews and constant academic support.
-                    </p>
-                    <p>
-                        The school building comprises several essential facilities designed to support the educational process and ensure comfort, including:
-                    </p>
-                    <ul>
-                        <li><strong>Classrooms:</strong> Rooms dedicated to lectures, equipped with necessary tools for interactive learning.</li>
-                        <li><strong>Administration Office:</strong> The executive headquarters of the school, managed by Principal Faisal Barghash Tayeh and his assistants.</li>
-                        <li><strong>Teachers' Lounge:</strong> A space for teachers to prepare lessons, rest, and engage in academic discussions.</li>
-                        <li><strong>School Yards:</strong> Open areas for sports activities like football and volleyball, allowing students to refresh their energy during breaks.</li>
-                        <li><strong>Social Counselor:</strong> Dedicated counseling office to assist students with personal and academic challenges, fostering a healthy social and educational environment.</li>
-                    </ul>
-
-                    <h2 id="digital">Activities and Digital Communication</h2>
-                    <p>
-                        The administration prioritizes integrating technology to strengthen relationships between students and the school, focusing on active direct communication channels through:
-                    </p>
-                    <ul>
-                        <li><strong>Online Survey Links:</strong> Digital tools allowing students to voice concerns or share suggestions directly with administration, enhancing trust and continuously improving the school environment.</li>
-                        <li><strong>Official Social Media Platforms:</strong> The school runs active official accounts, most notably on Telegram, to update students and parents instantly with administrative news, weekly schedules, exam timetables, and results.</li>
-                    </ul>
-
-                    <h2 id="vision">School Vision and Strategic Goals</h2>
-                    <p id="visionDesc">
-                        The educational vision of Al-Jawadin Intermediate School for Boys focuses on achieving integrated goals derived from its academic journey:
-                    </p>
-                    <div class="vision-grid">
-                        <div class="vision-card">
-                            <div class="vision-card-header">
-                                <span class="vision-card-number">1</span>
-                                <span class="vision-card-title">Academic Excellence</span>
-                            </div>
-                            <p class="vision-card-text">Continuous commitment to raising academic standards for students in Al-Shaab and surrounding areas.</p>
-                        </div>
-                        <div class="vision-card">
-                            <div class="vision-card-header">
-                                <span class="vision-card-number">2</span>
-                                <span class="vision-card-title">Digital Connection</span>
-                            </div>
-                            <p class="vision-card-text">Building mutual trust between students and administration through modern digital surveys and active updates.</p>
-                        </div>
-                        <div class="vision-card">
-                            <div class="vision-card-header">
-                                <span class="vision-card-number">3</span>
-                                <span class="vision-card-title">Optimal Environment</span>
-                            </div>
-                            <p class="vision-card-text">Upgrading classrooms and facilities regularly to inspire creativity and high-level academic performance.</p>
-                        </div>
-                        <div class="vision-card">
-                            <div class="vision-card-header">
-                                <span class="vision-card-number">4</span>
-                                <span class="vision-card-title">Support for 3rd Grade</span>
-                            </div>
-                            <p class="vision-card-text">Providing intensive revision courses, extra lectures, and psychological preparation to ensure top baccalaureate scores.</p>
-                        </div>
-                        <div class="vision-card">
-                            <div class="vision-card-header">
-                                <span class="vision-card-number">5</span>
-                                <span class="vision-card-title">Embracing Innovation</span>
-                            </div>
-                            <p class="vision-card-text">Adopting the latest educational tools and maintaining high transparency through official communication channels.</p>
-                        </div>
-                    </div>
-                `
+                    `
             }
         };
 
         const staticTranslations = {
             ar: {
                 title: "الموقع الرسمي لمتوسطة الجوادين للبنين",
-                logo: "الجوادين<span>.</span>",
-                home: "الرئيسية",
-                system: "النظام الدراسي",
-                digital: "التواصل الرقمي",
-                notifications: "التبليغات",
-                vision: "رؤية المدرسة",
-                heroTitle: "متوسطة الجوادين للبنين",
-                heroDesc: "صرح علمي متميز يسعى لبناء أجيال واعدة قادرة على التفوق والنجاح المستمر.",
-                heroSys: "النظام الدراسي والمرافق",
-                heroPortal: "نتائج امتحاناتي والتبليغات المخصصة",
-                sideTitle: "شعار متوسطة الجوادين للبنين",
-                thEst: "التأسيس",
-                tdEst: "2008م",
-                thDir: "المدير",
-                tdDir: "السيد فيصل برغش تايه",
-                thLoc: "المكان",
-                tdLoc: "بغداد، الشعب، الرصافة الأولى",
-                thCountry: "البلد",
-                tdCountry: "العراق 🇮🇶",
-                thCoord: "الإحداثيات",
-                thWeb: "المواقع الإلكترونية",
-                tg1: "قناة الأول متوسط",
-                tg2: "قناة الثاني متوسط",
-                tg3: "قناة الثالث متوسط",
-                tgStudent: "الدعم الطلابي",
-                footerText: "جميع الحقوق محفوظة © 2026 متوسطة الجوادين للبنين",
-                footerCredits: `تصميم وبرمجة: <span style="color: var(--color-blue);">محمود أحمد</span> | للدعم الفني: <a href="tel:07734894407">07734894407</a>`
+                logo: "الجوادين<span>.</span>", home: "الرئيسية", system: "النظام الدراسي", digital: "التواصل الرقمي", notifications: "التبليغات", vision: "رؤية المدرسة",
+                heroTitle: "متوسطة الجوادين للبنين", heroDesc: "صرح علمي متميز يسعى لبناء أجيال واعدة قادرة على التفوق والنجاح المستمر.", heroSys: "النظام الدراسي والمرافق", heroRes: "نتائج امتحاناتي والتبليغات المخصصة",
+                sideTitle: "شعار متوسطة الجوادين للبنين", thEst: "التأسيس", tdEst: "2008م", thDir: "المدير", tdDir: "السيد فيصل برغش تايه", thLoc: "المكان", tdLoc: "بغداد، الشعب، الرصافة الأولى", thCountry: "البلد", tdCountry: "العراق 🇮🇶", thCoord: "الإحداثيات", thWeb: "المواقع الإلكترونية",
+                tg1: "قناة الأول متوسط", tg2: "قناة الثاني متوسط", tg3: "قناة الثالث متوسط", tgStudent: "الدعم الطلابي",
+                footerText: "جميع الحقوق محفوظة © 2026 متوسطة الجوادين للبنين", footerCredits: `تصميم وبرمجة: <span style="color: var(--color-blue);">محمود أحمد</span> | للدعم الفني: <a href="tel:07734894407">07734894407</a>`
             },
             en: {
                 title: "Official Site - Al-Jawadin Intermediate School",
-                logo: "Al-Jawadin<span>.</span>",
-                home: "Home",
-                system: "Academic System",
-                digital: "Digital Communication",
-                notifications: "Announcements",
-                vision: "School Vision",
-                heroTitle: "Al-Jawadin School for Boys",
-                heroDesc: "A distinguished educational monument seeking to build promising generations capable of continuous excellence.",
-                heroSys: "System & Facilities",
-                heroPortal: "My Grades & Private Notes",
-                sideTitle: "Al-Jawadin School Badge",
-                thEst: "Established",
-                tdEst: "2008",
-                thDir: "Principal",
-                tdDir: "Mr. Faisal Barghash Tayeh",
-                thLoc: "Location",
-                tdLoc: "Baghdad, Al-Shaab, Rusafa 1st",
-                thCountry: "Country",
-                tdCountry: "Iraq 🇮🇶",
-                thCoord: "Coordinates",
-                thWeb: "Websites",
-                tg1: "1st Grade Channel",
-                tg2: "2nd Grade Channel",
-                tg3: "3rd Grade Channel",
-                tgStudent: "Student Support",
-                footerText: "All Rights Reserved © 2026 Al-Jawadin School for Boys",
-                footerCredits: `Designed & Developed by: <span style="color: var(--color-blue);">Mahmoud Ahmed</span> | Tech Support: <a href="tel:07734894407">07734894407</a>`
+                logo: "Al-Jawadin<span>.</span>", home: "Home", system: "Academic System", digital: "Digital Communication", notifications: "Announcements", vision: "School Vision",
+                heroTitle: "Al-Jawadin School for Boys", heroDesc: "A distinguished educational monument seeking to build promising generations capable of continuous excellence.", heroSys: "System & Facilities", heroRes: "My Results & Dashboard",
+                sideTitle: "Al-Jawadin School Badge", thEst: "Established", tdEst: "2008", thDir: "Principal", tdDir: "Mr. Faisal Barghash Tayeh", thLoc: "Location", tdLoc: "Baghdad, Al-Shaab, Rusafa 1st", thCountry: "Country", tdCountry: "Iraq 🇮🇶", thCoord: "Coordinates", thWeb: "Websites",
+                tg1: "1st Grade Channel", tg2: "2nd Grade Channel", tg3: "3rd Grade Channel", tgStudent: "Student Support",
+                footerText: "All Rights Reserved © 2026 Al-Jawadin School for Boys", footerCredits: `Designed & Developed by: <span style="color: var(--color-blue);">Mahmoud Ahmed</span> | Tech Support: <a href="tel:07734894407">07734894407</a>`
             }
         };
-
-        // قائمة المواد لكل مرحلة دراسية
-        const subjectsConfig = {
-            "1": ["عربي", "اسلاميه", "انكليزي", "رياضيات", "اجتماعيات", "احياء", "كيمياء", "فيزياء", "اخلاقية", "فنية"],
-            "2": ["عربي", "اسلاميه", "انكليزي", "رياضيات", "اجتماعيات", "احياء", "كيمياء", "فيزياء", "اخلاقية", "فنية"],
-            "3": ["عربي", "اسلامية", "ادب", "اجتماعيات", "رياضيات", "انكليزي", "احياء", "فيزياء", "كيمياء"]
-        };
-
-        // تهيئة عند بدء تشغيل الصفحة
-        window.addEventListener('DOMContentLoaded', () => {
-            // تفقد تسجيل الدخول السابق من التخزين المحلي
-            const cachedStudent = localStorage.getItem('loggedStudent');
-            if (cachedStudent) {
-                loggedInStudent = JSON.parse(cachedStudent);
-                updateAuthButtonState();
-            }
-        });
 
         function applyTranslations(lang) {
             currentLang = lang;
             document.documentElement.lang = lang;
             document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-
-            // تطبيق المقال
             document.getElementById('mainArticle').innerHTML = translations[lang].article;
-
-            // تطبيق الواجهات الثابتة
             const st = staticTranslations[lang];
             document.title = st.title;
             document.querySelector('.logo').innerHTML = st.logo;
@@ -1453,12 +1139,10 @@
             document.getElementById('linkDigital').innerText = st.digital;
             document.getElementById('linkNotifications').innerText = st.notifications;
             document.getElementById('linkVision').innerText = st.vision;
-
             document.getElementById('heroTitle').innerText = st.heroTitle;
             document.getElementById('heroDesc').innerText = st.heroDesc;
             document.getElementById('btnHeroSystem').innerText = st.heroSys;
-            document.getElementById('btnStudentPortal').innerText = st.heroPortal;
-
+            document.getElementById('btnHeroResults').innerText = st.heroRes;
             document.getElementById('sideCardTitle').innerText = st.sideTitle;
             document.getElementById('thEst').innerText = st.thEst;
             document.getElementById('tdEst').innerText = st.tdEst;
@@ -1470,16 +1154,14 @@
             document.getElementById('tdCountry').innerText = st.tdCountry;
             document.getElementById('thCoord').innerText = st.thCoord;
             document.getElementById('thWeb').innerText = st.thWeb;
-
             document.getElementById('linkTg1').innerText = st.tg1;
             document.getElementById('linkTg2').innerText = st.tg2;
             document.getElementById('linkTg3').innerText = st.tg3;
             document.getElementById('linkTgStudent').innerText = st.tgStudent;
-
             document.getElementById('footerText').innerText = st.footerText;
             document.getElementById('footerCredits').innerHTML = st.footerCredits;
-
-            updateAuthButtonState();
+            
+            updateHeaderAuthButton();
             fetchNotificationsFromFirebase();
         }
 
@@ -1488,446 +1170,34 @@
             applyTranslations(lang);
         }
 
-        // تحديث حالة دكمة تسجيل الدخول في الهيدر
-        function updateAuthButtonState() {
-            const btn = document.getElementById('btnAuth');
-            if (loggedInStudent) {
-                btn.innerText = currentLang === 'ar' ? `مرحباً، ${loggedInStudent.fullName.split(' ')[0]}` : `Welcome, ${loggedInStudent.fullName.split(' ')[0]}`;
-                btn.classList.add('logged-in');
+        // دالة لتحديث حالة الزر العلوي (تسجيل الدخول / اسم الطالب)
+        function updateHeaderAuthButton() {
+            const savedStudent = localStorage.getItem('loggedStudent');
+            const authBtn = document.getElementById('btnAuthHeader');
+            if (savedStudent) {
+                const studentObj = JSON.parse(savedStudent);
+                const firstName = studentObj.fullName.split(' ')[0] || "الطالب";
+                authBtn.innerText = `مرحباً، ${firstName} 👋`;
+                authBtn.style.backgroundColor = "var(--color-green)";
             } else {
-                btn.innerText = currentLang === 'ar' ? "تسجيل دخول / إنشاء حساب" : "Login / Register";
-                btn.classList.remove('logged-in');
+                authBtn.innerText = currentLang === 'ar' ? "تسجيل دخول / إنشاء حساب" : "Login / Register";
+                authBtn.style.backgroundColor = "var(--color-blue)";
             }
         }
 
-        // التعامل مع الضغط على دكمة الدخول في الهيدر
-        function handleAuthClick() {
-            if (loggedInStudent) {
-                openStudentPortal();
-            } else {
-                openModal('modalConfirmReg');
-            }
-        }
-
-        // التعامل مع زر "نتائج امتحاناتي والتبليغات المخصصة" بالهيرو
-        function handleStudentPortalClick() {
-            if (loggedInStudent) {
-                openStudentPortal();
-            } else {
-                openModal('modalConfirmReg');
-            }
-        }
-
-        // دوال التحكم بالنوافذ المنبثقة
-        function openModal(id) {
-            document.getElementById(id).classList.add('active');
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).classList.remove('active');
-        }
-
-        function openRegisterModal() {
-            closeModal('modalConfirmReg');
-            openModal('modalRegister');
-        }
-
-        function openLoginModal() {
-            closeModal('modalConfirmReg');
-            openModal('modalLogin');
-        }
-
-        // إدارة خيارات الشعب ديناميكياً حسب الصف المحدد للتسجيل
-        function handleRegGradeChange() {
-            const grade = document.getElementById('regGrade').value;
-            const sectionSelect = document.getElementById('regSection');
-            sectionSelect.innerHTML = '<option value="">-- اختر الشعبة --</option>';
-
-            if (!grade) {
-                return;
-            }
-
-            let sections = [];
-            if (grade === "1") {
-                sections = ["أ", "ب", "ج", "د", "واو"];
-            } else if (grade === "2") {
-                sections = ["أ", "ب", "ج", "د"];
-            } else if (grade === "3") {
-                sections = ["أ", "ب", "ج", "د", "هاء"];
-            }
-
-            sections.forEach(sec => {
-                const opt = document.createElement('option');
-                opt.value = sec;
-                opt.innerText = `شعبة ${sec}`;
-                sectionSelect.appendChild(opt);
-            });
-        }
-
-        // تحويل الصورة المرفوعة إلى ترميز Base64 لحفظها في قاعدة البيانات
-        function getBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = error => reject(error);
-            });
-        }
-
-        // معالجة وإرسال طلب التسجيل الجديد مع فحص التكرار لمنع تسجيل نفس الحساب مرتين
-        async function submitRegistration(event) {
-            event.preventDefault();
-            const errDiv = document.getElementById('regError');
-            errDiv.style.display = 'none';
-
-            const fullName = document.getElementById('regFullName').value.trim();
-            const grade = document.getElementById('regGrade').value;
-            const section = document.getElementById('regSection').value;
-            const motherName = document.getElementById('regMotherName').value.trim();
-            const motherFatherName = document.getElementById('regMotherFatherName').value.trim();
-            const phone = document.getElementById('regPhone').value.trim();
-            const nationalId = document.getElementById('regNationalId').value.trim();
-            const password = document.getElementById('regPassword').value;
-            const photoFile = document.getElementById('regPhoto').files[0];
-
-            if (!photoFile) {
-                errDiv.innerText = "يرجى اختيار صورة شخصية رسمية.";
-                errDiv.style.display = 'block';
-                return;
-            }
-
-            try {
-                // 1. تحويل الصورة الشخصية
-                const photoBase64 = await getBase64(photoFile);
-
-                // 2. التحقق من عدم وجود طالب مسجل مسبقاً بنفس الاسم الرباعي أو رقم البطاقة الموحدة
-                const studentsRef = database.ref('students');
-                const snapshot = await studentsRef.once('value');
-                const existingStudents = snapshot.val();
-
-                if (existingStudents) {
-                    for (let id in existingStudents) {
-                        const s = existingStudents[id];
-                        if (s.nationalId === nationalId) {
-                            errDiv.innerText = "فشل التسجيل: هذه البطاقة الموحدة مسجلة مسبقاً في المنصة!";
-                            errDiv.style.display = 'block';
-                            return;
-                        }
-                        if (s.fullName.toLowerCase() === fullName.toLowerCase()) {
-                            errDiv.innerText = "فشل التسجيل: هذا الاسم الرباعي مسجل مسبقاً في المنصة!";
-                            errDiv.style.display = 'block';
-                            return;
-                        }
-                    }
-                }
-
-                // 3. بناء هيكل درجات الطالب فارغاً
-                const subjects = subjectsConfig[grade];
-                const initialGrades = {
-                    kors1: {
-                        month1: {},
-                        month2: {}
-                    },
-                    midterm: {},
-                    kors2: {
-                        month1: {},
-                        month2: {}
-                    },
-                    final: {}
-                };
-
-                // تعبئة المواد بـ "لم تعلن بعد"
-                subjects.forEach(sub => {
-                    initialGrades.kors1.month1[sub] = "لم تعلن بعد";
-                    initialGrades.kors1.month2[sub] = "لم تعلن بعد";
-                    
-                    // استثناء مادة الأدب من امتحانات نصف السنة ونهاية السنة للثالث متوسط
-                    if (!(grade === "3" && sub === "ادب")) {
-                        initialGrades.midterm[sub] = "لم تعلن بعد";
-                        initialGrades.final[sub] = "لم تعلن بعد";
-                    }
-                    
-                    initialGrades.kors2.month1[sub] = "لم تعلن بعد";
-                    initialGrades.kors2.month2[sub] = "لم تعلن بعد";
-                });
-
-                // 4. حفظ بيانات الطالب الجديد في Firebase
-                const newStudentRef = studentsRef.push();
-                const studentData = {
-                    id: newStudentRef.key,
-                    fullName,
-                    grade,
-                    section,
-                    motherName,
-                    motherFatherName,
-                    phone,
-                    nationalId,
-                    photo: photoBase64,
-                    password,
-                    grades: initialGrades,
-                    private_notifications: {}
-                };
-
-                await newStudentRef.set(studentData);
-
-                // 5. حفظ الجلسة محلياً والتحويل التلقائي لصفحة الطالب
-                loggedInStudent = studentData;
-                localStorage.setItem('loggedStudent', JSON.stringify(studentData));
-                updateAuthButtonState();
-                
-                // تنظيف الفورم
-                document.getElementById('formRegister').reset();
-                closeModal('modalRegister');
-                openStudentPortal();
-
-            } catch (error) {
-                console.error(error);
-                errDiv.innerText = "حدث خطأ ما أثناء الاتصال بقاعدة البيانات. يرجى المحاولة لاحقاً.";
-                errDiv.style.display = 'block';
-            }
-        }
-
-        // معالجة تسجيل الدخول للطالب بالاسم والرمز السري
-        async function submitLogin(event) {
-            event.preventDefault();
-            const errDiv = document.getElementById('loginError');
-            errDiv.style.display = 'none';
-
-            const fullName = document.getElementById('loginFullName').value.trim();
-            const password = document.getElementById('loginPassword').value;
-
-            try {
-                const studentsRef = database.ref('students');
-                const snapshot = await studentsRef.once('value');
-                const students = snapshot.val();
-
-                let found = null;
-                if (students) {
-                    for (let id in students) {
-                        const s = students[id];
-                        if (s.fullName.toLowerCase() === fullName.toLowerCase() && s.password === password) {
-                            found = s;
-                            break;
-                        }
-                    }
-                }
-
-                if (found) {
-                    loggedInStudent = found;
-                    localStorage.setItem('loggedStudent', JSON.stringify(found));
-                    updateAuthButtonState();
-                    
-                    document.getElementById('formLogin').reset();
-                    closeModal('modalLogin');
-                    openStudentPortal();
-                } else {
-                    errDiv.style.display = 'block';
-                }
-
-            } catch (error) {
-                console.error(error);
-                errDiv.innerText = "خطأ في الشبكة وقاعدة البيانات.";
-                errDiv.style.display = 'block';
-            }
-        }
-
-        // فتح لوحة معلومات الطالب وجلب الدرجات والتبليغات في الوقت الفعلي
-        function openStudentPortal() {
-            if (!loggedInStudent) return;
-
-            // تحديث بيانات الملف الشخصي في المنبثقة
-            document.getElementById('portalStudentPhoto').src = loggedInStudent.photo;
-            document.getElementById('portalStudentName').innerText = loggedInStudent.fullName;
-            
-            const gradeName = loggedInStudent.grade === "1" ? "الصف الأول المتوسط" : loggedInStudent.grade === "2" ? "الصف الثاني المتوسط" : "الصف الثالث المتوسط";
-            document.getElementById('portalStudentMeta').innerText = `${gradeName} - شعبة ${loggedInStudent.section}`;
-
-            // الاستماع الحي للدرجات والتبليغات لتحديثها لحظة بلحظة إذا قام الأستاذ بتغييرها
-            const studentLiveRef = database.ref(`students/${loggedInStudent.id}`);
-            studentLiveRef.on('value', (snapshot) => {
-                const studentData = snapshot.val();
-                if (!studentData) return;
-
-                // تحديث كائن البيانات المحلي والذاكرة المؤقتة
-                loggedInStudent = studentData;
-                localStorage.setItem('loggedStudent', JSON.stringify(studentData));
-
-                // 1. بناء جدول الدرجات المطور
-                buildGradesTable(studentData);
-
-                // 2. عرض التبليغات الخاصة للطالب
-                buildPrivateNotifications(studentData.private_notifications);
-            });
-
-            openModal('modalStudentPortal');
-        }
-
-        // بناء وعرض جداول الدرجات ديناميكياً مع ترتيب وتصميم احترافي (مع استثناء مادة الأدب للثالث)
-        function buildGradesTable(student) {
-            const container = document.getElementById('gradesTablesContainer');
-            container.innerHTML = '';
-
-            const grade = student.grade;
-            const grades = student.grades || {};
-
-            // الكورس الأول مقسم
-            const kors1 = grades.kors1 || { month1: {}, month2: {} };
-            const kors1Month1 = kors1.month1 || {};
-            const kors1Month2 = kors1.month2 || {};
-
-            // نصف السنة
-            const midterm = grades.midterm || {};
-
-            // الكورس الثاني مقسم
-            const kors2 = grades.kors2 || { month1: {}, month2: {} };
-            const kors2Month1 = kors2.month1 || {};
-            const kors2Month2 = kors2.month2 || {};
-
-            // نهاية السنة
-            const final = grades.final || {};
-
-            const subjects = subjectsConfig[grade] || [];
-
-            // الجزء الأول: الكورس الأول ودرجات نصف السنة
-            let html = `
-                <div class="grades-section-title">
-                    <span>الفصل الدراسي الأول ونصف السنة</span>
-                </div>
-                <table class="grades-table">
-                    <thead>
-                        <tr>
-                            <th>المادة</th>
-                            <th>الشهر الأول</th>
-                            <th>الشهر الثاني</th>
-                            <th>نصف السنة</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-
-            subjects.forEach(sub => {
-                const m1 = kors1Month1[sub] !== undefined ? kors1Month1[sub] : "لم تعلن بعد";
-                const m2 = kors1Month2[sub] !== undefined ? kors1Month2[sub] : "لم تعلن بعد";
-                
-                // فحص ما إذا كانت المادة مستثناة من امتحان نصف السنة (مثل الأدب للثالث متوسط)
-                let isMidtermExcluded = (grade === "3" && sub === "ادب");
-                const midVal = isMidtermExcluded ? "—" : (midterm[sub] !== undefined ? midterm[sub] : "لم تعلن بعد");
-
-                html += `
-                    <tr>
-                        <td style="font-weight: bold; background-color: #fafafa;">${sub}</td>
-                        <td class="${m1 === "لم تعلن بعد" ? "grade-not-announced" : ""}">${m1}</td>
-                        <td class="${m2 === "لم تعلن بعد" ? "grade-not-announced" : ""}">${m2}</td>
-                        <td class="${midVal === "لم تعلن بعد" ? "grade-not-announced" : ""}" style="${isMidtermExcluded ? "color: #94a3b8; background-color: #f1f5f9;" : "font-weight: bold; background-color: #f8fafc;"}">${midVal}</td>
-                    </tr>
-                `;
-            });
-
-            html += `</tbody></table>`;
-
-            // الجزء الثاني: الكورس الثاني ودرجات نهاية السنة
-            html += `
-                <div class="grades-section-title" style="margin-top: 20px;">
-                    <span>الفصل الدراسي الثاني ونهاية السنة</span>
-                </div>
-                <table class="grades-table">
-                    <thead>
-                        <tr>
-                            <th>المادة</th>
-                            <th>الشهر الأول</th>
-                            <th>الشهر الثاني</th>
-                            <th>نهاية السنة</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-
-            subjects.forEach(sub => {
-                const m1 = kors2Month1[sub] !== undefined ? kors2Month1[sub] : "لم تعلن بعد";
-                const m2 = kors2Month2[sub] !== undefined ? kors2Month2[sub] : "لم تعلن بعد";
-                
-                // فحص ما إذا كانت المادة مستثناة من امتحانات نهاية السنة (الأدب للثالث متوسط)
-                let isFinalExcluded = (grade === "3" && sub === "ادب");
-                const finalVal = isFinalExcluded ? "—" : (final[sub] !== undefined ? final[sub] : "لم تعلن بعد");
-
-                html += `
-                    <tr>
-                        <td style="font-weight: bold; background-color: #fafafa;">${sub}</td>
-                        <td class="${m1 === "لم تعلن بعد" ? "grade-not-announced" : ""}">${m1}</td>
-                        <td class="${m2 === "لم تعلن بعد" ? "grade-not-announced" : ""}">${m2}</td>
-                        <td class="${finalVal === "لم تعلن بعد" ? "grade-not-announced" : ""}" style="${isFinalExcluded ? "color: #94a3b8; background-color: #f1f5f9;" : "font-weight: bold; background-color: #f8fafc;"}">${finalVal}</td>
-                    </tr>
-                `;
-            });
-
-            html += `</tbody></table>`;
-
-            container.innerHTML = html;
-        }
-
-        // عرض التبليغات الخاصة الموجهة من الأستاذ إلى هذا الطالب
-        function buildPrivateNotifications(notifications) {
-            const container = document.getElementById('privateNotificationsContainer');
-            
-            if (!notifications || Object.keys(notifications).length === 0) {
-                container.innerHTML = `<p style="font-size: 13.5px; color: #64748b; text-align: center; font-style: italic;" id="lblNoPrivateNotif">لا توجد تبليغات مخصصة لك حالياً.</p>`;
-                return;
-            }
-
-            // تحويل وتصفية التبليغات لفرزها من الأحدث للأقدم
-            const list = [];
-            for (let id in notifications) {
-                list.push({ id, ...notifications[id] });
-            }
-            list.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-            let html = '';
-            list.forEach(item => {
-                html += `
-                    <div class="private-notif-card">
-                        <span class="private-notif-date">📅 ${item.date}</span>
-                        <div style="font-weight: 500; color: #7f1d1d;">${item.text}</div>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
-        }
-
-        // تسجيل الخروج للطالب ومسح الذاكرة
-        function logoutStudent() {
-            if (loggedInStudent) {
-                // إلغاء مستمع Firebase النشط لتجنب تسريب الذاكرة
-                database.ref(`students/${loggedInStudent.id}`).off();
-            }
-            loggedInStudent = null;
-            localStorage.removeItem('loggedStudent');
-            updateAuthButtonState();
-            closeModal('modalStudentPortal');
-        }
-
-        // جلب البيانات ومعالجتها للتبليغات العامة بالصفحة الرئيسية
         function fetchNotificationsFromFirebase() {
             const notificationsRef = database.ref('notifications');
             notificationsRef.on('value', (snapshot) => {
                 const data = snapshot.val();
                 const container = document.getElementById('notificationsBox');
                 if (!container) return;
-
                 if (data) {
                     const list = [];
-                    for (let id in data) {
-                        list.push({ id, ...data[id] });
-                    }
+                    for (let id in data) { list.push({ id, ...data[id] }); }
                     list.sort((a, b) => new Date(b.date) - new Date(a.date));
-
                     let htmlContent = '';
                     list.forEach(item => {
-                        let mediaHtml = '';
-                        if (item.image) {
-                            mediaHtml = `<img src="${item.image}" alt="مرفق التبليغ" class="notification-img" />`;
-                        }
-
+                        let mediaHtml = item.image ? `<img src="${item.image}" alt="مرفق التبليغ" class="notification-img" />` : '';
                         htmlContent += `
                             <div class="notification-item">
                                 <span class="notification-date">📅 ${item.date}</span>
@@ -1938,24 +1208,280 @@
                     });
                     container.innerHTML = htmlContent;
                 } else {
-                    container.innerHTML = `<div class="notifications-box">${currentLang === 'ar' ? 'لا توجد تبليغات حالياً.' : 'No announcements available at the moment.'}</div>`;
+                    container.innerHTML = `<div class="notifications-box">${currentLang === 'ar' ? 'لا توجد تبليغات حالياً.' : 'No announcements available.'}</div>`;
                 }
             });
         }
 
-        // تفعيل قائمة الهاتف المحمول الجانبية
+        /* --- نظام إدارة الطلاب البرمجي الجديد والربط بـ Firebase --- */
+        
+        function handleStudentGate() {
+            const savedStudent = localStorage.getItem('loggedStudent');
+            if (savedStudent) {
+                const studentObj = JSON.parse(savedStudent);
+                loadStudentDashboard(studentObj.fullName);
+            } else {
+                document.getElementById('studentGateModal').classList.add('active');
+                showFormView('ask');
+            }
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function showFormView(view) {
+            document.getElementById('askRegisterView').style.display = view === 'ask' ? 'block' : 'none';
+            document.getElementById('loginFormView').style.display = view === 'login' ? 'block' : 'none';
+            document.getElementById('registerFormView').style.display = view === 'register' ? 'block' : 'none';
+            
+            if(view === 'register') document.getElementById('gateTitle').innerText = "إنشاء حساب طالب جديد";
+            else if(view === 'login') document.getElementById('gateTitle').innerText = "تسجيل دخول الطالب";
+            else document.getElementById('gateTitle').innerText = "بوابة الطالب الإلكترونية";
+        }
+
+        function updateClassOptions() {
+            const grade = document.getElementById('regGrade').value;
+            const selectClass = document.getElementById('regClassOption');
+            selectClass.innerHTML = '';
+
+            let classes = [];
+            if (grade === '1') classes = ['أ', 'ب', 'ج', 'د', 'و'];
+            else if (grade === '2') classes = ['أ', 'ب', 'ج', 'د'];
+            else if (grade === '3') classes = ['أ', 'ب', 'ج', 'د', 'هـ'];
+
+            if (classes.length === 0) {
+                selectClass.innerHTML = '<option value="">يرجى اختيار الصف أولاً</option>';
+                return;
+            }
+
+            classes.forEach(c => {
+                selectClass.innerHTML += `<option value="${c}">شعبة ${c}</option>`;
+            });
+        }
+
+        // معالجة رفع وحفظ استمارة التسجيل ومنع التكرار
+        function processRegister() {
+            const fullName = document.getElementById('regFullName').value.trim();
+            const grade = document.getElementById('regGrade').value;
+            const classOpt = document.getElementById('regClassOption').value;
+            const motherName = document.getElementById('regMotherName').value.trim();
+            const motherFatherName = document.getElementById('regMotherFatherName').value.trim();
+            const phone = document.getElementById('regPhone').value.trim();
+            const nationalId = document.getElementById('regNationalId').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const photoFile = document.getElementById('regPhotoFile').files[0];
+
+            if (!fullName || !grade || !classOpt || !motherName || !motherFatherName || !phone || !nationalId || !password || !photoFile) {
+                alert('يرجى ملء جميع الحقول المطلوبة ورفع الصورة الرسمية للطالب!');
+                return;
+            }
+
+            // منع التكرار: الفحص في Firebase أولاً قبل التسجيل
+            database.ref('students').once('value').then((snapshot) => {
+                const allStudents = snapshot.val();
+                let exists = false;
+
+                if (allStudents) {
+                    // الفحص عن طريق الاسم الرباعي كمفتاح أو رقم الهوية الموحدة داخل الحسابات
+                    if (allStudents[fullName]) {
+                        exists = true;
+                    } else {
+                        for (let key in allStudents) {
+                            if (allStudents[key].nationalId === nationalId) {
+                                exists = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (exists) {
+                    alert('خطأ: يوجد نفس هذه المعلومات في المنصة مسبقاً!');
+                    return;
+                }
+
+                // تحويل الصورة الشخصية وحفظ البيانات
+                const reader = new FileReader();
+                reader.readAsDataURL(photoFile);
+                reader.onload = function () {
+                    const base64Image = reader.result;
+
+                    let defaultGrades = {};
+                    let subjects = [];
+                    if (grade === '1' || grade === '2') {
+                        subjects = ['عربي', 'اسلاميه', 'انكليزي', 'رياضيات', 'اجتماعيات', 'احياء', 'كيمياء', 'فيزياء', 'اخلاقية', 'فنية'];
+                    } else if (grade === '3') {
+                        subjects = ['عربي', 'اسلامية', 'ادب', 'اجتماعيات', 'رياضيات', 'انكليزي', 'احياء', 'فيزياء', 'كيمياء'];
+                    }
+
+                    // تهيئة الدرجات للكورسات مع إضافة "نصف السنة" و "نهاية السنة"
+                    const periods = ['كورس1_شهر1', 'كورس1_شهر2', 'نصف_السنة', 'كورس2_شهر1', 'كورس2_شهر2', 'نهاية_السنة'];
+                    periods.forEach(p => {
+                        defaultGrades[p] = {};
+                        subjects.forEach(sub => {
+                            // التحقق لاستثناء الأدب للثالث متوسط في نصف ونهاية السنة
+                            if (grade === '3' && sub === 'ادب' && (p === 'نصف_السنة' || p === 'نهاية_السنة')) {
+                                // لا تضيف مادة الأدب لهذين الجدولين
+                            } else {
+                                defaultGrades[p][sub] = "لم تعلن بعد";
+                            }
+                        });
+                    });
+
+                    const studentData = {
+                        fullName, grade, classOption: classOpt, motherName, motherFatherName, phone, nationalId, password,
+                        photo: base64Image,
+                        grades: defaultGrades,
+                        private_notifications: ""
+                    };
+
+                    database.ref('students/' + fullName).set(studentData, (error) => {
+                        if (error) {
+                            alert('حدث خطأ أثناء حفظ البيانات، يرجى المحاولة لاحقاً.');
+                        } else {
+                            alert('تم إنشاء حسابك بنجاح يا بطل! يمكنك الآن الدخول لاستعراض لوحتك.');
+                            localStorage.setItem('loggedStudent', JSON.stringify({ fullName }));
+                            updateHeaderAuthButton();
+                            closeModal('studentGateModal');
+                            loadStudentDashboard(fullName);
+                        }
+                    });
+                };
+            });
+        }
+
+        function processLogin() {
+            const fullName = document.getElementById('loginFullName').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if(!fullName || !password) {
+                alert('يرجى كتابة الاسم والرمز السري!');
+                return;
+            }
+
+            database.ref('students/' + fullName).once('value').then((snapshot) => {
+                const student = snapshot.val();
+                if(student && student.password === password) {
+                    localStorage.setItem('loggedStudent', JSON.stringify({ fullName }));
+                    updateHeaderAuthButton();
+                    closeModal('studentGateModal');
+                    loadStudentDashboard(fullName);
+                } else {
+                    alert('الاسم أو الرمز السري غير صحيح! يرجى التأكد وإعادة المحاولة.');
+                }
+            });
+        }
+
+        // جلب وبناء لوحة تحكم الطالب الكاملة
+        function loadStudentDashboard(fullName) {
+            database.ref('students/' + fullName).once('value').then((snapshot) => {
+                const student = snapshot.val();
+                if(!student) return;
+
+                const dashboardModal = document.getElementById('studentDashboardModal');
+                const content = document.getElementById('dashboardContent');
+                
+                let gradeText = student.grade === '1' ? 'الأول متوسط' : student.grade === '2' ? 'الثاني متوسط' : 'الثالث متوسط';
+                
+                // 1. بناء التنبيه المخصص السريع (إن وجد في الأعلى)
+                let alertPvtHtml = '';
+                if(student.private_notifications && student.private_notifications.trim() !== "") {
+                    alertPvtHtml = `
+                        <div class="badge-alert-pvt">
+                            <strong>📢 إشعار هام:</strong> يرجى مراجعة التبليغات المخصصة لك في أسفل اللوحة.
+                        </div>
+                    `;
+                }
+
+                // دالة بناء جداول الدرجات
+                const formatPeriod = (pKey, title) => {
+                    let tableRows = '';
+                    const pData = student.grades ? student.grades[pKey] : null;
+                    if(pData) {
+                        for(let sub in pData) {
+                            let score = pData[sub];
+                            let scoreStyle = score === "لم تعلن بعد" ? "color: #94a3b8; font-style: italic;" : "font-weight: bold; color: var(--color-blue);";
+                            tableRows += `<tr><td><strong>${sub}</strong></td><td style="${scoreStyle}">${score}</td></tr>`;
+                        }
+                    }
+                    if(!tableRows) return ''; // إذا لم تكن هناك درجات للجدول (كأن يكون تم استثناء الأدب بالكامل منه ولم يبق شيء)
+                    
+                    return `
+                        <div style="flex: 1; min-width: 220px;">
+                            <h4 style="text-align: center; margin-bottom: 5px; color: #475569;">${title}</h4>
+                            <table class="grades-table">
+                                <thead><tr><th>المادة</th><th>الدرجة</th></tr></thead>
+                                <tbody>${tableRows}</tbody>
+                            </table>
+                        </div>
+                    `;
+                };
+
+                // 2. بناء جداول الدرجات متضمنة الكورس الأول ونصف السنة والكورس الثاني ونهاية السنة
+                let gradesHtml = '';
+                gradesHtml += `
+                    <div class="grade-section-title">📊 نتائج امتحانات الكورس الأول ونصف السنة</div>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                        ${formatPeriod('كورس1_شهر1', 'الشهر الأول')}
+                        ${formatPeriod('كورس1_شهر2', 'الشهر الثاني')}
+                        ${formatPeriod('نصف_السنة', 'درجات نصف السنة')}
+                    </div>
+                    
+                    <div class="grade-section-title">📊 نتائج امتحانات الكورس الثاني ونهاية السنة</div>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                        ${formatPeriod('كورس2_شهر1', 'الشهر الأول')}
+                        ${formatPeriod('كورس2_شهر2', 'الشهر الثاني')}
+                        ${formatPeriod('نهاية_السنة', 'درجات نهاية السنة')}
+                    </div>
+                `;
+
+                // 3. بناء قسم التبليغات المخصصة للطالب من الأستاذ أسفل قائمة الدرجات
+                let teacherNotificationsHtml = `
+                    <div class="dashboard-private-notifications">
+                        <h4>✉️ التبليغات والرسائل الخاصة من الكادر التدريسي:</h4>
+                        <p style="font-size: 14.5px; color: #334155; line-height: 1.6;">
+                            ${(student.private_notifications && student.private_notifications.trim() !== "") 
+                                ? student.private_notifications 
+                                : "لا توجد تبليغات خاصة بك حالياً من قِبل أساتذتك. استمر في تفوقك!"}
+                        </p>
+                    </div>
+                `;
+
+                // دمج كل الأقسام وعرضها داخل الـ Modal
+                content.innerHTML = `
+                    ${alertPvtHtml}
+                    <div class="student-dashboard-grid">
+                        <img src="${student.photo}" class="dashboard-avatar" alt="صورة الطالب الرسمية">
+                        <div class="dashboard-info-text">
+                            <h3 style="font-size: 18px; color: var(--color-blue); margin-bottom: 8px;">${student.fullName}</h3>
+                            <p>الصف الدراسي: <strong>${gradeText}</strong></p>
+                            <p>الشعبة: <strong>شعبة ${student.classOption}</strong></p>
+                            <p>رقم الهاتف المسجل: <strong>${student.phone}</strong></p>
+                            <p>الرقم الوطني الموحد: <strong>${student.nationalId}</strong></p>
+                            <p>اسم الأم: <strong>${student.motherName}</strong></p>
+                            <p style="margin-top: 10px;"><button class="btn" style="padding: 4px 12px; font-size:12px; background:#e2e8f0; color:#475569;" onclick="logoutStudent()">تسجيل الخروج من الحساب</button></p>
+                        </div>
+                    </div>
+                    ${gradesHtml}
+                    ${teacherNotificationsHtml}
+                `;
+
+                dashboardModal.classList.add('active');
+            });
+        }
+
+        function logoutStudent() {
+            localStorage.removeItem('loggedStudent');
+            updateHeaderAuthButton();
+            closeModal('studentDashboardModal');
+            alert('تم تسجيل الخروج بنجاح.');
+        }
+
         const menuBtn = document.getElementById('menuBtn');
         const navMenu = document.getElementById('navMenu');
-
-        menuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
-        });
+        menuBtn.addEventListener('click', () => { navMenu.classList.toggle('active'); });
+        document.querySelectorAll('nav ul li a').forEach(link => { link.addEventListener('click', () => { navMenu.classList.remove('active'); }); });
     </script>
 </body>
 </html>
