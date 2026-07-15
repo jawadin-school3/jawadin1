@@ -2,72 +2,108 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>لوحة تحكم الأستاذ - متوسطة الجوادين</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <title>لوحة التحكم الإدارية - متوسطة الجوادين</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Tajawal', sans-serif; background: #f3f4f6; padding: 20px; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .form-group { margin-bottom: 15px; }
-        input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 6px; }
-        button { background: #2563eb; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; }
+        :root { --main-blue: #2563eb; --bg-gray: #f8fafc; }
+        body { font-family: 'Tajawal', sans-serif; background: var(--bg-gray); padding: 20px; }
+        .admin-card { background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); max-width: 900px; margin: auto; }
+        .header-logo { text-align: center; margin-bottom: 20px; }
+        .header-logo img { width: 100px; border-radius: 50%; }
+        .nav-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        button { padding: 12px 20px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-blue { background: var(--main-blue); color: white; }
+        .student-row { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #e2e8f0; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
 
-<div class="container" id="loginView">
-    <h2>دخول الأستاذ</h2>
-    <input type="password" id="adminPass" placeholder="أدخل الرمز السري للأستاذ">
-    <button onclick="checkAdmin()">دخول</button>
-</div>
+<div class="admin-card">
+    <div class="header-logo"><img src="2.jpg" alt="Logo"><h2>لوحة تحكم الأستاذ</h2></div>
+    
+    <!-- شاشة تسجيل الدخول -->
+    <div id="loginSection">
+        <input type="password" id="adminPass" placeholder="أدخل الرمز السري للإدارة">
+        <button class="btn-blue" onclick="checkAdmin()">دخول للمنصة</button>
+    </div>
 
-<div class="container" id="adminView" style="display:none;">
-    <h2>إدارة قاعدة بيانات الطلاب</h2>
-    <select id="selectGrade" onchange="loadStudents()">
-        <option value="">اختر الصف...</option>
-        <option value="1">الأول متوسط</option>
-        <option value="2">الثاني متوسط</option>
-        <option value="3">الثالث متوسط</option>
-    </select>
-    <select id="selectClass" onchange="loadStudents()">
-        <option value="">اختر الشعبة...</option>
-    </select>
-    <div id="studentsList"></div>
+    <!-- لوحة التحكم -->
+    <div id="dashboardSection" class="hidden">
+        <div class="nav-tabs">
+            <button class="btn-blue" onclick="showView('announcements')">التبليغات والتعميمات</button>
+            <button class="btn-blue" onclick="showView('students')">قاعدة بيانات الطلاب</button>
+        </div>
+
+        <div id="announcementsView" class="hidden">
+            <!-- هنا ستضع كودك القديم الخاص بنشر التبليغات العامة -->
+        </div>
+
+        <div id="studentsView" class="hidden">
+            <select id="selGrade" onchange="updateClassList()">
+                <option value="">اختر الصف...</option>
+                <option value="1">الأول</option>
+                <option value="2">الثاني</option>
+                <option value="3">الثالث</option>
+            </select>
+            <select id="selClass"></select>
+            <button onclick="filterStudents()">عرض الطلاب</button>
+            <div id="studentsList"></div>
+        </div>
+    </div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 <script>
-    const firebaseConfig = { databaseURL: "https://jawadin-school1-default-rtdb.firebaseio.com" };
-    firebase.initializeApp(firebaseConfig);
+    // تهيئة Firebase (يجب أن تكون نفس إعدادات موقع الطالب)
     const db = firebase.database();
 
     function checkAdmin() {
-        if(document.getElementById('adminPass').value === "123456") { // يمكنك تغيير الرمز
-            document.getElementById('loginView').style.display = 'none';
-            document.getElementById('adminView').style.display = 'block';
-        } else { alert("رمز خاطئ!"); }
+        if(document.getElementById('adminPass').value === "123456") {
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('dashboardSection').classList.remove('hidden');
+        } else { alert("رمز غير صحيح!"); }
     }
 
-    function loadStudents() {
-        const grade = document.getElementById('selectGrade').value;
-        const cls = document.getElementById('selectClass').value;
-        if(!grade) return;
-        
-        db.ref('students').orderByChild('grade').equalTo(grade).on('value', snap => {
+    function updateClassList() {
+        const grade = document.getElementById('selGrade').value;
+        const selClass = document.getElementById('selClass');
+        selClass.innerHTML = '<option value="">اختر الشعبة...</option>';
+        const classes = grade === '3' ? ['أ','ب','ج','د','هـ'] : ['أ','ب','ج','د'];
+        classes.forEach(c => selClass.innerHTML += `<option value="${c}">شعبة ${c}</option>`);
+    }
+
+    function filterStudents() {
+        const grade = document.getElementById('selGrade').value;
+        const cls = document.getElementById('selClass').value;
+        db.ref('students').orderByChild('grade').equalTo(grade).once('value', snap => {
             const list = document.getElementById('studentsList');
             list.innerHTML = "";
             snap.forEach(s => {
                 const stu = s.val();
-                if(stu.classOption === cls || !cls) {
-                    list.innerHTML += `<div style="border-bottom:1px solid #ccc; padding:10px;">
-                        <strong>${stu.fullName}</strong>
-                        <button onclick="editStudent('${s.key}')">تعديل درجات/تبليغ</button>
+                if(stu.classOption === cls) {
+                    list.innerHTML += `<div class="student-row">
+                        <span>${stu.fullName}</span>
+                        <button onclick="openStudentEditor('${s.key}')">إضافة درجات/تبليغ</button>
                     </div>`;
                 }
             });
         });
     }
-    // ملاحظة: أكمل بناء دالة editStudent لفتح نافذة إدخال الدرجات والتبليغ الاختياري.
+
+    function openStudentEditor(studentName) {
+        // هنا ستفتح نافذة منبثقة (Modal) تحتوي على حقول الدرجات + حقل التبليغ الخاص
+        // ويمكنك استخدام prompt أو Modal احترافي
+        alert("فتح محرر الطالب: " + studentName);
+        // عند حفظ البيانات من هذه النافذة، نستخدم db.ref('students/' + studentName + '/grades').update(...)
+    }
+
+    function showView(view) {
+        document.getElementById('announcementsView').classList.add('hidden');
+        document.getElementById('studentsView').classList.add('hidden');
+        document.getElementById(view + 'View').classList.remove('hidden');
+    }
 </script>
 </body>
 </html>
