@@ -1373,34 +1373,38 @@
         }
 
         // جلب وبناء لوحة تحكم الطالب الكاملة بالتعديلات وهيكل الدرجات الجديد
-        function loadStudentDashboard(fullName) {
-            database.ref('students/' + fullName).once('value').then((snapshot) => {
-                const student = snapshot.val();
-                if(!student) return;
-
-                const dashboardModal = document.getElementById('studentDashboardModal');
-                const content = document.getElementById('dashboardContent');
-                
-                let gradeText = student.grade === '1' ? 'الأول متوسط' : student.grade === '2' ? 'الثاني متوسط' : 'الثالث متوسط';
-                
-                // تحديد قائمة المواد الثابتة بناءً على مرحلة الطالب المسجلة لمنع اختفائها أبداً
-                let currentSubjects = [];
-                if (student.grade === '1' || student.grade === '2') {
-                    currentSubjects = ['عربي', 'اسلاميه', 'انكليزي', 'رياضيات', 'اجتماعيات', 'احياء', 'كيمياء', 'فيزياء', 'اخلاقية', 'فنية'];
-                } else if (student.grade === '3') {
-                    currentSubjects = ['عربي', 'اسلامية', 'ادب', 'اجتماعيات', 'رياضيات', 'انكليزي', 'احياء', 'فيزياء', 'كيمياء'];
-                }
-
-                // بناء التنبيه المخصص السريع (إن وجد في الأعلى)
-                let alertPvtHtml = '';
-                if(student.private_notifications && student.private_notifications.trim() !== "") {
-                    alertPvtHtml = `
-                        <div class="badge-alert-pvt">
-                            <strong>📢 إشعار هام:</strong> يرجى مراجعة التبليغات المخصصة لك في أسفل اللوحة.
-                        </div>
-                    `;
-                }
-
+      // استبدل دالة formatPeriod القديمة بهذه الدالة المحدثة:
+const formatPeriod = (pKey, title) => {
+    let tableRows = '';
+    const pData = student.grades ? student.grades[pKey] : null;
+    
+    if(pData) {
+        for(let sub in pData) {
+            let score = pData[sub];
+            
+            // التعديل: إذا كانت الدرجة فارغة أو غير معلنة، لا نغير النمط بشكل خاطئ
+            let scoreStyle = (score === "لم تعلن بعد" || !score) ? "color: #94a3b8; font-style: italic;" : "font-weight: bold; color: var(--color-blue);";
+            
+            // التعديل: إضافة شرط للتأكد أن المادة ليست فارغة قبل عرضها في الجدول
+            if (score !== undefined && score !== "") {
+                tableRows += `<tr><td><strong>${sub}</strong></td><td style="${scoreStyle}">${score}</td></tr>`;
+            }
+        }
+    }
+    
+    // إذا لم تكن هناك مواد للعرض، لا تعرض الجدول نهائياً
+    if(!tableRows) return ''; 
+    
+    return `
+        <div style="flex: 1; min-width: 200px;">
+            <h4 style="text-align: center; margin-bottom: 5px; color: #475569;">${title}</h4>
+            <table class="grades-table">
+                <thead><tr><th>المادة</th><th>الدرجة</th></tr></thead>
+                <tbody>${tableRows}</tbody>
+            </table>
+        </div>
+    `;
+};
                 // دالة بناء جداول الدرجات التفاعلية
                 const formatPeriod = (pKey, title) => {
                     let tableRows = '';
