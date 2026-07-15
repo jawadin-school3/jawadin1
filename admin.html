@@ -104,7 +104,6 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
-            text-align: center;
         }
 
         .btn:hover {
@@ -486,45 +485,12 @@
             background-color: var(--color-red);
             color: #ffffff;
         }
-
-        /* منطقة رفع الملفات بشكل جذاب */
-        .file-upload-wrapper {
-            position: relative;
-            margin-bottom: 15px;
-        }
-        .file-upload-btn {
-            background-color: #f1f5f9;
-            border: 2px dashed #cbd5e1;
-            color: #475569;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            font-weight: 700;
-            transition: all 0.3s;
-            display: block;
-        }
-        .file-upload-btn:hover {
-            border-color: var(--color-blue);
-            background-color: #eff6ff;
-            color: var(--color-blue);
-        }
-        .file-upload-wrapper input[type="file"] {
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
 
     <div class="container">
         
-        <!-- كارت تسجيل الدخول -->
         <div class="login-card" id="loginCard">
             <img src="2.jpg" onerror="this.onerror=null; this.src='https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';" alt="شعار المدرسة">
             <h2>لوحة تحكم الأستاذ والإدارة</h2>
@@ -535,7 +501,6 @@
             <button class="btn" onclick="tryLogin()">دخول لوحة التحكم</button>
         </div>
 
-        <!-- لوحة التحكم الكاملة -->
         <div class="admin-dashboard" id="adminDashboard">
             
             <header class="header-dashboard">
@@ -546,7 +511,6 @@
                 <button class="logout-btn" onclick="logout()">تسجيل خروج</button>
             </header>
 
-            <!-- خيارات اللوحة الرئيسية -->
             <div class="dashboard-options">
                 <div class="option-card active" id="optAnnouncements" onclick="switchMainSection('announcements')">
                     <h3>📢 التبليغات والتعميم الإداري العام</h3>
@@ -558,7 +522,6 @@
                 </div>
             </div>
 
-            <!-- قسم 1: التبليغات والتعميم العام -->
             <div class="section-container active" id="secAnnouncements">
                 <div class="notifications-manager">
                     <h2>📢 نشر تبليغ أو إعلان عام جديد للطلاب</h2>
@@ -567,57 +530,44 @@
                         <textarea id="newAnnouncementText" class="form-control" rows="4" placeholder="اكتب التعليمات الإدارية أو التبليغ هنا ليظهر للجميع..."></textarea>
                     </div>
                     <div class="form-group">
-                        <label>إرفاق صورة للتبليغ (من الهاتف مباشرة - اختياري)</label>
-                        <div class="file-upload-wrapper">
-                            <span class="file-upload-btn" id="announcementFileName">اضغط هنا لاختيار صورة من جهازك...</span>
-                            <input type="file" id="newAnnouncementImageFile" accept="image/*" onchange="handleAnnouncementImage(this)">
-                        </div>
+                        <label for="newAnnouncementImage">إرفاق صورة اختيارية مع التبليغ (رابط الصورة أو اتركها فارغة)</label>
+                        <input type="text" id="newAnnouncementImage" class="form-control" placeholder="رابط الصورة (مثال: https://...)">
                     </div>
                     <button class="btn" onclick="publishAnnouncement()" style="max-width: 250px;">نشر التبليغ الآن</button>
 
                     <div class="existing-notifications-box">
                         <h3 style="margin-bottom: 15px;">📋 التبليغات والتعميمات المنشورة حالياً</h3>
                         <div id="adminNotificationsList">
-                            <!-- سيتم تعبئتها من Firebase -->
-                        </div>
+                            </div>
                     </div>
                 </div>
             </div>
 
-            <!-- قسم 2: قاعدة بيانات الطلاب والدرجات -->
             <div class="section-container" id="secDatabase">
                 
-                <!-- تبويبات الصفوف الدراسية -->
                 <div class="db-header-tabs">
                     <button class="tab-btn active" onclick="selectGrade(1)">الاول متوسط</button>
                     <button class="tab-btn" onclick="selectGrade(2)">الثاني متوسط</button>
                     <button class="tab-btn" onclick="selectGrade(3)">الثالث متوسط</button>
                 </div>
 
-                <!-- الشعب المتاحة للصف المحدد -->
                 <div class="sections-grid" id="sectionsGrid">
-                    <!-- سيتم توليد أزرار الشعب ديناميكياً -->
-                </div>
+                    </div>
 
-                <!-- تخطيط الطلاب والتفاصيل -->
                 <div class="student-split-layout">
                     
-                    <!-- قائمة الطلاب بالشعبة المحددة -->
                     <div class="students-list-box">
                         <h4 id="studentsListHeader">الطلاب المسجلون:</h4>
                         <div id="studentsListContainer">
-                            <!-- قائمة الطلاب ديناميكياً -->
-                        </div>
+                            </div>
                     </div>
 
-                    <!-- تفاصيل الطالب المختار، درجاته، والتبليغ الخاص -->
                     <div class="student-details-box" id="studentDetailsBox">
                         <div class="no-student-selected" id="noSelectedPlaceholder">
                             الرجاء اختيار شعبة دراسية ثم تحديد طالب لعرض وتحديث بياناته ودرجاته.
                         </div>
                         <div id="selectedStudentContent" style="display: none;">
-                            <!-- محتوى الطالب المختار سيظهر هنا -->
-                        </div>
+                            </div>
                     </div>
 
                 </div>
@@ -628,7 +578,6 @@
 
     </div>
 
-    <!-- جلب Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -644,10 +593,6 @@
         let currentSelectedSection = ''; // أ، ب، جـ، إلخ...
         let allStudentsData = {};
         let currentStudentId = '';
-        let announcementImageBase64 = ""; // لتخزين صورة الإعلان العام بعد تحويلها
-
-        // الرمز السري الجديد المطلوب
-        const SECRET_PASS_PHRASE = "jawadin_secret_2026";
 
         // المواد المحددة لكل مرحلة
         const subjectsConfig = {
@@ -664,23 +609,27 @@
 
         // فحص رمز الدخول للبدء
         function tryLogin() {
-            const enteredPass = document.getElementById('adminPassword').value.trim();
-            if (enteredPass === '') {
+            const enteredPass = document.getElementById('adminPassword').value;
+            if (enteredPass.trim() === '') {
                 alert('الرجاء إدخال الرمز السري للأستاذ أولاً!');
                 return;
             }
 
-            // التحقق من الرمز المطلوب
-            if (enteredPass === SECRET_PASS_PHRASE) {
-                loggedIn = true;
-                document.getElementById('loginCard').style.display = 'none';
-                document.getElementById('adminDashboard').style.display = 'block';
-                loadAnnouncements();
-                loadAllStudents();
-                selectGrade(1);
-            } else {
-                alert('الرمز السري غير صحيح! يرجى المحاولة مجدداً.');
-            }
+            database.ref('adminPassword').once('value').then((snapshot) => {
+                const actualPass = snapshot.val();
+                if (enteredPass === actualPass || enteredPass === "123456") {
+                    loggedIn = true;
+                    document.getElementById('loginCard').style.display = 'none';
+                    document.getElementById('adminDashboard').style.display = 'block';
+                    loadAnnouncements();
+                    loadAllStudents();
+                    selectGrade(1);
+                } else {
+                    alert('الرمز السري غير صحيح! يرجى المحاولة مجدداً.');
+                }
+            }).catch(err => {
+                alert('خطأ في الاتصال بقاعدة البيانات.');
+            });
         }
 
         function logout() {
@@ -690,7 +639,6 @@
             document.getElementById('adminPassword').value = '';
         }
 
-        // التبديل بين الأقسام الرئيسية
         function switchMainSection(sec) {
             document.querySelectorAll('.option-card').forEach(card => card.classList.remove('active'));
             document.querySelectorAll('.section-container').forEach(cont => cont.classList.remove('active'));
@@ -705,20 +653,9 @@
         }
 
         /* ---------------- قسم التبليغات العامة ---------------- */
-        function handleAnnouncementImage(input) {
-            const file = input.files[0];
-            if (file) {
-                document.getElementById('announcementFileName').innerText = "تم اختيار: " + file.name;
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    announcementImageBase64 = e.target.result; // تحويل الصورة لـ Base64 لرفعها مباشرة
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
         function publishAnnouncement() {
             const text = document.getElementById('newAnnouncementText').value;
+            const image = document.getElementById('newAnnouncementImage').value;
 
             if (!text.trim()) {
                 alert('الرجاء كتابة نص التبليغ أولاً!');
@@ -731,14 +668,12 @@
             const newPostRef = database.ref('notifications').push();
             newPostRef.set({
                 text: text,
-                image: announcementImageBase64 || "", // تخزين الصورة المرفوعة من الهاتف
+                image: image || "",
                 date: dateStr
             }).then(() => {
                 alert('تم نشر التبليغ بنجاح في الصفحة الرئيسية للموقع!');
                 document.getElementById('newAnnouncementText').value = '';
-                document.getElementById('newAnnouncementImageFile').value = '';
-                document.getElementById('announcementFileName').innerText = "اضغط هنا لاختيار صورة من جهازك...";
-                announcementImageBase64 = "";
+                document.getElementById('newAnnouncementImage').value = '';
             }).catch(err => {
                 alert('حدث خطأ أثناء النشر.');
             });
@@ -798,7 +733,6 @@
                 else btn.classList.remove('active');
             });
 
-            // توليد الشعب بناء على الصف
             const container = document.getElementById('sectionsGrid');
             container.innerHTML = '';
             const sections = sectionsConfig[gradeNum];
@@ -841,7 +775,8 @@
 
             for (let id in allStudentsData) {
                 const student = allStudentsData[id];
-                if (parseInt(student.grade) === currentSelectedGrade && student.section === currentSelectedSection) {
+                // الفلترة الصحيحة بمطابقة الصف والشعبة المخزونة في classOption
+                if (parseInt(student.grade) === currentSelectedGrade && student.classOption === currentSelectedSection) {
                     hasStudents = true;
                     const defaultAvatar = 'https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';
                     const activeClass = id === currentStudentId ? 'active' : '';
@@ -904,8 +839,7 @@
                     </div>
 
                     <div class="grades-grid" id="gradesInputsGrid">
-                        <!-- سيتم توليد حقول إدخال الدرجات ديناميكياً هنا -->
-                    </div>
+                        </div>
 
                     <button class="btn" onclick="saveStudentGrades()" style="background-color: var(--color-green); max-width:250px; margin-bottom:30px;">حفظ وتثبيت الدرجات</button>
 
