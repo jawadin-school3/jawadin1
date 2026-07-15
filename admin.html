@@ -2,487 +2,81 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة تحكم الأستاذ - متوسطة الجوادين</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <style>
-        :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --color-text-dark: #0f172a;
-            --color-blue: #2563eb;
-            --color-blue-hover: #1d4ed8;
-            --color-red: #ef4444;
-            --color-red-hover: #dc2626;
-            --font-main: 'Tajawal', sans-serif;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: var(--font-main);
-            background-color: var(--bg-secondary);
-            color: var(--color-text-dark);
-            line-height: 1.6;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .admin-card {
-            background-color: var(--bg-primary);
-            border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px;
-            padding: 35px;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 30px;
-        }
-
-        .header-logo {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .header-logo img {
-            max-width: 100px;
-            height: auto;
-            border-radius: 50%;
-            border: 3px solid var(--color-blue);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            font-size: 22px;
-            font-weight: 800;
-            text-align: center;
-            color: var(--color-text-dark);
-            margin-bottom: 10px;
-        }
-
-        .sub-title {
-            font-size: 14px;
-            color: #64748b;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-weight: 700;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #334155;
-        }
-
-        input[type="text"],
-        input[type="password"],
-        textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-family: var(--font-main);
-            font-size: 15px;
-            color: var(--color-text-dark);
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-
-        input[type="text"]:focus,
-        input[type="password"]:focus,
-        textarea:focus {
-            border-color: var(--color-blue);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .file-upload-wrapper {
-            position: relative;
-            margin-top: 5px;
-        }
-
-        .file-upload-btn {
-            display: block;
-            text-align: center;
-            background-color: #f1f5f9;
-            border: 2px dashed #cbd5e1;
-            padding: 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 700;
-            color: #475569;
-            transition: all 0.3s ease;
-        }
-
-        .file-upload-btn:hover {
-            background-color: #e2e8f0;
-            border-color: var(--color-blue);
-        }
-
-        input[type="file"] {
-            display: none;
-        }
-
-        .image-preview {
-            margin-top: 15px;
-            max-width: 100%;
-            max-height: 200px;
-            border-radius: 8px;
-            display: none;
-            border: 1px solid #e2e8f0;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background-color: var(--color-blue);
-            color: #ffffff;
-            border: none;
-            padding: 14px;
-            font-family: var(--font-main);
-            font-weight: 800;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .btn-submit:hover {
-            background-color: var(--color-blue-hover);
-        }
-
-        .status-msg {
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 15px;
-            font-weight: 700;
-            text-align: center;
-            font-size: 14px;
-            display: none;
-        }
-
-        .status-success {
-            background-color: #dcfce7;
-            color: #15803d;
-            border: 1px solid #bbf7d0;
-        }
-
-        .status-error {
-            background-color: #fee2e2;
-            color: #b91c1c;
-            border: 1px solid #fca5a5;
-        }
-
-        /* تنسيق قسم إدارة وحذف التبليغات */
-        .manage-section {
-            width: 100%;
-            max-width: 600px;
-            background-color: var(--bg-primary);
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            padding: 30px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-
-        .manage-title {
-            font-size: 18px;
-            font-weight: 800;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            color: var(--color-text-dark);
-        }
-
-        .manage-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            background-color: #f8fafc;
-            gap: 15px;
-        }
-
-        .manage-item-content {
-            flex-grow: 1;
-            font-size: 14px;
-            color: #334155;
-            max-height: 80px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .manage-item-date {
-            font-size: 11px;
-            color: #64748b;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .btn-delete {
-            background-color: var(--color-red);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-family: var(--font-main);
-            font-weight: 700;
-            font-size: 13px;
-            transition: background-color 0.2s;
-            white-space: nowrap;
-        }
-
-        .btn-delete:hover {
-            background-color: var(--color-red-hover);
-        }
-
-        .no-data {
-            text-align: center;
-            color: #64748b;
-            font-style: italic;
-            padding: 20px;
-        }
+        body { font-family: 'Tajawal', sans-serif; background: #f1f5f9; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn { padding: 12px 20px; margin: 5px; cursor: pointer; border: none; border-radius: 8px; background: #2563eb; color: white; }
+        .student-list { margin-top: 20px; border-top: 1px solid #ddd; padding-top: 10px; }
     </style>
 </head>
 <body>
 
-    <div class="admin-card">
-        <div class="header-logo">
-            <img src="2.jpg" onerror="this.onerror=null; this.src='https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';" alt="شعار مدرسة الجوادين">
-        </div>
+<div class="container" id="adminApp">
+    <h2>لوحة تحكم الأستاذ</h2>
+    
+    <div id="selectionArea">
+        <h3>اختر الصف:</h3>
+        <button class="btn" onclick="loadClasses('1st')">الأول المتوسط</button>
+        <button class="btn" onclick="loadClasses('2nd')">الثاني المتوسط</button>
+        <button class="btn" onclick="loadClasses('3rd')">الثالث المتوسط</button>
+    </div>
+
+    <div id="displayArea" class="student-list"></div>
+</div>
+
+<script>
+    const firebaseConfig = { databaseURL: "https://jawadin-school1-default-rtdb.firebaseio.com" };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // دالة لجلب الطلاب حسب الصف
+    function loadClasses(grade) {
+        const display = document.getElementById('displayArea');
+        display.innerHTML = "جاري جلب البيانات...";
         
-        <h2>لوحة تحكم الأستاذ والإدارة</h2>
-        <div class="sub-title">يمكنك كتابة التبليغ للطلاب ورفع صورة من هاتفك مباشرة لتظهر في الصفحة الرئيسية.</div>
-
-        <form id="notificationForm" onsubmit="publishNotification(event)">
+        db.ref('students').orderByChild('grade').equalTo(grade).on('value', (snapshot) => {
+            const students = snapshot.val();
+            if (!students) { display.innerHTML = "لا يوجد طلاب مسجلين في هذا الصف."; return; }
             
-            <div class="form-group">
-                <label for="notifText">نص التبليغ أو الإعلان *</label>
-                <textarea id="notifText" placeholder="اكتب هنا التبليغ أو التعليمات الإدارية للطلاب أولياء الأمور..." required></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>إرفاق صورة مع التبليغ (اختياري)</label>
-                <div class="file-upload-wrapper">
-                    <label for="notifImage" class="file-upload-btn" id="uploadLabel">اضغط هنا لاختيار صورة من هاتفك</label>
-                    <input type="file" id="notifImage" accept="image/*" onchange="previewImage(event)">
-                </div>
-                <img id="imgPreview" class="image-preview" alt="معاينة الصورة">
-            </div>
-
-            <div class="form-group">
-                <label for="secretKey">الرمز السري الأمني للنشر *</label>
-                <input type="password" id="secretKey" placeholder="أدخل رمز المرور الخاص بالنشر..." required>
-            </div>
-
-            <button type="submit" class="btn-submit" id="submitBtn">نشر التبليغ للطلاب الآن</button>
-        </form>
-
-        <div id="statusBox" class="status-msg"></div>
-    </div>
-
-    <div class="manage-section">
-        <div class="manage-title">🗂️ إدارة وحذف التبليغات الحالية</div>
-        <div id="manageList">
-            <div class="no-data">جاري تحميل التبليغات النشطة...</div>
-        </div>
-    </div>
-
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
-    <script>
-        // إعداد وتأسيس الاتصال بالـ Firebase الخاص بك
-        const firebaseConfig = {
-            databaseURL: "https://jawadin-school1-default-rtdb.firebaseio.com"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
-
-        let base64Image = ""; // متغير لتخزين ترميز الصورة بعد تحويلها
-
-        // تحميل قائمة التبليغات تلقائياً عند فتح الصفحة من أجل خيار الحذف
-        function loadManageList() {
-            const manageList = document.getElementById('manageList');
-            
-            database.ref('notifications').on('value', (snapshot) => {
-                const data = snapshot.val();
-                manageList.innerHTML = '';
-
-                if (data) {
-                    let listHTML = '';
-                    // عرض التبليغات من الأحدث إلى الأقدم
-                    const keys = Object.keys(data).reverse();
-
-                    keys.forEach(key => {
-                        const item = data[key];
-                        let textContent = "";
-
-                        if (typeof item === 'object') {
-                            textContent = item.text || item.content || "";
-                        } else {
-                            textContent = item;
-                        }
-
-                        const itemDate = item.date ? item.date : "بلا تاريخ";
-                        
-                        listHTML += `
-                            <div class="manage-item">
-                                <div class="manage-item-content">
-                                    <span class="manage-item-date">📅 ${itemDate}</span>
-                                    <span>${textContent}</span>
-                                </div>
-                                <button class="btn-delete" onclick="deleteNotification('${key}')">حذف</button>
-                            </div>
-                        `;
-                    });
-
-                    manageList.innerHTML = listHTML;
-                } else {
-                    manageList.innerHTML = '<div class="no-data">لا توجد تبليغات نشطة حالياً لحذفها.</div>';
-                }
-            });
-        }
-
-        // دالة الحذف
-        function deleteNotification(key) {
-            // يطلب من الأستاذ كتابة الرمز السري للتأكيد قبل الحذف
-            const password = prompt("لحذف هذا التبليغ نهائياً، يرجى إدخال الرمز السري الأمني:");
-
-            if (password === null) {
-                return; // إذا ضغط إلغاء
+            let html = "<h3>قائمة الطلاب:</h3><ul>";
+            for (let id in students) {
+                html += `<li style="cursor:pointer; color:blue;" onclick="showStudentDetails('${id}')">${students[id].fullName} - ${students[id].classSection}</li>`;
             }
+            html += "</ul>";
+            display.innerHTML = html;
+        });
+    }
 
-            if (password !== "jawadin_secret_2026") {
-                alert("الرمز السري غير صحيح! تم إلغاء عملية الحذف.");
-                return;
-            }
+    // دالة عرض بيانات الطالب (التي ستتوسع لاحقاً لإضافة الدرجات)
+    function showStudentDetails(studentId) {
+        db.ref('students/' + studentId).once('value', (snapshot) => {
+            const data = snapshot.val();
+            const display = document.getElementById('displayArea');
+            display.innerHTML = `
+                <h3>بيانات الطالب: ${data.fullName}</h3>
+                <p>الهاتف: ${data.phone}</p>
+                <img src="${data.photoUrl}" style="width:100px; border-radius:50%;">
+                <hr>
+                <h4>إضافة درجات:</h4>
+                <input type="text" id="gradeInput" placeholder="أدخل الدرجة">
+                <button class="btn" onclick="saveGrade('${studentId}')">حفظ الدرجة</button>
+                <hr>
+                <h4>إرسال تبليغ خاص:</h4>
+                <textarea id="privateNote" placeholder="اكتب تبليغاً خاصاً للطالب..."></textarea>
+                <button class="btn" onclick="sendPrivateNote('${studentId}')">إرسال</button>
+            `;
+        });
+    }
 
-            // تنفيذ الحذف من فايربيس
-            database.ref('notifications/' + key).remove()
-                .then(() => {
-                    alert("تم حذف التبليغ بنجاح وسيختفي فوراً من شاشات الطلاب.");
-                })
-                .catch((error) => {
-                    console.error("حذف خطأ: ", error);
-                    alert("حدث خطأ أثناء محاولة الحذف من قاعدة البيانات.");
-                });
-        }
-
-        // دالة لمعاينة الصورة المرفوعة من الهاتف وتحويلها لـ Base64
-        function previewImage(event) {
-            const file = event.target.files[0];
-            const preview = document.getElementById('imgPreview');
-            const label = document.getElementById('uploadLabel');
-
-            if (file) {
-                if (!file.type.startsWith('image/')) {
-                    showStatus("يرجى اختيار ملف صورة صالح فقط!", false);
-                    event.target.value = "";
-                    return;
-                }
-
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    base64Image = e.target.result;
-                    preview.src = base64Image;
-                    preview.style.display = "block";
-                    label.innerText = `تم اختيار: ${file.name}`;
-                    label.style.borderColor = "#2563eb";
-                };
-                reader.readAsDataURL(file);
-            } else {
-                base64Image = "";
-                preview.style.display = "none";
-                label.innerText = "اضغط هنا لاختيار صورة من هاتفك";
-                label.style.borderColor = "#cbd5e1";
-            }
-        }
-
-        // دالة إرسال ونشر البيانات إلى Firebase
-        function publishNotification(event) {
-            event.preventDefault();
-
-            const text = document.getElementById('notifText').value.trim();
-            const password = document.getElementById('secretKey').value;
-            const submitBtn = document.getElementById('submitBtn');
-
-            if (password !== "jawadin_secret_2026") {
-                showStatus("الرمز السري الأمني غير صحيح! يرجى التأكد وإعادة المحاولة.", false);
-                return;
-            }
-
-            submitBtn.disabled = true;
-            submitBtn.innerText = "جاري النشر والرفع...";
-
-            const today = new Date();
-            const yyyy = today.getFullYear();
-            let mm = today.getMonth() + 1;
-            let dd = today.getDate();
-
-            if (dd < 10) dd = '0' + dd;
-            if (mm < 10) mm = '0' + mm;
-            const formattedDate = yyyy + '-' + mm + '-' + dd;
-
-            const newPost = {
-                text: text,
-                date: formattedDate,
-                image: base64Image
-            };
-
-            database.ref('notifications').push(newPost)
-                .then(() => {
-                    showStatus("تم نشر التبليغ ورفعه بنجاح! سيظهر الآن للطلاب فوراً في الواجهة.", true);
-                    
-                    document.getElementById('notificationForm').reset();
-                    document.getElementById('imgPreview').style.display = "none";
-                    document.getElementById('uploadLabel').innerText = "اضغط هنا لاختيار صورة من هاتفك";
-                    base64Image = ""; 
-                })
-                .catch((error) => {
-                    console.error("Firebase Error: ", error);
-                    showStatus("حدث خطأ أثناء الاتصال بقاعدة البيانات. حاول مجدداً.", false);
-                })
-                .finally(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = "نشر التبليغ للطلاب الآن";
-                });
-        }
-
-        function showStatus(message, isSuccess) {
-            const statusBox = document.getElementById('statusBox');
-            statusBox.innerText = message;
-            statusBox.className = isSuccess ? "status-msg status-success" : "status-msg status-error";
-            statusBox.style.display = "block";
-
-            setTimeout(() => {
-                statusBox.style.display = "none";
-            }, 6000);
-        }
-
-        // استدعاء تشغيل تحميل القائمة عند بدء تشغيل الصفحة فوراً
-        window.onload = loadManageList;
-    </script>
+    function saveGrade(id) { /* دالة حفظ الدرجة في Firebase */ }
+    function sendPrivateNote(id) {
+        const note = document.getElementById('privateNote').value;
+        db.ref('students/' + id + '/privateNote').set(note);
+        alert("تم إرسال التبليغ الخاص للطالب!");
+    }
+</script>
 </body>
 </html>
