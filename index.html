@@ -135,14 +135,16 @@
 
         .modal-card {
             background-color: #ffffff;
-            padding: 35px 25px;
+            padding: 30px 25px;
             border-radius: 16px;
-            width: 90%;
-            max-width: 450px;
+            width: 95%;
+            max-width: 500px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             position: relative;
             transform: translateY(-20px);
             transition: all 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .modal-overlay.active .modal-card {
@@ -172,23 +174,23 @@
 
         .modal-header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .modal-header h3 {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 800;
             color: var(--color-text-dark);
             margin-bottom: 5px;
         }
 
         .modal-header p {
-            font-size: 13.5px;
+            font-size: 13px;
             color: #64748b;
         }
 
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 14px;
             text-align: right;
         }
 
@@ -198,19 +200,19 @@
 
         .form-group label {
             display: block;
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 700;
             color: #475569;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
         .form-control {
             width: 100%;
-            padding: 12px 15px;
+            padding: 10px 12px;
             border: 1.5px solid #cbd5e1;
             border-radius: 8px;
             font-family: var(--font-main);
-            font-size: 14px;
+            font-size: 13.5px;
             color: var(--color-text-dark);
             outline: none;
             transition: border-color 0.3s;
@@ -225,7 +227,7 @@
             background-color: var(--color-blue);
             color: #ffffff;
             border: none;
-            padding: 13px;
+            padding: 12px;
             border-radius: 8px;
             font-family: var(--font-main);
             font-weight: 700;
@@ -237,6 +239,38 @@
 
         .modal-submit-btn:hover {
             background-color: var(--color-blue-hover);
+        }
+
+        .toggle-auth-mode {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13.5px;
+            color: #64748b;
+        }
+
+        .toggle-auth-mode a {
+            color: var(--color-blue);
+            text-decoration: none;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .toggle-auth-mode a:hover {
+            text-decoration: underline;
+        }
+
+        /* نافذة الرمز السري المولد */
+        .code-display-box {
+            background-color: #f1f5f9;
+            border: 2px dashed var(--color-blue);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--color-blue);
+            margin: 15px 0;
         }
 
         header {
@@ -746,34 +780,102 @@
         </div>
     </div>
 
-    <!-- نافذة تسجيل الدخول والإنشاء المنبثقة -->
+    <!-- نافذة تسجيل الدخول والإنشاء المنبثقة المحدثة -->
     <div class="modal-overlay" id="authModal">
         <div class="modal-card">
             <button class="modal-close" onclick="closeAuthModal()">&times;</button>
-            <div class="modal-header">
-                <h3 id="modalTitle">تسجيل دخول / إنشاء حساب</h3>
-                <p id="modalSub">أدخل معلوماتك للوصول إلى لوحتك والنتائج الفورية</p>
+            
+            <div id="authFormsContainer">
+                <!-- فورم إنشاء الحساب (التسجيل) -->
+                <div id="registerFormSection">
+                    <div class="modal-header">
+                        <h3>إنشاء حساب جديد للطالب</h3>
+                        <p>املأ البيانات بدقة لإصدار هويتك الرقمية وحفظ بياناتك</p>
+                    </div>
+                    <form id="registerForm" onsubmit="handleRegisterSubmit(event)">
+                        <div class="form-group">
+                            <label for="studentName">الاسم الرباعي للطالب</label>
+                            <input type="text" id="studentName" class="form-control" placeholder="علي محمد حسن علوان" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="studentGrade">الصف الدراسي</label>
+                            <select id="studentGrade" class="form-control" onchange="updateDivisionOptions()" required>
+                                <option value="" disabled selected>اختر صفك الدراسي</option>
+                                <option value="first">الأول متوسط</option>
+                                <option value="second">الثاني متوسط</option>
+                                <option value="third">الثالث متوسط</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="divisionGroup" style="display: none;">
+                            <label for="studentDivision">الشعبة الدراسية</label>
+                            <select id="studentDivision" class="form-control" required>
+                                <!-- يتم ملء الخيارات برمجياً بناءً على الصف -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="motherName">اسم الأم الثلاثي</label>
+                            <input type="text" id="motherName" class="form-control" placeholder="مثال: مريم جاسم محمد" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="parentPhone">رقم هاتف ولي الأمر</label>
+                            <input type="tel" id="parentPhone" class="form-control" placeholder="07XXXXXXXXX" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nationalId">رقم البطاقة الموحدة</label>
+                            <input type="text" id="nationalId" class="form-control" placeholder="مكون من 12 رقم" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="studentPhoto">صورة رسمية للطالب (خلفية بيضاء حصراً)</label>
+                            <input type="file" id="studentPhoto" class="form-control" accept="image/*" required>
+                        </div>
+
+                        <button type="submit" class="modal-submit-btn">إنشاء الحساب وتوليد الرمز</button>
+                    </form>
+                    <div class="toggle-auth-mode">
+                        لديك حساب بالفعل؟ <a onclick="switchAuthMode('login')">سجل دخولك هنا</a>
+                    </div>
+                </div>
+
+                <!-- فورم تسجيل الدخول السريع بالرمز -->
+                <div id="loginFormSection" style="display: none;">
+                    <div class="modal-header">
+                        <h3>تسجيل دخول سريع</h3>
+                        <p>أدخل اسمك الرباعي والرمز السري الخاص بك للدخول إلى حسابك</p>
+                    </div>
+                    <form id="loginForm" onsubmit="handleLoginSubmit(event)">
+                        <div class="form-group">
+                            <label for="loginName">الاسم الرباعي للطالب</label>
+                            <input type="text" id="loginName" class="form-control" placeholder="اكتب اسمك الرباعي كما سجلته أول مرة" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">الرمز السري الخاص بك</label>
+                            <input type="text" id="loginPassword" class="form-control" placeholder="مثال: JW1234" required>
+                        </div>
+                        <button type="submit" class="modal-submit-btn">تسجيل الدخول</button>
+                    </form>
+                    <div class="toggle-auth-mode">
+                        طالب جديد؟ <a onclick="switchAuthMode('register')">سجل حساباً جديداً من هنا</a>
+                    </div>
+                </div>
+
+                <!-- واجهة عرض الرمز للمستخدم الجديد بعد نجاح التسجيل -->
+                <div id="successDisplaySection" style="display: none; text-align: center;">
+                    <div class="modal-header">
+                        <h3 style="color: #10b981;">🎉 تم إنشاء الحساب بنجاح!</h3>
+                        <p>تم حفظ معلوماتك وإصدار رمز الدخول السري المخصص لك.</p>
+                    </div>
+                    <p style="font-weight: bold; color: var(--color-text-dark);">احفظ هذا الرمز جيداً لتسجيل الدخول به لاحقاً:</p>
+                    <div class="code-display-box" id="generatedCodeBox">JW-0000</div>
+                    <p style="font-size: 13px; color: #dc2626; margin-bottom: 20px;">🚨 (قم بأخذ لقطة شاشة للرمز أو كتابته في ورقة خارجية قبل الإغلاق)</p>
+                    <button class="modal-submit-btn" onclick="finishRegistration()">فهمت، ادخل للموقع</button>
+                </div>
             </div>
-            <form id="authForm" onsubmit="handleAuthSubmit(event)">
-                <div class="form-group">
-                    <label for="studentName">اسم الطالب الثلاثي</label>
-                    <input type="text" id="studentName" class="form-control" placeholder="مثال: علي محمد حسن" required>
-                </div>
-                <div class="form-group">
-                    <label for="studentGrade">الصف الدراسي</label>
-                    <select id="studentGrade" class="form-control" required>
-                        <option value="" disabled selected>اختر صفك الدراسي</option>
-                        <option value="first">الأول متوسط</option>
-                        <option value="second">الثاني متوسط</option>
-                        <option value="third">الثالث متوسط</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="studentKey">رقم الهاتف أو رمز الدخول الخاص بك</label>
-                    <input type="text" id="studentKey" class="form-control" placeholder="مثال: 077XXXXXXX أو الرمز المخصص" required>
-                </div>
-                <button type="submit" class="modal-submit-btn">حفظ وإرسال المعلومات</button>
-            </form>
         </div>
     </div>
 
@@ -884,6 +986,7 @@
         const database = firebase.database();
 
         let currentLang = 'ar';
+        let temporaryUserCode = ''; // لحفظ الكود المولد مؤقتاً
 
         const translations = {
             ar: {
@@ -1017,52 +1120,179 @@
         // التحكم بالنوافذ المنبثقة للتحقق من الهوية
         function openAuthModal() {
             document.getElementById('authModal').classList.add('active');
+            switchAuthMode('register'); // الوضع الافتراضي عند الفتح
         }
 
         function closeAuthModal() {
             document.getElementById('authModal').classList.remove('active');
         }
 
-        // التعامل مع إرسال فورم تسجيل الدخول / إنشاء الحساب
-        function handleAuthSubmit(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('studentName').value.trim();
-            const grade = document.getElementById('studentGrade').value;
-            const key = document.getElementById('studentKey').value.trim();
+        // التبديل بين واجهة إنشاء الحساب وتسجيل الدخول
+        function switchAuthMode(mode) {
+            if (mode === 'register') {
+                document.getElementById('registerFormSection').style.display = 'block';
+                document.getElementById('loginFormSection').style.display = 'none';
+                document.getElementById('successDisplaySection').style.display = 'none';
+            } else if (mode === 'login') {
+                document.getElementById('registerFormSection').style.display = 'none';
+                document.getElementById('loginFormSection').style.display = 'block';
+                document.getElementById('successDisplaySection').style.display = 'none';
+            }
+        }
 
-            if (!name || !grade || !key) {
-                alert("يرجى ملء كافة الحقول المطلوبة!");
-                return;
+        // تحديث الشعب الدراسية تلقائياً حسب الصف المحدد
+        function updateDivisionOptions() {
+            const grade = document.getElementById('studentGrade').value;
+            const divisionGroup = document.getElementById('divisionGroup');
+            const studentDivision = document.getElementById('studentDivision');
+
+            studentDivision.innerHTML = ''; // تصفير الشعب السابقة
+
+            let divisions = [];
+            if (grade === 'first') {
+                divisions = ['أ', 'ب', 'ج', 'د', 'و'];
+            } else if (grade === 'second') {
+                divisions = ['أ', 'ب', 'ج', 'د'];
+            } else if (grade === 'third') {
+                divisions = ['أ', 'ب', 'ج', 'د', 'هـ'];
             }
 
-            // تنظيف المفتاح ليكون متوافقاً مع Firebase Keys (بدون نقاط أو علامات غريبة)
-            const sanitizedKey = key.replace(/[\.\#\$\[\]]/g, "_");
-
-            // حفظ البيانات في الـ Firebase Database تحت مسار /students
-            database.ref('students/' + sanitizedKey).set({
-                fullName: name,
-                grade: grade,
-                accessKey: key,
-                registeredAt: new Date().toISOString()
-            }).then(() => {
-                // حفظ الهوية محلياً في المتصفح لتذكر الطالب
-                localStorage.setItem('studentName', name);
-                localStorage.setItem('studentGrade', grade);
-                localStorage.setItem('studentKey', key);
-
-                // تغيير شكل الأزرار التفاعلية
-                updateHeaderWithUser(name);
+            if (divisions.length > 0) {
+                divisionGroup.style.display = 'block';
                 
-                alert("تم تسجيل معلوماتك بنجاح في قاعدة البيانات!");
-                closeAuthModal();
-            }).catch((error) => {
-                console.error("Firebase Auth Error: ", error);
-                alert("حدث خطأ أثناء حفظ المعلومات، يرجى المحاولة لاحقاً.");
+                // إضافة خيار افتراضي
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.disabled = true;
+                defaultOption.selected = true;
+                defaultOption.textContent = 'اختر شعبتك';
+                studentDivision.appendChild(defaultOption);
+
+                divisions.forEach(div => {
+                    const option = document.createElement('option');
+                    option.value = div;
+                    option.textContent = `الشعبة ${div}`;
+                    studentDivision.appendChild(option);
+                });
+            } else {
+                divisionGroup.style.display = 'none';
+            }
+        }
+
+        // تحويل الصورة المرفوعة لقاعدة بيانات Firebase
+        function getBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
             });
         }
 
-        // فحص وجود حساب مسجل محلياً
+        // توليد رمز سري سهل للطالب (مثل JW1849)
+        function generateEasyPassword() {
+            const randomNumber = Math.floor(1000 + Math.random() * 9000); // 4 أرقام عشوائية
+            return `JW${randomNumber}`;
+        }
+
+        // معالجة "إنشاء حساب" جديد
+        async function handleRegisterSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('studentName').value.trim();
+            const grade = document.getElementById('studentGrade').value;
+            const division = document.getElementById('studentDivision').value;
+            const mother = document.getElementById('motherName').value.trim();
+            const phone = document.getElementById('parentPhone').value.trim();
+            const nationalId = document.getElementById('nationalId').value.trim();
+            const photoFile = document.getElementById('studentPhoto').files[0];
+
+            if (!name || !grade || !division || !mother || !phone || !nationalId || !photoFile) {
+                alert("يرجى إكمال وتدقيق جميع الخيارات المطلوبة!");
+                return;
+            }
+
+            try {
+                // تحويل الصورة لنص Base64 للحفظ السريع
+                const photoBase64 = await getBase64(photoFile);
+
+                // توليد الرمز السري الجديد والسهل
+                const generatedCode = generateEasyPassword();
+                temporaryUserCode = generatedCode;
+
+                // تحويل الاسم الرباعي إلى معرف مفتاحي آمن في الفايربيس (بدون مسافات ورموز خاصة)
+                const safeKey = name.replace(/\s+/g, '_');
+
+                // حفظ البيانات في Firebase Realtime Database
+                await database.ref('students/' + safeKey).set({
+                    fullName: name,
+                    grade: grade,
+                    division: division,
+                    motherName: mother,
+                    parentPhone: phone,
+                    nationalId: nationalId,
+                    photoData: photoBase64,
+                    accessKey: generatedCode,
+                    registeredAt: new Date().toISOString()
+                });
+
+                // حفظ معلومات الدخول محلياً في المتصفح لتذكر الطالب
+                localStorage.setItem('studentName', name);
+                localStorage.setItem('studentKey', generatedCode);
+
+                // إظهار واجهة نجاح التسجيل وعرض الرمز السري
+                document.getElementById('registerFormSection').style.display = 'none';
+                document.getElementById('successDisplaySection').style.display = 'block';
+                document.getElementById('generatedCodeBox').textContent = generatedCode;
+
+            } catch (error) {
+                console.error("خطأ أثناء معالجة التسجيل: ", error);
+                alert("حدث خطأ في الاتصال بقاعدة البيانات، يرجى المحاولة لاحقاً.");
+            }
+        }
+
+        // معالجة "تسجيل الدخول" بالرمز والاسم
+        function handleLoginSubmit(event) {
+            event.preventDefault();
+
+            const inputName = document.getElementById('loginName').value.trim();
+            const inputKey = document.getElementById('loginPassword').value.trim();
+
+            if (!inputName || !inputKey) {
+                alert("يرجى كتابة الاسم والرمز السري الخاص بك!");
+                return;
+            }
+
+            const safeKey = inputName.replace(/\s+/g, '_');
+
+            // جلب بيانات الطالب للتحقق من تطابق الرمز
+            database.ref('students/' + safeKey).once('value').then((snapshot) => {
+                const data = snapshot.val();
+                if (data && data.accessKey === inputKey) {
+                    localStorage.setItem('studentName', data.fullName);
+                    localStorage.setItem('studentKey', data.accessKey);
+                    updateHeaderWithUser(data.fullName);
+                    alert(`مرحباً بك مجدداً يا ${data.fullName}! تم تسجيل دخولك بنجاح.`);
+                    closeAuthModal();
+                } else {
+                    alert("عذراً، لم نجد حساباً متطابقاً بهذا الاسم والرمز السري. تأكد من دقة المعلومات المدخلة.");
+                }
+            }).catch((error) => {
+                console.error("خطأ في جلب البيانات: ", error);
+                alert("حدث خطأ أثناء فحص البيانات.");
+            });
+        }
+
+        // إنهاء التسجيل والدخول الفعلي للموقع
+        function finishRegistration() {
+            const savedName = localStorage.getItem('studentName');
+            if (savedName) {
+                updateHeaderWithUser(savedName);
+            }
+            closeAuthModal();
+        }
+
+        // فحص وجود حساب مسجل محلياً عند تشغيل الصفحة
         function checkLocalUser() {
             const savedName = localStorage.getItem('studentName');
             if (savedName) {
@@ -1070,7 +1300,7 @@
             }
         }
 
-        // تحديث الهيدر باسم الطالب بعد التسجيل
+        // تحديث الهيدر وتصميم الزر بناءً على هوية الطالب
         function updateHeaderWithUser(name) {
             const btnHeader = document.getElementById('btnAuthHeader');
             const btnHero = document.getElementById('btnHeroResults');
@@ -1083,7 +1313,7 @@
             if (btnHero) {
                 btnHero.textContent = "لوحتي الخاصة والنتائج";
                 btnHero.onclick = () => {
-                    alert("مرحباً بك مجدداً يا " + name + "! سيتم عرض لوحتك المخصصة ونتائجك قريباً فور رفعها من قبل الإدارة.");
+                    alert("مرحباً بك مجدداً يا " + name + "! سيتم عرض لوحتك المخصصة ونتائجك فور رفعها وتدقيقها من قبل إدارة المدرسة.");
                 };
             }
         }
