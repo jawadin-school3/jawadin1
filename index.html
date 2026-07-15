@@ -1320,7 +1320,8 @@
                         defaultGrades[p] = {};
                         subjects.forEach(sub => {
                             // شرط استثناء مادة الأدب للثالث متوسط في نصف السنة ونهاية السنة
-                            if (grade === '3' && sub === 'الادب' && (p === 'mid' || p === 'final')) {
+                            if (grade === '3' && sub === 'الادب' && (p === 'mid' || p === 'final')) 
+                                 if (grade === '3' && sub === 'الادب' && (p === 'mid' )) {
                                 // تترك فارغة وخالية للامتثال لشروط الثالث متوسط
                             } else {
                                 defaultGrades[p][sub] = "لم تعلن بعد";
