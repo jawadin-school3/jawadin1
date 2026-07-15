@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متوسطة الجوادين للبنين - المنصة الإلكترونية</title>
+    <title>الموقع الرسمي لمتوسطة الجوادين للبنين</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -27,156 +27,401 @@
 
         body {
             font-family: var(--font-main);
-            background-color: #f1f5f9;
+            background-color: #f8fafc;
             color: var(--color-text-dark);
             line-height: 1.6;
-            padding: 20px 10px;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
+        /* --- الهيدر العلوي الأبيض الأنيق --- */
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        /* رأس الصفحة والملاحة الإضافية */
-        header {
-            background-color: var(--bg-primary);
-            border-radius: 16px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            margin-bottom: 25px;
-            border: 1px solid var(--border-color);
-            position: relative;
+        .navbar-brand {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--color-blue);
+            text-decoration: none;
         }
 
-        /* زر الدخول المضاف بدلاً من قناة التليغرام */
-        .nav-action-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background-color: var(--color-blue);
-            color: #ffffff;
-            border: none;
-            padding: 8px 16px;
+        .navbar-brand span {
+            color: var(--color-text-dark);
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .navbar-menu a {
+            text-decoration: none;
+            color: var(--color-text-muted);
+            font-weight: 700;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .navbar-menu a:hover, .navbar-menu a.active {
+            color: var(--color-blue);
+        }
+
+        /* زر تسجيل الدخول في الهيدر */
+        .btn-header-login {
+            background-color: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            padding: 8px 18px;
             border-radius: 20px;
             font-family: var(--font-main);
             font-weight: 700;
-            font-size: 13px;
+            font-size: 13.5px;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
 
-        .nav-action-btn:hover {
+        .btn-header-login:hover {
+            background-color: var(--color-blue);
+            color: #ffffff;
+            border-color: var(--color-blue);
+        }
+
+        @media (max-width: 768px) {
+            .navbar-menu {
+                display: none; /* إخفاء القائمة في الموبايل لتبسيط الواجهة */
+            }
+        }
+
+        /* --- قسم البطولة (Hero Section) --- */
+        .hero {
+            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(241,245,249,1) 100%);
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 15px;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0 auto 25px auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: 12px 24px;
+            font-family: var(--font-main);
+            font-weight: 700;
+            font-size: 14.5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-hero-primary {
+            background-color: var(--color-blue);
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-hero-primary:hover {
             background-color: var(--color-blue-hover);
         }
 
-        @media (max-width: 576px) {
-            header {
-                padding-top: 60px;
-            }
-            .nav-action-btn {
-                top: 15px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: calc(100% - 40px);
-                text-align: center;
-            }
-        }
-
-        header img {
-            max-width: 90px;
-            margin-bottom: 15px;
-        }
-
-        header h1 {
-            font-size: 24px;
-            font-weight: 800;
+        .btn-hero-secondary {
+            background-color: transparent;
             color: var(--color-blue);
-            margin-bottom: 5px;
+            border: 2px solid var(--color-blue);
         }
 
-        header p {
-            font-size: 14px;
-            color: var(--color-text-muted);
+        .btn-hero-secondary:hover {
+            background-color: rgba(37, 99, 235, 0.05);
         }
 
-        /* التبليغات العامة */
-        .announcements-section {
-            background-color: #eff6ff;
-            border: 1px solid #bfdbfe;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 25px;
+        /* --- المحتوى الرئيسي (لوحة المدرسة الإدارية والتبليغات) --- */
+        .main-layout {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
         }
 
-        .announcements-section h2 {
-            font-size: 18px;
-            font-weight: 800;
-            color: #1e40af;
+        @media (max-width: 900px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* كارت معلومات المدرسة الجانبي */
+        .school-profile-card {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            align-self: start;
+        }
+
+        .school-logo {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
             margin-bottom: 15px;
+        }
+
+        .school-profile-card h3 {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--color-text-dark);
+            margin-bottom: 20px;
+        }
+
+        .school-info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12.5px;
+        }
+
+        .school-info-table td {
+            padding: 8px 4px;
+            border-bottom: 1px dashed #f1f5f9;
+            text-align: right;
+        }
+
+        .school-info-table td.label {
+            color: var(--color-text-muted);
+            font-weight: 700;
+        }
+
+        .school-info-table td.value {
+            font-weight: 800;
+            color: var(--color-text-dark);
+        }
+
+        /* قسم التبليغات والتعميمات */
+        .announcements-container h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--color-text-dark);
+            margin-bottom: 20px;
+        }
+
+        .announcements-list {
             display: flex;
-            align-items: center;
-            gap: 8px;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .announcement-card {
-            background-color: var(--bg-primary);
-            border: 1px solid #dbeafe;
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--color-blue);
             border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 12px;
+            padding: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
         .announcement-card .date {
-            font-size: 12px;
+            font-size: 11.5px;
             color: var(--color-text-muted);
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             display: block;
         }
 
         .announcement-card p {
-            font-size: 14.5px;
+            font-size: 14px;
             font-weight: 500;
+            color: #334155;
             white-space: pre-line;
+            line-height: 1.7;
         }
 
         .announcement-card img {
             max-width: 100%;
             border-radius: 8px;
-            margin-top: 10px;
+            margin-top: 12px;
             border: 1px solid var(--border-color);
         }
 
-        /* النافذة المنبثقة للتسجيل والدخول */
+        /* واجهة لوحة الطالب الشخصية (تظهر مكان الهيرو والتبليغات بعد تسجيل الدخول) */
+        .student-portal {
+            display: none;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .portal-card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .portal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .portal-header h2 {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .student-profile {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background-color: #f8fafc;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 576px) {
+            .student-profile {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .student-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ffffff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .student-info h3 {
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .student-info p {
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+
+        .private-notification-box {
+            background-color: #fff9db;
+            border: 1px solid #ffe066;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #856404;
+            display: none;
+        }
+
+        .grades-table-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .grades-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .grades-table th, .grades-table td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: right;
+        }
+
+        .grades-table th {
+            background-color: #f8fafc;
+            font-weight: 700;
+        }
+
+        .grade-badge {
+            background-color: #e2e8f0;
+            color: #334155;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 12.5px;
+            display: inline-block;
+        }
+
+        .grade-badge.announced {
+            background-color: #dcfce7;
+            color: #15803d;
+        }
+
+        .grade-badge.not-announced {
+            background-color: #fef3c7;
+            color: #b45309;
+        }
+
+        /* --- النافذة المنبثقة للتسجيل والدخول (Modal) --- */
         .modal-overlay {
-            display: none; /* مخفي افتراضياً */
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(15, 23, 42, 0.6); /* خلفية معتمة */
+            background-color: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(4px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
             padding: 15px;
-            overflow-y: auto;
         }
 
         .modal-content {
             background-color: var(--bg-primary);
             border-radius: 16px;
             width: 100%;
-            max-width: 650px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            max-width: 600px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border-color);
             position: relative;
-            animation: modalFadeIn 0.3s ease-out;
+            animation: modalFadeIn 0.25s ease-out;
             max-height: 90vh;
             overflow-y: auto;
         }
@@ -192,12 +437,12 @@
             left: 15px;
             background-color: #f1f5f9;
             border: none;
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             cursor: pointer;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 14px;
             color: var(--color-text-muted);
             display: flex;
             align-items: center;
@@ -215,7 +460,6 @@
             padding: 25px;
         }
 
-        /* التبويبات للتبديل بين الدخول والتسجيل */
         .auth-tabs {
             display: flex;
             gap: 10px;
@@ -225,13 +469,13 @@
 
         .tab-btn {
             flex: 1;
-            padding: 12px;
+            padding: 11px;
             background-color: #e2e8f0;
             border: none;
             border-radius: 8px;
             font-family: var(--font-main);
             font-weight: 700;
-            font-size: 15px;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.3s;
             color: #475569;
@@ -242,39 +486,32 @@
             color: #ffffff;
         }
 
-        /* كروت النوافذ */
-        .card {
-            background-color: var(--bg-primary);
-            border-radius: 16px;
-            padding: 10px 5px;
-        }
-
-        .card h2 {
-            font-size: 19px;
+        .card-inner h2 {
+            font-size: 17px;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 10px;
+            padding-bottom: 8px;
         }
 
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 15px;
         }
 
         .form-group label {
             display: block;
             font-weight: 700;
-            margin-bottom: 8px;
-            font-size: 14px;
+            margin-bottom: 6px;
+            font-size: 13px;
         }
 
         .form-control {
             width: 100%;
-            padding: 12px;
+            padding: 11px;
             border: 1px solid #cbd5e1;
             border-radius: 8px;
             font-family: var(--font-main);
-            font-size: 14.5px;
+            font-size: 14px;
             outline: none;
             transition: border-color 0.3s;
         }
@@ -297,14 +534,14 @@
 
         .btn {
             width: 100%;
-            padding: 12px;
+            padding: 11px;
             background-color: var(--color-blue);
             color: #ffffff;
             border: none;
             border-radius: 8px;
             font-family: var(--font-main);
             font-weight: 700;
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
@@ -313,7 +550,7 @@
             background-color: var(--color-blue-hover);
         }
 
-        /* منطقة رفع الصورة */
+        /* رفع الملفات */
         .file-upload-wrapper {
             position: relative;
         }
@@ -321,18 +558,13 @@
             background-color: #f8fafc;
             border: 2px dashed #cbd5e1;
             color: #475569;
-            padding: 15px;
+            padding: 12px;
             border-radius: 8px;
             text-align: center;
             cursor: pointer;
             font-weight: 700;
-            transition: all 0.3s;
+            font-size: 13px;
             display: block;
-        }
-        .file-upload-btn:hover {
-            border-color: var(--color-blue);
-            background-color: #eff6ff;
-            color: var(--color-blue);
         }
         .file-upload-wrapper input[type="file"] {
             position: absolute;
@@ -344,106 +576,7 @@
             cursor: pointer;
         }
 
-        /* واجهة لوحة الطالب الشخصية بعد الدخول */
-        .student-portal {
-            display: none;
-        }
-
-        .student-profile {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            background-color: #f8fafc;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 25px;
-        }
-
-        @media (max-width: 576px) {
-            .student-profile {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-
-        .student-avatar {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #ffffff;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .student-info h3 {
-            font-size: 19px;
-            font-weight: 800;
-            margin-bottom: 5px;
-        }
-
-        .student-info p {
-            font-size: 13.5px;
-            color: var(--color-text-muted);
-        }
-
-        .private-notification-box {
-            background-color: #fff9db;
-            border: 1px solid #ffe066;
-            border-radius: 12px;
-            padding: 15px 20px;
-            margin-bottom: 25px;
-            font-size: 14.5px;
-            color: #856404;
-            display: none;
-        }
-
-        /* كارت وعرض الدرجات */
-        .grades-table-card {
-            background-color: var(--bg-primary);
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-        }
-
-        .grades-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 14.5px;
-        }
-
-        .grades-table th, .grades-table td {
-            border: 1px solid #e2e8f0;
-            padding: 12px;
-            text-align: right;
-        }
-
-        .grades-table th {
-            background-color: #f8fafc;
-            font-weight: 700;
-        }
-
-        .grade-badge {
-            background-color: #e2e8f0;
-            color: #334155;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 13px;
-            display: inline-block;
-        }
-
-        .grade-badge.announced {
-            background-color: #dcfce7;
-            color: #15803d;
-        }
-
-        .grade-badge.not-announced {
-            background-color: #fef3c7;
-            color: #b45309;
-        }
-
+        /* نجاح التسجيل */
         .success-register-box {
             display: none;
             text-align: center;
@@ -451,24 +584,23 @@
             border: 1px solid #bbf7d0;
             color: #15803d;
             border-radius: 12px;
-            padding: 25px;
-            margin-top: 20px;
+            padding: 20px;
         }
 
         .success-register-box h3 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
             margin-bottom: 10px;
         }
 
         .success-register-box .student-code {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 800;
             color: var(--color-blue);
-            letter-spacing: 2px;
-            margin: 15px 0;
+            letter-spacing: 1px;
+            margin: 12px 0;
             background-color: #ffffff;
-            padding: 10px;
+            padding: 8px;
             border-radius: 8px;
             border: 1px dashed var(--color-blue);
             display: inline-block;
@@ -477,163 +609,203 @@
 </head>
 <body>
 
-    <div class="container">
-        
-        <!-- رأس الصفحة العام -->
-        <header>
-            <!-- زر تسجيل الدخول الجديد المستبدل -->
-            <button class="nav-action-btn" onclick="openAuthModal()">تسجيل الدخول / إنشاء حساب</button>
+    <!-- الهيدر الأبيض الأنيق المتواجد في الأعلى -->
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">الجوادين<span>.</span></a>
+        <ul class="navbar-menu">
+            <li><a href="#" class="active">الرئيسية</a></li>
+            <li><a href="#">النظام الدراسي</a></li>
+            <li><a href="#">التواصل الرقمي</a></li>
+            <li><a href="#">التبليغات</a></li>
+            <li><a href="#">رؤية المدرسة</a></li>
+        </ul>
+        <!-- زر تسجيل الدخول المستبدل من زر قناة تليجرام الدائري -->
+        <button class="btn-header-login" onclick="openAuthModal()">تسجيل دخول / إنشاء حساب</button>
+    </nav>
 
-            <img src="2.jpg" onerror="this.onerror=null; this.src='https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';" alt="شعار مدرسة الجوادين">
+    <!-- واجهة الموقع الرئيسي (يتم إخفاؤها فقط عند دخول الطالب للوحة درجاته) -->
+    <div id="mainWebsiteSection">
+        
+        <!-- قسم الهيرو (الواجهة الرئيسية الترحيبية) -->
+        <header class="hero">
             <h1>متوسطة الجوادين للبنين</h1>
-            <p>المنصة الرسمية المباشرة للتواصل وإعلان النتائج والتبليغات الإدارية</p>
+            <p>صرح علمي متميز يسعى لبناء أجيال واعدة قادرة على التفوق والنجاح المستمر.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-hero btn-hero-primary">النظام الدراسي والمرافق</a>
+                <!-- زر نتائجي والتبليغات المخصصة المستبدل من زر التليجرام المفرغ -->
+                <button class="btn-hero btn-hero-secondary" onclick="openAuthModal()">نتائجي والتبليغات المخصصة</button>
+            </div>
         </header>
 
-        <!-- قسم التبليغات العامة (يظهر بالواجهة مباشرة) -->
-        <div class="announcements-section" id="announcementsSec" style="display: none;">
-            <h2>📢 تبليغات وإعلانات إدارة المدرسة</h2>
-            <div id="publicAnnouncementsList">
-                <!-- الإعلانات ستظهر هنا تلقائياً -->
-            </div>
-        </div>
+        <!-- المحتوى من التبليغات والمعلومات الجانبية للمدرسة -->
+        <main class="main-layout">
+            
+            <!-- كارت الملف والتعريف الجانبي للمدرسة -->
+            <aside class="school-profile-card">
+                <img src="2.jpg" onerror="this.onerror=null; this.src='https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';" class="school-logo" alt="شعار المدرسة">
+                <h3>شعار متوسطة الجوادين للبنين</h3>
+                <table class="school-info-table">
+                    <tr>
+                        <td class="label">التأسيس</td>
+                        <td class="value">2008م</td>
+                    </tr>
+                    <tr>
+                        <td class="label">المدير</td>
+                        <td class="value">السيد فيصل برغش تايه</td>
+                    </tr>
+                    <tr>
+                        <td class="label">المكان</td>
+                        <td class="value">بغداد، الشعب، الرصافة الأولى</td>
+                    </tr>
+                </table>
+            </aside>
 
-        <!-- النافذة المنبثقة الاختيارية (Modal) -->
-        <div class="modal-overlay" id="authModal">
-            <div class="modal-content">
-                <button class="modal-close-btn" onclick="closeAuthModal()">✕</button>
-                <div class="modal-body">
-                    <div id="authContainer">
-                        <div class="auth-tabs">
-                            <button class="tab-btn active" id="tabBtnLogin" onclick="switchAuthTab('login')">تسجيل دخول الطالب</button>
-                            <button class="tab-btn" id="tabBtnRegister" onclick="switchAuthTab('register')">تسجيل طالب جديد</button>
-                        </div>
-
-                        <!-- كارت تسجيل الدخول بالرمز الشخصي -->
-                        <div class="card" id="loginCard">
-                            <h2>🔑 الدخول إلى لوحة درجاتك الشخصية</h2>
-                            <div class="form-group">
-                                <label for="studentCode">أدخل رمز الطالب السري الخاص بك</label>
-                                <input type="text" id="studentCode" class="form-control" placeholder="مثال: JWD-1234 (تحصل عليه بعد التسجيل)">
-                            </div>
-                            <button class="btn" onclick="loginStudent()">دخول المنصة</button>
-                        </div>
-
-                        <!-- كارت التسجيل الجديد لأول مرة (بدون خانة اسم أب الأم) -->
-                        <div class="card" id="registerCard" style="display: none;">
-                            <h2>📝 ملء استمارة الطالب الجديدة لأول مرة</h2>
-                            
-                            <div class="form-group">
-                                <label for="regFullName">اسم الطالب الرباعي واللقب *</label>
-                                <input type="text" id="regFullName" class="form-control" placeholder="أدخل اسمك الكامل...">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="regMotherName">اسم الأم الثلاثي *</label>
-                                <input type="text" id="regMotherName" class="form-control" placeholder="أدخل اسم الأم الثلاثي...">
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group">
-                                    <label for="regPhone">رقم هاتف ولي الأمر الفعال *</label>
-                                    <input type="tel" id="regPhone" class="form-control" placeholder="أدخل رقم الهاتف...">
-                                </div>
-                                <div class="form-group">
-                                    <label for="regNationalId">رقم البطاقة الموحدة / الهوية *</label>
-                                    <input type="text" id="regNationalId" class="form-control" placeholder="أدخل الرقم الوطني...">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group">
-                                    <label for="regGrade">الصف الدراسي *</label>
-                                    <select id="regGrade" class="form-control" onchange="updateRegisterSections()">
-                                        <option value="1">الاول متوسط</option>
-                                        <option value="2">الثاني متوسط</option>
-                                        <option value="3">الثالث متوسط</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="regSection">الشعبة *</label>
-                                    <select id="regSection" class="form-control">
-                                        <!-- سيتم تعبئتها ديناميكياً -->
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>تحميل صورتك الشخصية (من الهاتف مباشرة - اختياري)</label>
-                                <div class="file-upload-wrapper">
-                                    <span class="file-upload-btn" id="photoFileName">اضغط هنا لالتقاط أو اختيار صورتك الشخصية...</span>
-                                    <input type="file" id="regPhotoFile" accept="image/*" onchange="handleStudentPhoto(this)">
-                                </div>
-                            </div>
-
-                            <button class="btn" style="background-color: var(--color-green);" onclick="registerStudent()">تسجيل وتوليد كود الدخول الخاص بي</button>
-                        </div>
-
-                        <!-- صندوق النجاح بعد التسجيل مباشرة وإظهار الكود -->
-                        <div class="success-register-box" id="successRegisterBox">
-                            <h3>🎉 تم تسجيلك بنجاح في مدرسة الجوادين!</h3>
-                            <p>يرجى حفظ الكود السري المولد أدناه جيداً وتصوير الشاشة. ستحتاجه في كل مرة لتسجيل الدخول ومعرفة درجاتك:</p>
-                            <div class="student-code" id="generatedStudentCode"></div>
-                            <p style="font-size:13px; font-weight:700;">(ملاحظة: تفعيل حسابك ورفع درجاتك يتم فوراً من قبل أستاذ المادة)</p>
-                            <button class="btn" onclick="goToLoginAfterRegister()" style="margin-top: 20px; max-width: 200px;">الذهاب لتسجيل الدخول</button>
-                        </div>
-                    </div>
+            <!-- التبليغات والتعميمات الرسمية -->
+            <section class="announcements-container">
+                <h2>التبليغات والتعميمات الإدارية</h2>
+                <div class="announcements-list" id="publicAnnouncementsList">
+                    <!-- التبليغات تظهر هنا تلقائياً من Firebase -->
                 </div>
-            </div>
-        </div>
+            </section>
 
-        <!-- واجهة الطالب الشخصية بعد الدخول بنجاح -->
-        <div class="student-portal" id="studentPortal">
-            <div class="card" style="padding: 20px 10px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
-                    <h2>👤 حسابك الشخصي ودرجاتك</h2>
-                    <button class="tab-btn" onclick="logoutStudent()" style="max-width: 120px; background-color:#fee2e2; color:#ef4444;">تسجيل خروج</button>
-                </div>
-
-                <!-- بيانات الطالب الشخصية المنبثقة -->
-                <div class="student-profile" id="studentProfile">
-                    <!-- سيتم توليدها ديناميكياً -->
-                </div>
-
-                <!-- التنبيه الخاص بالطالب إن وجد -->
-                <div class="private-notification-box" id="studentPrivateNotification">
-                    <!-- يظهر هنا تبليغ الأستاذ الخاص -->
-                </div>
-
-                <!-- جدول عرض الدرجات والنتائج -->
-                <div class="grades-table-card">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                        <h3 style="font-size: 16px; font-weight: 800;">📊 كشف درجات الطالب</h3>
-                        <select id="selectTermPortal" class="form-control" style="max-width: 250px;" onchange="renderStudentGradesTable()">
-                            <option value="c1_m1">الكورس الأول - الشهر الأول</option>
-                            <option value="c1_m2">الكورس الأول - الشهر الثاني</option>
-                            <option value="mid">الكورس الأول - نصف السنة</option>
-                            <option value="c2_m1">الكورس الثاني - الشهر الأول</option>
-                            <option value="c2_m2">الكورس الثاني - الشهر الثاني</option>
-                            <option value="final">الكورس الثاني - نهاية السنة</option>
-                        </select>
-                    </div>
-
-                    <table class="grades-table">
-                        <thead>
-                            <tr>
-                                <th>المادة الدراسية</th>
-                                <th>الدرجة المستحقة</th>
-                            </tr>
-                        </thead>
-                        <tbody id="studentGradesTableBody">
-                            <!-- سيتم عرض الدرجات ديناميكياً -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
+        </main>
     </div>
 
-    <!-- جلب حزم Firebase الأساسية -->
+    <!-- واجهة الطالب الشخصية بعد الدخول بنجاح (مخفية افتراضياً وتظهر فقط عند تسجيل الدخول) -->
+    <div class="student-portal" id="studentPortal">
+        <div class="portal-card">
+            <div class="portal-header">
+                <h2>👤 حسابك الشخصي ودرجاتك</h2>
+                <button class="tab-btn" onclick="logoutStudent()" style="max-width: 120px; background-color:#fee2e2; color:#ef4444;">تسجيل خروج</button>
+            </div>
+
+            <!-- معلومات الطالب بروفايلك -->
+            <div class="student-profile" id="studentProfile">
+                <!-- مولد ديناميكياً -->
+            </div>
+
+            <!-- تنبيه الأستاذ الخاص -->
+            <div class="private-notification-box" id="studentPrivateNotification">
+                <!-- رسالة الأستاذ الخاصة -->
+            </div>
+
+            <!-- الدرجات والمواد والنتائج لكافة الأكوام والكورسات -->
+            <div class="grades-table-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <h3 style="font-size: 15px; font-weight: 800;">📊 كشف درجات الطالب</h3>
+                    <select id="selectTermPortal" class="form-control" style="max-width: 220px;" onchange="renderStudentGradesTable()">
+                        <option value="c1_m1">الكورس الأول - الشهر الأول</option>
+                        <option value="c1_m2">الكورس الأول - الشهر الثاني</option>
+                        <option value="mid">الكورس الأول - نصف السنة</option>
+                        <option value="c2_m1">الكورس الثاني - الشهر الأول</option>
+                        <option value="c2_m2">الكورس الثاني - الشهر الثاني</option>
+                        <option value="final">الكورس الثاني - نهاية السنة</option>
+                    </select>
+                </div>
+
+                <table class="grades-table">
+                    <thead>
+                        <tr>
+                            <th>المادة الدراسية</th>
+                            <th>الدرجة المستحقة</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentGradesTableBody">
+                        <!-- تُعرض ديناميكياً -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- النافذة المنبثقة الاختيارية (Modal) -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-content">
+            <button class="modal-close-btn" onclick="closeAuthModal()">✕</button>
+            <div class="modal-body">
+                <div id="authContainer">
+                    <div class="auth-tabs">
+                        <button class="tab-btn active" id="tabBtnLogin" onclick="switchAuthTab('login')">تسجيل دخول الطالب</button>
+                        <button class="tab-btn" id="tabBtnRegister" onclick="switchAuthTab('register')">تسجيل طالب جديد</button>
+                    </div>
+
+                    <!-- كارت الدخول -->
+                    <div class="card-inner" id="loginCard">
+                        <h2>🔑 الدخول إلى لوحة درجاتك الشخصية</h2>
+                        <div class="form-group">
+                            <label for="studentCode">أدخل رمز الطالب السري الخاص بك</label>
+                            <input type="text" id="studentCode" class="form-control" placeholder="مثال: JWD-1234 (تحصل عليه بعد التسجيل)">
+                        </div>
+                        <button class="btn" onclick="loginStudent()">دخول المنصة</button>
+                    </div>
+
+                    <!-- كارت التسجيل الجديد (بدون خانة اسم أب الأم نهائياً) -->
+                    <div class="card-inner" id="registerCard" style="display: none;">
+                        <h2>📝 ملء استمارة الطالب الجديدة لأول مرة</h2>
+                        
+                        <div class="form-group">
+                            <label for="regFullName">اسم الطالب الرباعي واللقب *</label>
+                            <input type="text" id="regFullName" class="form-control" placeholder="أدخل اسمك الرباعي الكامل واللقب...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regMotherName">اسم الأم الثلاثي *</label>
+                            <input type="text" id="regMotherName" class="form-control" placeholder="أدخل اسم الأم الثلاثي الكامل...">
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="regPhone">رقم هاتف ولي الأمر الفعال *</label>
+                                <input type="tel" id="regPhone" class="form-control" placeholder="أدخل رقم الهاتف...">
+                            </div>
+                            <div class="form-group">
+                                <label for="regNationalId">رقم البطاقة الموحدة / الهوية *</label>
+                                <input type="text" id="regNationalId" class="form-control" placeholder="أدخل الرقم الوطني الموحد...">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="regGrade">الصف الدراسي *</label>
+                                <select id="regGrade" class="form-control" onchange="updateRegisterSections()">
+                                    <option value="1">الاول متوسط</option>
+                                    <option value="2">الثاني متوسط</option>
+                                    <option value="3">الثالث متوسط</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="regSection">الشعبة *</label>
+                                <select id="regSection" class="form-control">
+                                    <!-- سيتم تعبئتها ديناميكياً -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>تحميل صورتك الشخصية (اختياري)</label>
+                            <div class="file-upload-wrapper">
+                                <span class="file-upload-btn" id="photoFileName">اضغط هنا لالتقاط أو اختيار صورتك الشخصية...</span>
+                                <input type="file" id="regPhotoFile" accept="image/*" onchange="handleStudentPhoto(this)">
+                            </div>
+                        </div>
+
+                        <button class="btn" style="background-color: var(--color-green);" onclick="registerStudent()">تسجيل وتوليد كود الدخول</button>
+                    </div>
+
+                    <!-- صندوق النجاح والحصول على الكود -->
+                    <div class="success-register-box" id="successRegisterBox">
+                        <h3>🎉 تم تسجيلك بنجاح في مدرسة الجوادين!</h3>
+                        <p>يرجى تصوير الشاشة وحفظ هذا الكود السري للدخول مجدداً ومعرفة درجاتك دائماً:</p>
+                        <div class="student-code" id="generatedStudentCode"></div>
+                        <p style="font-size:12.5px; font-weight:700; color:#b45309;">(ملاحظة: تفعيل الحساب والدرجات يتم فوراً عبر الأستاذ)</p>
+                        <button class="btn" onclick="goToLoginAfterRegister()" style="margin-top: 15px; max-width: 180px;">الذهاب لتسجيل الدخول</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- جلب Firebase الأساسي -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -663,7 +835,7 @@
             loadPublicAnnouncements();
             updateRegisterSections();
 
-            // إغلاق النافذة المنبثقة عند الضغط خارجها بالخطأ
+            // إغلاق النافذة المنبثقة عند الضغط على المساحة الفارغة خارجها
             window.onclick = function(event) {
                 const modal = document.getElementById('authModal');
                 if (event.target === modal) {
@@ -672,7 +844,6 @@
             }
         };
 
-        // دوال التحكم بالنافذة المنبثقة
         function openAuthModal() {
             document.getElementById('authModal').style.display = 'flex';
         }
@@ -711,10 +882,8 @@
             database.ref('notifications').on('value', (snapshot) => {
                 const data = snapshot.val();
                 const container = document.getElementById('publicAnnouncementsList');
-                const mainSec = document.getElementById('announcementsSec');
 
                 if (data) {
-                    mainSec.style.display = 'block';
                     let htmlContent = '';
                     const list = [];
                     for (let id in data) {
@@ -734,7 +903,7 @@
                     });
                     container.innerHTML = htmlContent;
                 } else {
-                    mainSec.style.display = 'none';
+                    container.innerHTML = '<p style="text-align:center; color:var(--color-text-muted); font-weight:700; padding: 20px;">لا توجد أي تعميمات إدارية منشورة حالياً.</p>';
                 }
             });
         }
@@ -760,7 +929,7 @@
             const section = document.getElementById('regSection').value;
 
             if (!fullName || !motherName || !phone || !nationalId) {
-                alert('الرجاء تعبئة كافة الحقول المطلوبة التي تحتوي على علامة (*) واختيار صورتك الشخصية إن أمكن لضمان التسجيل!');
+                alert('الرجاء ملء كل الحقول التي تحتوي علامة (*) لتأكيد التسجيل!');
                 return;
             }
 
@@ -790,7 +959,7 @@
                 document.getElementById('photoFileName').innerText = "اضغط هنا لالتقاط أو اختيار صورتك الشخصية...";
                 studentPhotoBase64 = "";
             }).catch(err => {
-                alert('حدث خطأ أثناء إتمام عملية التسجيل، يرجى التحقق من اتصالك بالإنترنت والمحاولة مجدداً.');
+                alert('عذراً، حدثت مشكلة أثناء الاتصال بقاعدة البيانات. الرجاء إعادة المحاولة مجدداً.');
             });
         }
 
@@ -801,7 +970,7 @@
         function loginStudent() {
             const enteredCode = document.getElementById('studentCode').value.trim();
             if (!enteredCode) {
-                alert('يرجى إدخال كود الطالب السري للدخول!');
+                alert('الرجاء كتابة كود الطالب السري للدخول!');
                 return;
             }
 
@@ -814,32 +983,33 @@
                         if (students[id].studentCode === enteredCode) {
                             found = true;
                             currentStudentData = { id, ...students[id] };
-                            closeAuthModal(); // إغلاق النافذة المنبثقة فوراً بعد النجاح
-                            showStudentPortal();
+                            closeAuthModal(); // إغلاق النافذة المنبثقة
+                            showStudentPortal(); // إظهار لوحة الطالب الشخصية
                             break;
                         }
                     }
                 }
 
                 if (!found) {
-                    alert('عذراً، لم نجد أي طالب مسجل بهذا الكود السري. يرجى التأكد من كتابة الرمز بشكل صحيح.');
+                    alert('هذا الكود السري غير مسجل لدينا. يرجى التحقق من الكود أو عمل تسجيل جديد.');
                 }
             });
         }
 
         function showStudentPortal() {
-            document.getElementById('announcementsSec').style.display = 'none'; // إخفاء الإعلانات العامة لإعطاء مساحة للوحة الطالب
+            // إخفاء واجهة الموقع الرئيسي بالكامل وعرض بوابة الطالب
+            document.getElementById('mainWebsiteSection').style.display = 'none';
             document.getElementById('studentPortal').style.display = 'block';
 
             const defaultAvatar = 'https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';
             const gradeText = currentStudentData.grade == '1' ? 'الاول متوسط' : currentStudentData.grade == '2' ? 'الثاني متوسط' : 'الثالث متوسط';
             
             document.getElementById('studentProfile').innerHTML = `
-                <img src="${currentStudentData.photo || defaultAvatar}" onerror="this.src='${defaultAvatar}'" class="student-avatar" alt="بروفايلك">
+                <img src="${currentStudentData.photo || defaultAvatar}" onerror="this.src='${defaultAvatar}'" class="student-avatar" alt="بروفايل">
                 <div class="student-info">
                     <h3>${currentStudentData.fullName}</h3>
                     <p>الصف: ${gradeText} | شعبة: ${currentStudentData.section}</p>
-                    <p style="margin-top:5px; font-weight:700;">رمز الطالب السري: <span style="color:var(--color-blue);">${currentStudentData.studentCode}</span></p>
+                    <p style="margin-top:4px; font-weight:700;">رمز الدخول السري: <span style="color:var(--color-blue);">${currentStudentData.studentCode}</span></p>
                 </div>
             `;
 
@@ -892,8 +1062,8 @@
         function logoutStudent() {
             currentStudentData = null;
             document.getElementById('studentPortal').style.display = 'none';
+            document.getElementById('mainWebsiteSection').style.display = 'block';
             document.getElementById('studentCode').value = '';
-            loadPublicAnnouncements(); // استعادة التبليغات العامة في الواجهة
             switchAuthTab('login');
         }
     </script>
