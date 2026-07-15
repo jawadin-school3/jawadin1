@@ -1220,11 +1220,52 @@
             if (savedStudent) {
                 const studentObj = JSON.parse(savedStudent);
                 loadStudentDashboard(studentObj.fullName);
-            } else {
-                document.getElementById('studentGateModal').classList.add('active');
-                showFormView('ask');
+        // استبدل دالة loadStudentDashboard في الكود القديم بهذا التحديث:
+function loadStudentDashboard(fullName) {
+    database.ref('students/' + fullName).once('value').then((snapshot) => {
+        const student = snapshot.val();
+        if(!student) return;
+
+        const content = document.getElementById('dashboardContent');
+        let gradeText = student.grade === '1' ? 'الأول متوسط' : student.grade === '2' ? 'الثاني متوسط' : 'الثالث متوسط';
+        
+        // دالة بناء جدول مخصص (للشهور أو للامتحانات)
+        const buildTable = (title, data) => {
+            if(!data) return '';
+            let rows = '';
+            for(let sub in data) {
+                // شرط إخفاء الأدب في جداول نصف ونهاية السنة للثالث متوسط
+                if(student.grade === '3' && sub === 'ادب' && (title.includes('نصف') || title.includes('نهاية'))) continue;
+                rows += `<tr><td>${sub}</td><td>${data[sub]}</td></tr>`;
             }
-        }
+            return `
+                <div style="margin-bottom: 20px;">
+                    <h4 style="text-align: center; background: #e2e8f0; padding: 5px;">${title}</h4>
+                    <table class="grades-table">
+                        <thead><tr><th>المادة</th><th>الدرجة</th></tr></thead>
+                        <tbody>${rows}</tbody>
+                    </table>
+                </div>
+            `;
+        };
+
+        content.innerHTML = `
+            <h3>${student.fullName}</h3>
+            <div class="grade-section-title">الكورس الأول</div>
+            ${buildTable('الشهر الأول', student.grades.كورس1_شهر1)}
+            ${buildTable('الشهر الثاني', student.grades.كورس1_شهر2)}
+            <div class="grade-section-title" style="background:#dc2626;">درجات نصف السنة</div>
+            ${buildTable('نصف السنة', student.grades.نصف_السنة)}
+            
+            <div class="grade-section-title">الكورس الثاني</div>
+            ${buildTable('الشهر الأول', student.grades.كورس2_شهر1)}
+            ${buildTable('الشهر الثاني', student.grades.كورس2_شهر2)}
+            <div class="grade-section-title" style="background:#dc2626;">درجات نهاية السنة</div>
+            ${buildTable('نهاية السنة', student.grades.نهاية_السنة)}
+        `;
+        document.getElementById('studentDashboardModal').classList.add('active');
+    });
+}
 
         function closeModal(id) {
             document.getElementById(id).classList.remove('active');
