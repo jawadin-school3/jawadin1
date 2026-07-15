@@ -638,8 +638,6 @@
                 </ul>
             </nav>
             <div class="header-left">
-                <!-- تم إضافة زر تسجيل الدخول هنا -->
-                <a href="login.html" class="lang-btn">دخول الطالب</a>
                 <a href="https://telegram.me/jawadin3" target="_blank" class="lang-btn" id="btnTelegram">قناة التلغرام</a>
             </div>
         </div>
@@ -651,8 +649,6 @@
             <p id="heroDesc">صرح علمي متميز يسعى لبناء أجيال واعدة قادرة على التفوق والنجاح المستمر.</p>
             <div class="hero-buttons">
                 <a href="#system" class="btn btn-primary" id="btnHeroSystem">النظام الدراسي والمرافق</a>
-                <!-- تم إضافة زر النتائج المخصصة هنا -->
-                <a href="results.html" class="btn btn-secondary">نتائج امتحاناتي والتبليغات</a>
                 <a href="https://telegram.me/jawadin3" target="_blank" class="btn btn-secondary" id="btnHeroResults">نتائج الامتحانات على تلغرام</a>
             </div>
         </div>
@@ -662,7 +658,7 @@
         
         <main class="wiki-content">
             <article id="mainArticle">
-                <!-- سيتم ملء هذا المحتوى ديناميكياً -->
+                <!-- سيتم ملء هذا المحتوى ديناميكياً حسب اختيار اللغة -->
             </article>
         </main>
 
@@ -715,7 +711,6 @@
         </div>
     </footer>
 
-    <!-- ربط Firebase المحدث -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -735,10 +730,92 @@
                     <div id="notificationsBox">
                         <div class="notifications-box">جاري تحميل التبليغات من قاعدة البيانات...</div>
                     </div>
+
                     <p style="margin-top: 25px;">
-                        <strong>متوسطة الجوادين للبنين</strong> هي مدرسة متوسطة حكومية مخصصة للبنين تقع في العاصمة العراقية <strong>بغداد</strong>...
+                        <strong>متوسطة الجوادين للبنين</strong> هي مدرسة متوسطة حكومية مخصصة للبنين تقع في العاصمة العراقية <strong>بغداد</strong>، وتحديداً في منطقة <strong>الشعب</strong> التابعة لمديرية تربية الرصافة الأولى. تُصنف المدرسة كواحدة من أشهر المدارس المتوسطة وأبرزها في المنطقة؛ حيث تقدم خدماتها التعليمية والتربوية لجمهور واسع من الطلبة يتجاوز عددهم الألف طالب، وتضم تحت سقفها المراحل الدراسية الثلاث المعتمدة في النظام التعليمي العراقي للمرحلة المتوسطة وهي: الصف الأول المتوسط، والصف الثاني المتوسط، والصف الثالث المتوسط، ويشرف على تدريسهم كادر تعليمي وتدريسي متميز ومؤهل علمياً.
                     </p>
-                    <!-- (المحتوى الأصلي الخاص بك كاملاً) -->
+
+                    <h2>التأسيس والتاريخ والنمو الأكاديمي</h2>
+                    <p>
+                        يرجع تاريخ تأسيس متوسطة الجوادين للبنين إلى عام 2008م. ومنذ انطلاقتها في هذا العام، سعت المدرسة بشكل دؤوب إلى تحقيق رسالتها في رفع وتطوير المستوى العلمي والتربوي لجميع الطلاب الساكنين في منطقة الشعب والمناطق المجاورة والمحيطة بها. وبفضل هذه الجهود المستمرة، نجحت المدرسة في بناء واكتساب سمعة طيبة جداً وشهرة واسعة بين أهالي المنطقة والطلبة على حد سواء، ويعود الفضل في هذه السمعة إلى ما تمتلكه المدرسة من كادر تدريسي متميز يمتلك الرصانة العلمية والخبرة التربوية الكافية لإدارة وتوجيه الطلاب.
+                    </p>
+                    <p>
+                        خلال مسيرتها التي تمتد لأكثر من عقد ونصف، قامت المدرسة بتخريج آلاف الطلبة الذين واصلوا مسيرتهم بنجاح في الإعداديات والجامعات العراقية المرموقة. وتتميز الإدارة بحرصها على الانضباط العالي والالتزام بالزي المدرسي الموحد، وتوطيد العلاقات الاجتماعية الهادفة بين الملاك التدريسي وأولياء الأمور من خلال مجالس الآباء والمعلمين الدورية لتذليل العقبات الدراسية التي قد تواجه الطلبة في مسيرتهم الأكاديمية.
+                    </p>
+                    <p>
+                        تواصل المدرسة تحديث مخرجاتها التعليمية باستمرار من خلال التدريب والتطوير المستمر لكادرها التدريسي ودمج الأساليب الحديثة مع التعليم التقليدي، مما أثمر عن تحقيق نسب نجاح متميزة في الامتحانات الوزارية للصف الثالث المتوسط على مستوى قاطع الشعب والمديرية العامة لتربية الرصافة الأولى لسنوات متعددة.
+                    </p>
+
+                    <h2 id="system">النظام الدراسي والمرافق البناية</h2>
+                    <p>
+                        تلتزم المدرسة التزاماً كاملاً بتطبيق المناهج والقرارات الدراسية الرسمية الصادرة عن وزارة التربية العراقية. وتولي إدارة المدرسة والكادر التدريسي اهتماماً خاصاً واستثنائياً بطلبة الصف الثالث المتوسط؛ نظراً للأهمية المصيرية لهذه المرحلة الدراسية، حيث تعمل على تهيئتهم وإعدادهم بشكل كامل لخوض غمار الامتحانات الوزارية النهائية (الباكالوريا)، ويتم ذلك عبر خطة تعليمية تشمل تقديم الدعم العلمي المتواصل والمراجعات المنهجية المستمرة للمواد الدراسية.
+                    </p>
+                    <p>
+                        وتتكون البناية المدرسية لمتوسطة الجوادين للبنين من عدة مرافق أساسية تم تصميمها لخدمة العملية التعليمية وتوفير سبل الراحة للطلبة والكادر، وتشتمل هذه المرافق على:
+                    </p>
+                    <ul>
+                        <li><strong>الصفوف الدراسية:</strong> القاعات المخصصة لإعطاء الدروس والمحاضرات للطلبة في المراحل المختلفة ومجهزة بالوسائل الضرورية لتلقي العلم.</li>
+                        <li><strong>غرفة الإدارة:</strong> المقر المخصص لإدارة المدرسة ومتابعة شؤونها التنظيمية والتربوية واللوجستية بقيادة المدير المتميز السيد فيصل برغش تايه ومساعديه.</li>
+                        <li><strong>غرفة المدرسين:</strong> المكان المخصص لأعضاء الكادر التدريسي المتميز للاستراحة والتحضير العلمي والمناقشات المنهجية.</li>
+                        <li><strong>الساحات المدرسية:</strong> الفضاءات المفتوحة المخصصة لممارسة الأنشطة الرياضية المتنوعة مثل كرة القدم والكرة الطائرة، واستراحة الطلاب وتجديد نشاطهم البدني والذهني بين الحصص الدراسية.</li>
+                        <li><strong>المرشد التربوي:</strong> توفر المدرسة مكتباً خاصاً بالإرشاد التربوي والنفسي لمساعدة الطلاب على حل مشاكلهم الشخصية والأكاديمية، وتهيئة بيئة صحية تحفزهم على التفوق الدراسي وصقل شخصياتهم القيادية والاجتماعية.</li>
+                    </ul>
+
+                    <h2 id="digital">الأنشطة والتواصل الرقمي والالكتروني</h2>
+                    <p>
+                        التركيز الأساسي للإدارة يعتمد على دمج التكنولوجيا والأنشطة الرقمية التفاعلية لتعزيز أواصر العلاقة بين الطالب والمدرسة، حيث تحرص بشكل كبير على تفعيل قنوات التواصل المباشر بين الطلاب والإدارة عبر الوسائل التالية:
+                    </p>
+                    <ul>
+                        <li><strong>روابط الاستبيان الإلكترونية:</strong> وهي أدوات رقمية تتيح للطلاب إمكانية تسجيل الشكاوى التي تواجههم، أو مشاركة آرائهم الشخصية ومقترحاتهم البناءة مع الإدارة مباشرة، مما أسهم بشكل واضح في تعزيز مستويات الثقة المتبادلة بين الطلاب ومدرستهم وعمل على تطوير البيئة التعليمية داخل المدرسة بشكل مستمر.</li>
+                        <li><strong>المنصات الرسمية على مواقع التواصل الاجتماعي:</strong> تمتلك المدرسة منصات إلكترونية رسمية نشطة، وتبرز من بينها القناة الرسمية للمدرسة على تطبيق تلغرام، والتي تُستخدم كأداة إعلامية أساسية للتواصل مع الطلاب وأولياء الأمور أولاً بأول ونشر كل ما يتعلق بـالتبليغات والتعليمات الرسمية، الجداول الدراسية الأسبوعية وجداول الامتحانات، والنتائج بمجرد صدورها لضمان وصولها السريع للجميع.</li>
+                    </ul>
+
+                    <h2 id="vision">رؤية مدرسة الجوادين والأهداف الاستراتيجية</h2>
+                    <p id="visionDesc">
+                        ترتكز الرؤية التعليمية والتربوية لمتوسطة الجوادين للبنين على تحقيق عدة أهداف متكاملة مستخلصة من مسيرتها التعليمية، وتتلخص في:
+                    </p>
+                    
+                    <div class="vision-grid">
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">١</span>
+                                <span class="vision-card-title">التميز العلمي</span>
+                            </div>
+                            <p class="vision-card-text">السعي الدائم والمستمر لرفع وتطوير المستوى العلمي والتربوي للطلاب في منطقة الشعب والمناطق المجاورة لها.</p>
+                        </div>
+
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">٢</span>
+                                <span class="vision-card-title">التواصل الرقمي</span>
+                            </div>
+                            <p class="vision-card-text">تعزيز وبناء ثقة متبادلة وقوية بين الطلاب وإدارة المدرسة عبر قنوات التواصل الرقمية والاستبيانات الإلكترونية الفورية والمستمرة.</p>
+                        </div>
+
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">٣</span>
+                                <span class="vision-card-title">البيئة التعليمية</span>
+                            </div>
+                            <p class="vision-card-text">التطوير الشامل والمستمر للبيئة التعليمية والصفوف الدراسية والمرافق اللوجستية لتكون دائماً محفزة على التفوق والإبداع.</p>
+                        </div>
+
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">٤</span>
+                                <span class="vision-card-title">دعم الثالث المتوسط</span>
+                            </div>
+                            <p class="vision-card-text">الاهتمام الفائق بطلبة الصف الثالث المتوسط وتقديم كافة أشكال الدعم العلمي، المحاضرات الإضافية والمراجعات المكثفة لضمان حصولهم على أعلى المعدلات والتميز في امتحانات البكالوريا الوزارية.</p>
+                        </div>
+
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">٥</span>
+                                <span class="vision-card-title">مواكبة التطور</span>
+                            </div>
+                            <p class="vision-card-text">الاستمرار في مواكبة أحدث الأساليب والوسائل الإلكترونية المتاحة في التعليم الإلكتروني، ونشر كافة الجداول والتبليغات ونتائج الامتحانات عبر منصات التواصل الرسمية لضمان أقصى درجات الشفافية والتواصل السريع والفعال.</p>
+                        </div>
+                    </div>
                 `
             },
             en: {
@@ -747,7 +824,87 @@
                     <div id="notificationsBox">
                         <div class="notifications-box">Loading announcements from the database...</div>
                     </div>
-                    <!-- (المحتوى الأصلي المترجم) -->
+
+                    <p style="margin-top: 25px;">
+                        <strong>Al-Jawadin Intermediate School for Boys</strong> is a public intermediate school for boys located in the Iraqi capital, <strong>Baghdad</strong>, specifically in the <strong>Al-Shaab</strong> district under the Directorate of Education of Rusafa First. The school is classified as one of the most famous and prominent intermediate schools in the region, providing educational services to a large student body exceeding 1,000 students, encompassing the three intermediate grade levels: First, Second, and Third Intermediate, supervised by a distinguished and academically qualified teaching staff.
+                    </p>
+
+                    <h2>Establishment, History, and Academic Growth</h2>
+                    <p>
+                        The establishment of Al-Jawadin Intermediate School for Boys dates back to 2008. Since its inception, the school has worked diligently to achieve its mission of elevating the academic and educational standards for all students residing in Al-Shaab and surrounding areas. Thanks to these continuous efforts, the school has built an outstanding reputation among the community and students alike, largely due to its dedicated teaching staff which possesses both academic rigor and extensive educational experience.
+                    </p>
+                    <p>
+                        Over its fifteen-year journey, the school has graduated thousands of students who successfully continued their paths in prestigious Iraqi high schools and universities. The administration is well-regarded for its high discipline, commitment to the school uniform, and strengthening social ties between the staff and parents through regular Parent-Teacher Association (PTA) meetings to resolve any academic challenges students might face.
+                    </p>
+                    <p>
+                        The school continuously updates its educational methods by developing its teaching staff and integrating modern technology with traditional learning, which has resulted in outstanding success rates in the national ministerial examinations (Baccalaureate) for the Third Intermediate grade across the Al-Shaab district for several consecutive years.
+                    </p>
+
+                    <h2 id="system">Educational System and Campus Facilities</h2>
+                    <p>
+                        The school is fully committed to implementing the official curricula and academic regulations issued by the Iraqi Ministry of Education. The administration and teaching staff pay exceptional attention to Third Intermediate students due to the critical nature of this academic stage, working to prepare them fully for the final national exams (Baccalaureate) through structured reviews and constant academic support.
+                    </p>
+                    <p>
+                        The school building comprises several essential facilities designed to support the educational process and ensure comfort, including:
+                    </p>
+                    <ul>
+                        <li><strong>Classrooms:</strong> Rooms dedicated to lectures, equipped with necessary tools for interactive learning.</li>
+                        <li><strong>Administration Office:</strong> The executive headquarters of the school, managed by Principal Faisal Barghash Tayeh and his assistants.</li>
+                        <li><strong>Teachers' Lounge:</strong> A space for teachers to prepare lessons, rest, and engage in academic discussions.</li>
+                        <li><strong>School Yards:</strong> Open areas for sports activities like football and volleyball, allowing students to refresh their energy during breaks.</li>
+                        <li><strong>Social Counselor:</strong> Dedicated counseling office to assist students with personal and academic challenges, fostering a healthy social and educational environment.</li>
+                    </ul>
+
+                    <h2 id="digital">Activities and Digital Communication</h2>
+                    <p>
+                        The administration prioritizes integrating technology to strengthen relationships between students and the school, focusing on active direct communication channels through:
+                    </p>
+                    <ul>
+                        <li><strong>Online Survey Links:</strong> Digital tools allowing students to voice concerns or share suggestions directly with administration, enhancing trust and continuously improving the school environment.</li>
+                        <li><strong>Official Social Media Platforms:</strong> The school runs active official accounts, most notably on Telegram, to update students and parents instantly with administrative news, weekly schedules, exam timetables, and results.</li>
+                    </ul>
+
+                    <h2 id="vision">School Vision and Strategic Goals</h2>
+                    <p id="visionDesc">
+                        The educational vision of Al-Jawadin Intermediate School for Boys focuses on achieving integrated goals derived from its academic journey:
+                    </p>
+                    <div class="vision-grid">
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">1</span>
+                                <span class="vision-card-title">Academic Excellence</span>
+                            </div>
+                            <p class="vision-card-text">Continuous commitment to raising academic standards for students in Al-Shaab and surrounding areas.</p>
+                        </div>
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">2</span>
+                                <span class="vision-card-title">Digital Connection</span>
+                            </div>
+                            <p class="vision-card-text">Building mutual trust between students and administration through modern digital surveys and active updates.</p>
+                        </div>
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">3</span>
+                                <span class="vision-card-title">Optimal Environment</span>
+                            </div>
+                            <p class="vision-card-text">Upgrading classrooms and facilities regularly to inspire creativity and high-level academic performance.</p>
+                        </div>
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">4</span>
+                                <span class="vision-card-title">Support for 3rd Grade</span>
+                            </div>
+                            <p class="vision-card-text">Providing intensive revision courses, extra lectures, and psychological preparation to ensure top baccalaureate scores.</p>
+                        </div>
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">5</span>
+                                <span class="vision-card-title">Embracing Innovation</span>
+                            </div>
+                            <p class="vision-card-text">Adopting the latest educational tools and maintaining high transparency through official communication channels.</p>
+                        </div>
+                    </div>
                 `
             }
         };
@@ -821,7 +978,11 @@
             currentLang = lang;
             document.documentElement.lang = lang;
             document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            // تطبيق المقال
             document.getElementById('mainArticle').innerHTML = translations[lang].article;
+
+            // تطبيق الواجهات الثابتة
             const st = staticTranslations[lang];
             document.title = st.title;
             document.querySelector('.logo').innerHTML = st.logo;
@@ -831,10 +992,12 @@
             document.getElementById('linkNotifications').innerText = st.notifications;
             document.getElementById('linkVision').innerText = st.vision;
             document.getElementById('btnTelegram').innerText = st.tgBtn;
+
             document.getElementById('heroTitle').innerText = st.heroTitle;
             document.getElementById('heroDesc').innerText = st.heroDesc;
             document.getElementById('btnHeroSystem').innerText = st.heroSys;
             document.getElementById('btnHeroResults').innerText = st.heroRes;
+
             document.getElementById('sideCardTitle').innerText = st.sideTitle;
             document.getElementById('thEst').innerText = st.thEst;
             document.getElementById('tdEst').innerText = st.tdEst;
@@ -846,12 +1009,16 @@
             document.getElementById('tdCountry').innerText = st.tdCountry;
             document.getElementById('thCoord').innerText = st.thCoord;
             document.getElementById('thWeb').innerText = st.thWeb;
+
             document.getElementById('linkTg1').innerText = st.tg1;
             document.getElementById('linkTg2').innerText = st.tg2;
             document.getElementById('linkTg3').innerText = st.tg3;
             document.getElementById('linkTgStudent').innerText = st.tgStudent;
+
             document.getElementById('footerText').innerText = st.footerText;
             document.getElementById('footerCredits').innerHTML = st.footerCredits;
+
+            // إعادة جلب التبليغات بعد تحديث محتوى الـ HTML الديناميكي
             fetchNotificationsFromFirebase();
         }
 
@@ -860,19 +1027,29 @@
             applyTranslations(lang);
         }
 
+        // جلب البيانات ومعالجتها من قاعدة البيانات
         function fetchNotificationsFromFirebase() {
             const notificationsRef = database.ref('notifications');
             notificationsRef.on('value', (snapshot) => {
                 const data = snapshot.val();
                 const container = document.getElementById('notificationsBox');
                 if (!container) return;
+
                 if (data) {
+                    // تحويل الكائن إلى مصفوفة وفرزها زمنياً (من الأحدث للأقدم)
                     const list = [];
-                    for (let id in data) { list.push({ id, ...data[id] }); }
+                    for (let id in data) {
+                        list.push({ id, ...data[id] });
+                    }
                     list.sort((a, b) => new Date(b.date) - new Date(a.date));
+
                     let htmlContent = '';
                     list.forEach(item => {
-                        let mediaHtml = item.image ? `<img src="${item.image}" alt="مرفق التبليغ" class="notification-img" />` : '';
+                        let mediaHtml = '';
+                        if (item.image) {
+                            mediaHtml = `<img src="${item.image}" alt="مرفق التبليغ" class="notification-img" />`;
+                        }
+
                         htmlContent += `
                             <div class="notification-item">
                                 <span class="notification-date">📅 ${item.date}</span>
@@ -883,16 +1060,24 @@
                     });
                     container.innerHTML = htmlContent;
                 } else {
-                    container.innerHTML = `<div class="notifications-box">${currentLang === 'ar' ? 'لا توجد تبليغات حالياً.' : 'No announcements available.'}</div>`;
+                    container.innerHTML = `<div class="notifications-box">${currentLang === 'ar' ? 'لا توجد تبليغات حالياً.' : 'No announcements available at the moment.'}</div>`;
                 }
             });
         }
 
+        // تفعيل قائمة الهاتف المحمول الجانبية
         const menuBtn = document.getElementById('menuBtn');
         const navMenu = document.getElementById('navMenu');
-        menuBtn.addEventListener('click', () => { navMenu.classList.toggle('active'); });
+
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // إغلاق القائمة بمجرد الضغط على الروابط
         document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', () => { navMenu.classList.remove('active'); });
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
         });
     </script>
 </body>
