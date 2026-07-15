@@ -110,7 +110,7 @@
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
-        /* نافذة تسجيل الدخول المنبثقة الرهيبة */
+        /* نافذة تسجيل الدخول والإنشاء */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -978,15 +978,19 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <script>
-        // إعدادات الـ Firebase
+        // إعدادات الـ Firebase المحدثة لضمان الاتصال الصحيح والكامل بقاعدة البيانات
         const firebaseConfig = {
-            databaseURL: "https://jawadin-school1-default-rtdb.firebaseio.com"
+            apiKey: "AIzaSyDummyKeyForInitializationOnly", // مفتاح وهمي إلزامي لتشغيل الـ SDK بشكل سليم
+            authDomain: "jawadin-school1.firebaseapp.com",
+            databaseURL: "https://jawadin-school1-default-rtdb.firebaseio.com",
+            projectId: "jawadin-school1"
         };
+        
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
         let currentLang = 'ar';
-        let temporaryUserCode = ''; // لحفظ الكود المولد مؤقتاً
+        let temporaryUserCode = ''; 
 
         const translations = {
             ar: {
@@ -1093,41 +1097,27 @@
                     <p style="margin-top: 25px;">
                         <strong>Al-Jawadin Intermediate School for Boys</strong> is a public intermediate school for boys located in the Iraqi capital, <strong>Baghdad</strong>, specifically in the <strong>Al-Shaab</strong> district under the Directorate of Education of Rusafa First. The school is classified as one of the most famous and prominent intermediate schools in the region, providing educational services to a large student body exceeding 1,000 students, encompassing the three intermediate grade levels: First, Second, and Third Intermediate, supervised by a distinguished and academically qualified teaching staff.
                     </p>
-
-                    <h2>Establishment, History, and Academic Growth</h2>
-                    <p>
-                        The establishment of Al-Jawadin Intermediate School for Boys dates back to 2008. Since its inception, the school has worked diligently to achieve its mission of elevating the academic and educational standards for all students residing in Al-Shaab and surrounding areas. Thanks to these continuous efforts, the school has built an outstanding reputation among the community and students alike, largely due to its dedicated teaching staff which possesses both academic rigor and extensive educational experience.
-                    </p>
-                    <p>
-                        Over its fifteen-year journey, the school has graduated thousands of students who successfully continued their paths in prestigious Iraqi high schools and universities. The administration is well-regarded for its high discipline, commitment to the school uniform, and strengthening social ties between the staff and parents through regular Parent-Teacher Association (PTA) meetings to resolve academic obstacles.
-                    </p>
-                    <p>
-                        The school continuously updates its educational outcomes through continuous training and development of its teaching staff and integrating modern methods with traditional education, resulting in outstanding success rates in the ministerial exams for the Third Intermediate on Al-Shaab sector and the General Directorate of Education of Rusafa First for multiple years.
-                    </p>
                 `
             }
         };
 
-        // دالة اختيار اللغة وإخفاء شاشة الترحيب
         function selectLanguage(lang) {
             currentLang = lang;
             document.getElementById('mainArticle').innerHTML = translations[lang].article;
             document.getElementById('langOverlay').classList.add('hidden');
             fetchNotifications();
-            checkLocalUser(); // التحقق إذا كان الطالب مسجلاً مسبقاً
+            checkLocalUser(); 
         }
 
-        // التحكم بالنوافذ المنبثقة للتحقق من الهوية
         function openAuthModal() {
             document.getElementById('authModal').classList.add('active');
-            switchAuthMode('register'); // الوضع الافتراضي عند الفتح
+            switchAuthMode('register'); 
         }
 
         function closeAuthModal() {
             document.getElementById('authModal').classList.remove('active');
         }
 
-        // التبديل بين واجهة إنشاء الحساب وتسجيل الدخول
         function switchAuthMode(mode) {
             if (mode === 'register') {
                 document.getElementById('registerFormSection').style.display = 'block';
@@ -1140,13 +1130,12 @@
             }
         }
 
-        // تحديث الشعب الدراسية تلقائياً حسب الصف المحدد
         function updateDivisionOptions() {
             const grade = document.getElementById('studentGrade').value;
             const divisionGroup = document.getElementById('divisionGroup');
             const studentDivision = document.getElementById('studentDivision');
 
-            studentDivision.innerHTML = ''; // تصفير الشعب السابقة
+            studentDivision.innerHTML = ''; 
 
             let divisions = [];
             if (grade === 'first') {
@@ -1160,7 +1149,6 @@
             if (divisions.length > 0) {
                 divisionGroup.style.display = 'block';
                 
-                // إضافة خيار افتراضي
                 const defaultOption = document.createElement('option');
                 defaultOption.value = '';
                 defaultOption.disabled = true;
@@ -1179,7 +1167,6 @@
             }
         }
 
-        // تحويل الصورة المرفوعة لقاعدة بيانات Firebase
         function getBase64(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -1189,13 +1176,12 @@
             });
         }
 
-        // توليد رمز سري سهل للطالب (مثل JW1849)
         function generateEasyPassword() {
-            const randomNumber = Math.floor(1000 + Math.random() * 9000); // 4 أرقام عشوائية
+            const randomNumber = Math.floor(1000 + Math.random() * 9000); 
             return `JW${randomNumber}`;
         }
 
-        // معالجة "إنشاء حساب" جديد
+        // معالجة إنشاء الحساب مع منع تكرار التسجيل لنفس الاسم وحفظها بنجاح بقاعدة البيانات
         async function handleRegisterSubmit(event) {
             event.preventDefault();
 
@@ -1208,22 +1194,30 @@
             const photoFile = document.getElementById('studentPhoto').files[0];
 
             if (!name || !grade || !division || !mother || !phone || !nationalId || !photoFile) {
-                alert("يرجى إكمال وتدقيق جميع الخيارات المطلوبة!");
+                alert("يرجى ملء جميع الحقول المطلوبة!");
                 return;
             }
 
+            const safeKey = name.replace(/\s+/g, '_');
+
             try {
-                // تحويل الصورة لنص Base64 للحفظ السريع
+                // الفحص الأول: هل الطالب مسجل مسبقاً بنفس الاسم الرباعي؟
+                const checkSnapshot = await database.ref('students/' + safeKey).once('value');
+                if (checkSnapshot.exists()) {
+                    alert("⚠️ عذراً! هذا الاسم الرباعي مسجل لدينا بالفعل.\nإذا كنت أنت نفس الطالب، يرجى تسجيل الدخول باستخدام رمزك السري مباشرة.");
+                    switchAuthMode('login');
+                    document.getElementById('loginName').value = name; // تعبئة الاسم له ليسهل عليه
+                    return;
+                }
+
+                // تحويل الصورة وترميزها
                 const photoBase64 = await getBase64(photoFile);
 
-                // توليد الرمز السري الجديد والسهل
+                // توليد الرمز السري الجديد
                 const generatedCode = generateEasyPassword();
                 temporaryUserCode = generatedCode;
 
-                // تحويل الاسم الرباعي إلى معرف مفتاحي آمن في الفايربيس (بدون مسافات ورموز خاصة)
-                const safeKey = name.replace(/\s+/g, '_');
-
-                // حفظ البيانات في Firebase Realtime Database
+                // إرسال وحفظ البيانات في الـ Firebase
                 await database.ref('students/' + safeKey).set({
                     fullName: name,
                     grade: grade,
@@ -1236,22 +1230,22 @@
                     registeredAt: new Date().toISOString()
                 });
 
-                // حفظ معلومات الدخول محلياً في المتصفح لتذكر الطالب
+                // تأكيد الحفظ محلياً
                 localStorage.setItem('studentName', name);
                 localStorage.setItem('studentKey', generatedCode);
 
-                // إظهار واجهة نجاح التسجيل وعرض الرمز السري
+                // الانتقال لواجهة إظهار الرمز
                 document.getElementById('registerFormSection').style.display = 'none';
                 document.getElementById('successDisplaySection').style.display = 'block';
                 document.getElementById('generatedCodeBox').textContent = generatedCode;
 
             } catch (error) {
-                console.error("خطأ أثناء معالجة التسجيل: ", error);
-                alert("حدث خطأ في الاتصال بقاعدة البيانات، يرجى المحاولة لاحقاً.");
+                console.error("خطأ أثناء تسجيل البيانات: ", error);
+                alert("❌ فشل الاتصال بقاعدة البيانات! يرجى التحقق من اتصال الإنترنت وحالة خادم Firebase.");
             }
         }
 
-        // معالجة "تسجيل الدخول" بالرمز والاسم
+        // تسجيل الدخول بالاسم الرباعي والرمز
         function handleLoginSubmit(event) {
             event.preventDefault();
 
@@ -1259,31 +1253,29 @@
             const inputKey = document.getElementById('loginPassword').value.trim();
 
             if (!inputName || !inputKey) {
-                alert("يرجى كتابة الاسم والرمز السري الخاص بك!");
+                alert("يرجى إدخال اسمك الرباعي ورمزك السري!");
                 return;
             }
 
             const safeKey = inputName.replace(/\s+/g, '_');
 
-            // جلب بيانات الطالب للتحقق من تطابق الرمز
             database.ref('students/' + safeKey).once('value').then((snapshot) => {
                 const data = snapshot.val();
-                if (data && data.accessKey === inputKey) {
+                if (snapshot.exists() && data.accessKey === inputKey) {
                     localStorage.setItem('studentName', data.fullName);
                     localStorage.setItem('studentKey', data.accessKey);
                     updateHeaderWithUser(data.fullName);
-                    alert(`مرحباً بك مجدداً يا ${data.fullName}! تم تسجيل دخولك بنجاح.`);
+                    alert(`✅ أهلاً بك مجدداً يا ${data.fullName}! تم تسجيل دخولك بنجاح.`);
                     closeAuthModal();
                 } else {
-                    alert("عذراً، لم نجد حساباً متطابقاً بهذا الاسم والرمز السري. تأكد من دقة المعلومات المدخلة.");
+                    alert("❌ خطأ! الرمز السري أو الاسم الرباعي غير متطابقين. تأكد من إدخال البيانات بالشكل الذي سجلت به.");
                 }
             }).catch((error) => {
-                console.error("خطأ في جلب البيانات: ", error);
-                alert("حدث خطأ أثناء فحص البيانات.");
+                console.error("حدث خطأ أثناء فحص الحساب: ", error);
+                alert("⚠️ حدث خطأ فني أثناء الاتصال والتحقق من حسابك.");
             });
         }
 
-        // إنهاء التسجيل والدخول الفعلي للموقع
         function finishRegistration() {
             const savedName = localStorage.getItem('studentName');
             if (savedName) {
@@ -1292,7 +1284,6 @@
             closeAuthModal();
         }
 
-        // فحص وجود حساب مسجل محلياً عند تشغيل الصفحة
         function checkLocalUser() {
             const savedName = localStorage.getItem('studentName');
             if (savedName) {
@@ -1300,7 +1291,6 @@
             }
         }
 
-        // تحديث الهيدر وتصميم الزر بناءً على هوية الطالب
         function updateHeaderWithUser(name) {
             const btnHeader = document.getElementById('btnAuthHeader');
             const btnHero = document.getElementById('btnHeroResults');
@@ -1318,7 +1308,6 @@
             }
         }
 
-        // جلب الإشعارات من Firebase
         function fetchNotifications() {
             const notificationsBox = document.getElementById('notificationsBox');
             database.ref('notifications').once('value', (snapshot) => {
@@ -1354,7 +1343,6 @@
             });
         }
 
-        // إظهار وإخفاء القائمة للهواتف
         const menuBtn = document.getElementById('menuBtn');
         const navMenu = document.getElementById('navMenu');
         
