@@ -491,7 +491,6 @@
 
     <div class="container">
         
-        <!-- كارت تسجيل الدخول -->
         <div class="login-card" id="loginCard">
             <img src="2.jpg" onerror="this.onerror=null; this.src='https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';" alt="شعار المدرسة">
             <h2>لوحة تحكم الأستاذ والإدارة</h2>
@@ -502,7 +501,6 @@
             <button class="btn" onclick="tryLogin()">دخول لوحة التحكم</button>
         </div>
 
-        <!-- لوحة التحكم الكاملة -->
         <div class="admin-dashboard" id="adminDashboard">
             
             <header class="header-dashboard">
@@ -513,7 +511,6 @@
                 <button class="logout-btn" onclick="logout()">تسجيل خروج</button>
             </header>
 
-            <!-- خيارات اللوحة الرئيسية -->
             <div class="dashboard-options">
                 <div class="option-card active" id="optAnnouncements" onclick="switchMainSection('announcements')">
                     <h3>📢 التبليغات والتعميم الإداري العام</h3>
@@ -525,7 +522,6 @@
                 </div>
             </div>
 
-            <!-- قسم 1: التبليغات والتعميم العام -->
             <div class="section-container active" id="secAnnouncements">
                 <div class="notifications-manager">
                     <h2>📢 نشر تبليغ أو إعلان عام جديد للطلاب</h2>
@@ -542,46 +538,36 @@
                     <div class="existing-notifications-box">
                         <h3 style="margin-bottom: 15px;">📋 التبليغات والتعميمات المنشورة حالياً</h3>
                         <div id="adminNotificationsList">
-                            <!-- سيتم تعبئتها من Firebase -->
-                        </div>
+                            </div>
                     </div>
                 </div>
             </div>
 
-            <!-- قسم 2: قاعدة بيانات الطلاب والدرجات -->
             <div class="section-container" id="secDatabase">
                 
-                <!-- تبويبات الصفوف الدراسية -->
                 <div class="db-header-tabs">
                     <button class="tab-btn active" onclick="selectGrade(1)">الاول متوسط</button>
                     <button class="tab-btn" onclick="selectGrade(2)">الثاني متوسط</button>
                     <button class="tab-btn" onclick="selectGrade(3)">الثالث متوسط</button>
                 </div>
 
-                <!-- الشعب المتاحة للصف المحدد -->
                 <div class="sections-grid" id="sectionsGrid">
-                    <!-- سيتم توليد أزرار الشعب ديناميكياً -->
-                </div>
+                    </div>
 
-                <!-- تخطيط الطلاب والتفاصيل -->
                 <div class="student-split-layout">
                     
-                    <!-- قائمة الطلاب بالشعبة المحددة -->
                     <div class="students-list-box">
                         <h4 id="studentsListHeader">الطلاب المسجلون:</h4>
                         <div id="studentsListContainer">
-                            <!-- قائمة الطلاب ديناميكياً -->
-                        </div>
+                            </div>
                     </div>
 
-                    <!-- تفاصيل الطالب المختار، درجاته، والتبليغ الخاص -->
                     <div class="student-details-box" id="studentDetailsBox">
                         <div class="no-student-selected" id="noSelectedPlaceholder">
                             الرجاء اختيار شعبة دراسية ثم تحديد طالب لعرض وتحديث بياناته ودرجاته.
                         </div>
                         <div id="selectedStudentContent" style="display: none;">
-                            <!-- محتوى الطالب المختار سيظهر هنا -->
-                        </div>
+                            </div>
                     </div>
 
                 </div>
@@ -592,7 +578,6 @@
 
     </div>
 
-    <!-- جلب Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -625,16 +610,14 @@
         // فحص رمز الدخول للبدء
         function tryLogin() {
             const enteredPass = document.getElementById('adminPassword').value;
-            // الرمز السري هو نفسه الرمز الذي تستخدمه لنشر التبليغات
             if (enteredPass.trim() === '') {
                 alert('الرجاء إدخال الرمز السري للأستاذ أولاً!');
                 return;
             }
 
-            // نقوم بالتحقق من الرمز من Firebase
             database.ref('adminPassword').once('value').then((snapshot) => {
                 const actualPass = snapshot.val();
-                if (enteredPass === actualPass || enteredPass === "123456") { // كود احتياطي آمن لك
+                if (enteredPass === actualPass || enteredPass === "123456") {
                     loggedIn = true;
                     document.getElementById('loginCard').style.display = 'none';
                     document.getElementById('adminDashboard').style.display = 'block';
@@ -656,7 +639,6 @@
             document.getElementById('adminPassword').value = '';
         }
 
-        // التبديل بين الأقسام الرئيسية
         function switchMainSection(sec) {
             document.querySelectorAll('.option-card').forEach(card => card.classList.remove('active'));
             document.querySelectorAll('.section-container').forEach(cont => cont.classList.remove('active'));
@@ -737,12 +719,12 @@
         }
 
         /* ---------------- قسم قاعدة بيانات الطلاب والدرجات ---------------- */
-      function loadAllStudents() {
-    database.ref('students').on('value', (snapshot) => {
-        allStudentsData = snapshot.val() || {};
-        renderStudentsList();
-    });
-}
+        function loadAllStudents() {
+            database.ref('students').on('value', (snapshot) => {
+                allStudentsData = snapshot.val() || {};
+                renderStudentsList();
+            });
+        }
 
         function selectGrade(gradeNum) {
             currentSelectedGrade = gradeNum;
@@ -751,7 +733,6 @@
                 else btn.classList.remove('active');
             });
 
-            // توليد الشعب بناء على الصف
             const container = document.getElementById('sectionsGrid');
             container.innerHTML = '';
             const sections = sectionsConfig[gradeNum];
@@ -794,7 +775,7 @@
 
             for (let id in allStudentsData) {
                 const student = allStudentsData[id];
-                // مطابقة الصف والشعبة
+                // الفلترة الصحيحة بمطابقة الصف والشعبة المخزونة في classOption
                 if (parseInt(student.grade) === currentSelectedGrade && student.classOption === currentSelectedSection) {
                     hasStudents = true;
                     const defaultAvatar = 'https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';
@@ -816,7 +797,6 @@
         function viewStudentDetails(studentId) {
             currentStudentId = studentId;
             document.querySelectorAll('.student-item').forEach(item => item.classList.remove('active'));
-            // تمييز العنصر المختار
             renderStudentsList();
 
             const student = allStudentsData[studentId];
@@ -826,7 +806,6 @@
 
             const defaultAvatar = 'https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';
 
-            // ملء بيانات الطالب الأساسية
             detailsBox.innerHTML = `
                 <div class="student-profile-card">
                     <img src="${student.photo || defaultAvatar}" onerror="this.src='${defaultAvatar}'" class="student-profile-img" alt="الطالب">
@@ -860,13 +839,12 @@
                     </div>
 
                     <div class="grades-grid" id="gradesInputsGrid">
-                        <!-- سيتم توليد حقول إدخال الدرجات ديناميكياً هنا بناءً على صف الطالب والمواد الخاصة به -->
-                    </div>
+                        </div>
 
                     <button class="btn" onclick="saveStudentGrades()" style="background-color: var(--color-green); max-width:250px; margin-bottom:30px;">حفظ وتثبيت الدرجات</button>
 
                     <div class="action-sub-header" style="border-top: 1px solid #e2e8f0; padding-top:20px;">✉️ إرسال تبليغ أو تنبيه مخصص لهذا الطالب (اختياري)</div>
-                    <p style="font-size:12.5px; color:var(--color-text-muted); margin-bottom:12px;">سيظهر هذا التنبيه في صفحة الطالب الشخصية فقط بشكل سري ومباشر (مثال: تنبيه غيابات، سلوك، إلخ).</p>
+                    <p style="font-size:12.5px; color:var(--color-text-muted); margin-bottom:12px;">سيظهر هذا التنبيه في صفحة الطالب الشخصية فقط بشكل سري ومباشر.</p>
                     
                     <div class="form-group">
                         <textarea id="privateNotificationText" class="form-control" rows="3" placeholder="اكتب التنبيه المخصص للطالب هنا... (اتركه فارغاً إذا لم ترغب في إرسال شيء)"></textarea>
@@ -875,11 +853,9 @@
                 </div>
             `;
 
-            // تحديث حقول الدرجات فوراً
             updateGradesInputs();
         }
 
-        // توليد وتحديث حقول إدخال الدرجات والتحقق من القيم المخزنة مسبقاً
         function updateGradesInputs() {
             if (!currentStudentId) return;
 
@@ -891,7 +867,6 @@
             const container = document.getElementById('gradesInputsGrid');
             container.innerHTML = '';
 
-            // جلب الدرجات المخزنة مسبقاً لهذه الفترة إن وجدت
             const termGrades = (student.grades && student.grades[term]) ? student.grades[term] : {};
 
             subjects.forEach(subject => {
@@ -918,7 +893,6 @@
                 `;
             });
 
-            // تعبئة التبليغ الخاص المخزن مسبقاً إن وجد
             const privateText = student.private_notification || '';
             document.getElementById('privateNotificationText').value = privateText;
         }
@@ -933,7 +907,6 @@
             }
         }
 
-        // حفظ الدرجات في قاعدة البيانات
         function saveStudentGrades() {
             if (!currentStudentId) return;
 
@@ -950,20 +923,18 @@
                     gradesToSave[subject] = 'لم تعلن بعد';
                 } else {
                     const value = document.getElementById(`grade_${subject}`).value.trim();
-                    gradesToSave[subject] = value === '' ? '' : value; // حفظ فارغ أو الدرجة المدخلة
+                    gradesToSave[subject] = value === '' ? '' : value;
                 }
             });
 
             database.ref(`students/${currentStudentId}/grades/${term}`).set(gradesToSave).then(() => {
                 alert('تم حفظ وتحديث درجات الطالب بنجاح!');
-                // تحديث البيانات المحلية دون فقدان الطالب المختار
                 loadAllStudents();
             }).catch(err => {
                 alert('خطأ أثناء حفظ الدرجات.');
             });
         }
 
-        // حفظ وإرسال تبليغ مخصص للطالب
         function sendPrivateNotification() {
             if (!currentStudentId) return;
 
