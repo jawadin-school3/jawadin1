@@ -636,7 +636,12 @@
     const password = document.getElementById('adminPassword').value;
     // تأكد من تغيير كلمة السر هذه بكلمة السر الخاصة بك
     if (password === "123456") { 
-        document.getElementById('loginModal').style.display = 'none';
+       const modal = document.getElementById('loginModal');
+if (modal) {
+    modal.style.display = 'none';
+} else {
+    console.warn("عنصر loginModal غير موجود في هذه الصفحة!");
+}
         document.getElementById('adminDashboard').style.display = 'block';
         loadAllStudents(); // استدعاء دالة عرض الطلاب
     } else {
