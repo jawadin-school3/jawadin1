@@ -1383,6 +1383,14 @@
                 
                 let gradeText = student.grade === '1' ? 'الأول متوسط' : student.grade === '2' ? 'الثاني متوسط' : 'الثالث متوسط';
                 
+                // تحديد قائمة المواد الثابتة بناءً على مرحلة الطالب المسجلة لمنع اختفائها أبداً
+                let currentSubjects = [];
+                if (student.grade === '1' || student.grade === '2') {
+                    currentSubjects = ['عربي', 'اسلاميه', 'انكليزي', 'رياضيات', 'اجتماعيات', 'احياء', 'كيمياء', 'فيزياء', 'اخلاقية', 'فنية'];
+                } else if (student.grade === '3') {
+                    currentSubjects = ['عربي', 'اسلامية', 'ادب', 'اجتماعيات', 'رياضيات', 'انكليزي', 'احياء', 'فيزياء', 'كيمياء'];
+                }
+
                 // بناء التنبيه المخصص السريع (إن وجد في الأعلى)
                 let alertPvtHtml = '';
                 if(student.private_notifications && student.private_notifications.trim() !== "") {
@@ -1397,15 +1405,35 @@
                 const formatPeriod = (pKey, title) => {
                     let tableRows = '';
                     const pData = student.grades ? student.grades[pKey] : null;
-                    if(pData) {
-                        for(let sub in pData) {
-                            let score = pData[sub];
-                            let scoreStyle = score === "لم تعلن بعد" ? "color: #94a3b8; font-style: italic;" : "font-weight: bold; color: var(--color-blue);";
-                            tableRows += `<tr><td><strong>${sub}</strong></td><td style="${scoreStyle}">${score}</td></tr>`;
-                        }
-                    }
-                    if(!tableRows) return ''; // إذا لم تكن هناك درجات للجدول (كأن يكون تم استثناء الأدب بالكامل منه ولم يبق شيء)
                     
+                    currentSubjects.forEach(sub => {
+                        // شرط استثناء مادة الأدب للثالث متوسط في نصف السنة ونهاية السنة
+                        if (student.grade === '3' && sub === 'ادب' && (pKey === 'نصف_السنة' || pKey === 'n_year')) {
+                            return; // لا تبني سطراً للأدب هنا
+                        }
+
+                        // البحث عن الدرجة داخل كائن الفترة، وإذا لم تكن موجودة، نكتب "لم تعلن بعد"
+                        let score = "لم تعلن بعد";
+                        if (pData) {
+                            // فحص وجود المادة بكلا الطريقتين (التاء المربوطة والهاء/الياء المهملة) لضمان القراءة السليمة
+                            if (pData[sub] !== undefined) {
+                                score = pData[sub];
+                            } else if (sub === 'اسلاميه' && pData['اسلامية'] !== undefined) {
+                                score = pData['اسلامية'];
+                            } else if (sub === 'اسلامية' && pData['اسلاميه'] !== undefined) {
+                                score = pData['اسلاميه'];
+                            }
+                        }
+                        
+                        // تعويض الحقول الفارغة بنص ترحيبي
+                        if (score === null || score === undefined || score.toString().trim() === "") {
+                            score = "لم تعلن بعد";
+                        }
+
+                        let scoreStyle = score === "لم تعلن بعد" ? "color: #94a3b8; font-style: italic;" : "font-weight: bold; color: var(--color-blue);";
+                        tableRows += `<tr><td><strong>${sub}</strong></td><td style="${scoreStyle}">${score}</td></tr>`;
+                    });
+
                     return `
                         <div style="flex: 1; min-width: 220px;">
                             <h4 style="text-align: center; margin-bottom: 5px; color: #475569;">${title}</h4>
@@ -1417,7 +1445,7 @@
                     `;
                 };
 
-                // بناء الترتيب الزمني الجديد للجداول (درجات نصف السنة بعد الكورس الأول، ونهاية السنة بعد الكورس الثاني)
+                // بناء الترتيب الزمني الكامل والمنسق للجداول بدون أي نقص
                 let gradesHtml = '';
                 gradesHtml += `
                     <div class="grade-section-title">📊 نتائج امتحانات الكورس الأول ونصف السنة</div>
