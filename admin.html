@@ -632,29 +632,17 @@
         };
 
         // فحص رمز الدخول للبدء
-        function tryLogin() {
-            const enteredPass = document.getElementById('adminPassword').value;
-            if (enteredPass.trim() === '') {
-                alert('الرجاء إدخل الرمز السري للأستاذ أولاً!');
-                return;
-            }
-
-            database.ref('adminPassword').once('value').then((snapshot) => {
-                const actualPass = snapshot.val();
-                if (enteredPass === actualPass || enteredPass === "123456") {
-                    loggedIn = true;
-                    document.getElementById('loginCard').style.display = 'none';
-                    document.getElementById('adminDashboard').style.display = 'block';
-                    loadAnnouncements();
-                    loadAllStudents();
-                    selectGrade(1);
-                } else {
-                    alert('الرمز السري غير صحيح! يرجى المحاولة مجدداً.');
-                }
-            }).catch(err => {
-                alert('خطأ في الاتصال بقاعدة البيانات.');
-            });
-        }
+       function tryLogin() {
+    const password = document.getElementById('adminPassword').value;
+    // تأكد من تغيير كلمة السر هذه بكلمة السر الخاصة بك
+    if (password === "123456") { 
+        document.getElementById('loginModal').style.display = 'none';
+        document.getElementById('adminDashboard').style.display = 'block';
+        loadAllStudents(); // استدعاء دالة عرض الطلاب
+    } else {
+        alert("كلمة السر خاطئة!");
+    }
+}
 
         function logout() {
             loggedIn = false;
