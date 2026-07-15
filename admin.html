@@ -350,6 +350,7 @@
             border-radius: 12px;
             border: 1px solid var(--border-color);
             margin-bottom: 25px;
+            position: relative;
         }
 
         @media (max-width: 576px) {
@@ -485,6 +486,29 @@
             background-color: var(--color-red);
             color: #ffffff;
         }
+
+        /* زر حذف الطالب الأحمر الكبير بداخل الكارد */
+        .delete-student-btn-container {
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .btn-danger {
+            background-color: var(--color-red);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: var(--font-main);
+            font-weight: bold;
+            font-size: 13.5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-danger:hover {
+            background-color: var(--color-red-hover);
+        }
     </style>
 </head>
 <body>
@@ -594,7 +618,7 @@
         let allStudentsData = {};
         let currentStudentId = '';
 
-        // المواد المحددة لكل مرحلة
+        // توحيد مسميات المواد بدقة متناهية مع صفحة الطالب
         const subjectsConfig = {
             1: ['العربية', 'الاسلامية', 'الانكليزية', 'الرياضيات', 'الاجتماعيات', 'الاحياء', 'الكيمياء', 'الفيزياء', 'الاخلاقية', 'الفنية'],
             2: ['العربية', 'الاسلامية', 'الانكليزية', 'الرياضيات', 'الاجتماعيات', 'الاحياء', 'الكيمياء', 'الفيزياء', 'الاخلاقية', 'الفنية'],
@@ -611,7 +635,7 @@
         function tryLogin() {
             const enteredPass = document.getElementById('adminPassword').value;
             if (enteredPass.trim() === '') {
-                alert('الرجاء إدخال الرمز السري للأستاذ أولاً!');
+                alert('الرجاء إدخل الرمز السري للأستاذ أولاً!');
                 return;
             }
 
@@ -775,7 +799,6 @@
 
             for (let id in allStudentsData) {
                 const student = allStudentsData[id];
-                // الفلترة الصحيحة بمطابقة الصف والشعبة المخزونة في classOption
                 if (parseInt(student.grade) === currentSelectedGrade && student.classOption === currentSelectedSection) {
                     hasStudents = true;
                     const defaultAvatar = 'https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';
@@ -806,6 +829,7 @@
 
             const defaultAvatar = 'https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';
 
+            // بناء واجهة الطالب المختار مع إضافة زر الحذف النهائي للأستاذ
             detailsBox.innerHTML = `
                 <div class="student-profile-card">
                     <img src="${student.photo || defaultAvatar}" onerror="this.src='${defaultAvatar}'" class="student-profile-img" alt="الطالب">
@@ -816,7 +840,10 @@
                             <div><span class="info-label">اسم أب الأم:</span> ${student.motherFatherName}</div>
                             <div><span class="info-label">هاتف ولي الأمر:</span> <a href="tel:${student.phone}">${student.phone}</a></div>
                             <div><span class="info-label">البطاقة الموحدة:</span> ${student.nationalId}</div>
-                            <div><span class="info-label">الرمز السري الخاص به:</span> <strong style="color:var(--color-blue);">${student.studentCode}</strong></div>
+                            <div><span class="info-label">الرمز السري الخاص به:</span> <strong style="color:var(--color-blue);">${student.password}</strong></div>
+                        </div>
+                        <div class="delete-student-btn-container">
+                            <button class="btn-danger" onclick="deleteStudentFromPlatform('${student.fullName}')">🗑️ حذف الطالب من المنصة نهائياً</button>
                         </div>
                     </div>
                 </div>
@@ -854,6 +881,19 @@
             `;
 
             updateGradesInputs();
+        }
+
+        // دالة حذف الطالب نهائياً من المنصة
+        function deleteStudentFromPlatform(studentName) {
+            if (confirm(`⚠️ تحذير هام جداً:\nهل أنت متأكد تماماً من رغبتك في حذف الطالب "${studentName}" وكل درجاته وصورته من المنصة نهائياً؟ لا يمكن التراجع عن هذا الإجراء!`)) {
+                database.ref('students').child(studentName).remove().then(() => {
+                    alert('تم حذف الطالب بنجاح وإلغاء تسجيله من المنصة.');
+                    resetStudentDetails();
+                    loadAllStudents();
+                }).catch(err => {
+                    alert('حدث خطأ أثناء محاولة حذف الطالب من قاعدة البيانات.');
+                });
+            }
         }
 
         function updateGradesInputs() {
