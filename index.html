@@ -1373,7 +1373,7 @@
         }
 
         // جلب وبناء لوحة تحكم الطالب الكاملة بالتعديلات وهيكل الدرجات الجديد
-       function loadStudentDashboard(fullName) {
+      function loadStudentDashboard(fullName) {
     database.ref('students/' + fullName).once('value').then((snapshot) => {
         const student = snapshot.val();
         if(!student) return;
@@ -1437,6 +1437,21 @@
                 </div>
             `;
         }
+
+        content.innerHTML = `
+            <div class="student-dashboard-grid">
+                <img src="${student.photo}" class="dashboard-avatar" alt="صورة الطالب">
+                <div class="dashboard-info-text">
+                    <h3 style="font-size: 18px; color: var(--color-blue); margin-bottom: 8px;">${student.fullName}</h3>
+                    <p>الصف: <strong>${gradeText}</strong></p>
+                </div>
+            </div>
+            ${gradesHtml}
+        `;
+
+        dashboardModal.classList.add('active');
+    });
+}
 
         content.innerHTML = `
             <div class="student-dashboard-grid">
