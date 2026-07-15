@@ -110,169 +110,6 @@
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
-        /* نافذة تسجيل الدخول والإنشاء */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-card {
-            background-color: #ffffff;
-            padding: 30px 25px;
-            border-radius: 16px;
-            width: 95%;
-            max-width: 500px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            position: relative;
-            transform: translateY(-20px);
-            transition: all 0.3s ease;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-overlay.active .modal-card {
-            transform: translateY(0);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: #94a3b8;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        html[dir="ltr"] .modal-close {
-            left: auto;
-            right: 15px;
-        }
-
-        .modal-close:hover {
-            color: var(--color-blue);
-        }
-
-        .modal-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-header h3 {
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--color-text-dark);
-            margin-bottom: 5px;
-        }
-
-        .modal-header p {
-            font-size: 13px;
-            color: #64748b;
-        }
-
-        .form-group {
-            margin-bottom: 14px;
-            text-align: right;
-        }
-
-        html[dir="ltr"] .form-group {
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13.5px;
-            font-weight: 700;
-            color: #475569;
-            margin-bottom: 5px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1.5px solid #cbd5e1;
-            border-radius: 8px;
-            font-family: var(--font-main);
-            font-size: 13.5px;
-            color: var(--color-text-dark);
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .form-control:focus {
-            border-color: var(--color-blue);
-        }
-
-        .modal-submit-btn {
-            width: 100%;
-            background-color: var(--color-blue);
-            color: #ffffff;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-family: var(--font-main);
-            font-weight: 700;
-            font-size: 15px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-        }
-
-        .modal-submit-btn:hover {
-            background-color: var(--color-blue-hover);
-        }
-
-        .toggle-auth-mode {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 13.5px;
-            color: #64748b;
-        }
-
-        .toggle-auth-mode a {
-            color: var(--color-blue);
-            text-decoration: none;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .toggle-auth-mode a:hover {
-            text-decoration: underline;
-        }
-
-        /* نافذة الرمز السري المولد */
-        .code-display-box {
-            background-color: #f1f5f9;
-            border: 2px dashed var(--color-blue);
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: var(--color-blue);
-            margin: 15px 0;
-        }
-
         header {
             background-color: var(--bg-primary);
             border-bottom: 1px solid #e5e7eb;
@@ -327,7 +164,7 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
         .lang-btn {
@@ -348,25 +185,6 @@
             color: var(--color-blue);
         }
 
-        .logout-btn {
-            background: none;
-            border: 1px solid #ef4444;
-            color: #ef4444;
-            padding: 6px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-family: var(--font-main);
-            font-size: 14px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: none;
-        }
-
-        .logout-btn:hover {
-            background-color: #ef4444;
-            color: #ffffff;
-        }
-
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -380,10 +198,10 @@
 
         .menu-toggle span {
             display: block;
-            width: 25px;
-            height: 3px;
+            width: 6px;
+            height: 6px;
             background-color: var(--color-text-dark);
-            border-radius: 3px;
+            border-radius: 50%;
             transition: all 0.3s ease;
         }
 
@@ -798,107 +616,13 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="authModal">
-        <div class="modal-card">
-            <button class="modal-close" onclick="closeAuthModal()">×</button>
-            
-            <div id="authFormsContainer">
-                <div id="registerFormSection">
-                    <div class="modal-header">
-                        <h3>إنشاء حساب جديد للطالب</h3>
-                        <p>املأ البيانات بدقة لإصدار هويتك الرقمية وحفظ بياناتك</p>
-                    </div>
-                    <form id="registerForm" onsubmit="handleRegisterSubmit(event)">
-                        <div class="form-group">
-                            <label for="studentName">الاسم الرباعي للطالب</label>
-                            <input type="text" id="studentName" class="form-control" placeholder="علي محمد حسن علوان" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="studentGrade">الصف الدراسي</label>
-                            <select id="studentGrade" class="form-control" onchange="updateDivisionOptions()" required>
-                                <option value="" disabled selected>اختر صفك الدراسي</option>
-                                <option value="الأول متوسط">الأول متوسط</option>
-                                <option value="الثاني متوسط">الثاني متوسط</option>
-                                <option value="الثالث متوسط">الثالث متوسط</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group" id="divisionGroup" style="display: none;">
-                            <label for="studentDivision">الشعبة الدراسية</label>
-                            <select id="studentDivision" class="form-control" required>
-                                </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="motherName">اسم الأم الثلاثي</label>
-                            <input type="text" id="motherName" class="form-control" placeholder="مثال: مريم جاسم محمد" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="parentPhone">رقم هاتف ولي الأمر</label>
-                            <input type="tel" id="parentPhone" class="form-control" placeholder="07XXXXXXXXX" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nationalId">رقم البطاقة الموحدة</label>
-                            <input type="text" id="nationalId" class="form-control" placeholder="مكون من 12 رقم" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="studentPhoto">صورة رسمية للطالب (خلفية بيضاء حصراً)</label>
-                            <input type="file" id="studentPhoto" class="form-control" accept="image/*" required>
-                        </div>
-
-                        <button type="submit" class="modal-submit-btn">إنشاء الحساب وتوليد الرمز</button>
-                    </form>
-                    <div class="toggle-auth-mode">
-                        لديك حساب بالفعل؟ <a onclick="switchAuthMode('login')">سجل دخولك هنا</a>
-                    </div>
-                </div>
-
-                <div id="loginFormSection" style="display: none;">
-                    <div class="modal-header">
-                        <h3>تسجيل دخول سريع</h3>
-                        <p>أدخل اسمك الرباعي والرمز السري الخاص بك للدخول إلى حسابك</p>
-                    </div>
-                    <form id="loginForm" onsubmit="handleLoginSubmit(event)">
-                        <div class="form-group">
-                            <label for="loginName">الاسم الرباعي للطالب</label>
-                            <input type="text" id="loginName" class="form-control" placeholder="اكتب اسمك الرباعي كما سجلته أول مرة" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="loginPassword">الرمز السري الخاص بك</label>
-                            <input type="text" id="loginPassword" class="form-control" placeholder="مثال: JW-XXXXXX" required>
-                        </div>
-                        <button type="submit" class="modal-submit-btn">تسجيل الدخول</button>
-                    </form>
-                    <div class="toggle-auth-mode">
-                        طالب جديد؟ <a onclick="switchAuthMode('register')">سجل حساباً جديداً من هنا</a>
-                    </div>
-                </div>
-
-                <div id="successDisplaySection" style="display: none; text-align: center;">
-                    <div class="modal-header">
-                        <h3 style="color: #10b981;">🎉 تم إنشاء الحساب بنجاح!</h3>
-                        <p>تم حفظ معلوماتك وإصدار رمز الدخول السري المخصص لك.</p>
-                    </div>
-                    <p style="font-weight: bold; color: var(--color-text-dark);">احفظ هذا الرمز جيداً لتسجيل الدخول به لاحقاً:</p>
-                    <div class="code-display-box" id="generatedCodeBox">JW-0000</div>
-                    <p style="font-size: 13px; color: #dc2626; margin-bottom: 20px;">🚨 (قم بأخذ لقطة شاشة للرمز أو كتابته في ورقة خارجية قبل الإغلاق)</p>
-                    <button class="modal-submit-btn" onclick="finishRegistration()">فهمت، ادخل للموقع</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <header>
         <div class="nav-container">
             <a href="#" class="logo">
                 الجوادين<span>.</span>
             </a>
             
-            <button class="menu-toggle" id="menuBtn" aria-label="القائمة" onclick="toggleMobileMenu()">
+            <button class="menu-toggle" id="menuBtn" aria-label="القائمة">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -914,8 +638,7 @@
                 </ul>
             </nav>
             <div class="header-left">
-                <button class="lang-btn" id="btnAuthHeader" onclick="openAuthModal()">تسجيل دخول / إنشاء حساب</button>
-                <button class="logout-btn" id="btnLogout" onclick="handleLogout()">تسجيل الخروج</button>
+                <a href="https://telegram.me/jawadin3" target="_blank" class="lang-btn" id="btnTelegram">قناة التلغرام</a>
             </div>
         </div>
     </header>
@@ -926,7 +649,7 @@
             <p id="heroDesc">صرح علمي متميز يسعى لبناء أجيال واعدة قادرة على التفوق والنجاح المستمر.</p>
             <div class="hero-buttons">
                 <a href="#system" class="btn btn-primary" id="btnHeroSystem">النظام الدراسي والمرافق</a>
-                <button class="btn btn-secondary" id="btnHeroResults" onclick="openAuthModal()">نتائجي والتبليغات المخصصة</button>
+                <a href="https://telegram.me/jawadin3" target="_blank" class="btn btn-secondary" id="btnHeroResults">نتائج الامتحانات على تلغرام</a>
             </div>
         </div>
     </section>
@@ -935,7 +658,8 @@
         
         <main class="wiki-content">
             <article id="mainArticle">
-                </article>
+                <!-- سيتم ملء هذا المحتوى ديناميكياً حسب اختيار اللغة -->
+            </article>
         </main>
 
         <aside class="info-card">
@@ -962,7 +686,7 @@
                 </tr>
                 <tr>
                     <th id="thCoord">الإحداثيات</th>
-                    <td><a href="https://maps.google.com" target="_blank" class="map-link">📍 33° 25' 42.4" N, 44° 24' 07.0" E</a></td>
+                    <td><a href="https://maps.google.com/?q=33.428444,44.401944" target="_blank" class="map-link">📍 33° 25' 42.4" N, 44° 24' 07.0" E</a></td>
                 </tr>
                 <tr>
                     <th id="thWeb">المواقع الإلكترونية</th>
@@ -991,373 +715,370 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <script>
-        // إعدادات الـ Firebase
         const firebaseConfig = {
-            apiKey: "AIzaSyDummyKeyForInitializationOnly", // ضع مفتاحك هنا إن وجد
-            authDomain: "jawadin-school1.firebaseapp.com",
-            databaseURL: "https://jawadin-school1-default-rtdb.firebaseio.com",
-            projectId: "jawadin-school1"
+            databaseURL: "https://jawadin-school1-default-rtdb.firebaseio.com"
         };
-        
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
-        // متغير لحفظ بيانات اللغة الحالية
         let currentLang = 'ar';
-        let loggedInStudent = null; // لحفظ بيانات الطالب بعد تسجيل الدخول
 
-        // محتوى المقالات للغات المختلفة (عربي / إنجليزي)
-        const content = {
+        const translations = {
             ar: {
                 article: `
-                    <h2 id="system">النظام الدراسي والمرافق</h2>
-                    <p>تتبع متوسطة الجوادين للبنين الأنظمة والتعليمات الرسمية الصادرة من وزارة التربية العراقية المديرية العامة لتربية الرصافة الأولى. وتوفر مدرسة الجوادين مرافق تعليمية مجهزة لضمان حصول الطلاب على أفضل مستويات التعليم والراحة الفكرية والجسدية.</p>
-                    
-                    <h2 id="digital">التواصل الرقمي والخدمات الإلكترونية</h2>
-                    <p>سعياً منا لمواكبة التطور التكنولوجي وتسهيل التواصل بين المدرسة وأولياء الأمور والطلاب، تقدم المدرسة بوابتها الرقمية الحالية لتوفير الخدمات التالية بشكل سريع وآمن:</p>
-                    <ul>
-                        <li>توليد هوية رقمية ورمز سري فريد لكل طالب مسجل.</li>
-                        <li>إمكانية الاستعلام الفوري والمباشر عن درجات الامتحانات والنتائج الشهرية والنهائية.</li>
-                        <li>استلام التبليغات والإنذارات المخصصة بشكل سري وفردي لكل طالب.</li>
-                    </ul>
-
-                    <h2 id="notifications">التبليغات والإعلانات العامة</h2>
-                    <div id="notificationsContainer" class="notifications-box">
-                        لم يتم نشر أي تبليغات عامة بعد، سجل دخولك لرؤية التبليغات الخاصة بك.
+                    <h2 id="notifications" style="margin-top: 0;">التبليغات والتعميمات الإدارية</h2>
+                    <div id="notificationsBox">
+                        <div class="notifications-box">جاري تحميل التبليغات من قاعدة البيانات...</div>
                     </div>
 
-                    <h2 id="vision">رؤية المدرسة وأهدافها</h2>
-                    <p>تتمحور رؤية المدرسة حول بناء أساس تعليمي متين يسهم في تطوير مهارات التفكير النقدي والإبداعي لدى الطلاب من خلال:</p>
+                    <p style="margin-top: 25px;">
+                        <strong>متوسطة الجوادين للبنين</strong> هي مدرسة متوسطة حكومية مخصصة للبنين تقع في العاصمة العراقية <strong>بغداد</strong>، وتحديداً في منطقة <strong>الشعب</strong> التابعة لمديرية تربية الرصافة الأولى. تُصنف المدرسة كواحدة من أشهر المدارس المتوسطة وأبرزها في المنطقة؛ حيث تقدم خدماتها التعليمية والتربوية لجمهور واسع من الطلبة يتجاوز عددهم الألف طالب، وتضم تحت سقفها المراحل الدراسية الثلاث المعتمدة في النظام التعليمي العراقي للمرحلة المتوسطة وهي: الصف الأول المتوسط، والصف الثاني المتوسط، والصف الثالث المتوسط، ويشرف على تدريسهم كادر تعليمي وتدريسي متميز ومؤهل علمياً.
+                    </p>
+
+                    <h2>التأسيس والتاريخ والنمو الأكاديمي</h2>
+                    <p>
+                        يرجع تاريخ تأسيس متوسطة الجوادين للبنين إلى عام 2008م. ومنذ انطلاقتها في هذا العام، سعت المدرسة بشكل دؤوب إلى تحقيق رسالتها في رفع وتطوير المستوى العلمي والتربوي لجميع الطلاب الساكنين في منطقة الشعب والمناطق المجاورة والمحيطة بها. وبفضل هذه الجهود المستمرة، نجحت المدرسة في بناء واكتساب سمعة طيبة جداً وشهرة واسعة بين أهالي المنطقة والطلبة على حد سواء، ويعود الفضل في هذه السمعة إلى ما تمتلكه المدرسة من كادر تدريسي متميز يمتلك الرصانة العلمية والخبرة التربوية الكافية لإدارة وتوجيه الطلاب.
+                    </p>
+                    <p>
+                        خلال مسيرتها التي تمتد لأكثر من عقد ونصف، قامت المدرسة بتخريج آلاف الطلبة الذين واصلوا مسيرتهم بنجاح في الإعداديات والجامعات العراقية المرموقة. وتتميز الإدارة بحرصها على الانضباط العالي والالتزام بالزي المدرسي الموحد، وتوطيد العلاقات الاجتماعية الهادفة بين الملاك التدريسي وأولياء الأمور من خلال مجالس الآباء والمعلمين الدورية لتذليل العقبات الدراسية التي قد تواجه الطلبة في مسيرتهم الأكاديمية.
+                    </p>
+                    <p>
+                        تواصل المدرسة تحديث مخرجاتها التعليمية باستمرار من خلال التدريب والتطوير المستمر لكادرها التدريسي ودمج الأساليب الحديثة مع التعليم التقليدي، مما أثمر عن تحقيق نسب نجاح متميزة في الامتحانات الوزارية للصف الثالث المتوسط على مستوى قاطع الشعب والمديرية العامة لتربية الرصافة الأولى لسنوات متعددة.
+                    </p>
+
+                    <h2 id="system">النظام الدراسي والمرافق البناية</h2>
+                    <p>
+                        تلتزم المدرسة التزاماً كاملاً بتطبيق المناهج والقرارات الدراسية الرسمية الصادرة عن وزارة التربية العراقية. وتولي إدارة المدرسة والكادر التدريسي اهتماماً خاصاً واستثنائياً بطلبة الصف الثالث المتوسط؛ نظراً للأهمية المصيرية لهذه المرحلة الدراسية، حيث تعمل على تهيئتهم وإعدادهم بشكل كامل لخوض غمار الامتحانات الوزارية النهائية (الباكالوريا)، ويتم ذلك عبر خطة تعليمية تشمل تقديم الدعم العلمي المتواصل والمراجعات المنهجية المستمرة للمواد الدراسية.
+                    </p>
+                    <p>
+                        وتتكون البناية المدرسية لمتوسطة الجوادين للبنين من عدة مرافق أساسية تم تصميمها لخدمة العملية التعليمية وتوفير سبل الراحة للطلبة والكادر، وتشتمل هذه المرافق على:
+                    </p>
+                    <ul>
+                        <li><strong>الصفوف الدراسية:</strong> القاعات المخصصة لإعطاء الدروس والمحاضرات للطلبة في المراحل المختلفة ومجهزة بالوسائل الضرورية لتلقي العلم.</li>
+                        <li><strong>غرفة الإدارة:</strong> المقر المخصص لإدارة المدرسة ومتابعة شؤونها التنظيمية والتربوية واللوجستية بقيادة المدير المتميز السيد فيصل برغش تايه ومساعديه.</li>
+                        <li><strong>غرفة المدرسين:</strong> المكان المخصص لأعضاء الكادر التدريسي المتميز للاستراحة والتحضير العلمي والمناقشات المنهجية.</li>
+                        <li><strong>الساحات المدرسية:</strong> الفضاءات المفتوحة المخصصة لممارسة الأنشطة الرياضية المتنوعة مثل كرة القدم، واستراحة الطلاب وتجديد نشاطهم البدني والذهني بين الحصص الدراسية.</li>
+                        <li><strong>المرشد التربوي:</strong> توفر المدرسة مكتباً خاصاً بالإرشاد التربوي والنفسي لمساعدة الطلاب على حل مشاكلهم الشخصية والأكاديمية، وتهيئة بيئة صحية تحفزهم على التفوق الدراسي وصقل شخصياتهم القيادية والاجتماعية.</li>
+                    </ul>
+
+                    <h2 id="digital">الأنشطة والتواصل الرقمي والالكتروني</h2>
+                    <p>
+                        التركيز الأساسي للإدارة يعتمد على دمج التكنولوجيا والأنشطة الرقمية التفاعلية لتعزيز أواصر العلاقة بين الطالب والمدرسة، حيث تحرص بشكل كبير على تفعيل قنوات التواصل المباشر بين الطلاب والإدارة عبر الوسائل التالية:
+                    </p>
+                    <ul>
+                        <li><strong>روابط الاستبيان الإلكترونية:</strong> وهي أدوات رقمية تتيح للطلاب إمكانية تسجيل الشكاوى التي تواجههم، أو مشاركة آرائهم الشخصية ومقترحاتهم البناءة مع الإدارة مباشرة، مما أسهم بشكل واضح في تعزيز مستويات الثقة المتبادلة بين الطلاب ومدرستهم وعمل على تطوير البيئة التعليمية داخل المدرسة بشكل مستمر.</li>
+                        <li><strong>المنصات الرسمية على مواقع التواصل الاجتماعي:</strong> تمتلك المدرسة منصات إلكترونية رسمية نشطة، وتبرز من بينها القناة الرسمية للمدرسة على تطبيق تلغرام، والتي تُستخدم كأداة إعلامية أساسية للتواصل مع الطلاب وأولياء الأمور أولاً بأول ونشر كل ما يتعلق بـالتبليغات والتعليمات الرسمية، الجداول الدراسية الأسبوعية وجداول الامتحانات، والنتائج بمجرد صدورها لضمان وصولها السريع للجميع.</li>
+                    </ul>
+
+                    <h2 id="vision">رؤية مدرسة الجوادين والأهداف الاستراتيجية</h2>
+                    <p id="visionDesc">
+                        ترتكز الرؤية التعليمية والتربوية لمتوسطة الجوادين للبنين على تحقيق عدة أهداف متكاملة مستخلصة من مسيرتها التعليمية، وتتلخص في:
+                    </p>
+                    
                     <div class="vision-grid">
                         <div class="vision-card">
                             <div class="vision-card-header">
-                                <div class="vision-card-number">١</div>
-                                <div class="vision-card-title">التفوق الأكاديمي</div>
+                                <span class="vision-card-number">١</span>
+                                <span class="vision-card-title">التميز العلمي</span>
                             </div>
-                            <p class="vision-card-text">توفير بيئة تعليمية تسعى للوصول بالطلاب لأعلى نسب النجاح في الامتحانات المدرسية والوزارية بفضل نخبة من الكادر التدريسي المتميز.</p>
+                            <p class="vision-card-text">السعي الدائم والمستمر لرفع وتطوير المستوى العلمي والتربوي للطلاب في منطقة الشعب والمناطق المجاورة لها.</p>
                         </div>
+
                         <div class="vision-card">
                             <div class="vision-card-header">
-                                <div class="vision-card-number">٢</div>
-                                <div class="vision-card-title">التربية والأخلاق</div>
+                                <span class="vision-card-number">٢</span>
+                                <span class="vision-card-title">التواصل الرقمي</span>
                             </div>
-                            <p class="vision-card-text">غرس القيم التربوية السامية والأخلاق النبيلة في نفوس أبنائنا الطلبة ليكونوا بناة حقيقيين للمجتمع العراقي.</p>
+                            <p class="vision-card-text">تعزيز وبناء ثقة متبادلة وقوية بين الطلاب وإدارة المدرسة عبر قنوات التواصل الرقمية والاستبيانات الإلكترونية الفورية والمستمرة.</p>
                         </div>
+
                         <div class="vision-card">
                             <div class="vision-card-header">
-                                <div class="vision-card-number">٣</div>
-                                <div class="vision-card-title">مواكبة التكنولوجيا</div>
+                                <span class="vision-card-number">٣</span>
+                                <span class="vision-card-title">البيئة التعليمية</span>
                             </div>
-                            <p class="vision-card-text">تطوير الخدمات الرقمية وتدريب الطلاب على استخدام المنصات الحديثة لتلقي المعرفة ومتابعة مستوياتهم بكل سلاسة.</p>
+                            <p class="vision-card-text">التطوير الشامل والمستمر للبيئة التعليمية والصفوف الدراسية والمرافق اللوجستية لتكون دائماً محفزة على التفوق والإبداع.</p>
+                        </div>
+
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">٤</span>
+                                <span class="vision-card-title">دعم الثالث المتوسط</span>
+                            </div>
+                            <p class="vision-card-text">الاهتمام الفائق بطلبة الصف الثالث المتوسط وتقديم كافة أشكال الدعم العلمي، المحاضرات الإضافية والمراجعات المكثفة لضمان حصولهم على أعلى المعدلات والتميز في امتحانات البكالوريا الوزارية.</p>
+                        </div>
+
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">٥</span>
+                                <span class="vision-card-title">مواكبة التطور</span>
+                            </div>
+                            <p class="vision-card-text">الاستمرار في مواكبة أحدث الأساليب والوسائل الإلكترونية المتاحة في التعليم الإلكتروني، ونشر كافة الجداول والتبليغات ونتائج الامتحانات عبر منصات التواصل الرسمية لضمان أقصى درجات الشفافية والتواصل السريع والفعال.</p>
                         </div>
                     </div>
                 `
             },
             en: {
                 article: `
-                    <h2 id="system">Educational System and Facilities</h2>
-                    <p>Al-Jawadain Intermediate School for Boys follows the official regulations issued by the Iraqi Ministry of Education. The school provides equipped educational facilities to ensure students receive the best levels of education.</p>
-                    
-                    <h2 id="digital">Digital Communication and Services</h2>
-                    <p>To keep pace with technological development, the school offers its digital portal to provide the following services safely and quickly:</p>
-                    <ul>
-                        <li>Generating a unique digital identity and secret code for each registered student.</li>
-                        <li>Instant check of monthly and final exam grades and results.</li>
-                        <li>Receiving private and customized notifications and warnings for each student.</li>
-                    </ul>
-
-                    <h2 id="notifications">Public Notifications</h2>
-                    <div id="notificationsContainer" class="notifications-box">
-                        No public announcements have been posted yet. Log in to view your personalized notifications.
+                    <h2 id="notifications" style="margin-top: 0;">Announcements & Administrative Circulars</h2>
+                    <div id="notificationsBox">
+                        <div class="notifications-box">Loading announcements from the database...</div>
                     </div>
 
-                    <h2 id="vision">School Vision and Goals</h2>
-                    <p>Our vision is built around creating a strong educational foundation that develops students' critical thinking and creativity through:</p>
+                    <p style="margin-top: 25px;">
+                        <strong>Al-Jawadin Intermediate School for Boys</strong> is a public intermediate school for boys located in the Iraqi capital, <strong>Baghdad</strong>, specifically in the <strong>Al-Shaab</strong> district under the Directorate of Education of Rusafa First. The school is classified as one of the most famous and prominent intermediate schools in the region, providing educational services to a large student body exceeding 1,000 students, encompassing the three intermediate grade levels: First, Second, and Third Intermediate, supervised by a distinguished and academically qualified teaching staff.
+                    </p>
+
+                    <h2>Establishment, History, and Academic Growth</h2>
+                    <p>
+                        The establishment of Al-Jawadin Intermediate School for Boys dates back to 2008. Since its inception, the school has worked diligently to achieve its mission of elevating the academic and educational standards for all students residing in Al-Shaab and surrounding areas. Thanks to these continuous efforts, the school has built an outstanding reputation among the community and students alike, largely due to its dedicated teaching staff which possesses both academic rigor and extensive educational experience.
+                    </p>
+                    <p>
+                        Over its fifteen-year journey, the school has graduated thousands of students who successfully continued their paths in prestigious Iraqi high schools and universities. The administration is well-regarded for its high discipline, commitment to the school uniform, and strengthening social ties between the staff and parents through regular Parent-Teacher Association (PTA) meetings to resolve any academic challenges students might face.
+                    </p>
+                    <p>
+                        The school continuously updates its educational methods by developing its teaching staff and integrating modern technology with traditional learning, which has resulted in outstanding success rates in the national ministerial examinations (Baccalaureate) for the Third Intermediate grade across the Al-Shaab district for several consecutive years.
+                    </p>
+
+                    <h2 id="system">Educational System and Campus Facilities</h2>
+                    <p>
+                        The school is fully committed to implementing the official curricula and academic regulations issued by the Iraqi Ministry of Education. The administration and teaching staff pay exceptional attention to Third Intermediate students due to the critical nature of this academic stage, working to prepare them fully for the final national exams (Baccalaureate) through structured reviews and constant academic support.
+                    </p>
+                    <p>
+                        The school building comprises several essential facilities designed to support the educational process and ensure comfort, including:
+                    </p>
+                    <ul>
+                        <li><strong>Classrooms:</strong> Rooms dedicated to lectures, equipped with necessary tools for interactive learning.</li>
+                        <li><strong>Administration Office:</strong> The executive headquarters of the school, managed by Principal Faisal Barghash Tayeh and his assistants.</li>
+                        <li><strong>Teachers' Lounge:</strong> A space for teachers to prepare lessons, rest, and engage in academic discussions.</li>
+                        <li><strong>School Yards:</strong> Open areas for sports activities like football and volleyball, allowing students to refresh their energy during breaks.</li>
+                        <li><strong>Social Counselor:</strong> Dedicated counseling office to assist students with personal and academic challenges, fostering a healthy social and educational environment.</li>
+                    </ul>
+
+                    <h2 id="digital">Activities and Digital Communication</h2>
+                    <p>
+                        The administration prioritizes integrating technology to strengthen relationships between students and the school, focusing on active direct communication channels through:
+                    </p>
+                    <ul>
+                        <li><strong>Online Survey Links:</strong> Digital tools allowing students to voice concerns or share suggestions directly with administration, enhancing trust and continuously improving the school environment.</li>
+                        <li><strong>Official Social Media Platforms:</strong> The school runs active official accounts, most notably on Telegram, to update students and parents instantly with administrative news, weekly schedules, exam timetables, and results.</li>
+                    </ul>
+
+                    <h2 id="vision">School Vision and Strategic Goals</h2>
+                    <p id="visionDesc">
+                        The educational vision of Al-Jawadin Intermediate School for Boys focuses on achieving integrated goals derived from its academic journey:
+                    </p>
                     <div class="vision-grid">
                         <div class="vision-card">
                             <div class="vision-card-header">
-                                <div class="vision-card-number">1</div>
-                                <div class="vision-card-title">Academic Excellence</div>
+                                <span class="vision-card-number">1</span>
+                                <span class="vision-card-title">Academic Excellence</span>
                             </div>
-                            <p class="vision-card-text">Providing an educational environment that drives students to high success rates with the help of our distinguished teaching staff.</p>
+                            <p class="vision-card-text">Continuous commitment to raising academic standards for students in Al-Shaab and surrounding areas.</p>
                         </div>
                         <div class="vision-card">
                             <div class="vision-card-header">
-                                <div class="vision-card-number">2</div>
-                                <div class="vision-card-title">Values and Ethics</div>
+                                <span class="vision-card-number">2</span>
+                                <span class="vision-card-title">Digital Connection</span>
                             </div>
-                            <p class="vision-card-text">Instilling noble educational values and ethics in our students to make them real builders of Iraqi society.</p>
+                            <p class="vision-card-text">Building mutual trust between students and administration through modern digital surveys and active updates.</p>
                         </div>
                         <div class="vision-card">
                             <div class="vision-card-header">
-                                <div class="vision-card-number">3</div>
-                                <div class="vision-card-title">Keeping Pace with Tech</div>
+                                <span class="vision-card-number">3</span>
+                                <span class="vision-card-title">Optimal Environment</span>
                             </div>
-                            <p class="vision-card-text">Developing digital services and training students on modern platforms to follow up on their academic levels smoothly.</p>
+                            <p class="vision-card-text">Upgrading classrooms and facilities regularly to inspire creativity and high-level academic performance.</p>
+                        </div>
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">4</span>
+                                <span class="vision-card-title">Support for 3rd Grade</span>
+                            </div>
+                            <p class="vision-card-text">Providing intensive revision courses, extra lectures, and psychological preparation to ensure top baccalaureate scores.</p>
+                        </div>
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <span class="vision-card-number">5</span>
+                                <span class="vision-card-title">Embracing Innovation</span>
+                            </div>
+                            <p class="vision-card-text">Adopting the latest educational tools and maintaining high transparency through official communication channels.</p>
                         </div>
                     </div>
                 `
             }
         };
 
-        // تغيير خيارات الشعبة حسب الصف المختار
-        function updateDivisionOptions() {
-            const gradeSelect = document.getElementById('studentGrade');
-            const divisionGroup = document.getElementById('divisionGroup');
-            const divisionSelect = document.getElementById('studentDivision');
-            
-            const grade = gradeSelect.value;
-            divisionSelect.innerHTML = ""; // تصفير الشعب القديمة
-            
-            let divisions = [];
-            
-            if (grade === "الأول متوسط" || grade === "الثاني متوسط") {
-                divisions = ["أ", "ب", "ج", "د", "هـ", "و"];
-            } else if (grade === "الثالث متوسط") {
-                divisions = ["أ", "ب", "ج", "د", "هـ"];
+        const staticTranslations = {
+            ar: {
+                title: "الموقع الرسمي لمتوسطة الجوادين للبنين",
+                logo: "الجوادين<span>.</span>",
+                home: "الرئيسية",
+                system: "النظام الدراسي",
+                digital: "التواصل الرقمي",
+                notifications: "التبليغات",
+                vision: "رؤية المدرسة",
+                tgBtn: "قناة التلغرام",
+                heroTitle: "متوسطة الجوادين للبنين",
+                heroDesc: "صرح علمي متميز يسعى لبناء أجيال واعدة قادرة على التفوق والنجاح المستمر.",
+                heroSys: "النظام الدراسي والمرافق",
+                heroRes: "نتائج الامتحانات على تلغرام",
+                sideTitle: "شعار متوسطة الجوادين للبنين",
+                thEst: "التأسيس",
+                tdEst: "2008م",
+                thDir: "المدير",
+                tdDir: "السيد فيصل برغش تايه",
+                thLoc: "المكان",
+                tdLoc: "بغداد، الشعب، الرصافة الأولى",
+                thCountry: "البلد",
+                tdCountry: "العراق 🇮🇶",
+                thCoord: "الإحداثيات",
+                thWeb: "المواقع الإلكترونية",
+                tg1: "قناة الأول متوسط",
+                tg2: "قناة الثاني متوسط",
+                tg3: "قناة الثالث متوسط",
+                tgStudent: "الدعم الطلابي",
+                footerText: "جميع الحقوق محفوظة © 2026 متوسطة الجوادين للبنين",
+                footerCredits: `تصميم وبرمجة: <span style="color: var(--color-blue);">محمود أحمد</span> | للدعم الفني: <a href="tel:07734894407">07734894407</a>`
+            },
+            en: {
+                title: "Official Site - Al-Jawadin Intermediate School",
+                logo: "Al-Jawadin<span>.</span>",
+                home: "Home",
+                system: "Academic System",
+                digital: "Digital Communication",
+                notifications: "Announcements",
+                vision: "School Vision",
+                tgBtn: "Telegram Channel",
+                heroTitle: "Al-Jawadin School for Boys",
+                heroDesc: "A distinguished educational monument seeking to build promising generations capable of continuous excellence.",
+                heroSys: "System & Facilities",
+                heroRes: "Exam Results on Telegram",
+                sideTitle: "Al-Jawadin School Badge",
+                thEst: "Established",
+                tdEst: "2008",
+                thDir: "Principal",
+                tdDir: "Mr. Faisal Barghash Tayeh",
+                thLoc: "Location",
+                tdLoc: "Baghdad, Al-Shaab, Rusafa 1st",
+                thCountry: "Country",
+                tdCountry: "Iraq 🇮🇶",
+                thCoord: "Coordinates",
+                thWeb: "Websites",
+                tg1: "1st Grade Channel",
+                tg2: "2nd Grade Channel",
+                tg3: "3rd Grade Channel",
+                tgStudent: "Student Support",
+                footerText: "All Rights Reserved © 2026 Al-Jawadin School for Boys",
+                footerCredits: `Designed & Developed by: <span style="color: var(--color-blue);">Mahmoud Ahmed</span> | Tech Support: <a href="tel:07734894407">07734894407</a>`
             }
-            
-            if (divisions.length > 0) {
-                divisions.forEach(div => {
-                    const opt = document.createElement('option');
-                    opt.value = div;
-                    opt.innerText = div;
-                    divisionSelect.appendChild(opt);
-                });
-                divisionGroup.style.display = "block";
-            } else {
-                divisionGroup.style.display = "none";
-            }
-        }
+        };
 
-        // اختيار اللغة وتطبيق واجهات الاتجاهات
-        function selectLanguage(lang) {
+        function applyTranslations(lang) {
             currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            // تطبيق المقال
+            document.getElementById('mainArticle').innerHTML = translations[lang].article;
+
+            // تطبيق الواجهات الثابتة
+            const st = staticTranslations[lang];
+            document.title = st.title;
+            document.querySelector('.logo').innerHTML = st.logo;
+            document.getElementById('linkHome').innerText = st.home;
+            document.getElementById('linkSystem').innerText = st.system;
+            document.getElementById('linkDigital').innerText = st.digital;
+            document.getElementById('linkNotifications').innerText = st.notifications;
+            document.getElementById('linkVision').innerText = st.vision;
+            document.getElementById('btnTelegram').innerText = st.tgBtn;
+
+            document.getElementById('heroTitle').innerText = st.heroTitle;
+            document.getElementById('heroDesc').innerText = st.heroDesc;
+            document.getElementById('btnHeroSystem').innerText = st.heroSys;
+            document.getElementById('btnHeroResults').innerText = st.heroRes;
+
+            document.getElementById('sideCardTitle').innerText = st.sideTitle;
+            document.getElementById('thEst').innerText = st.thEst;
+            document.getElementById('tdEst').innerText = st.tdEst;
+            document.getElementById('thDir').innerText = st.thDir;
+            document.getElementById('tdDir').innerText = st.tdDir;
+            document.getElementById('thLoc').innerText = st.thLoc;
+            document.getElementById('tdLoc').innerText = st.tdLoc;
+            document.getElementById('thCountry').innerText = st.thCountry;
+            document.getElementById('tdCountry').innerText = st.tdCountry;
+            document.getElementById('thCoord').innerText = st.thCoord;
+            document.getElementById('thWeb').innerText = st.thWeb;
+
+            document.getElementById('linkTg1').innerText = st.tg1;
+            document.getElementById('linkTg2').innerText = st.tg2;
+            document.getElementById('linkTg3').innerText = st.tg3;
+            document.getElementById('linkTgStudent').innerText = st.tgStudent;
+
+            document.getElementById('footerText').innerText = st.footerText;
+            document.getElementById('footerCredits').innerHTML = st.footerCredits;
+
+            // إعادة جلب التبليغات بعد تحديث محتوى الـ HTML الديناميكي
+            fetchNotificationsFromFirebase();
+        }
+
+        function selectLanguage(lang) {
             document.getElementById('langOverlay').classList.add('hidden');
-            
-            if (lang === 'en') {
-                document.documentElement.setAttribute('dir', 'ltr');
-                document.documentElement.setAttribute('lang', 'en');
-                document.getElementById('linkHome').innerText = "Home";
-                document.getElementById('linkSystem').innerText = "System";
-                document.getElementById('linkDigital').innerText = "Digital Services";
-                document.getElementById('linkNotifications').innerText = "Announcements";
-                document.getElementById('linkVision').innerText = "Our Vision";
-                document.getElementById('btnAuthHeader').innerText = "Login / Register";
-                document.getElementById('heroTitle').innerText = "Al-Jawadain Intermediate School";
-                document.getElementById('heroDesc').innerText = "A distinguished educational monument aiming to build future generations capable of excellence.";
-                document.getElementById('btnHeroSystem').innerText = "Our System & Facilities";
-                document.getElementById('btnHeroResults').innerText = "My Grades & Notices";
-                document.getElementById('sideCardTitle').innerText = "School Logo";
-            } else {
-                document.documentElement.setAttribute('dir', 'rtl');
-                document.documentElement.setAttribute('lang', 'ar');
-            }
-            
-            document.getElementById('mainArticle').innerHTML = content[lang].article;
-            checkSavedSession();
+            applyTranslations(lang);
         }
 
-        function openAuthModal() {
-            document.getElementById('authModal').classList.add('active');
-            switchAuthMode('register');
-        }
+        // جلب البيانات ومعالجتها من قاعدة البيانات
+        function fetchNotificationsFromFirebase() {
+            const notificationsRef = database.ref('notifications');
+            notificationsRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                const container = document.getElementById('notificationsBox');
+                if (!container) return;
 
-        function closeAuthModal() {
-            document.getElementById('authModal').classList.remove('active');
-        }
-
-        function switchAuthMode(mode) {
-            if (mode === 'login') {
-                document.getElementById('registerFormSection').style.display = "none";
-                document.getElementById('loginFormSection').style.display = "block";
-                document.getElementById('successDisplaySection').style.display = "none";
-            } else if (mode === 'register') {
-                document.getElementById('registerFormSection').style.display = "block";
-                document.getElementById('loginFormSection').style.display = "none";
-                document.getElementById('successDisplaySection').style.display = "none";
-            }
-        }
-
-        function toggleMobileMenu() {
-            const navMenu = document.getElementById('navMenu');
-            navMenu.classList.toggle('active');
-        }
-
-        // تحويل صورة الطالب المرفوعة إلى Base64 للتخزين المباشر في Firebase
-        function getBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = error => reject(error);
-            });
-        }
-
-        // تسجيل وإنشاء حساب جديد للطالب
-        async function handleRegisterSubmit(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('studentName').value.trim();
-            const grade = document.getElementById('studentGrade').value;
-            const division = document.getElementById('studentDivision').value;
-            const motherName = document.getElementById('motherName').value.trim();
-            const phone = document.getElementById('parentPhone').value.trim();
-            const nationalId = document.getElementById('nationalId').value.trim();
-            const photoFile = document.getElementById('studentPhoto').files[0];
-
-            if (!name || !grade || !division || !motherName || !phone || !nationalId || !photoFile) {
-                alert("الرجاء ملء كافة الحقول لإتمام التسجيل!");
-                return;
-            }
-
-            try {
-                const photoBase64 = await getBase64(photoFile);
-                const studentId = database.ref().child('students').push().key;
-                const finalSecretCode = "JW-" + studentId.substring(1, 7).toUpperCase();
-
-                const studentData = {
-                    id: finalSecretCode,
-                    name: name,
-                    grade: grade,
-                    division: division,
-                    motherName: motherName,
-                    phone: phone,
-                    nationalId: nationalId,
-                    photo: photoBase64,
-                    grades: {
-                        chemistry: "لم ترصد",
-                        physics: "لم ترصد"
+                if (data) {
+                    // تحويل الكائن إلى مصفوفة وفرزها زمنياً (من الأحدث للأقدم)
+                    const list = [];
+                    for (let id in data) {
+                        list.push({ id, ...data[id] });
                     }
-                };
+                    list.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                await database.ref('students/' + finalSecretCode).set(studentData);
-
-                document.getElementById('generatedCodeBox').innerText = finalSecretCode;
-                document.getElementById('registerFormSection').style.display = "none";
-                document.getElementById('successDisplaySection').style.display = "block";
-
-                localStorage.setItem('studentSession', JSON.stringify(studentData));
-
-            } catch (error) {
-                console.error("حدث خطأ أثناء التسجيل: ", error);
-                alert("فشل في الاتصال بقاعدة البيانات. يرجى مراجعة إعدادات Firebase.");
-            }
-        }
-
-        function finishRegistration() {
-            closeAuthModal();
-            location.reload(); 
-        }
-
-        // تسجيل الدخول باستخدام الاسم الرمزي المولد
-        async function handleLoginSubmit(event) {
-            event.preventDefault();
-
-            const loginName = document.getElementById('loginName').value.trim();
-            const loginPassword = document.getElementById('loginPassword').value.trim();
-
-            if (!loginName || !loginPassword) {
-                alert("الرجاء إدخال اسمك ورمزك السري للدخول!");
-                return;
-            }
-
-            try {
-                const snapshot = await database.ref('students/' + loginPassword).once('value');
-                
-                if (snapshot.exists()) {
-                    const studentData = snapshot.val();
-                    
-                    if (studentData.name.toLowerCase() === loginName.toLowerCase()) {
-                        alert("🎉 تم تسجيل الدخول بنجاح! مرحباً بك: " + studentData.name);
-                        localStorage.setItem('studentSession', JSON.stringify(studentData));
-                        closeAuthModal();
-                        applyLoggedInState(studentData);
-                    } else {
-                        alert("❌ الاسم المكتوب لا يطابق صاحب هذا الرمز السري!");
-                    }
-                } else {
-                    alert("❌ الرمز السري غير صحيح أو الحساب غير موجود!");
-                }
-
-            } catch (error) {
-                console.error("حدث خطأ أثناء تسجيل الدخول: ", error);
-                alert("عذراً، فشل التحقق من البيانات.");
-            }
-        }
-
-        // تطبيق تغييرات الواجهة والاتصال بمصادر التبليغ عند الدخول
-        function applyLoggedInState(student) {
-            loggedInStudent = student;
-
-            const authBtn = document.getElementById('btnAuthHeader');
-            authBtn.innerText = "حسابي: " + student.name.split(' ')[0];
-            authBtn.onclick = null; 
-            
-            document.getElementById('btnLogout').style.display = "inline-block";
-
-            const resultBtn = document.getElementById('btnHeroResults');
-            resultBtn.innerText = "عرض درجاتي الفورية";
-            resultBtn.onclick = function() {
-                alert(`📚 درجات الطالب: ${student.name}\n\n🧪 الكيمياء: ${student.grades?.chemistry || 'لم ترصد'}\n⚡ الفيزياء: ${student.grades?.physics || 'لم ترصد'}`);
-            };
-
-            loadStudentPrivateNotifications(student.id);
-        }
-
-        // تحميل التبليغات الخاصة بالطالب ديناميكياً من Firebase
-        function loadStudentPrivateNotifications(studentId) {
-            const notifContainer = document.getElementById('notificationsContainer');
-            notifContainer.innerHTML = "جاري جلب تبليغاتك الخاصة...";
-
-            database.ref('notifications/' + studentId).on('value', (snapshot) => {
-                if (snapshot.exists()) {
-                    notifContainer.innerHTML = ""; 
-                    
-                    snapshot.forEach((childSnapshot) => {
-                        const notif = childSnapshot.val();
-                        const div = document.createElement('div');
-                        div.className = "notification-item";
-                        
-                        div.innerHTML = `
-                            <span class="notification-date">${notif.date || 'اليوم'}</span>
-                            <div class="notification-text">${notif.text}</div>
-                        `;
-
-                        if (notif.img) {
-                            const img = document.createElement('img');
-                            img.className = "notification-img";
-                            img.src = notif.img;
-                            div.appendChild(img);
+                    let htmlContent = '';
+                    list.forEach(item => {
+                        let mediaHtml = '';
+                        if (item.image) {
+                            mediaHtml = `<img src="${item.image}" alt="مرفق التبليغ" class="notification-img" />`;
                         }
 
-                        notifContainer.appendChild(div);
+                        htmlContent += `
+                            <div class="notification-item">
+                                <span class="notification-date">📅 ${item.date}</span>
+                                <div class="notification-text">${item.text}</div>
+                                ${mediaHtml}
+                            </div>
+                        `;
                     });
+                    container.innerHTML = htmlContent;
                 } else {
-                    notifContainer.innerHTML = "🎉 لا توجد لديك أي تبليغات أو إنذارات خاصة في الوقت الحالي.";
+                    container.innerHTML = `<div class="notifications-box">${currentLang === 'ar' ? 'لا توجد تبليغات حالياً.' : 'No announcements available at the moment.'}</div>`;
                 }
             });
         }
 
-        function handleLogout() {
-            localStorage.removeItem('studentSession');
-            alert("تم تسجيل الخروج.");
-            location.reload();
-        }
+        // تفعيل قائمة الهاتف المحمول الجانبية
+        const menuBtn = document.getElementById('menuBtn');
+        const navMenu = document.getElementById('navMenu');
 
-        function checkSavedSession() {
-            const savedSession = localStorage.getItem('studentSession');
-            if (savedSession) {
-                const studentData = JSON.parse(savedSession);
-                database.ref('students/' + studentData.id).once('value', (snapshot) => {
-                    if (snapshot.exists()) {
-                        applyLoggedInState(snapshot.val());
-                    } else {
-                        applyLoggedInState(studentData);
-                    }
-                });
-            }
-        }
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // إغلاق القائمة بمجرد الضغط على الروابط
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
     </script>
 </body>
 </html>
