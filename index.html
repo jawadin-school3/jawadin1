@@ -812,7 +812,10 @@
                 </ul>
             </nav>
             <div class="header-left">
-                <a href="https://telegram.me/jawadin3" target="_blank" class="lang-btn" id="btnTelegram">قناة التلغرام</a>
+                <!-- الزر المحدث التفاعلي بالكامل -->
+                <div id="userHeaderArea">
+                    <button onclick="handleStudentGate()" class="lang-btn" id="btnAuthHeader" style="background-color: var(--color-blue); color: #fff; border: none; font-weight: bold;">تسجيل الدخول / إنشاء حساب</button>
+                </div>
             </div>
         </div>
     </header>
@@ -828,11 +831,13 @@
         </div>
     </section>
 
+    <!-- نافذة نظام الطلاب (تسجيل دخول / اختيار التسجيل) -->
     <div class="modal-overlay" id="studentGateModal">
         <div class="modal-box">
             <button class="close-modal" onclick="closeModal('studentGateModal')">X</button>
             <div class="modal-title" id="gateTitle">بوابة الطالب الإلكترونية</div>
             
+            <!-- شاشة السؤال عن التسجيل -->
             <div id="askRegisterView" style="text-align: center; padding: 20px 0;">
                 <p style="font-size: 16px; margin-bottom: 25px; font-weight: 500;">لم تسجل في المنصة بعد، هل تريد التسجيل لإنشاء حساب جديد؟</p>
                 <div style="display: flex; gap: 15px; justify-content: center;">
@@ -841,6 +846,7 @@
                 </div>
             </div>
 
+            <!-- شاشة تسجيل الدخول -->
             <div id="loginFormView" style="display: none;">
                 <div class="form-group">
                     <label>الاسم الرباعي للطالب:</label>
@@ -854,6 +860,7 @@
                 <p style="text-align:center; font-size:13px; margin-top:15px; color:#64748b;">ليس لديك حساب؟ <a href="#" onclick="showFormView('register')">سجل الآن</a></p>
             </div>
 
+            <!-- شاشة إنشاء حساب جديد -->
             <div id="registerFormView" style="display: none;">
                 <div class="form-group">
                     <label>الاسم الرباعي للطالب حصراً *</label>
@@ -903,13 +910,15 @@
         </div>
     </div>
 
+    <!-- نافذة لوحة تحكم الطالب (بعد الدخول الناجح) -->
     <div class="modal-overlay" id="studentDashboardModal">
         <div class="modal-box" style="max-width: 750px;">
             <button class="close-modal" onclick="closeModal('studentDashboardModal')">X</button>
             <div class="modal-title">لوحة بيانات الطالب المخصصة</div>
             
             <div id="dashboardContent">
-                </div>
+                <!-- تعبئة البيانات تلقائياً عبر جافا سكربت -->
+            </div>
         </div>
     </div>
 
@@ -917,7 +926,8 @@
         
         <main class="wiki-content">
             <article id="mainArticle">
-                </article>
+                <!-- سيتم ملء هذا المحتوى ديناميكياً حسب اختيار اللغة -->
+            </article>
         </main>
 
         <aside class="info-card">
@@ -1082,7 +1092,7 @@
                     <div id="notificationsBox">
                         <div class="notifications-box">Loading announcements from the database...</div>
                     </div>
-                    `
+                `
             }
         };
 
@@ -1118,7 +1128,6 @@
             document.getElementById('linkDigital').innerText = st.digital;
             document.getElementById('linkNotifications').innerText = st.notifications;
             document.getElementById('linkVision').innerText = st.vision;
-            document.getElementById('btnTelegram').innerText = st.tgBtn;
             document.getElementById('heroTitle').innerText = st.heroTitle;
             document.getElementById('heroDesc').innerText = st.heroDesc;
             document.getElementById('btnHeroSystem').innerText = st.heroSys;
@@ -1176,16 +1185,50 @@
             });
         }
 
-        /* --- نظام إدارة الطلاب البرمجي الجديد والربط بـ Firebase --- */
+        /* --- نظام إدارة الطلاب البرمجي والتفاعل مع الهيدر --- */
         
+        // دالة لاستخراج الاسم الأول فقط للترحيب
+        function getFirstName(fullName) {
+            if (!fullName) return "";
+            return fullName.trim().split(" ")[0];
+        }
+
+        // فحص حالة تسجيل الدخول وتحديث الهيدر ديناميكياً
+        function checkLoginStatus() {
+            const savedStudent = localStorage.getItem('loggedStudent');
+            const headerArea = document.getElementById('userHeaderArea');
+            
+            if (savedStudent) {
+                const studentObj = JSON.parse(savedStudent);
+                const firstName = getFirstName(studentObj.fullName);
+                
+                // تحديث الهيدر ليظهر الترحيب بالاسم الأول بدلاً من الزر
+                headerArea.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="font-weight: bold; color: var(--color-text-dark); font-size: 14px; cursor: pointer; background: #f1f5f9; padding: 6px 14px; border-radius: 20px; border: 1px solid #cbd5e1; transition: all 0.3s;" onclick="handleStudentGate()" onmouseover="this.style.borderColor='var(--color-blue)';" onmouseout="this.style.borderColor='#cbd5e1';">
+                            مرحباً، ${firstName} 👋
+                        </span>
+                    </div>
+                `;
+            } else {
+                // إرجاع زر تسجيل الدخول الأصلي
+                headerArea.innerHTML = `
+                    <button onclick="handleStudentGate()" class="lang-btn" id="btnAuthHeader" style="background-color: var(--color-blue); color: #fff; border: none; font-weight: bold;">تسجيل الدخول / إنشاء حساب</button>
+                `;
+            }
+        }
+
+        // تشغيل الفحص فور تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', () => {
+            checkLoginStatus();
+        });
+
         function handleStudentGate() {
-            // التحقق مما إذا كان الطالب مسجلاً مسبقاً في نفس المتصفح
             const savedStudent = localStorage.getItem('loggedStudent');
             if (savedStudent) {
                 const studentObj = JSON.parse(savedStudent);
                 loadStudentDashboard(studentObj.fullName);
             } else {
-                // إظهار واجهة السؤال عن الحساب
                 document.getElementById('studentGateModal').classList.add('active');
                 showFormView('ask');
             }
@@ -1205,7 +1248,6 @@
             else document.getElementById('gateTitle').innerText = "بوابة الطالب الإلكترونية";
         }
 
-        // تحديث خيارات الشعبة ديناميكياً بناءً على الصف المختار
         function updateClassOptions() {
             const grade = document.getElementById('regGrade').value;
             const selectClass = document.getElementById('regClassOption');
@@ -1226,7 +1268,6 @@
             });
         }
 
-        // معالجة رفع وحفظ استمارة التسجيل
         function processRegister() {
             const fullName = document.getElementById('regFullName').value.trim();
             const grade = document.getElementById('regGrade').value;
@@ -1234,7 +1275,7 @@
             const motherName = document.getElementById('regMotherName').value.trim();
             const motherFatherName = document.getElementById('regMotherFatherName').value.trim();
             const phone = document.getElementById('regPhone').value.trim();
-            const nationalId = document.getElementById('nationalId') ? document.getElementById('nationalId').value.trim() : document.getElementById('regNationalId').value.trim();
+            const nationalId = document.getElementById('regNationalId').value.trim();
             const password = document.getElementById('regPassword').value;
             const photoFile = document.getElementById('regPhotoFile').files[0];
 
@@ -1243,13 +1284,11 @@
                 return;
             }
 
-            // تحويل الصورة الشخصية إلى Base64 لحفظها في قاعدة البيانات مباشرة
             const reader = new FileReader();
             reader.readAsDataURL(photoFile);
             reader.onload = function () {
                 const base64Image = reader.result;
 
-                // إعداد هيكل البيانات الافتراضي للمواد بحسب الصف لتهيئة حقول المدرس
                 let defaultGrades = {};
                 let subjects = [];
                 if (grade === '1' || grade === '2') {
@@ -1273,13 +1312,13 @@
                     private_notifications: ""
                 };
 
-                // حفظ في Firebase تحت عقدة الطلاب باستخدام الاسم الرباعي كمفتاح فريد
                 database.ref('students/' + fullName).set(studentData, (error) => {
                     if (error) {
-                        alert('حدث خطأ أثناء حفظ البيانات، يرجى المحاولة لاحقاً.');
+                        alert('حدث خطأ أثناء حفظ البيانات!');
                     } else {
                         alert('تم إنشاء حسابك بنجاح يا بطل! يمكنك الآن الدخول لاستعراض لوحتك.');
                         localStorage.setItem('loggedStudent', JSON.stringify({ fullName }));
+                        checkLoginStatus(); // تحديث الهيدر فوراً بعد إنشاء الحساب
                         closeModal('studentGateModal');
                         loadStudentDashboard(fullName);
                     }
@@ -1287,7 +1326,6 @@
             };
         }
 
-        // عملية تسجيل الدخول
         function processLogin() {
             const fullName = document.getElementById('loginFullName').value.trim();
             const password = document.getElementById('loginPassword').value;
@@ -1301,15 +1339,15 @@
                 const student = snapshot.val();
                 if(student && student.password === password) {
                     localStorage.setItem('loggedStudent', JSON.stringify({ fullName }));
+                    checkLoginStatus(); // تحديث الهيدر فوراً بعد الدخول
                     closeModal('studentGateModal');
                     loadStudentDashboard(fullName);
                 } else {
-                    alert('الاسم أو الرمز السري غير صحيح! يرجى التأكد وإعادة المحاولة.');
+                    alert('الاسم أو الرمز السري غير صحيح!');
                 }
             });
         }
 
-        // جلب وبناء لوحة تحكم الطالب الكاملة
         function loadStudentDashboard(fullName) {
             database.ref('students/' + fullName).once('value').then((snapshot) => {
                 const student = snapshot.val();
@@ -1320,7 +1358,6 @@
                 
                 let gradeText = student.grade === '1' ? 'الأول متوسط' : student.grade === '2' ? 'الثاني متوسط' : 'الثالث متوسط';
                 
-                // 1. بناء القسم الخاص بالتبليغات الفردية (إذا وجدت)
                 let alertPvtHtml = '';
                 if(student.private_notifications && student.private_notifications.trim() !== "") {
                     alertPvtHtml = `
@@ -1330,7 +1367,6 @@
                     `;
                 }
 
-                // 2. بناء جداول الدرجات
                 let gradesHtml = '';
                 const formatPeriod = (pKey, title) => {
                     let tableRows = '';
@@ -1366,7 +1402,6 @@
                     </div>
                 `;
 
-                // دمج كل الأقسام وعرضها داخل الـ Modal
                 content.innerHTML = `
                     ${alertPvtHtml}
                     <div class="student-dashboard-grid">
@@ -1390,6 +1425,7 @@
 
         function logoutStudent() {
             localStorage.removeItem('loggedStudent');
+            checkLoginStatus(); // إعادة زر تسجيل الدخول الأصلي للهيدر فوراً
             closeModal('studentDashboardModal');
             alert('تم تسجيل الخروج بنجاح.');
         }
