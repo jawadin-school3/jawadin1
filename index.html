@@ -1373,100 +1373,79 @@
         }
 
         // جلب وبناء لوحة تحكم الطالب الكاملة بالتعديلات وهيكل الدرجات الجديد
-      function loadStudentDashboard(fullName) {
-    database.ref('students/' + fullName).once('value').then((snapshot) => {
-        const student = snapshot.val();
-        if(!student) return;
+        function loadStudentDashboard(fullName) {
+            database.ref('students/' + fullName).once('value').then((snapshot) => {
+                const student = snapshot.val();
+                if(!student) return;
 
-        const dashboardModal = document.getElementById('studentDashboardModal');
-        const content = document.getElementById('dashboardContent');
-        
-        let gradeText = student.grade === '1' ? 'الأول متوسط' : student.grade === '2' ? 'الثاني متوسط' : 'الثالث متوسط';
-        
-        // دالة عرض الجدول بشرط وجود درجات فقط
-        const formatPeriod = (pKey, title) => {
-            // إخفاء نهاية السنة للثالث متوسط
-            if (student.grade === '3' && pKey === 'final') return ''; 
-
-            let tableRows = '';
-            const pData = student.grades ? student.grades[pKey] : null;
-            
-            if(pData) {
-                for(let sub in pData) {
-                    let score = pData[sub];
-                    // عرض المادة فقط إذا كانت الدرجة موجودة وليست فارغة
-                    if (score !== undefined && score !== "" && score !== null) {
-                        let scoreStyle = score === "لم تعلن بعد" ? "color: #94a3b8; font-style: italic;" : "font-weight: bold; color: var(--color-blue);";
-                        tableRows += `<tr><td><strong>${sub}</strong></td><td style="${scoreStyle}">${score}</td></tr>`;
-                    }
+                const dashboardModal = document.getElementById('studentDashboardModal');
+                const content = document.getElementById('dashboardContent');
+                
+                let gradeText = student.grade === '1' ? 'الأول متوسط' : student.grade === '2' ? 'الثاني متوسط' : 'الثالث متوسط';
+                
+                // بناء التنبيه المخصص السريع (إن وجد في الأعلى)
+                let alertPvtHtml = '';
+                if(student.private_notification && student.private_notification.trim() !== "") {
+                    alertPvtHtml = `
+                        <div class="badge-alert-pvt">
+                            <strong>📢 إشعار هام:</strong> يرجى مراجعة التبليغات المخصصة لك في أسفل اللوحة.
+                        </div>
+                    `;
                 }
-            }
-            
-            // إذا لم تكن هناك أي مادة بجدول معين، لا نعرض الجدول نهائياً
-            if(!tableRows) return ''; 
-            
-            return `
-                <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
-                    <h4 style="text-align: center; margin-bottom: 5px; color: #475569;">${title}</h4>
-                    <table class="grades-table">
-                        <thead><tr><th>المادة</th><th>الدرجة</th></tr></thead>
-                        <tbody>${tableRows}</tbody>
-                    </table>
-                </div>
-            `;
-        };
 
-        // بناء جداول الكورس الأول فقط
-        let gradesHtml = `
-            <div class="grade-section-title">📊 نتائج امتحانات الكورس الأول</div>
-            <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
-                ${formatPeriod('c1_m1', 'الشهر الأول')}
-                ${formatPeriod('c1_m2', 'الشهر الثاني')}
-                ${formatPeriod('mid', 'نصف السنة')}
-            </div>
-        `;
-        
-        // إضافة الكورس الثاني فقط إذا لم يكن الطالب في الثالث متوسط
-        if (student.grade !== '3') {
-            gradesHtml += `
-                <div class="grade-section-title">📊 نتائج امتحانات الكورس الثاني</div>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
-                    ${formatPeriod('c2_m1', 'الشهر الأول')}
-                    ${formatPeriod('c2_m2', 'الشهر الثاني')}
-                    ${formatPeriod('final', 'نهاية السنة')}
-                </div>
-            `;
-        }
+                // دالة بناء جداول الدرجات التفاعلية
+                const formatPeriod = (pKey, title) => {
+                    let tableRows = '';
+                    const pData = student.grades ? student.grades[pKey] : null;
+                    if(pData) {
+                        for(let sub in pData) {
+                            let score = pData[sub];
+                            let scoreStyle = score === "لم تعلن بعد" ? "color: #94a3b8; font-style: italic;" : "font-weight: bold; color: var(--color-blue);";
+                            tableRows += `<tr><td><strong>${sub}</strong></td><td style="${scoreStyle}">${score}</td></tr>`;
+                        }
+                    }
+                    if(!tableRows) return ''; // إذا لم تكن هناك درجات للجدول (كأن يكون تم استثناء الأدب بالكامل منه ولم يبق شيء)
+                    
+                    return `
+                        <div style="flex: 1; min-width: 200px;">
+                            <h4 style="text-align: center; margin-bottom: 5px; color: #475569;">${title}</h4>
+                            <table class="grades-table">
+                                <thead><tr><th>المادة</th><th>الدرجة</th></tr></thead>
+                                <tbody>${tableRows}</tbody>
+                            </table>
+                        </div>
+                    `;
+                };
 
-        content.innerHTML = `
-            <div class="student-dashboard-grid">
-                <img src="${student.photo}" class="dashboard-avatar" alt="صورة الطالب">
-                <div class="dashboard-info-text">
-                    <h3 style="font-size: 18px; color: var(--color-blue); margin-bottom: 8px;">${student.fullName}</h3>
-                    <p>الصف: <strong>${gradeText}</strong></p>
-                </div>
-            </div>
-            ${gradesHtml}
-        `;
+                // بناء الترتيب الزمني الجديد للجداول مع درجات نصف ونهاية السنة
+                let gradesHtml = '';
+                gradesHtml += `
+                    <div class="grade-section-title">📊 نتائج امتحانات الكورس الأول </div>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                        ${formatPeriod('c1_m1', 'الشهر الأول')}
+                        ${formatPeriod('c1_m2', 'الشهر الثاني')}
+                        ${formatPeriod('mid', 'نصف السنة')}
+                    </div>
+                    
+                    <div class="grade-section-title">📊 نتائج امتحانات الكورس الثاني </div>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                        ${formatPeriod('c2_m1', 'الشهر الأول')}
+                        ${formatPeriod('c2_m2', 'الشهر الثاني')}
+                        ${formatPeriod('final', 'نهاية السنة')}
+                    </div>
+                `;
 
-        dashboardModal.classList.add('active');
-    });
-}
-
-        content.innerHTML = `
-            <div class="student-dashboard-grid">
-                <img src="${student.photo}" class="dashboard-avatar" alt="صورة الطالب">
-                <div class="dashboard-info-text">
-                    <h3 style="font-size: 18px; color: var(--color-blue); margin-bottom: 8px;">${student.fullName}</h3>
-                    <p>الصف: <strong>${gradeText}</strong></p>
-                </div>
-            </div>
-            ${gradesHtml}
-        `;
-
-        dashboardModal.classList.add('active');
-    });
-}
+                // بناء قسم التبليغات المخصصة للطالب من الأستاذ أسفل قائمة الدرجات
+                let teacherNotificationsHtml = `
+                    <div class="dashboard-private-notifications">
+                        <h4>✉️ التبليغات والرسائل الخاصة من الكادر التدريسي:</h4>
+                        <p style="font-size: 14.5px; color: #334155; line-height: 1.6;">
+                            ${(student.private_notification && student.private_notification.trim() !== "") 
+                                ? student.private_notification 
+                                : "لا توجد تبليغات خاصة بك حالياً من قِبل أساتذتك. استمر في تفوقك!"}
+                        </p>
+                    </div>
+                `;
 
                 // دمج كل الأقسام وعرضها داخل الـ Modal
                 content.innerHTML = `
