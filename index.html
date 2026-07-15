@@ -1374,49 +1374,77 @@
         }
 
         // جلب وبناء لوحة تحكم الطالب الكاملة بالتعديلات وهيكل الدرجات الجديد
-        function loadStudentDashboard(fullName) {
-            database.ref('students/' + fullName).once('value').then((snapshot) => {
-                const student = snapshot.val();
-                if(!student) return;
+      // جلب وبناء لوحة تحكم الطالب الكاملة بالتعديلات وهيكل الدرجات الجديد
+function loadStudentDashboard(fullName) {
+    database.ref('students/' + fullName).once('value').then((snapshot) => {
+        const student = snapshot.val();
+        if(!student) return;
 
-                const dashboardModal = document.getElementById('studentDashboardModal');
-                const content = document.getElementById('dashboardContent');
-                
-                let gradeText = student.grade === '1' ? 'الأول متوسط' : student.grade === '2' ? 'الثاني متوسط' : 'الثالث متوسط';
-                
-                // بناء التنبيه المخصص السريع (إن وجد في الأعلى)
-                let alertPvtHtml = '';
-                if(student.private_notifications && student.private_notifications.trim() !== "") {
-                    alertPvtHtml = `
-                        <div class="badge-alert-pvt">
-                            <strong>📢 إشعار هام:</strong> يرجى مراجعة التبليغات المخصصة لك في أسفل اللوحة.
-                        </div>
-                    `;
-                }
-
-                // دالة بناء جداول الدرجات التفاعلية
-                const formatPeriod = (pKey, title) => {
-                    let tableRows = '';
-                    const pData = student.grades ? student.grades[pKey] : null;
-                    if(pData) {
-                        for(let sub in pData) {
-                            let score = pData[sub];
-                            let scoreStyle = score === "لم تعلن بعد" ? "color: #94a3b8; font-style: italic;" : "font-weight: bold; color: var(--color-blue);";
-                            tableRows += `<tr><td><strong>${sub}</strong></td><td style="${scoreStyle}">${score}</td></tr>`;
-                        }
+        const dashboardModal = document.getElementById('studentDashboardModal');
+        const content = document.getElementById('dashboardContent');
+        
+        let gradeText = student.grade === '1' ? 'الأول متوسط' : student.grade === '2' ? 'الثاني متوسط' : 'الثالث متوسط';
+        
+        // دالة بناء جداول الدرجات التفاعلية مع استثناء الأدب للثالث
+        const formatPeriod = (pKey, title) => {
+            let tableRows = '';
+            const pData = student.grades ? student.grades[pKey] : null;
+            if(pData) {
+                for(let sub in pData) {
+                    // شرط استثناء الأدب للثالث المتوسط في نصف ونهاية السنة
+                    if (student.grade === '3' && sub === 'ادب' && (pKey === 'نصف_السنة' || pKey === 'نهاية_السنة')) {
+                        continue; 
                     }
-                    if(!tableRows) return ''; // إذا لم تكن هناك درجات للجدول (كأن يكون تم استثناء الأدب بالكامل منه ولم يبق شيء)
-                    
-                    return `
-                        <div style="flex: 1; min-width: 220px;">
-                            <h4 style="text-align: center; margin-bottom: 5px; color: #475569;">${title}</h4>
-                            <table class="grades-table">
-                                <thead><tr><th>المادة</th><th>الدرجة</th></tr></thead>
-                                <tbody>${tableRows}</tbody>
-                            </table>
-                        </div>
-                    `;
-                };
+                    let score = pData[sub];
+                    let scoreStyle = score === "لم تعلن بعد" ? "color: #94a3b8; font-style: italic;" : "font-weight: bold; color: var(--color-blue);";
+                    tableRows += `<tr><td><strong>${sub}</strong></td><td style="${scoreStyle}">${score}</td></tr>`;
+                }
+            }
+            if(!tableRows) return '';
+            
+            return `
+                <div style="flex: 1; min-width: 220px;">
+                    <h4 style="text-align: center; margin-bottom: 5px; color: #475569;">${title}</h4>
+                    <table class="grades-table">
+                        <thead><tr><th>المادة</th><th>الدرجة</th></tr></thead>
+                        <tbody>${tableRows}</tbody>
+                    </table>
+                </div>
+            `;
+        };
+
+        // الترتيب الجديد: الكورسات + نصف السنة، ثم الكورسات + نهاية السنة
+        let gradesHtml = `
+            <div class="grade-section-title">📊 نتائج امتحانات الكورس الأول ونصف السنة</div>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                ${formatPeriod('كورس1_شهر1', 'الشهر الأول')}
+                ${formatPeriod('كورس1_شهر2', 'الشهر الثاني')}
+                ${formatPeriod('نصف_السنة', 'درجات نصف السنة')}
+            </div>
+            
+            <div class="grade-section-title">📊 نتائج امتحانات الكورس الثاني ونهاية السنة</div>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                ${formatPeriod('كورس2_شهر1', 'الشهر الأول')}
+                ${formatPeriod('كورس2_شهر2', 'الشهر الثاني')}
+                ${formatPeriod('نهاية_السنة', 'درجات نهاية السنة')}
+            </div>
+        `;
+
+        content.innerHTML = `
+            <div class="student-dashboard-grid">
+                <img src="${student.photo}" class="dashboard-avatar" alt="صورة الطالب">
+                <div class="dashboard-info-text">
+                    <h3 style="font-size: 18px; color: var(--color-blue); margin-bottom: 8px;">${student.fullName}</h3>
+                    <p>الصف: <strong>${gradeText}</strong> | الشعبة: <strong>${student.classOption}</strong></p>
+                    <button class="btn" style="padding: 4px 12px; font-size:12px; background:#e2e8f0; color:#475569;" onclick="logoutStudent()">تسجيل الخروج</button>
+                </div>
+            </div>
+            ${gradesHtml}
+        `;
+
+        dashboardModal.classList.add('active');
+    });
+}
 
                 // بناء الترتيب الزمني الجديد للجداول (درجات نصف السنة بعد الكورس الأول، ونهاية السنة بعد الكورس الثاني)
                 let gradesHtml = '';
