@@ -1374,47 +1374,32 @@
 
         // جلب وبناء لوحة تحكم الطالب الكاملة بالتعديلات وهيكل الدرجات الجديد
         function loadStudentDashboard(fullName) {
-    database.ref('students/' + fullName).once('value').then((snapshot) => {
-        const student = snapshot.val();
-        if(!student) return;
+            database.ref('students/' + fullName).once('value').then((snapshot) => {
+                const student = snapshot.val();
+                if(!student) return;
 
-        const content = document.getElementById('dashboardContent');
-        
-        // دالة بناء الجداول
-        const formatPeriod = (pKey, title) => {
-            // الشرط: إذا كان الطالب ثالث متوسط والفترة هي نهاية السنة، لا تعرض الجدول
-            if (student.grade === '3' && pKey === 'n_year') return ''; 
+                const dashboardModal = document.getElementById('studentDashboardModal');
+                const content = document.getElementById('dashboardContent');
+                
+                let gradeText = student.grade === '1' ? 'الأول متوسط' : student.grade === '2' ? 'الثاني متوسط' : 'الثالث متوسط';
+                
+                // تحديد قائمة المواد الثابتة بناءً على مرحلة الطالب المسجلة لمنع اختفائها أبداً
+                let currentSubjects = [];
+                if (student.grade === '1' || student.grade === '2') {
+                    currentSubjects = ['عربي', 'اسلاميه', 'انكليزي', 'رياضيات', 'اجتماعيات', 'احياء', 'كيمياء', 'فيزياء', 'اخلاقية', 'فنية'];
+                } else if (student.grade === '3') {
+                    currentSubjects = ['عربي', 'اسلامية', 'ادب', 'اجتماعيات', 'رياضيات', 'انكليزي', 'احياء', 'فيزياء', 'كيمياء'];
+                }
 
-            let tableRows = '';
-            const pData = student.grades ? student.grades[pKey] : null;
-            
-            // (باقي الكود لبناء الصفوف كما كان في ملفك السابق)
-            // ... تأكد من استخدام نفس المنطق الذي كان عندك ...
-            return `<div><h4>${title}</h4><table>...</table></div>`;
-        };
-
-        // بناء التبليغ (تم تصحيح المسار ليكون مطابقاً للأستاذ)
-        const teacherNotificationsHtml = `
-            <div class="dashboard-private-notifications">
-                <h4>✉️ تبليغات الأستاذ:</h4>
-                <p>${student.private_notification || "لا توجد تبليغات خاصة حالياً."}</p>
-            </div>
-        `;
-
-        // بناء الجداول
-        let gradesHtml = `
-            ${formatPeriod('كورس1_شهر1', 'الشهر الأول')}
-            ${formatPeriod('كورس2_شهر1', 'الشهر الأول (الكورس الثاني)')}
-            ${student.grade !== '3' ? formatPeriod('n_year', 'امتحان نهاية السنة') : '<div class="alert">نتائج نهاية السنة للثالث متوسط تُعلن منقبل وزارة التربية.</div>'}
-        `;
-
-        content.innerHTML = `
-            ${gradesHtml}
-            ${teacherNotificationsHtml}
-        `;
-        document.getElementById('studentDashboardModal').classList.add('active');
-    });
-}
+                // بناء التنبيه المخصص السريع (إن وجد في الأعلى)
+                let alertPvtHtml = '';
+                if(student.private_notifications && student.private_notifications.trim() !== "") {
+                    alertPvtHtml = `
+                        <div class="badge-alert-pvt">
+                            <strong>📢 إشعار هام:</strong> يرجى مراجعة التبليغات المخصصة لك في أسفل اللوحة.
+                        </div>
+                    `;
+                }
 
                 // دالة بناء جداول الدرجات التفاعلية
                 const formatPeriod = (pKey, title) => {
