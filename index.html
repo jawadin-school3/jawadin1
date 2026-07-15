@@ -684,6 +684,26 @@
             margin-bottom: 15px;
         }
 
+        /* تنسيق قسم التبليغات الخاصة داخل لوحة التحكم */
+        .dashboard-private-notifications {
+            margin-top: 25px;
+            background: #fffbeb;
+            border: 1px solid #fef3c7;
+            padding: 20px;
+            border-radius: 12px;
+            border-right: 4px solid #f59e0b;
+        }
+        
+        .dashboard-private-notifications h4 {
+            color: #b45309;
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         footer {
             background-color: var(--bg-secondary);
             border-top: 1px solid #e5e7eb;
@@ -812,7 +832,8 @@
                 </ul>
             </nav>
             <div class="header-left">
-                <a href="https://telegram.me/jawadin3" target="_blank" class="lang-btn" id="btnTelegram">قناة التلغرام</a>
+                <!-- دكمة الدخول الفورية التفاعلية المحسنة بالاسم الذكي -->
+                <button onclick="handleStudentGate()" class="lang-btn" id="btnAuthHeader" style="background-color: var(--color-blue); color: white; border: none; font-weight: bold; padding: 8px 18px; transition: all 0.3s ease;">تسجيل دخول / انشاء حساب</button>
             </div>
         </div>
     </header>
@@ -909,7 +930,7 @@
             <div class="modal-title">لوحة بيانات الطالب المخصصة</div>
             
             <div id="dashboardContent">
-                </div>
+            </div>
         </div>
     </div>
 
@@ -917,7 +938,7 @@
         
         <main class="wiki-content">
             <article id="mainArticle">
-                </article>
+            </article>
         </main>
 
         <aside class="info-card">
@@ -990,7 +1011,7 @@
                     </div>
 
                     <p style="margin-top: 25px;">
-                        <strong>متوسطة الجوادين للبنين</strong> هي مدرسة متوسطة حكومية مخصصة للبنين تقع في العاصمة العراقية <strong>بغداد</strong>، وتحديداً في منطقة <strong>الشعب</strong> التابعة لمديرية تربية الرصافة الأولى. تُصنف المدرسة كواحدة من أشهر المدارس المتوسطة وأبرزها في المنطقة؛ حيث تقدم خدماتها التعليمية والتربوية لجمهور واسع من الطلبة يتجاوز عددهم الألف طالب، وتضم تحت سقفها المراحل الدراسية الثلاث المعتمدة في النظام التعليمي العراقي للمرحلة المتوسطة وهي: الصف الأول المتوسط، والصف الثاني المتوسط، والصف الثالث المتوسط، ويشرف على تدريسهم كادر تعليمي وتدريسي متميز ومؤهل علمياً.
+                        <strong>متوسطة الجوادين للبنين</strong> هي مدرسة متوسطة حكومية مخصصة للبنين تقع في العاصمة العراقية <strong>بغداد</strong>، وتحديداً في منطقة <strong>الشعب</strong> التابعة لمديرية تربية الرصافة الأولى. تُصنف المدرسة كواحدة من أشهر المدارس المتوسطة وأبرزها في المنطقة؛ حيث تقدم خدماتها التعليمية والتربوية لجمهور واسع من الطلبة يتجاوز عددهم الألف طالب، وتضم تحت سقفها المراحل الدراسية الثلاث المعتمدة في النظام التعليمي العراقي للمرحلة المتوسطة وهي: الصف الأول المتوسط، والصف الثاني المتوسط، والصف الثالث المتوسط، ويشرف على تدريسهم كادر تعليمي وتدريسي متميز ومؤهل علمياً.[cite: 2]
                     </p>
 
                     <h2>التأسيس والتاريخ والنمو الأكاديمي</h2>
@@ -1001,12 +1022,12 @@
                         خلال مسيرتها التي تمتد لأكثر من عقد ونصف، قامت المدرسة بتخريج آلاف الطلبة الذين واصلوا مسيرتهم بنجاح في الإعداديات والجامعات العراقية المرموقة. وتتميز الإدارة بحرصها على الانضباط العالي والالتزام بالزي المدرسي الموحد، وتوطيد العلاقات الاجتماعية الهادفة بين الملاك التدريسي وأولياء الأمور من خلال مجالس الآباء والمعلمين الدورية لتذليل العقبات الدراسية التي قد تواجه الطلبة في مسيرتهم الأكاديمية.
                     </p>
                     <p>
-                        تواصل المدرسة تحديث مخرجاتها التعليمية باستمرار من خلال التدريب والتطوير المستمر لكادرها التدريسي ودمج الأساليب الحديثة مع التعليم التقليدي، مما أثمر عن تحقيق نسب نجاح متميزة في الامتحانات الوزارية للصف الثالث المتوسط على مستوى قاطع الشعب والمديرية العامة لتربية الرصافة الأولى لسنوات متعددة.
+                        تواصل المدرسة تحديث مخرجاتها التعليمية باستمرار من خلال التدريب والتطوير المستمر لكادرها التدريسي ودمج الأساليب الحديثة مع التعليم التقليدي، مما أثمر عن تحقيق نسب نجاح متميزة في الامتحانات الوزارية للصف الثالث المتوسط على مستوى قاطع الشعب والمديرية العامة لتربية الرصافة الأولى لسنوات متعددة.[cite: 2]
                     </p>
 
                     <h2 id="system">النظام الدراسي والمرافق البناية</h2>
                     <p>
-                        تلتزم المدرسة التزاماً كاملاً بتطبيق المناهج والقرارات الدراسية الرسمية الصادرة عن وزارة التربية العراقية. وتولي إدارة المدرسة والكادر التدريسي اهتماماً خاصاً واستثنائياً بطلبة الصف الثالث المتوسط؛ نظراً للأهمية المصيرية لهذه المرحلة الدراسية، حيث تعمل على تهيئتهم وإعدادهم بشكل كامل لخوض غمار الامتحانات الوزارية النهائية (الباكالوريا)، ويتم ذلك عبر خطة تعليمية تشمل تقديم الدعم العلمي المتواصل والمراجعات المنهجية المستمرة للمواد الدراسية.
+                        تلتزم المدرسة التزاماً كاملاً بتطبيق المناهج والقرارات الدراسية الرسمية الصادرة عن وزارة التربية العراقية. وتولي إدارة المدرسة والكادر التدريسي اهتماماً خاصاً واستثنائياً بطلبة الصف الثالث المتوسط؛ نظراً للأهمية المصيرية لهذه المرحلة الدراسية، حيث تعمل على تهيئتهم وإعدادهم بشكل كامل لخوض غمار الامتحانات الوزارية النهائية (الباكالوريا)، ويتم ذلك عبر خطة تعليمية تشمل تقديم الدعم العلمي المتواصل والمراجعات المنهجية المستمرة للمواد الدراسية.[cite: 2]
                     </p>
                     <p>
                         وتتكون البناية المدرسية لمتوسطة الجوادين للبنين من عدة مرافق أساسية تم تصميمها لخدمة العملية التعليمية وتوفير سبل الراحة للطلبة والكادر، وتشتمل هذه المرافق على:
@@ -1063,7 +1084,7 @@
                                 <span class="vision-card-number">٤</span>
                                 <span class="vision-card-title">دعم الثالث المتوسط</span>
                             </div>
-                            <p class="vision-card-text">الاهتمام الفائق بطلبة الصف الثالث المتوسط وتقديم كافة أشكال الدعم العلمي، المحاضرات الإضافية والمراجعات المكثفة لضمان حصولهم على أعلى المعدلات والتميز في امتحانات البكالوريا الوزارية.</p>
+                            <p class="vision-card-text">الاهتمام الفائق بطلبة الصف الثالث المتوسط وتقديم كافة أشكال الدعم العلمي، المحاضرات الإضافية والمراجعات المكثفة لضمان حصولهم على أعلى المعدلات والتميز في امتحانات البكالوريا الوزارية.[cite: 2]</p>
                         </div>
 
                         <div class="vision-card">
@@ -1089,7 +1110,7 @@
         const staticTranslations = {
             ar: {
                 title: "الموقع الرسمي لمتوسطة الجوادين للبنين",
-                logo: "الجوادين<span>.</span>", home: "الرئيسية", system: "النظام الدراسي", digital: "التواصل الرقمي", notifications: "التبليغات", vision: "رؤية المدرسة", tgBtn: "قناة التلغرام",
+                logo: "الجوادين<span>.</span>", home: "الرئيسية", system: "النظام الدراسي", digital: "التواصل الرقمي", notifications: "التبليغات", vision: "رؤية المدرسة",
                 heroTitle: "متوسطة الجوادين للبنين", heroDesc: "صرح علمي متميز يسعى لبناء أجيال واعدة قادرة على التفوق والنجاح المستمر.", heroSys: "النظام الدراسي والمرافق", heroRes: "نتائج امتحاناتي والتبليغات المخصصة",
                 sideTitle: "شعار متوسطة الجوادين للبنين", thEst: "التأسيس", tdEst: "2008م", thDir: "المدير", tdDir: "السيد فيصل برغش تايه", thLoc: "المكان", tdLoc: "بغداد، الشعب، الرصافة الأولى", thCountry: "البلد", tdCountry: "العراق 🇮🇶", thCoord: "الإحداثيات", thWeb: "المواقع الإلكترونية",
                 tg1: "قناة الأول متوسط", tg2: "قناة الثاني متوسط", tg3: "قناة الثالث متوسط", tgStudent: "الدعم الطلابي",
@@ -1097,7 +1118,7 @@
             },
             en: {
                 title: "Official Site - Al-Jawadin Intermediate School",
-                logo: "Al-Jawadin<span>.</span>", home: "Home", system: "Academic System", digital: "Digital Communication", notifications: "Announcements", vision: "School Vision", tgBtn: "Telegram Channel",
+                logo: "Al-Jawadin<span>.</span>", home: "Home", system: "Academic System", digital: "Digital Communication", notifications: "Announcements", vision: "School Vision",
                 heroTitle: "Al-Jawadin School for Boys", heroDesc: "A distinguished educational monument seeking to build promising generations capable of continuous excellence.", heroSys: "System & Facilities", heroRes: "My Results & Dashboard",
                 sideTitle: "Al-Jawadin School Badge", thEst: "Established", tdEst: "2008", thDir: "Principal", tdDir: "Mr. Faisal Barghash Tayeh", thLoc: "Location", tdLoc: "Baghdad, Al-Shaab, Rusafa 1st", thCountry: "Country", tdCountry: "Iraq 🇮🇶", thCoord: "Coordinates", thWeb: "Websites",
                 tg1: "1st Grade Channel", tg2: "2nd Grade Channel", tg3: "3rd Grade Channel", tgStudent: "Student Support",
@@ -1118,7 +1139,6 @@
             document.getElementById('linkDigital').innerText = st.digital;
             document.getElementById('linkNotifications').innerText = st.notifications;
             document.getElementById('linkVision').innerText = st.vision;
-            document.getElementById('btnTelegram').innerText = st.tgBtn;
             document.getElementById('heroTitle').innerText = st.heroTitle;
             document.getElementById('heroDesc').innerText = st.heroDesc;
             document.getElementById('btnHeroSystem').innerText = st.heroSys;
@@ -1140,12 +1160,29 @@
             document.getElementById('linkTgStudent').innerText = st.tgStudent;
             document.getElementById('footerText').innerText = st.footerText;
             document.getElementById('footerCredits').innerHTML = st.footerCredits;
+            
+            updateHeaderAuthButton();
             fetchNotificationsFromFirebase();
         }
 
         function selectLanguage(lang) {
             document.getElementById('langOverlay').classList.add('hidden');
             applyTranslations(lang);
+        }
+
+        // دالة لتحديث حالة الزر العلوي (تسجيل الدخول / اسم الطالب)
+        function updateHeaderAuthButton() {
+            const savedStudent = localStorage.getItem('loggedStudent');
+            const authBtn = document.getElementById('btnAuthHeader');
+            if (savedStudent) {
+                const studentObj = JSON.parse(savedStudent);
+                const firstName = studentObj.fullName.split(' ')[0] || "الطالب";
+                authBtn.innerText = `مرحباً، ${firstName} 👋`;
+                authBtn.style.backgroundColor = "var(--color-green)";
+            } else {
+                authBtn.innerText = currentLang === 'ar' ? "تسجيل دخول / إنشاء حساب" : "Login / Register";
+                authBtn.style.backgroundColor = "var(--color-blue)";
+            }
         }
 
         function fetchNotificationsFromFirebase() {
@@ -1179,13 +1216,11 @@
         /* --- نظام إدارة الطلاب البرمجي الجديد والربط بـ Firebase --- */
         
         function handleStudentGate() {
-            // التحقق مما إذا كان الطالب مسجلاً مسبقاً في نفس المتصفح
             const savedStudent = localStorage.getItem('loggedStudent');
             if (savedStudent) {
                 const studentObj = JSON.parse(savedStudent);
                 loadStudentDashboard(studentObj.fullName);
             } else {
-                // إظهار واجهة السؤال عن الحساب
                 document.getElementById('studentGateModal').classList.add('active');
                 showFormView('ask');
             }
@@ -1205,7 +1240,6 @@
             else document.getElementById('gateTitle').innerText = "بوابة الطالب الإلكترونية";
         }
 
-        // تحديث خيارات الشعبة ديناميكياً بناءً على الصف المختار
         function updateClassOptions() {
             const grade = document.getElementById('regGrade').value;
             const selectClass = document.getElementById('regClassOption');
@@ -1226,7 +1260,7 @@
             });
         }
 
-        // معالجة رفع وحفظ استمارة التسجيل
+        // معالجة رفع وحفظ استمارة التسجيل ومنع التكرار تماماً
         function processRegister() {
             const fullName = document.getElementById('regFullName').value.trim();
             const grade = document.getElementById('regGrade').value;
@@ -1234,7 +1268,7 @@
             const motherName = document.getElementById('regMotherName').value.trim();
             const motherFatherName = document.getElementById('regMotherFatherName').value.trim();
             const phone = document.getElementById('regPhone').value.trim();
-            const nationalId = document.getElementById('nationalId') ? document.getElementById('nationalId').value.trim() : document.getElementById('regNationalId').value.trim();
+            const nationalId = document.getElementById('regNationalId').value.trim();
             const password = document.getElementById('regPassword').value;
             const photoFile = document.getElementById('regPhotoFile').files[0];
 
@@ -1243,51 +1277,80 @@
                 return;
             }
 
-            // تحويل الصورة الشخصية إلى Base64 لحفظها في قاعدة البيانات مباشرة
-            const reader = new FileReader();
-            reader.readAsDataURL(photoFile);
-            reader.onload = function () {
-                const base64Image = reader.result;
+            // منع التكرار: فحص الحسابات السابقة في Firebase
+            database.ref('students').once('value').then((snapshot) => {
+                const allStudents = snapshot.val();
+                let exists = false;
 
-                // إعداد هيكل البيانات الافتراضي للمواد بحسب الصف لتهيئة حقول المدرس
-                let defaultGrades = {};
-                let subjects = [];
-                if (grade === '1' || grade === '2') {
-                    subjects = ['عربي', 'اسلاميه', 'انكليزي', 'رياضيات', 'اجتماعيات', 'احياء', 'كيمياء', 'فيزياء', 'اخلاقية', 'فنية'];
-                } else if (grade === '3') {
-                    subjects = ['عربي', 'اسلامية', 'ادب', 'اجتماعيات', 'رياضيات', 'انكليزي', 'احياء', 'فيزياء', 'كيمياء'];
+                if (allStudents) {
+                    if (allStudents[fullName]) {
+                        exists = true;
+                    } else {
+                        for (let key in allStudents) {
+                            if (allStudents[key].nationalId === nationalId) {
+                                exists = true;
+                                break;
+                            }
+                        }
+                    }
                 }
 
-                const periods = ['كورس1_شهر1', 'كورس1_شهر2', 'كورس2_شهر1', 'كورس2_شهر2'];
-                periods.forEach(p => {
-                    defaultGrades[p] = {};
-                    subjects.forEach(sub => {
-                        defaultGrades[p][sub] = "لم تعلن بعد";
-                    });
-                });
+                if (exists) {
+                    alert('خطأ: يوجد نفس هذه المعلومات في المنصة مسبقاً!');
+                    return;
+                }
 
-                const studentData = {
-                    fullName, grade, classOption: classOpt, motherName, motherFatherName, phone, nationalId, password,
-                    photo: base64Image,
-                    grades: defaultGrades,
-                    private_notifications: ""
-                };
+                // تحويل الصورة الشخصية وحفظ البيانات بعد التأكد من عدم التكرار
+                const reader = new FileReader();
+                reader.readAsDataURL(photoFile);
+                reader.onload = function () {
+                    const base64Image = reader.result;
 
-                // حفظ في Firebase تحت عقدة الطلاب باستخدام الاسم الرباعي كمفتاح فريد
-                database.ref('students/' + fullName).set(studentData, (error) => {
-                    if (error) {
-                        alert('حدث خطأ أثناء حفظ البيانات، يرجى المحاولة لاحقاً.');
-                    } else {
-                        alert('تم إنشاء حسابك بنجاح يا بطل! يمكنك الآن الدخول لاستعراض لوحتك.');
-                        localStorage.setItem('loggedStudent', JSON.stringify({ fullName }));
-                        closeModal('studentGateModal');
-                        loadStudentDashboard(fullName);
+                    let defaultGrades = {};
+                    let subjects = [];
+                    // تحديد المواد حسب الصف
+                    if (grade === '1' || grade === '2') {
+                        subjects = ['عربي', 'اسلاميه', 'انكليزي', 'رياضيات', 'اجتماعيات', 'احياء', 'كيمياء', 'فيزياء', 'اخلاقية', 'فنية'];
+                    } else if (grade === '3') {
+                        subjects = ['عربي', 'اسلامية', 'ادب', 'اجتماعيات', 'رياضيات', 'انكليزي', 'احياء', 'فيزياء', 'كيمياء'];
                     }
-                });
-            };
+
+                    // تهيئة الدرجات للمراحل الزمنية بالترتيب الصحيح مع درجات نصف ونهاية السنة
+                    const periods = ['كورس1_شهر1', 'كورس1_شهر2', 'نصف_السنة', 'كورس2_شهر1', 'كورس2_شهر2', 'نهاية_السنة'];
+                    periods.forEach(p => {
+                        defaultGrades[p] = {};
+                        subjects.forEach(sub => {
+                            // شرط استثناء مادة الأدب للثالث متوسط في نصف السنة ونهاية السنة
+                            if (grade === '3' && sub === 'ادب' && (p === 'نصف_السنة' || p === 'نهاية_السنة')) {
+                                // تترك فارغة وخالية للامتثال لشروط الثالث متوسط
+                            } else {
+                                defaultGrades[p][sub] = "لم تعلن بعد";
+                            }
+                        });
+                    });
+
+                    const studentData = {
+                        fullName, grade, classOption: classOpt, motherName, motherFatherName, phone, nationalId, password,
+                        photo: base64Image,
+                        grades: defaultGrades,
+                        private_notifications: ""
+                    };
+
+                    database.ref('students/' + fullName).set(studentData, (error) => {
+                        if (error) {
+                            alert('حدث خطأ أثناء حفظ البيانات، يرجى المحاولة لاحقاً.');
+                        } else {
+                            alert('تم إنشاء حسابك بنجاح يا بطل! يمكنك الآن الدخول لاستعراض لوحتك.');
+                            localStorage.setItem('loggedStudent', JSON.stringify({ fullName }));
+                            updateHeaderAuthButton();
+                            closeModal('studentGateModal');
+                            loadStudentDashboard(fullName);
+                        }
+                    });
+                };
+            });
         }
 
-        // عملية تسجيل الدخول
         function processLogin() {
             const fullName = document.getElementById('loginFullName').value.trim();
             const password = document.getElementById('loginPassword').value;
@@ -1301,6 +1364,7 @@
                 const student = snapshot.val();
                 if(student && student.password === password) {
                     localStorage.setItem('loggedStudent', JSON.stringify({ fullName }));
+                    updateHeaderAuthButton();
                     closeModal('studentGateModal');
                     loadStudentDashboard(fullName);
                 } else {
@@ -1309,7 +1373,7 @@
             });
         }
 
-        // جلب وبناء لوحة تحكم الطالب الكاملة
+        // جلب وبناء لوحة تحكم الطالب الكاملة بالتعديلات وهيكل الدرجات الجديد
         function loadStudentDashboard(fullName) {
             database.ref('students/' + fullName).once('value').then((snapshot) => {
                 const student = snapshot.val();
@@ -1320,18 +1384,17 @@
                 
                 let gradeText = student.grade === '1' ? 'الأول متوسط' : student.grade === '2' ? 'الثاني متوسط' : 'الثالث متوسط';
                 
-                // 1. بناء القسم الخاص بالتبليغات الفردية (إذا وجدت)
+                // بناء التنبيه المخصص السريع (إن وجد في الأعلى)
                 let alertPvtHtml = '';
                 if(student.private_notifications && student.private_notifications.trim() !== "") {
                     alertPvtHtml = `
                         <div class="badge-alert-pvt">
-                            <strong>📢 تبليغ إداري مخصص لك:</strong> ${student.private_notifications}
+                            <strong>📢 إشعار هام:</strong> يرجى مراجعة التبليغات المخصصة لك في أسفل اللوحة.
                         </div>
                     `;
                 }
 
-                // 2. بناء جداول الدرجات
-                let gradesHtml = '';
+                // دالة بناء جداول الدرجات التفاعلية
                 const formatPeriod = (pKey, title) => {
                     let tableRows = '';
                     const pData = student.grades ? student.grades[pKey] : null;
@@ -1342,8 +1405,10 @@
                             tableRows += `<tr><td><strong>${sub}</strong></td><td style="${scoreStyle}">${score}</td></tr>`;
                         }
                     }
+                    if(!tableRows) return ''; // إذا لم تكن هناك درجات للجدول (كأن يكون تم استثناء الأدب بالكامل منه ولم يبق شيء)
+                    
                     return `
-                        <div style="flex: 1; min-width: 240px;">
+                        <div style="flex: 1; min-width: 220px;">
                             <h4 style="text-align: center; margin-bottom: 5px; color: #475569;">${title}</h4>
                             <table class="grades-table">
                                 <thead><tr><th>المادة</th><th>الدرجة</th></tr></thead>
@@ -1353,16 +1418,33 @@
                     `;
                 };
 
+                // بناء الترتيب الزمني الجديد للجداول (درجات نصف السنة بعد الكورس الأول، ونهاية السنة بعد الكورس الثاني)
+                let gradesHtml = '';
                 gradesHtml += `
-                    <div class="grade-section-title">📊 نتائج امتحانات الكورس الأول</div>
-                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <div class="grade-section-title">📊 نتائج امتحانات الكورس الأول ونصف السنة</div>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
                         ${formatPeriod('كورس1_شهر1', 'الشهر الأول')}
                         ${formatPeriod('كورس1_شهر2', 'الشهر الثاني')}
+                        ${formatPeriod('نصف_السنة', 'درجات نصف السنة')}
                     </div>
-                    <div class="grade-section-title">📊 نتائج امتحانات الكورس الثاني</div>
-                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    
+                    <div class="grade-section-title">📊 نتائج امتحانات الكورس الثاني ونهاية السنة</div>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
                         ${formatPeriod('كورس2_شهر1', 'الشهر الأول')}
                         ${formatPeriod('كورس2_شهر2', 'الشهر الثاني')}
+                        ${formatPeriod('نهاية_السنة', 'درجات نهاية السنة')}
+                    </div>
+                `;
+
+                // بناء قسم التبليغات المخصصة للطالب من الأستاذ أسفل قائمة الدرجات
+                let teacherNotificationsHtml = `
+                    <div class="dashboard-private-notifications">
+                        <h4>✉️ التبليغات والرسائل الخاصة من الكادر التدريسي:</h4>
+                        <p style="font-size: 14.5px; color: #334155; line-height: 1.6;">
+                            ${(student.private_notifications && student.private_notifications.trim() !== "") 
+                                ? student.private_notifications 
+                                : "لا توجد تبليغات خاصة بك حالياً من قِبل أساتذتك. استمر في تفوقك!"}
+                        </p>
                     </div>
                 `;
 
@@ -1382,6 +1464,7 @@
                         </div>
                     </div>
                     ${gradesHtml}
+                    ${teacherNotificationsHtml}
                 `;
 
                 dashboardModal.classList.add('active');
@@ -1390,6 +1473,7 @@
 
         function logoutStudent() {
             localStorage.removeItem('loggedStudent');
+            updateHeaderAuthButton();
             closeModal('studentDashboardModal');
             alert('تم تسجيل الخروج بنجاح.');
         }
