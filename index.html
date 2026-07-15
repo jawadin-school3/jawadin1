@@ -1374,68 +1374,65 @@
         }
 
         // جلب وبناء لوحة تحكم الطالب الكاملة بالتعديلات وهيكل الدرجات الجديد
-    function loadStudentDashboard(fullName) {
-    database.ref('students/' + fullName).once('value').then((snapshot) => {
-        const student = snapshot.val();
-        if (!student) return;
+        function loadStudentDashboard(fullName) {
+            database.ref('students/' + fullName).once('value').then((snapshot) => {
+                const student = snapshot.val();
+                if(!student) return;
 
-        const dashboardModal = document.getElementById('studentDashboardModal');
-        const content = document.getElementById('dashboardContent');
-
-        // دالة بناء الجداول مع الشروط المطلوبة
-        const formatPeriod = (pKey, title, isFinal) => {
-            let tableRows = '';
-            const pData = student.grades ? student.grades[pKey] : null;
-            
-            if (pData) {
-                let subjects = Object.keys(pData);
+                const dashboardModal = document.getElementById('studentDashboardModal');
+                const content = document.getElementById('dashboardContent');
                 
-                // دمج عربي وإسلامية في نهاية السنة للثالث
-                if (isFinal && student.grade === '3') {
-                    let combined = `${pData['عربي'] || '---'} / ${pData['اسلامية'] || '---'}`;
-                    tableRows += `<tr><td><strong>عربي/اسلامية</strong></td><td>${combined}</td></tr>`;
-                    subjects = subjects.filter(s => s !== 'عربي' && s !== 'اسلامية' && s !== 'ادب');
+                let gradeText = student.grade === '1' ? 'الأول متوسط' : student.grade === '2' ? 'الثاني متوسط' : 'الثالث متوسط';
+                
+                // بناء التنبيه المخصص السريع (إن وجد في الأعلى)
+                let alertPvtHtml = '';
+                if(student.private_notifications && student.private_notifications.trim() !== "") {
+                    alertPvtHtml = `
+                        <div class="badge-alert-pvt">
+                            <strong>📢 إشعار هام:</strong> يرجى مراجعة التبليغات المخصصة لك في أسفل اللوحة.
+                        </div>
+                    `;
                 }
 
-                for (let sub of subjects) {
-                    // استثناء الأدب للثالث في نصف ونهاية السنة
-                    if (student.grade === '3' && sub === 'ادب' && (pKey === 'نصف_السنة' || pKey === 'نهاية_السنة')) continue;
+                // دالة بناء جداول الدرجات التفاعلية
+                const formatPeriod = (pKey, title) => {
+                    let tableRows = '';
+                    const pData = student.grades ? student.grades[pKey] : null;
+                    if(pData) {
+                        for(let sub in pData) {
+                            let score = pData[sub];
+                            let scoreStyle = score === "لم تعلن بعد" ? "color: #94a3b8; font-style: italic;" : "font-weight: bold; color: var(--color-blue);";
+                            tableRows += `<tr><td><strong>${sub}</strong></td><td style="${scoreStyle}">${score}</td></tr>`;
+                        }
+                    }
+                    if(!tableRows) return ''; // إذا لم تكن هناك درجات للجدول (كأن يكون تم استثناء الأدب بالكامل منه ولم يبق شيء)
                     
-                    tableRows += `<tr><td><strong>${sub}</strong></td><td>${pData[sub]}</td></tr>`;
-                }
-            }
-            
-            return tableRows ? `
-                <div style="flex: 1; min-width: 200px;">
-                    <h4 style="text-align:center; color:#475569;">${title}</h4>
-                    <table class="grades-table">
-                        <thead><tr><th>المادة</th><th>الدرجة</th></tr></thead>
-                        <tbody>${tableRows}</tbody>
-                    </table>
-                </div>` : '';
-        };
+                    return `
+                        <div style="flex: 1; min-width: 220px;">
+                            <h4 style="text-align: center; margin-bottom: 5px; color: #475569;">${title}</h4>
+                            <table class="grades-table">
+                                <thead><tr><th>المادة</th><th>الدرجة</th></tr></thead>
+                                <tbody>${tableRows}</tbody>
+                            </table>
+                        </div>
+                    `;
+                };
 
-        content.innerHTML = `
-            <div style="margin-bottom:20px;">
-                <h3>${student.fullName}</h3>
-                <p>الصف: ${student.grade === '3' ? 'الثالث متوسط' : (student.grade === '2' ? 'الثاني متوسط' : 'الأول متوسط')}</p>
-            </div>
-            <div class="grade-section-title">📊 الكورس الأول</div>
-            <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                ${formatPeriod('كورس1_شهر1', 'الشهر الأول', false)}
-                ${formatPeriod('كورس1_شهر2', 'الشهر الثاني', false)}
-                ${formatPeriod('نصف_السنة', 'نصف السنة', false)}
-            </div>
-            <div class="grade-section-title">📊 الكورس الثاني</div>
-            <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                ${formatPeriod('كورس2_شهر1', 'الشهر الأول', false)}
-                ${formatPeriod('كورس2_شهر2', 'الشهر الثاني', false)}
-                ${formatPeriod('نهاية_السنة', 'نهاية السنة', true)}
-            </div>
-        `;
-        dashboardModal.classList.add('active');
-    });
-}
+                // بناء الترتيب الزمني الجديد للجداول (درجات نصف السنة بعد الكورس الأول، ونهاية السنة بعد الكورس الثاني)
+                let gradesHtml = '';
+                gradesHtml += `
+                    <div class="grade-section-title">📊نتائج امتحانات الكورس الأول </div>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                        ${formatPeriod('كورس1_شهر1', 'الشهر الأول')}
+                        ${formatPeriod('كورس1_شهر2', 'الشهر الثاني')}
+                    </div>
+                    
+                    <div class="grade-section-title">📊 نتائج امتحانات الكورس الثاني </div>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                        ${formatPeriod('كورس2_شهر1', 'الشهر الأول')}
+                        ${formatPeriod('كورس2_شهر2', 'الشهر الثاني')}
+                    </div>
+                `;
 
                 // بناء قسم التبليغات المخصصة للطالب من الأستاذ أسفل قائمة الدرجات
                 let teacherNotificationsHtml = `
