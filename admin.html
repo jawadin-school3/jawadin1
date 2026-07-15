@@ -974,25 +974,7 @@
             }).catch(err => {
                 alert('خطأ أثناء إرسال التبليغ الخاص.');
             });
-        function loadStudents() {
-    const grade = document.getElementById('selectGrade').value; // افترضت وجود select للصف
-    const cls = document.getElementById('selectClass').value; // افترضت وجود select للشعبة
-
-    // جلب البيانات من مسار الطلاب
-    db.ref('students').orderByChild('grade').equalTo(grade).once('value', (snapshot) => {
-        const list = document.getElementById('studentsList');
-        list.innerHTML = ''; // تفريغ القائمة
-        snapshot.forEach((childSnapshot) => {
-            const student = childSnapshot.val();
-            if (student.class === cls) { // تصفية حسب الشعبة
-                list.innerHTML += `
-                    <div class="student-item" onclick="openStudentDetails('${childSnapshot.key}')">
-                        ${student.fullName}
-                    </div>`;
-            }
-        });
-    });
-    const firebaseConfig = {
+ t firebaseConfig = {
     databaseURL: "https://jawadin-school1-default-rtdb.firebaseio.com" // تأكد أن هذا الرابط هو نفسه في الاثنين
 };
 firebase.initializeApp(firebaseConfig);
