@@ -381,10 +381,10 @@
 
         .menu-toggle span {
             display: block;
-            width: 6px;
-            height: 6px;
+            width: 25px;
+            height: 3px;
             background-color: var(--color-text-dark);
-            border-radius: 50%;
+            border-radius: 3px;
             transition: all 0.3s ease;
         }
 
@@ -786,7 +786,6 @@
 </head>
 <body>
 
-    <!-- شاشة اختيار اللغة الترحيبية -->
     <div class="language-overlay" id="langOverlay">
         <div class="lang-card">
             <img src="2.jpg" onerror="this.onerror=null; this.src='https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';" alt="شعار مدرسة الجوادين" class="lang-card-img" />
@@ -800,13 +799,11 @@
         </div>
     </div>
 
-    <!-- نافذة تسجيل الدخول والإنشاء المنبثقة المحدثة -->
     <div class="modal-overlay" id="authModal">
         <div class="modal-card">
-            <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+            <button class="modal-close" onclick="closeAuthModal()">×</button>
             
             <div id="authFormsContainer">
-                <!-- فورم إنشاء الحساب (التسجيل) -->
                 <div id="registerFormSection">
                     <div class="modal-header">
                         <h3>إنشاء حساب جديد للطالب</h3>
@@ -822,17 +819,16 @@
                             <label for="studentGrade">الصف الدراسي</label>
                             <select id="studentGrade" class="form-control" onchange="updateDivisionOptions()" required>
                                 <option value="" disabled selected>اختر صفك الدراسي</option>
-                                <option value="first">الأول متوسط</option>
-                                <option value="second">الثاني متوسط</option>
-                                <option value="third">الثالث متوسط</option>
+                                <option value="الأول متوسط">الأول متوسط</option>
+                                <option value="الثاني متوسط">الثاني متوسط</option>
+                                <option value="الثالث متوسط">الثالث متوسط</option>
                             </select>
                         </div>
 
                         <div class="form-group" id="divisionGroup" style="display: none;">
                             <label for="studentDivision">الشعبة الدراسية</label>
                             <select id="studentDivision" class="form-control" required>
-                                <!-- يتم ملء الخيارات برمجياً بناءً على الصف -->
-                            </select>
+                                </select>
                         </div>
 
                         <div class="form-group">
@@ -862,7 +858,6 @@
                     </div>
                 </div>
 
-                <!-- فورم تسجيل الدخول السريع بالرمز -->
                 <div id="loginFormSection" style="display: none;">
                     <div class="modal-header">
                         <h3>تسجيل دخول سريع</h3>
@@ -875,7 +870,7 @@
                         </div>
                         <div class="form-group">
                             <label for="loginPassword">الرمز السري الخاص بك</label>
-                            <input type="text" id="loginPassword" class="form-control" placeholder="مثال: JW1234" required>
+                            <input type="text" id="loginPassword" class="form-control" placeholder="مثال: JW-XXXXXX" required>
                         </div>
                         <button type="submit" class="modal-submit-btn">تسجيل الدخول</button>
                     </form>
@@ -884,7 +879,6 @@
                     </div>
                 </div>
 
-                <!-- واجهة عرض الرمز للمستخدم الجديد بعد نجاح التسجيل -->
                 <div id="successDisplaySection" style="display: none; text-align: center;">
                     <div class="modal-header">
                         <h3 style="color: #10b981;">🎉 تم إنشاء الحساب بنجاح!</h3>
@@ -905,7 +899,7 @@
                 الجوادين<span>.</span>
             </a>
             
-            <button class="menu-toggle" id="menuBtn" aria-label="القائمة">
+            <button class="menu-toggle" id="menuBtn" aria-label="القائمة" onclick="toggleMobileMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -921,7 +915,6 @@
                 </ul>
             </nav>
             <div class="header-left">
-                <!-- أزرار الدخول والخروج -->
                 <button class="lang-btn" id="btnAuthHeader" onclick="openAuthModal()">تسجيل دخول / إنشاء حساب</button>
                 <button class="logout-btn" id="btnLogout" onclick="handleLogout()">تسجيل الخروج</button>
             </div>
@@ -943,8 +936,7 @@
         
         <main class="wiki-content">
             <article id="mainArticle">
-                <!-- سيتم ملء هذا المحتوى ديناميكياً حسب اختيار اللغة -->
-            </article>
+                </article>
         </main>
 
         <aside class="info-card">
@@ -971,7 +963,7 @@
                 </tr>
                 <tr>
                     <th id="thCoord">الإحداثيات</th>
-                    <td><a href="https://maps.google.com/?q=33.428444,44.401944" target="_blank" class="map-link">📍 33° 25' 42.4" N, 44° 24' 07.0" E</a></td>
+                    <td><a href="https://maps.google.com" target="_blank" class="map-link">📍 33° 25' 42.4" N, 44° 24' 07.0" E</a></td>
                 </tr>
                 <tr>
                     <th id="thWeb">المواقع الإلكترونية</th>
@@ -1000,9 +992,9 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <script>
-        // إعدادات الـ Firebase المحدثة لضمان الاتصال الصحيح والكامل بقاعدة البيانات
+        // إعدادات الـ Firebase
         const firebaseConfig = {
-            apiKey: "AIzaSyDummyKeyForInitializationOnly", // مفتاح وهمي إلزامي لتشغيل الـ SDK بشكل سليم
+            apiKey: "AIzaSyDummyKeyForInitializationOnly", // ضع مفتاحك هنا إن وجد
             authDomain: "jawadin-school1.firebaseapp.com",
             databaseURL: "https://jawadin-school1-default-rtdb.firebaseio.com",
             projectId: "jawadin-school1"
@@ -1011,409 +1003,88 @@
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
+        // متغير لحفظ بيانات اللغة الحالية
         let currentLang = 'ar';
-        let temporaryUserCode = ''; 
+        let loggedInStudent = null; // لحفظ بيانات الطالب بعد تسجيل الدخول
 
-        const translations = {
+        // محتوى المقالات للغات المختلفة (عربي / إنجليزي)
+        const content = {
             ar: {
                 article: `
-                    <h2 id="notifications" style="margin-top: 0;">التبليغات والتعميمات الإدارية</h2>
-                    <div id="notificationsBox">
-                        <div class="notifications-box">جاري تحميل التبليغات من قاعدة البيانات...</div>
+                    <h2 id="system">النظام الدراسي والمرافق</h2>
+                    <p>تتبع متوسطة الجوادين للبنين الأنظمة والتعليمات الرسمية الصادرة من وزارة التربية العراقية المديرية العامة لتربية الرصافة الأولى. وتوفر مدرسة الجوادين مرافق تعليمية مجهزة لضمان حصول الطلاب على أفضل مستويات التعليم والراحة الفكرية والجسدية.</p>
+                    
+                    <h2 id="digital">التواصل الرقمي والخدمات الإلكترونية</h2>
+                    <p>سعياً منا لمواكبة التطور التكنولوجي وتسهيل التواصل بين المدرسة وأولياء الأمور والطلاب، تقدم المدرسة بوابتها الرقمية الحالية لتوفير الخدمات التالية بشكل سريع وآمن:</p>
+                    <ul>
+                        <li>توليد هوية رقمية ورمز سري فريد لكل طالب مسجل.</li>
+                        <li>إمكانية الاستعلام الفوري والمباشر عن درجات الامتحانات والنتائج الشهرية والنهائية.</li>
+                        <li>استلام التبليغات والإنذارات المخصصة بشكل سري وفردي لكل طالب.</li>
+                    </ul>
+
+                    <h2 id="notifications">التبليغات والإعلانات العامة</h2>
+                    <div id="notificationsContainer" class="notifications-box">
+                        لم يتم نشر أي تبليغات عامة بعد، سجل دخولك لرؤية التبليغات الخاصة بك.
                     </div>
 
-                    <p style="margin-top: 25px;">
-                        <strong>متوسطة الجوادين للبنين</strong> هي مدرسة متوسطة حكومية مخصصة للبنين تقع في العاصمة العراقية <strong>بغداد</strong>، وتحديداً في منطقة <strong>الشعب</strong> التابعة لمديرية تربية الرصافة الأولى. تُصنف المدرسة كواحدة من أشهر المدارس المتوسطة وأبرزها في المنطقة؛ حيث تقدم خدماتها التعليمية والتربوية لجمهور واسع من الطلبة يتجاوز عددهم الألف طالب، وتضم تحت سقفها المراحل الدراسية الثلاث المعتمدة في النظام التعليمي العراقي للمرحلة المتوسطة وهي: الصف الأول المتوسط، والصف الثاني المتوسط، والصف الثالث المتوسط، ويشرف على تدريسهم كادر تعليمي وتدريسي متميز ومؤهل علمياً.
-                    </p>
-
-                    <h2>التأسيس والتاريخ والنمو الأكاديمي</h2>
-                    <p>
-                        يرجع تاريخ تأسيس متوسطة الجوادين للبنين إلى عام 2008م. ومنذ انطلاقتها in هذا العام، سعت المدرسة بشكل دؤوب إلى تحقيق رسالتها في رفع وتطوير المستوى العلمي والتربوي لجميع الطلاب الساكنين في منطقة الشعب والمناطق المجاورة والمحيطة بها. وبفضل هذه الجهود المستمرة، نجحت المدرسة في بناء واكتساب سمعة طيبة جداً وشهرة واسعة بين أهالي المنطقة والطلبة على حد سواء، ويعود الفضل في هذه السمعة إلى ما تمتلكه المدرسة من كادر تدريسي متميز يمتلك الرصانة العلمية والخبرة التربوية الكافية لإدارة وتوجيه الطلاب.
-                    </p>
-                    <p>
-                        خلال مسيرتها التي تمتد لأكثر من عقد ونصف، قامت المدرسة بتخريج آلاف الطلبة الذين واصلوا مسيرتهم بنجاح في الإعداديات والجامعات العراقية المرموقة. وتتميز الإدارة بحرصها على الانضباط العالي والالتزام بالزي المدرسي الموحد، وتوطيد العلاقات الاجتماعية الهادفة بين الملاك التدريسي وأولياء الأمور من خلال مجالس الآباء والمعلمين الدورية لتذليل العقبات الدراسية التي قد تواجه الطلبة في مسيرتهم الأكاديمية.
-                    </p>
-                    <p>
-                        تواصل المدرسة تحديث مخرجاتها التعليمية باستمرار من خلال التدريب والتطوير المستمر لكادرها التدريسي ودمج الأساليب الحديثة مع التعليم التقليدي، مما أثمر عن تحقيق نسب نجاح متميزة في الامتحانات الوزارية للصف الثالث المتوسط على مستوى قاطع الشعب والمديرية العامة لتربية الرصافة الأولى لسنوات متعددة.
-                    </p>
-
-                    <h2 id="system">النظام الدراسي والمرافق البناية</h2>
-                    <p>
-                        تلتزم المدرسة التزاماً كاملاً بتطبيق المناهج والقرارات الدراسية الرسمية الصادرة عن وزارة التربية العراقية. وتولي إدارة المدرسة والكادر التدريسي اهتماماً خاصاً واستثنائياً بطلبة الصف الثالث المتوسط؛ نظراً للأهمية المصيرية لهذه المرحلة الدراسية، حيث تعمل على تهيئتهم وإعدادهم بشكل كامل لخوض غمار الامتحانات الوزارية النهائية (الباكالوريا)، ويتم ذلك عبر خطة تعليمية تشمل تقديم الدعم العلمي المتواصل والمراجعات المنهجية المستمرة للمواد الدراسية.
-                    </p>
-                    <p>
-                        وتتكون البناية المدرسية لمتوسطة الجوادين للبنين من عدة مرافق أساسية تم تصميمها لخدمة العملية التعليمية وتوفير سبل الراحة للطلبة والكادر، وتشتمل هذه المرافق على:
-                    </p>
-                    <ul>
-                        <li><strong>الصفوف الدراسية:</strong> القاعات المخصصة لإعطاء الدروس والمحاضرات للطلبة في المراحل المختلفة ومجهزة بالوسائل الضرورية لتلقي العلم.</li>
-                        <li><strong>غرفة الإدارة:</strong> المقر المخصص لإدارة المدرسة ومتابعة شؤونها التنظيمية والتربوية واللوجستية بقيادة المدير المتميز السيد فيصل برغش تايه ومساعديه.</li>
-                        <li><strong>غرفة المدرسين:</strong> المكان المخصص لأعضاء الكادر التدريسي المتميز للاستراحة والتحضير العلمي والمناقشات المنهجية.</li>
-                        <li><strong>الساحات المدرسية:</strong> الفضاءات المفتوحة المخصصة لممارسة الأنشطة الرياضية المتنوعة مثل كرة القدم، واستراحة الطلاب وتجديد نشاطهم البدني والذهني بين الحصص الدراسية.</li>
-                        <li><strong>المرشد التربوي:</strong> توفر المدرسة مكتباً خاصاً بالإرشاد التربوي والنفسي لمساعدة الطلاب على حل مشاكلهم الشخصية والأكاديمية، وتهيئة بيئة صحية تحفزهم على التفوق الدراسي وصقل شخصياتهم القيادية والاجتماعية.</li>
-                    </ul>
-
-                    <h2 id="digital">الأنشطة والتواصل الرقمي والالكتروني</h2>
-                    <p>
-                        التركيز الأساسي للإدارة يعتمد على دمج التكنولوجيا والأنشطة الرقمية التفاعلية لتعزيز أواصر العلاقة بين الطالب والمدرسة، حيث تحرص بشكل كبير على تفعيل قنوات التواصل المباشر بين الطلاب والإدارة عبر الوسائل التالية:
-                    </p>
-                    <ul>
-                        <li><strong>روابط الاستبيان الإلكترونية:</strong> وهي أدوات رقمية تتيح للطلاب إمكانية تسجيل الشكاوى التي تواجههم، أو مشاركة آرائهم الشخصية ومقترحاتهم البناءة مع الإدارة مباشرة، مما أسهم بشكل واضح في تعزيز مستويات الثقة المتبادلة بين الطلاب ومدرستهم وعمل على تطوير البيئة التعليمية داخل المدرسة بشكل مستمر.</li>
-                        <li><strong>المنصات الرسمية على مواقع التواصل الاجتماعي:</strong> تمتلك المدرسة منصات إلكترونية رسمية نشطة، وتبرز من بينها القناة الرسمية للمدرسة على تطبيق تلغرام، والتي تُستخدم كأداة إعلامية أساسية للتواصل مع الطلاب وأولياء الأمور أولاً بأول ونشر كل ما يتعلق بـالتبليغات والتعليمات الرسمية، الجداول الدراسية الأسبوعية وجداول الامتحانات، والنتائج بمجرد صدورها لضمان وصولها السريع للجميع.</li>
-                    </ul>
-
-                    <h2 id="vision">رؤية مدرسة الجوادين والأهداف الاستراتيجية</h2>
-                    <p id="visionDesc">
-                        ترتكز الرؤية التعليمية والتربوية لمتوسطة الجوادين للبنين على تحقيق عدة أهداف متكاملة مستخلصة من مسيرتها التعليمية، وتتلخص في:
-                    </p>
-                    
+                    <h2 id="vision">رؤية المدرسة وأهدافها</h2>
+                    <p>تتمحور رؤية المدرسة حول بناء أساس تعليمي متين يسهم في تطوير مهارات التفكير النقدي والإبداعي لدى الطلاب من خلال:</p>
                     <div class="vision-grid">
                         <div class="vision-card">
                             <div class="vision-card-header">
-                                <span class="vision-card-number">١</span>
-                                <span class="vision-card-title">التميز العلمي</span>
+                                <div class="vision-card-number">١</div>
+                                <div class="vision-card-title">التفوق الأكاديمي</div>
                             </div>
-                            <p class="vision-card-text">السعي الدائم والمستمر لرفع وتطوير المستوى العلمي والتربوي للطلاب في منطقة الشعب والمناطق المجاورة لها.</p>
+                            <p class="vision-card-text">توفير بيئة تعليمية تسعى للوصول بالطلاب لأعلى نسب النجاح في الامتحانات المدرسية والوزارية بفضل نخبة من الكادر التدريسي المتميز.</p>
                         </div>
-
                         <div class="vision-card">
                             <div class="vision-card-header">
-                                <span class="vision-card-number">٢</span>
-                                <span class="vision-card-title">التواصل الرقمي</span>
+                                <div class="vision-card-number">٢</div>
+                                <div class="vision-card-title">التربية والأخلاق</div>
                             </div>
-                            <p class="vision-card-text">تعزيز وبناء ثقة متبادلة وقوية بين الطلاب وإدارة المدرسة عبر قنوات التواصل الرقمية والاستبيانات الإلكترونية الفورية والمستمرة.</p>
+                            <p class="vision-card-text">غرس القيم التربوية السامية والأخلاق النبيلة في نفوس أبنائنا الطلبة ليكونوا بناة حقيقيين للمجتمع العراقي.</p>
                         </div>
-
                         <div class="vision-card">
                             <div class="vision-card-header">
-                                <span class="vision-card-number">٣</span>
-                                <span class="vision-card-title">البيئة التعليمية</span>
+                                <div class="vision-card-number">٣</div>
+                                <div class="vision-card-title">مواكبة التكنولوجيا</div>
                             </div>
-                            <p class="vision-card-text">التطوير الشامل والمستمر للبيئة التعليمية والصفوف الدراسية والمرافق اللوجستية لتكون دائماً محفزة على التفوق والإبداع.</p>
-                        </div>
-
-                        <div class="vision-card">
-                            <div class="vision-card-header">
-                                <span class="vision-card-number">٤</span>
-                                <span class="vision-card-title">دعم الثالث المتوسط</span>
-                            </div>
-                            <p class="vision-card-text">الاهتمام الفائق بطلبة الصف الثالث المتوسط وتقديم كافة أشكال الدعم العلمي، المحاضرات الإضافية والمراجعات المكثفة لضمان حصولهم على أعلى المعدلات والتميز في امتحانات البكالوريا الوزارية.</p>
-                        </div>
-
-                        <div class="vision-card">
-                            <div class="vision-card-header">
-                                <span class="vision-card-number">٥</span>
-                                <span class="vision-card-title">مواكبة التطور</span>
-                            </div>
-                            <p class="vision-card-text">الاستمرار في مواكبة أحدث الأساليب والوسائل الإلكترونية المتاحة في التعليم الإلكتروني، ونشر كافة الجداول والتبليغات ونتائج الامتحانات عبر منصات التواصل الرسمية لضمان أقصى درجات الشفافية والتواصل السريع والفعال.</p>
+                            <p class="vision-card-text">تطوير الخدمات الرقمية وتدريب الطلاب على استخدام المنصات الحديثة لتلقي المعرفة ومتابعة مستوياتهم بكل سلاسة.</p>
                         </div>
                     </div>
                 `
             },
             en: {
                 article: `
-                    <h2 id="notifications" style="margin-top: 0;">Announcements & Administrative Circulars</h2>
-                    <div id="notificationsBox">
-                        <div class="notifications-box">Loading announcements from the database...</div>
+                    <h2 id="system">Educational System and Facilities</h2>
+                    <p>Al-Jawadain Intermediate School for Boys follows the official regulations issued by the Iraqi Ministry of Education. The school provides equipped educational facilities to ensure students receive the best levels of education.</p>
+                    
+                    <h2 id="digital">Digital Communication and Services</h2>
+                    <p>To keep pace with technological development, the school offers its digital portal to provide the following services safely and quickly:</p>
+                    <ul>
+                        <li>Generating a unique digital identity and secret code for each registered student.</li>
+                        <li>Instant check of monthly and final exam grades and results.</li>
+                        <li>Receiving private and customized notifications and warnings for each student.</li>
+                    </ul>
+
+                    <h2 id="notifications">Public Notifications</h2>
+                    <div id="notificationsContainer" class="notifications-box">
+                        No public announcements have been posted yet. Log in to view your personalized notifications.
                     </div>
 
-                    <p style="margin-top: 25px;">
-                        <strong>Al-Jawadin Intermediate School for Boys</strong> is a public intermediate school for boys located in the Iraqi capital, <strong>Baghdad</strong>, specifically in the <strong>Al-Shaab</strong> district under the Directorate of Education of Rusafa First. The school is classified as one of the most famous and prominent intermediate schools in the region, providing educational services to a large student body exceeding 1,000 students, encompassing the three intermediate grade levels: First, Second, and Third Intermediate, supervised by a distinguished and academically qualified teaching staff.
-                    </p>
-                `
-            }
-        };
-
-        function selectLanguage(lang) {
-            currentLang = lang;
-            document.getElementById('mainArticle').innerHTML = translations[lang].article;
-            document.getElementById('langOverlay').classList.add('hidden');
-            fetchNotifications();
-            checkLocalUser(); 
-        }
-
-        function openAuthModal() {
-            document.getElementById('authModal').classList.add('active');
-            switchAuthMode('register'); 
-        }
-
-        function closeAuthModal() {
-            document.getElementById('authModal').classList.remove('active');
-        }
-
-        function switchAuthMode(mode) {
-            if (mode === 'register') {
-                document.getElementById('registerFormSection').style.display = 'block';
-                document.getElementById('loginFormSection').style.display = 'none';
-                document.getElementById('successDisplaySection').style.display = 'none';
-            } else if (mode === 'login') {
-                document.getElementById('registerFormSection').style.display = 'none';
-                document.getElementById('loginFormSection').style.display = 'block';
-                document.getElementById('successDisplaySection').style.display = 'none';
-            }
-        }
-
-        function updateDivisionOptions() {
-            const grade = document.getElementById('studentGrade').value;
-            const divisionGroup = document.getElementById('divisionGroup');
-            const studentDivision = document.getElementById('studentDivision');
-
-            studentDivision.innerHTML = ''; 
-
-            let divisions = [];
-            if (grade === 'first') {
-                divisions = ['أ', 'ب', 'ج', 'د', 'و'];
-            } else if (grade === 'second') {
-                divisions = ['أ', 'ب', 'ج', 'د'];
-            } else if (grade === 'third') {
-                divisions = ['أ', 'ب', 'ج', 'د', 'هـ'];
-            }
-
-            if (divisions.length > 0) {
-                divisionGroup.style.display = 'block';
-                
-                const defaultOption = document.createElement('option');
-                defaultOption.value = '';
-                defaultOption.disabled = true;
-                defaultOption.selected = true;
-                defaultOption.textContent = 'اختر شعبتك';
-                studentDivision.appendChild(defaultOption);
-
-                divisions.forEach(div => {
-                    const option = document.createElement('option');
-                    option.value = div;
-                    option.textContent = `الشعبة ${div}`;
-                    studentDivision.appendChild(option);
-                });
-            } else {
-                divisionGroup.style.display = 'none';
-            }
-        }
-
-        function getBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = error => reject(error);
-            });
-        }
-
-        function generateEasyPassword() {
-            const randomNumber = Math.floor(1000 + Math.random() * 9000); 
-            return `JW${randomNumber}`;
-        }
-
-        // معالجة إنشاء الحساب مع منع تكرار التسجيل لنفس الاسم وحفظها بنجاح بقاعدة البيانات
-        async function handleRegisterSubmit(event) {
-            event.preventDefault();
-
-            const name = document.getElementById('studentName').value.trim();
-            const grade = document.getElementById('studentGrade').value;
-            const division = document.getElementById('studentDivision').value;
-            const mother = document.getElementById('motherName').value.trim();
-            const phone = document.getElementById('parentPhone').value.trim();
-            const nationalId = document.getElementById('nationalId').value.trim();
-            const photoFile = document.getElementById('studentPhoto').files[0];
-
-            if (!name || !grade || !division || !mother || !phone || !nationalId || !photoFile) {
-                alert("يرجى ملء جميع الحقول المطلوبة!");
-                return;
-            }
-
-            const safeKey = name.replace(/\s+/g, '_');
-
-            try {
-                // الفحص الأول: هل الطالب مسجل مسبقاً بنفس الاسم الرباعي؟
-                const checkSnapshot = await database.ref('students/' + safeKey).once('value');
-                if (checkSnapshot.exists()) {
-                    alert("⚠️ عذراً! هذا الاسم الرباعي مسجل لدينا بالفعل.\nإذا كنت أنت نفس الطالب، يرجى تسجيل الدخول باستخدام رمزك السري مباشرة.");
-                    switchAuthMode('login');
-                    document.getElementById('loginName').value = name; // تعبئة الاسم له ليسهل عليه
-                    return;
-                }
-
-                // تحويل الصورة وترميزها
-                const photoBase64 = await getBase64(photoFile);
-
-                // توليد الرمز السري الجديد
-                const generatedCode = generateEasyPassword();
-                temporaryUserCode = generatedCode;
-
-                // إرسال وحفظ البيانات في الـ Firebase
-                await database.ref('students/' + safeKey).set({
-                    fullName: name,
-                    grade: grade,
-                    division: division,
-                    motherName: mother,
-                    parentPhone: phone,
-                    nationalId: nationalId,
-                    photoData: photoBase64,
-                    accessKey: generatedCode,
-                    registeredAt: new Date().toISOString()
-                });
-
-                // تأكيد الحفظ محلياً
-                localStorage.setItem('studentName', name);
-                localStorage.setItem('studentKey', generatedCode);
-
-                // الانتقال لواجهة إظهار الرمز
-                document.getElementById('registerFormSection').style.display = 'none';
-                document.getElementById('successDisplaySection').style.display = 'block';
-                document.getElementById('generatedCodeBox').textContent = generatedCode;
-
-            } catch (error) {
-                console.error("خطأ أثناء تسجيل البيانات: ", error);
-                alert("❌ فشل الاتصال بقاعدة البيانات! يرجى التحقق من اتصال الإنترنت وحالة خادم Firebase.");
-            }
-        }
-
-        // تسجيل الدخول بالاسم الرباعي والرمز
-        function handleLoginSubmit(event) {
-            event.preventDefault();
-
-            const inputName = document.getElementById('loginName').value.trim();
-            const inputKey = document.getElementById('loginPassword').value.trim();
-
-            if (!inputName || !inputKey) {
-                alert("يرجى إدخال اسمك الرباعي ورمزك السري!");
-                return;
-            }
-
-            const safeKey = inputName.replace(/\s+/g, '_');
-
-            database.ref('students/' + safeKey).once('value').then((snapshot) => {
-                const data = snapshot.val();
-                if (snapshot.exists() && data.accessKey === inputKey) {
-                    localStorage.setItem('studentName', data.fullName);
-                    localStorage.setItem('studentKey', data.accessKey);
-                    updateHeaderWithUser(data.fullName);
-                    alert(`✅ أهلاً بك مجدداً يا ${data.fullName}! تم تسجيل دخولك بنجاح.`);
-                    closeAuthModal();
-                } else {
-                    alert("❌ خطأ! الرمز السري أو الاسم الرباعي غير متطابقين. تأكد من إدخال البيانات بالشكل الذي سجلت به.");
-                }
-            }).catch((error) => {
-                console.error("حدث خطأ أثناء فحص الحساب: ", error);
-                alert("⚠️ حدث خطأ فني أثناء الاتصال والتحقق من حسابك.");
-            });
-        }
-
-        function finishRegistration() {
-            const savedName = localStorage.getItem('studentName');
-            if (savedName) {
-                updateHeaderWithUser(savedName);
-            }
-            closeAuthModal();
-        }
-
-        function checkLocalUser() {
-            const savedName = localStorage.getItem('studentName');
-            if (savedName) {
-                updateHeaderWithUser(savedName);
-            } else {
-                // التأكيد على إخفاء زر تسجيل الخروج إذا لم يكن هناك مستخدم مسجل
-                document.getElementById('btnLogout').style.display = 'none';
-            }
-        }
-
-        // تحديث الهيدر وإظهار زر تسجيل الخروج
-        function updateHeaderWithUser(name) {
-            const btnHeader = document.getElementById('btnAuthHeader');
-            const btnLogout = document.getElementById('btnLogout');
-            const btnHero = document.getElementById('btnHeroResults');
-            
-            if (btnHeader) {
-                btnHeader.textContent = "أهلاً، " + name;
-                btnHeader.style.borderColor = "#10b981";
-                btnHeader.style.color = "#10b981";
-                btnHeader.onclick = null; // نلغي حدث الفتح عند الضغط عليه لأنه يرحب به فقط
-            }
-
-            if (btnLogout) {
-                btnLogout.style.display = "inline-block"; // إظهار زر تسجيل الخروج
-            }
-
-            if (btnHero) {
-                btnHero.textContent = "لوحتي الخاصة والنتائج";
-                btnHero.onclick = () => {
-                    alert("مرحباً بك مجدداً يا " + name + "! سيتم عرض لوحتك المخصصة ونتائجك فور رفعها وتدقيقها من قبل إدارة المدرسة.");
-                };
-            }
-        }
-
-        // دالة تسجيل الخروج الجديدة
-        function handleLogout() {
-            if (confirm("هل أنت متأكد من رغبتك في تسجيل الخروج؟")) {
-                // مسح البيانات المحفوظة محلياً
-                localStorage.removeItem('studentName');
-                localStorage.removeItem('studentKey');
-
-                // إعادة تهيئة العناصر في الواجهة
-                const btnHeader = document.getElementById('btnAuthHeader');
-                const btnLogout = document.getElementById('btnLogout');
-                const btnHero = document.getElementById('btnHeroResults');
-
-                if (btnHeader) {
-                    btnHeader.textContent = "تسجيل دخول / إنشاء حساب";
-                    btnHeader.style.borderColor = "#d1d5db";
-                    btnHeader.style.color = "var(--color-text-dark)";
-                    btnHeader.onclick = openAuthModal; // إعادة تفعيل حدث الفتح
-                }
-
-                if (btnLogout) {
-                    btnLogout.style.display = "none"; // إخفاء زر الخروج مجدداً
-                }
-
-                if (btnHero) {
-                    btnHero.textContent = "نتائجي والتبليغات المخصصة";
-                    btnHero.onclick = openAuthModal; // إعادة تفعيل الفتح من الهيرو
-                }
-
-                alert("تم تسجيل الخروج بنجاح!");
-            }
-        }
-
-        function fetchNotifications() {
-            const notificationsBox = document.getElementById('notificationsBox');
-            database.ref('notifications').once('value', (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    notificationsBox.innerHTML = '';
-                    const sortedKeys = Object.keys(data).reverse();
-                    sortedKeys.forEach((key) => {
-                        const item = data[key];
-                        const date = item.date || '';
-                        const text = item.text || '';
-                        const imageUrl = item.imageUrl || '';
-                        
-                        let imgTag = '';
-                        if (imageUrl) {
-                            imgTag = `<img src="${imageUrl}" alt="صورة التبليغ" class="notification-img">`;
-                        }
-
-                        notificationsBox.innerHTML += `
-                            <div class="notification-item">
-                                <span class="notification-date">${date}</span>
-                                <div class="notification-text">${text}</div>
-                                ${imgTag}
+                    <h2 id="vision">School Vision and Goals</h2>
+                    <p>Our vision is built around creating a strong educational foundation that develops students' critical thinking and creativity through:</p>
+                    <div class="vision-grid">
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <div class="vision-card-number">1</div>
+                                <div class="vision-card-title">Academic Excellence</div>
                             </div>
-                        `;
-                    });
-                } else {
-                    notificationsBox.innerHTML = `<div class="notifications-box">لا توجد تبليغات حالياً.</div>`;
-                }
-            }).catch((error) => {
-                console.error("Error fetching data: ", error);
-                notificationsBox.innerHTML = `<div class="notifications-box">حدث خطأ أثناء تحميل التبليغات.</div>`;
-            });
-        }
-
-        const menuBtn = document.getElementById('menuBtn');
-        const navMenu = document.getElementById('navMenu');
-        
-        menuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-    </script>
-</body>
-</html>
+                            <p class="vision-card-text">Providing an educational environment that drives students to high success rates with the help of our distinguished teaching staff.</p>
+                        </div>
+                        <div class="vision-card">
+                            <div class="vision-card-header">
+                                <div class="vision-card-number">2</div>
+                                <div class="vision-card-title">Values and Ethics</div>
+                            </div>
+                            <p class="vision-card-text">Instilling noble educational values and ethics in our
