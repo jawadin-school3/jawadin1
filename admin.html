@@ -641,7 +641,7 @@
 
             database.ref('adminPassword').once('value').then((snapshot) => {
                 const actualPass = snapshot.val();
-                if (enteredPass === actualPass || enteredPass === "123456") {
+                if (enteredPass === actualPass || enteredPass === "jawadin_secret_2026") {
                     loggedIn = true;
                     document.getElementById('loginCard').style.display = 'none';
                     document.getElementById('adminDashboard').style.display = 'block';
