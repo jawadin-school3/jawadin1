@@ -553,20 +553,38 @@
                         <label for="newAnnouncementText">نص التبليغ أو الإعلان *</label>
                         <textarea id="newAnnouncementText" class="form-control" rows="4" placeholder="اكتب التعليمات الإدارية أو التبليغ هنا ليظهر للجميع..."></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="newAnnouncementImage">إرفاق صورة اختيارية مع التبليغ (رابط الصورة أو اتركها فارغة)</label>
-                        <input type="text" id="newAnnouncementImage" class="form-control" placeholder="رابط الصورة (مثال: https://...)">
-                    </div>
-                    <button class="btn" onclick="publishAnnouncement()" style="max-width: 250px;">نشر التبليغ الآن</button>
+                    <div class="upload-card">
+    <h3>صورة المدرس</h3>
+    
+    // دالة لمعاينة الصورة المرفوعة من الهاتف وتحويلها لـ Base64
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('imgPreview');
+            const label = document.getElementById('uploadLabel');
 
-                    <div class="existing-notifications-box">
-                        <h3 style="margin-bottom: 15px;">📋 التبليغات والتعميمات المنشورة حالياً</h3>
-                        <div id="adminNotificationsList">
-                            </div>
-                    </div>
-                </div>
-            </div>
+            if (file) {
+                if (!file.type.startsWith('image/')) {
+                    showStatus("يرجى اختيار ملف صورة صالح فقط!", false);
+                    event.target.value = "";
+                    return;
+                }
 
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    base64Image = e.target.result;
+                    preview.src = base64Image;
+                    preview.style.display = "block";
+                    label.innerText = `تم اختيار: ${file.name}`;
+                    label.style.borderColor = "#2563eb";
+                };
+                reader.readAsDataURL(file);
+            } else {
+                base64Image = "";
+                preview.style.display = "none";
+                label.innerText = "اضغط هنا لاختيار صورة من هاتفك";
+                label.style.borderColor = "#cbd5e1";
+            }
+        }
             <div class="section-container" id="secDatabase">
                 
                 <div class="db-header-tabs">
