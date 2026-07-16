@@ -499,7 +499,7 @@
                 <label for="adminPassword">الرمز السري للأستاذ</label>
                 <input type="password" id="adminPassword" class="form-control" placeholder="أدخل رمز المرور الخاص بالنشر...">
             </div>
-            <button class="btn" onclick="tryLogin()">دخول لوحة التحكم</button>
+            <button type="button" class="btn" onclick="tryLogin()">دخول لوحة التحكم</button>
         </div>
 
         <!-- لوحة التحكم الكاملة -->
@@ -605,11 +605,11 @@
         let currentStudentId = '';
 
         // المواد المحددة لكل مرحلة
-      const subjectsConfig = {
-    '1': ['العربية', 'الاسلامية', 'الانكليزية', 'الرياضيات', 'الاجتماعيات', 'الاحياء', 'الكيمياء', 'الفيزياء', 'الاخلاقية', 'الفنية'],
-    '2': ['العربية', 'الاسلامية', 'الانكليزية', 'الرياضيات', 'الاجتماعيات', 'الاحياء', 'الكيمياء', 'الفيزياء', 'الاخلاقية', 'الفنية'],
-    '3': ['العربية', 'الاسلامية', 'الادب', 'الاجتماعيات', 'الرياضيات', 'الانكليزية', 'الاحياء', 'الفيزياء', 'الكيمياء']
-};
+        const subjectsConfig = {
+            1: ['العربية', 'الاسلامية', 'الانكليزية', 'الرياضيات', 'الاجتماعيات', 'الاحياء', 'الكيمياء', 'الفيزياء', 'الاخلاقية', 'الفنية'],
+            2: ['العربية', 'الاسلامية', 'الانكليزية', 'الرياضيات', 'الاجتماعيات', 'الاحياء', 'الكيمياء', 'الفيزياء', 'الاخلاقية', 'الفنية'],
+            3: ['العربية', 'الاسلامية', 'الادب', 'الاجتماعيات', 'الرياضيات', 'الانكليزية', 'الاحياء', 'الفيزياء', 'الكيمياء']
+        };
 
         const sectionsConfig = {
             1: ['أ', 'ب', 'ج', 'د', 'و'],
@@ -627,22 +627,21 @@
             }
 
             // نقوم بالتحقق من الرمز من Firebase
-            database.ref('adminPassword').once('value').then((snapshot) => {
-                const actualPass = snapshot.val();
-                if (enteredPass === actualPass || enteredPass === "jawadin_secret_2026") { // كود احتياطي آمن لك
-                    loggedIn = true;
-                    document.getElementById('loginCard').style.display = 'none';
-                    document.getElementById('adminDashboard').style.display = 'block';
-                    loadAnnouncements();
-                    loadAllStudents();
-                    selectGrade(1);
-                } else {
-                    alert('الرمز السري غير صحيح! يرجى المحاولة مجدداً.');
-                }
-            }).catch(err => {
-                alert('خطأ في الاتصال بقاعدة البيانات.');
-            });
-        }
+            // التأكد من أن db أو database معرف ومتاح
+if (typeof db !== 'undefined') {
+    db.ref('adminPassword').once('value')
+        .then((snapshot) => {
+            const actualPass = snapshot.val();
+            // هنا تضع منطق التحقق الخاص بك
+            console.log("الرمز السري تم صحيح تم التسجيل بنجاح");
+        })
+        .catch((error) => {
+            console.error("حدث خطأ أثناء جلب الرمز السري:", error);
+            alert("فشل الاتصال بقاعدة البيانات");
+        });
+} else {
+    console.error("قاعدة البيانات غير معرفة (Database not initialized)");
+}
 
         function logout() {
             loggedIn = false;
@@ -999,6 +998,34 @@ firebase.initializeApp(firebaseConfig);
 }
     // ملاحظة: أكمل بناء دالة editStudent لفتح نافذة إدخال الدرجات والتبليغ الاختياري.
         }
+
+        // أضف هذه الدالة في نهاية ملفك داخل وسم الـ script
+function tryLogin() {
+    const passwordInput = document.getElementById('adminPassword');
+    const enteredPass = passwordInput ? passwordInput.value : '';
+
+    if (!enteredPass || enteredPass.trim() === '') {
+        alert('الرجاء إدخال الرمز السري');
+        return;
+    }
+
+    // تأكد من أن db معرفة
+    db.ref('adminPassword').once('value')
+        .then((snapshot) => {
+            const actualPass = snapshot.val();
+            if (enteredPass === actualPass) {
+                document.getElementById('loginCard').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+                loadAllStudents(); 
+            } else {
+                alert('الرمز السري غير صحيح');
+            }
+        })
+        .catch((err) => {
+            console.error("خطأ:", err);
+            alert('خطأ في الاتصال بقاعدة البيانات');
+        });
+}
     </script>
 </body>
 </html>
