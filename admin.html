@@ -553,20 +553,28 @@
                         <label for="newAnnouncementText">نص التبليغ أو الإعلان *</label>
                         <textarea id="newAnnouncementText" class="form-control" rows="4" placeholder="اكتب التعليمات الإدارية أو التبليغ هنا ليظهر للجميع..."></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="newAnnouncementImage">إرفاق صورة اختيارية مع التبليغ (رابط الصورة أو اتركها فارغة)</label>
-                        <input type="text" id="newAnnouncementImage" class="form-control" placeholder="رابط الصورة (مثال: https://...)">
-                    </div>
-                    <button class="btn" onclick="publishAnnouncement()" style="max-width: 250px;">نشر التبليغ الآن</button>
+                    <div class="upload-card">
+    <h3>صورة المدرس</h3>
+    
+    <div class="form-group">
+    <label for="newAnnouncementText">نص التبليغ أو الإعلان *</label>
+    <textarea id="newAnnouncementText" class="form-control" rows="4" placeholder="اكتب التعليمات الإدارية أو التبليغ هنا ليظهر للجميع..."></textarea>
+</div>
 
-                    <div class="existing-notifications-box">
-                        <h3 style="margin-bottom: 15px;">📋 التبليغات والتعميمات المنشورة حالياً</h3>
-                        <div id="adminNotificationsList">
-                            </div>
-                    </div>
-                </div>
-            </div>
+<div class="form-group">
+    <label style="display: block; font-weight: 700; margin-bottom: 8px;">إرفاق صورة مع التبليغ (مباشرة من الهاتف)</label>
+    
+    <label for="newAnnouncementImage" id="uploadLabel" style="display: block; border: 2px dashed #2563eb; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; background: #f8fafc; transition: background 0.3s;">
+        <span style="font-size: 30px; display: block; margin-bottom: 5px;">📸</span>
+        <strong style="color: #2563eb; font-size: 14px;">اضغط هنا لالتقاط صورة أو اختيارها</strong>
+        <input type="file" id="newAnnouncementImage" accept="image/*" style="display: none;" onchange="previewImage(event)">
+    </label>
 
+    <div id="previewContainer" style="display: none; text-align: center; margin-top: 15px;">
+        <img id="imgPreview" src="" alt="معاينة الصورة" style="max-width: 100%; max-height: 220px; border-radius: 8px; border: 1px solid #cbd5e1; object-fit: cover;">
+        <button type="button" class="delete-btn" onclick="removeSelectedImage()" style="display: block; margin: 10px auto 0; padding: 6px 15px;">حذف الصورة المحددة</button>
+    </div>
+</div>
             <div class="section-container" id="secDatabase">
                 
                 <div class="db-header-tabs">
@@ -678,30 +686,31 @@
 
         /* ---------------- قسم التبليغات العامة ---------------- */
         function publishAnnouncement() {
-            const text = document.getElementById('newAnnouncementText').value;
-            const image = document.getElementById('newAnnouncementImage').value;
+    const text = document.getElementById('newAnnouncementText').value;
 
-            if (!text.trim()) {
-                alert('الرجاء كتابة نص التبليغ أولاً!');
-                return;
-            }
+    if (!text.trim()) {
+        alert('الرجاء كتابة نص التبليغ أولاً!');
+        return;
+    }
 
-            const today = new Date();
-            const dateStr = today.toISOString().split('T')[0];
+    const today = new Date();
+    const dateStr = today.toISOString().split('T')[0];
 
-            const newPostRef = database.ref('notifications').push();
-            newPostRef.set({
-                text: text,
-                image: image || "",
-                date: dateStr
-            }).then(() => {
-                alert('تم نشر التبليغ بنجاح في الصفحة الرئيسية للموقع!');
-                document.getElementById('newAnnouncementText').value = '';
-                document.getElementById('newAnnouncementImage').value = '';
-            }).catch(err => {
-                alert('حدث خطأ أثناء النشر.');
-            });
-        }
+    const newPostRef = database.ref('notifications').push();
+    newPostRef.set({
+        text: text,
+        image: uploadedImageBase64, // هنا سيتم تخزين نص الـ Base64 الخاص بالصورة الملتقطة
+        date: dateStr
+    }).then(() => {
+        alert('تم نشر التبليغ بنجاح في الصفحة الرئيسية للموقع!');
+        
+        // تصفير الواجهة بعد النشر بنجاح
+        document.getElementById('newAnnouncementText').value = '';
+        removeSelectedImage(); 
+    }).catch(err => {
+        alert('حدث خطأ أثناء النشر.');
+    });
+}
 
         function loadAnnouncements() {
             database.ref('notifications').on('value', (snapshot) => {
@@ -991,6 +1000,46 @@
                 alert('خطأ أثناء إرسال التبليغ الخاص.');
             });
         }
+
+        // متغير لحفظ كود الصورة المحولة (Base64)
+let uploadedImageBase64 = "";
+
+// دالتك المعدلة لمعاينة الصورة وتحويلها لـ Base64
+function previewImage(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('imgPreview');
+    const label = document.getElementById('uploadLabel');
+    const container = document.getElementById('previewContainer');
+
+    if (file) {
+        if (!file.type.startsWith('image/')) {
+            alert("يرجى اختيار ملف صورة صالح فقط!");
+            event.target.value = "";
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // حفظ كود الـ Base64 بالمتغير
+            uploadedImageBase64 = e.target.result;
+            
+            // إظهار المعاينة للمدرس
+            preview.src = e.target.result;
+            container.style.display = 'block';
+            label.style.display = 'none'; // إخفاء زر الاختيار لترتيب الواجهة
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+// دالة لحذف الصورة المختارة والرجوع لرفع صورة جديدة
+function removeSelectedImage() {
+    document.getElementById('newAnnouncementImage').value = ""; // تصفير الـ input
+    uploadedImageBase64 = ""; // مسح القيمة المخزنة
+    document.getElementById('imgPreview').src = "";
+    document.getElementById('previewContainer').style.display = 'none';
+    document.getElementById('uploadLabel').style.display = 'block'; // إعادة إظهار زر الرفع
+}
     </script>
 </body>
 </html>
