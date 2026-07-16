@@ -104,6 +104,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
+            text-align: center;
         }
 
         .btn:hover {
@@ -485,6 +486,38 @@
             background-color: var(--color-red);
             color: #ffffff;
         }
+
+        /* منطقة رفع الملفات بشكل جذاب */
+        .file-upload-wrapper {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .file-upload-btn {
+            background-color: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            color: #475569;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: block;
+        }
+        .file-upload-btn:hover {
+            border-color: var(--color-blue);
+            background-color: #eff6ff;
+            color: var(--color-blue);
+        }
+        .file-upload-wrapper input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -499,7 +532,7 @@
                 <label for="adminPassword">الرمز السري للأستاذ</label>
                 <input type="password" id="adminPassword" class="form-control" placeholder="أدخل رمز المرور الخاص بالنشر...">
             </div>
-            <button type="button" class="btn" onclick="tryLogin()">دخول لوحة التحكم</button>
+            <button class="btn" onclick="tryLogin()">دخول لوحة التحكم</button>
         </div>
 
         <!-- لوحة التحكم الكاملة -->
@@ -534,8 +567,11 @@
                         <textarea id="newAnnouncementText" class="form-control" rows="4" placeholder="اكتب التعليمات الإدارية أو التبليغ هنا ليظهر للجميع..."></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="newAnnouncementImage">إرفاق صورة اختيارية مع التبليغ (رابط الصورة أو اتركها فارغة)</label>
-                        <input type="text" id="newAnnouncementImage" class="form-control" placeholder="رابط الصورة (مثال: https://...)">
+                        <label>إرفاق صورة للتبليغ (من الهاتف مباشرة - اختياري)</label>
+                        <div class="file-upload-wrapper">
+                            <span class="file-upload-btn" id="announcementFileName">اضغط هنا لاختيار صورة من جهازك...</span>
+                            <input type="file" id="newAnnouncementImageFile" accept="image/*" onchange="handleAnnouncementImage(this)">
+                        </div>
                     </div>
                     <button class="btn" onclick="publishAnnouncement()" style="max-width: 250px;">نشر التبليغ الآن</button>
 
@@ -597,12 +633,21 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <script>
+        const firebaseConfig = {
+            databaseURL: "https://jawadin-school1-default-rtdb.firebaseio.com"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
 
         let loggedIn = false;
         let currentSelectedGrade = 1; // 1 = أول, 2 = ثاني, 3 = ثالث
         let currentSelectedSection = ''; // أ، ب، جـ، إلخ...
         let allStudentsData = {};
         let currentStudentId = '';
+        let announcementImageBase64 = ""; // لتخزين صورة الإعلان العام بعد تحويلها
+
+        // الرمز السري الجديد المطلوب
+        const SECRET_PASS_PHRASE = "jawadin_secret_2026";
 
         // المواد المحددة لكل مرحلة
         const subjectsConfig = {
@@ -619,29 +664,24 @@
 
         // فحص رمز الدخول للبدء
         function tryLogin() {
-            const enteredPass = document.getElementById('adminPassword').value;
-            // الرمز السري هو نفسه الرمز الذي تستخدمه لنشر التبليغات
-            if (enteredPass.trim() === '') {
+            const enteredPass = document.getElementById('adminPassword').value.trim();
+            if (enteredPass === '') {
                 alert('الرجاء إدخال الرمز السري للأستاذ أولاً!');
                 return;
             }
 
-            // نقوم بالتحقق من الرمز من Firebase
-            // التأكد من أن db أو database معرف ومتاح
-if (typeof db !== 'undefined') {
-    db.ref('adminPassword').once('value')
-        .then((snapshot) => {
-            const actualPass = snapshot.val();
-            // هنا تضع منطق التحقق الخاص بك
-            console.log("الرمز السري تم صحيح تم التسجيل بنجاح");
-        })
-        .catch((error) => {
-            console.error("حدث خطأ أثناء جلب الرمز السري:", error);
-            alert("فشل الاتصال بقاعدة البيانات");
-        });
-} else {
-    console.error("قاعدة البيانات غير معرفة (Database not initialized)");
-}
+            // التحقق من الرمز المطلوب
+            if (enteredPass === SECRET_PASS_PHRASE) {
+                loggedIn = true;
+                document.getElementById('loginCard').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+                loadAnnouncements();
+                loadAllStudents();
+                selectGrade(1);
+            } else {
+                alert('الرمز السري غير صحيح! يرجى المحاولة مجدداً.');
+            }
+        }
 
         function logout() {
             loggedIn = false;
@@ -665,9 +705,20 @@ if (typeof db !== 'undefined') {
         }
 
         /* ---------------- قسم التبليغات العامة ---------------- */
+        function handleAnnouncementImage(input) {
+            const file = input.files[0];
+            if (file) {
+                document.getElementById('announcementFileName').innerText = "تم اختيار: " + file.name;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    announcementImageBase64 = e.target.result; // تحويل الصورة لـ Base64 لرفعها مباشرة
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
         function publishAnnouncement() {
             const text = document.getElementById('newAnnouncementText').value;
-            const image = document.getElementById('newAnnouncementImage').value;
 
             if (!text.trim()) {
                 alert('الرجاء كتابة نص التبليغ أولاً!');
@@ -680,12 +731,14 @@ if (typeof db !== 'undefined') {
             const newPostRef = database.ref('notifications').push();
             newPostRef.set({
                 text: text,
-                image: image || "",
+                image: announcementImageBase64 || "", // تخزين الصورة المرفوعة من الهاتف
                 date: dateStr
             }).then(() => {
                 alert('تم نشر التبليغ بنجاح في الصفحة الرئيسية للموقع!');
                 document.getElementById('newAnnouncementText').value = '';
-                document.getElementById('newAnnouncementImage').value = '';
+                document.getElementById('newAnnouncementImageFile').value = '';
+                document.getElementById('announcementFileName').innerText = "اضغط هنا لاختيار صورة من جهازك...";
+                announcementImageBase64 = "";
             }).catch(err => {
                 alert('حدث خطأ أثناء النشر.');
             });
@@ -788,7 +841,6 @@ if (typeof db !== 'undefined') {
 
             for (let id in allStudentsData) {
                 const student = allStudentsData[id];
-                // مطابقة الصف والشعبة
                 if (parseInt(student.grade) === currentSelectedGrade && student.section === currentSelectedSection) {
                     hasStudents = true;
                     const defaultAvatar = 'https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';
@@ -810,7 +862,6 @@ if (typeof db !== 'undefined') {
         function viewStudentDetails(studentId) {
             currentStudentId = studentId;
             document.querySelectorAll('.student-item').forEach(item => item.classList.remove('active'));
-            // تمييز العنصر المختار
             renderStudentsList();
 
             const student = allStudentsData[studentId];
@@ -820,7 +871,6 @@ if (typeof db !== 'undefined') {
 
             const defaultAvatar = 'https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';
 
-            // ملء بيانات الطالب الأساسية
             detailsBox.innerHTML = `
                 <div class="student-profile-card">
                     <img src="${student.photo || defaultAvatar}" onerror="this.src='${defaultAvatar}'" class="student-profile-img" alt="الطالب">
@@ -854,13 +904,13 @@ if (typeof db !== 'undefined') {
                     </div>
 
                     <div class="grades-grid" id="gradesInputsGrid">
-                        <!-- سيتم توليد حقول إدخال الدرجات ديناميكياً هنا بناءً على صف الطالب والمواد الخاصة به -->
+                        <!-- سيتم توليد حقول إدخال الدرجات ديناميكياً هنا -->
                     </div>
 
                     <button class="btn" onclick="saveStudentGrades()" style="background-color: var(--color-green); max-width:250px; margin-bottom:30px;">حفظ وتثبيت الدرجات</button>
 
                     <div class="action-sub-header" style="border-top: 1px solid #e2e8f0; padding-top:20px;">✉️ إرسال تبليغ أو تنبيه مخصص لهذا الطالب (اختياري)</div>
-                    <p style="font-size:12.5px; color:var(--color-text-muted); margin-bottom:12px;">سيظهر هذا التنبيه في صفحة الطالب الشخصية فقط بشكل سري ومباشر (مثال: تنبيه غيابات، سلوك، إلخ).</p>
+                    <p style="font-size:12.5px; color:var(--color-text-muted); margin-bottom:12px;">سيظهر هذا التنبيه في صفحة الطالب الشخصية فقط بشكل سري ومباشر.</p>
                     
                     <div class="form-group">
                         <textarea id="privateNotificationText" class="form-control" rows="3" placeholder="اكتب التنبيه المخصص للطالب هنا... (اتركه فارغاً إذا لم ترغب في إرسال شيء)"></textarea>
@@ -869,11 +919,9 @@ if (typeof db !== 'undefined') {
                 </div>
             `;
 
-            // تحديث حقول الدرجات فوراً
             updateGradesInputs();
         }
 
-        // توليد وتحديث حقول إدخال الدرجات والتحقق من القيم المخزنة مسبقاً
         function updateGradesInputs() {
             if (!currentStudentId) return;
 
@@ -885,7 +933,6 @@ if (typeof db !== 'undefined') {
             const container = document.getElementById('gradesInputsGrid');
             container.innerHTML = '';
 
-            // جلب الدرجات المخزنة مسبقاً لهذه الفترة إن وجدت
             const termGrades = (student.grades && student.grades[term]) ? student.grades[term] : {};
 
             subjects.forEach(subject => {
@@ -912,7 +959,6 @@ if (typeof db !== 'undefined') {
                 `;
             });
 
-            // تعبئة التبليغ الخاص المخزن مسبقاً إن وجد
             const privateText = student.private_notification || '';
             document.getElementById('privateNotificationText').value = privateText;
         }
@@ -927,7 +973,6 @@ if (typeof db !== 'undefined') {
             }
         }
 
-        // حفظ الدرجات في قاعدة البيانات
         function saveStudentGrades() {
             if (!currentStudentId) return;
 
@@ -944,20 +989,18 @@ if (typeof db !== 'undefined') {
                     gradesToSave[subject] = 'لم تعلن بعد';
                 } else {
                     const value = document.getElementById(`grade_${subject}`).value.trim();
-                    gradesToSave[subject] = value === '' ? '' : value; // حفظ فارغ أو الدرجة المدخلة
+                    gradesToSave[subject] = value === '' ? '' : value;
                 }
             });
 
             database.ref(`students/${currentStudentId}/grades/${term}`).set(gradesToSave).then(() => {
                 alert('تم حفظ وتحديث درجات الطالب بنجاح!');
-                // تحديث البيانات المحلية دون فقدان الطالب المختار
                 loadAllStudents();
             }).catch(err => {
                 alert('خطأ أثناء حفظ الدرجات.');
             });
         }
 
-        // حفظ وإرسال تبليغ مخصص للطالب
         function sendPrivateNotification() {
             if (!currentStudentId) return;
 
@@ -973,59 +1016,7 @@ if (typeof db !== 'undefined') {
             }).catch(err => {
                 alert('خطأ أثناء إرسال التبليغ الخاص.');
             });
-        function loadStudents() {
-    const grade = document.getElementById('selectGrade').value; // افترضت وجود select للصف
-    const cls = document.getElementById('selectClass').value; // افترضت وجود select للشعبة
-
-    // جلب البيانات من مسار الطلاب
-    db.ref('students').orderByChild('grade').equalTo(grade).once('value', (snapshot) => {
-        const list = document.getElementById('studentsList');
-        list.innerHTML = ''; // تفريغ القائمة
-        snapshot.forEach((childSnapshot) => {
-            const student = childSnapshot.val();
-            if (student.class === cls) { // تصفية حسب الشعبة
-                list.innerHTML += `
-                    <div class="student-item" onclick="openStudentDetails('${childSnapshot.key}')">
-                        ${student.fullName}
-                    </div>`;
-            }
-        });
-    });
-    const firebaseConfig = {
-    databaseURL: "https://jawadin-school1-default-rtdb.firebaseio.com" // تأكد أن هذا الرابط هو نفسه في الاثنين
-};
-firebase.initializeApp(firebaseConfig);
-}
-    // ملاحظة: أكمل بناء دالة editStudent لفتح نافذة إدخال الدرجات والتبليغ الاختياري.
         }
-
-        // أضف هذه الدالة في نهاية ملفك داخل وسم الـ script
-function tryLogin() {
-    const passwordInput = document.getElementById('adminPassword');
-    const enteredPass = passwordInput ? passwordInput.value : '';
-
-    if (!enteredPass || enteredPass.trim() === '') {
-        alert('الرجاء إدخال الرمز السري');
-        return;
-    }
-
-    // تأكد من أن db معرفة
-    db.ref('adminPassword').once('value')
-        .then((snapshot) => {
-            const actualPass = snapshot.val();
-            if (enteredPass === actualPass) {
-                document.getElementById('loginCard').style.display = 'none';
-                document.getElementById('adminDashboard').style.display = 'block';
-                loadAllStudents(); 
-            } else {
-                alert('الرمز السري غير صحيح');
-            }
-        })
-        .catch((err) => {
-            console.error("خطأ:", err);
-            alert('خطأ في الاتصال بقاعدة البيانات');
-        });
-}
     </script>
 </body>
 </html>
