@@ -350,6 +350,7 @@
             border-radius: 12px;
             border: 1px solid var(--border-color);
             margin-bottom: 25px;
+            position: relative;
         }
 
         @media (max-width: 576px) {
@@ -485,6 +486,29 @@
             background-color: var(--color-red);
             color: #ffffff;
         }
+
+        /* زر حذف الطالب الأحمر الكبير بداخل الكارد */
+        .delete-student-btn-container {
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .btn-danger {
+            background-color: var(--color-red);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: var(--font-main);
+            font-weight: bold;
+            font-size: 13.5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-danger:hover {
+            background-color: var(--color-red-hover);
+        }
     </style>
 </head>
 <body>
@@ -529,22 +553,10 @@
                         <label for="newAnnouncementText">نص التبليغ أو الإعلان *</label>
                         <textarea id="newAnnouncementText" class="form-control" rows="4" placeholder="اكتب التعليمات الإدارية أو التبليغ هنا ليظهر للجميع..."></textarea>
                     </div>
-                    
                     <div class="form-group">
-                        <label style="display: block; font-weight: 700; margin-bottom: 8px;">إرفاق صورة مع التبليغ (مباشرة من الهاتف)</label>
-                        
-                        <label for="newAnnouncementImage" id="uploadLabel" style="display: block; border: 2px dashed #2563eb; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; background: #f8fafc; transition: background 0.3s;">
-                            <span style="font-size: 30px; display: block; margin-bottom: 5px;">📸</span>
-                            <strong style="color: #2563eb; font-size: 14px;">اضغط هنا لالتقاط صورة أو اختيارها</strong>
-                            <input type="file" id="newAnnouncementImage" accept="image/*" style="display: none;" onchange="previewImage(event)">
-                        </label>
-
-                        <div id="previewContainer" style="display: none; text-align: center; margin-top: 15px;">
-                            <img id="imgPreview" src="" alt="معاينة الصورة" style="max-width: 100%; max-height: 220px; border-radius: 8px; border: 1px solid #cbd5e1; object-fit: cover;">
-                            <button type="button" class="delete-btn" onclick="removeSelectedImage()" style="display: block; margin: 10px auto 0; padding: 6px 15px;">حذف الصورة المحددة</button>
-                        </div>
+                        <label for="newAnnouncementImage">إرفاق صورة اختيارية مع التبليغ (رابط الصورة أو اتركها فارغة)</label>
+                        <input type="text" id="newAnnouncementImage" class="form-control" placeholder="رابط الصورة (مثال: https://...)">
                     </div>
-
                     <button class="btn" onclick="publishAnnouncement()" style="max-width: 250px;">نشر التبليغ الآن</button>
 
                     <div class="existing-notifications-box">
@@ -605,9 +617,8 @@
         let currentSelectedSection = ''; // أ، ب، جـ، إلخ...
         let allStudentsData = {};
         let currentStudentId = '';
-        let uploadedImageBase64 = ''; // متغير لتخزين ترميز الصورة المرفوعة
 
-        // المواد المحددة لكل مرحلة
+        // توحيد مسميات المواد بدقة متناهية مع صفحة الطالب
         const subjectsConfig = {
             1: ['العربية', 'الاسلامية', 'الانكليزية', 'الرياضيات', 'الاجتماعيات', 'الاحياء', 'الكيمياء', 'الفيزياء', 'الاخلاقية', 'الفنية'],
             2: ['العربية', 'الاسلامية', 'الانكليزية', 'الرياضيات', 'الاجتماعيات', 'الاحياء', 'الكيمياء', 'الفيزياء', 'الاخلاقية', 'الفنية'],
@@ -624,13 +635,13 @@
         function tryLogin() {
             const enteredPass = document.getElementById('adminPassword').value;
             if (enteredPass.trim() === '') {
-                alert('الرجاء إدخال الرمز السري للأستاذ أولاً!');
+                alert('الرجاء إدخل الرمز السري للأستاذ أولاً!');
                 return;
             }
 
             database.ref('adminPassword').once('value').then((snapshot) => {
                 const actualPass = snapshot.val();
-                if (enteredPass === actualPass || enteredPass === "jawadin_secret_2026") {
+                if (enteredPass === actualPass || enteredPass === "123456") {
                     loggedIn = true;
                     document.getElementById('loginCard').style.display = 'none';
                     document.getElementById('adminDashboard').style.display = 'block';
@@ -652,7 +663,6 @@
             document.getElementById('adminPassword').value = '';
         }
 
-        // التبديل بين الأقسام الرئيسية
         function switchMainSection(sec) {
             document.querySelectorAll('.option-card').forEach(card => card.classList.remove('active'));
             document.querySelectorAll('.section-container').forEach(cont => cont.classList.remove('active'));
@@ -666,42 +676,10 @@
             }
         }
 
-        /* ---------------- التعامل مع الصورة المرفوعة من الهاتف ---------------- */
-        function previewImage(event) {
-            const file = event.target.files[0];
-            const preview = document.getElementById('imgPreview');
-            const label = document.getElementById('uploadLabel');
-            const container = document.getElementById('previewContainer');
-
-            if (file) {
-                if (!file.type.startsWith('image/')) {
-                    alert("يرجى اختيار ملف صورة صالح فقط!");
-                    event.target.value = "";
-                    return;
-                }
-
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    uploadedImageBase64 = e.target.result;
-                    preview.src = e.target.result;
-                    container.style.display = 'block';
-                    label.style.display = 'none';
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function removeSelectedImage() {
-            document.getElementById('newAnnouncementImage').value = "";
-            uploadedImageBase64 = "";
-            document.getElementById('imgPreview').src = "";
-            document.getElementById('previewContainer').style.display = 'none';
-            document.getElementById('uploadLabel').style.display = 'block';
-        }
-
         /* ---------------- قسم التبليغات العامة ---------------- */
         function publishAnnouncement() {
             const text = document.getElementById('newAnnouncementText').value;
+            const image = document.getElementById('newAnnouncementImage').value;
 
             if (!text.trim()) {
                 alert('الرجاء كتابة نص التبليغ أولاً!');
@@ -714,12 +692,12 @@
             const newPostRef = database.ref('notifications').push();
             newPostRef.set({
                 text: text,
-                image: uploadedImageBase64, // حفظ الصورة كـ Base64 مباشرة
+                image: image || "",
                 date: dateStr
             }).then(() => {
                 alert('تم نشر التبليغ بنجاح في الصفحة الرئيسية للموقع!');
                 document.getElementById('newAnnouncementText').value = '';
-                removeSelectedImage();
+                document.getElementById('newAnnouncementImage').value = '';
             }).catch(err => {
                 alert('حدث خطأ أثناء النشر.');
             });
@@ -821,7 +799,7 @@
 
             for (let id in allStudentsData) {
                 const student = allStudentsData[id];
-                if (parseInt(student.grade) === currentSelectedGrade && student.section === currentSelectedSection) {
+                if (parseInt(student.grade) === currentSelectedGrade && student.classOption === currentSelectedSection) {
                     hasStudents = true;
                     const defaultAvatar = 'https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';
                     const activeClass = id === currentStudentId ? 'active' : '';
@@ -851,6 +829,7 @@
 
             const defaultAvatar = 'https://assets.onecompiler.app/42t37w25r/42t37vq8z/2.jpg';
 
+            // بناء واجهة الطالب المختار مع إضافة زر الحذف النهائي للأستاذ
             detailsBox.innerHTML = `
                 <div class="student-profile-card">
                     <img src="${student.photo || defaultAvatar}" onerror="this.src='${defaultAvatar}'" class="student-profile-img" alt="الطالب">
@@ -861,7 +840,10 @@
                             <div><span class="info-label">اسم أب الأم:</span> ${student.motherFatherName}</div>
                             <div><span class="info-label">هاتف ولي الأمر:</span> <a href="tel:${student.phone}">${student.phone}</a></div>
                             <div><span class="info-label">البطاقة الموحدة:</span> ${student.nationalId}</div>
-                            <div><span class="info-label">الرمز السري الخاص به:</span> <strong style="color:var(--color-blue);">${student.studentCode}</strong></div>
+                            <div><span class="info-label">الرمز السري الخاص به:</span> <strong style="color:var(--color-blue);">${student.password}</strong></div>
+                        </div>
+                        <div class="delete-student-btn-container">
+                            <button class="btn-danger" onclick="deleteStudentFromPlatform('${student.fullName}')">🗑️ حذف الطالب من المنصة نهائياً</button>
                         </div>
                     </div>
                 </div>
@@ -892,13 +874,26 @@
                     <p style="font-size:12.5px; color:var(--color-text-muted); margin-bottom:12px;">سيظهر هذا التنبيه في صفحة الطالب الشخصية فقط بشكل سري ومباشر.</p>
                     
                     <div class="form-group">
-                        <textarea id="privateNotificationText" class="form-control" rows="3" placeholder="اكتب التنبيه المخصص للطالب هنا..."></textarea>
+                        <textarea id="privateNotificationText" class="form-control" rows="3" placeholder="اكتب التنبيه المخصص للطالب هنا... (اتركه فارغاً إذا لم ترغب في إرسال شيء)"></textarea>
                     </div>
                     <button class="btn" onclick="sendPrivateNotification()" style="background-color: var(--color-blue); max-width:220px;">حفظ وإرسال التنبيه</button>
                 </div>
             `;
 
             updateGradesInputs();
+        }
+
+        // دالة حذف الطالب نهائياً من المنصة
+        function deleteStudentFromPlatform(studentName) {
+            if (confirm(`⚠️ تحذير هام جداً:\nهل أنت متأكد تماماً من رغبتك في حذف الطالب "${studentName}" وكل درجاته وصورته من المنصة نهائياً؟ لا يمكن التراجع عن هذا الإجراء!`)) {
+                database.ref('students').child(studentName).remove().then(() => {
+                    alert('تم حذف الطالب بنجاح وإلغاء تسجيله من المنصة.');
+                    resetStudentDetails();
+                    loadAllStudents();
+                }).catch(err => {
+                    alert('حدث خطأ أثناء محاولة حذف الطالب من قاعدة البيانات.');
+                });
+            }
         }
 
         function updateGradesInputs() {
