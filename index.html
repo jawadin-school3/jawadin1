@@ -1171,7 +1171,7 @@
 
         // دالة لتحديث حالة الزر العلوي (تسجيل الدخول / اسم الطالب)
         function updateHeaderAuthButton() {
-            const savedStudent = localStorage.getItem('loggedStudent');
+            const savedStudent = sessionStorage.getItem('loggedStudent');
             const authBtn = document.getElementById('btnAuthHeader');
             if (savedStudent) {
                 const studentObj = JSON.parse(savedStudent);
@@ -1215,7 +1215,7 @@
         /* --- نظام إدارة الطلاب البرمجي الجديد والربط بـ Firebase --- */
         
         function handleStudentGate() {
-            const savedStudent = localStorage.getItem('loggedStudent');
+            const savedStudent = sessionStorage.getItem('loggedStudent');
             if (savedStudent) {
                 const studentObj = JSON.parse(savedStudent);
                 loadStudentDashboard(studentObj.fullName);
@@ -1341,7 +1341,7 @@
                             alert('حدث خطأ أثناء حفظ البيانات، يرجى المحاولة لاحقاً.');
                         } else {
                             alert('تم إنشاء حسابك بنجاح يا بطل! يمكنك الآن الدخول لاستعراض لوحتك.');
-                            localStorage.setItem('loggedStudent', JSON.stringify({ fullName }));
+                            sessionStorage.setItem('loggedStudent', JSON.stringify({ fullName }));
                             updateHeaderAuthButton();
                             closeModal('studentGateModal');
                             loadStudentDashboard(fullName);
@@ -1363,7 +1363,7 @@
             database.ref('students/' + fullName).once('value').then((snapshot) => {
                 const student = snapshot.val();
                 if(student && student.password === password) {
-                    localStorage.setItem('loggedStudent', JSON.stringify({ fullName }));
+                    sessionStorage.setItem('loggedStudent', JSON.stringify({ fullName }));
                     updateHeaderAuthButton();
                     closeModal('studentGateModal');
                     loadStudentDashboard(fullName);
@@ -1476,7 +1476,7 @@
         }
 
         function logoutStudent() {
-            localStorage.removeItem('loggedStudent');
+            sessionStorage.removeItem('loggedStudent');
             updateHeaderAuthButton();
             closeModal('studentDashboardModal');
             alert('تم تسجيل الخروج بنجاح.');
